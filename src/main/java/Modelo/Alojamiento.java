@@ -6,6 +6,12 @@ public class Alojamiento {
 	protected String nombre;
 	protected String ubicacion;
 	
+	/**
+	 * Objeto padre Alojamiento
+	 * @param codAlojamiento Codigo principal del alojamiento
+	 * @param nombre Nombre
+	 * @param ubicacion Ubicacion
+	 */
 	public Alojamiento(int codAlojamiento, String nombre, String ubicacion) {
 		this.codAlojamiento = codAlojamiento;
 		this.nombre = nombre;
