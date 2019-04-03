@@ -1,4 +1,4 @@
-package Modelo;
+package modelo;
 
 public class Hotel extends Alojamiento {
 
@@ -14,6 +14,10 @@ public class Hotel extends Alojamiento {
 	public Hotel(int codAlojamiento, String nombre, String ubicacion, int estrellas) {
 		super(codAlojamiento, nombre, ubicacion);
 		this.estrellas = estrellas;
+	}
+	
+	public Hotel() {
+		
 	}
 
 	public int getEstrellas() {
