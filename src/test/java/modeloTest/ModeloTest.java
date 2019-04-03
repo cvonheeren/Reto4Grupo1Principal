@@ -42,6 +42,7 @@ public class ModeloTest {
 	
 	@Test
 	public void testControlador() {
-		assertEquals(Controlador.class, controlador.getClass());
+		miModelo.setControlador(controlador);
+		assertEquals(controlador.getClass(), miModelo.getControlador().getClass());
 	}
 }
