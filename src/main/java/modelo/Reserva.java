@@ -1,4 +1,4 @@
-package Modelo;
+package modelo;
 
 import java.sql.Date;
 
@@ -18,6 +18,10 @@ public class Reserva {
 		this.codReserva = codReserva;
 		this.fecha = fecha;
 		this.precio = precio;
+	}
+	
+	public Reserva() {
+		
 	}
 
 	public int getCodReserva() {

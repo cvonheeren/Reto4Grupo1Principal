@@ -1,4 +1,4 @@
-package Modelo;
+package modelo;
 
 public class Alojamiento {
 
@@ -16,6 +16,10 @@ public class Alojamiento {
 		this.codAlojamiento = codAlojamiento;
 		this.nombre = nombre;
 		this.ubicacion = ubicacion;
+	}
+	
+	public Alojamiento() {
+		
 	}
 
 	public int getCodAlojamiento() {
