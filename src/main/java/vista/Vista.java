@@ -19,13 +19,13 @@ public class Vista extends JFrame {
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setBackground(new Color(255, 192, 203));	
-		Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/Logo_Bilbao.png"));
-	    setIconImage(icon);
-	    setVisible(true);
+//		Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/Logo_Bilbao.png"));
+//	    setIconImage(icon);
 	    setTitle("Bidai-On");
 	    
 	    InstanciarPaneles();
 		AddPaneles();
+		activarVisibilidad();
 	}
 	
 	private void InstanciarPaneles() {
@@ -40,6 +40,14 @@ public class Vista extends JFrame {
 		getContentPane().add(selHotel);
 		getContentPane().add(pago);
 		getContentPane().add(finPago);	
+	}
+	
+	private void activarVisibilidad() {
+		bienvenida.setVisible(true);
+		selHotel.setVisible(false); 
+		pago.setVisible(false);
+		finPago.setVisible(false);	
+		setVisible(true);
 	}
 
 }

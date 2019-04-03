@@ -23,7 +23,7 @@ public class Bienvenida extends JPanel {
 		
 		// logo
 		lblIcono = new JLabel("");
-		lblIcono.setIcon(new ImageIcon(Bienvenida.class.getResource("/img/image.png")));
+//		lblIcono.setIcon(new ImageIcon(Bienvenida.class.getResource("/img/image.png")));
 		lblIcono.setBounds(120, 130, 1024, 300);
 		add(lblIcono);
 		

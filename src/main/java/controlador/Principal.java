@@ -27,6 +27,6 @@ public class Principal {
 		miControlador = new Controlador(miModelo, miVista);
 		
 		//Seteamos el controlador en el modelo para cuando usemos algo del controlador en el modelo
-		miModelo.setControlador(miControlador); 
+		miModelo.setControlador(miControlador);
 	}
 }

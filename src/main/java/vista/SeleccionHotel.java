@@ -26,7 +26,7 @@ public class SeleccionHotel extends JPanel {
 		
 		// logo
 		lblIcono = new JLabel("");
-		lblIcono.setIcon(new ImageIcon(Bienvenida.class.getResource("/img/image2.png")));
+//		lblIcono.setIcon(new ImageIcon(Bienvenida.class.getResource("/img/image2.png")));
 		lblIcono.setOpaque(true);
 		lblIcono.setBorder(null);
 		lblIcono.setForeground(new Color(0, 0, 0));
