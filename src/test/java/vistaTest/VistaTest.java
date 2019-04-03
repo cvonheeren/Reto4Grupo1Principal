@@ -1,10 +1,10 @@
-package ModeloTest;
+package vistaTest;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class ModeloTest {
+public class VistaTest {
 
 	@Test
 	public void test() {

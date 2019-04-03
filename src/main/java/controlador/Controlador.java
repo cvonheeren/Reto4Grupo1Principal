@@ -18,6 +18,7 @@ public class Controlador {
 		this.miVista = miVista;
 	}
 
+	
 	public Modelo getMiModelo() {
 		return miModelo;
 	}

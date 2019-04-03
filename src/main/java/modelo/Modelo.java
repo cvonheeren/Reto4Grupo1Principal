@@ -9,6 +9,7 @@ public class Modelo {
 	public Alojamiento alojamiento = null;
 	public Hotel hotel = null;
 	public Reserva reserva = null;
+	public Habitacion habitacion = null;
 	
 	/**
 	 * Constructor
@@ -17,14 +18,15 @@ public class Modelo {
 		this.alojamiento = new Alojamiento();
 		this.hotel = new Hotel();
 		this.reserva = new Reserva();
+		this.habitacion = new Habitacion();
 	}
 	
-	//Getters y setters del controlador
+	
 	public Controlador getControlador() {
 		return miControlador;
 	}
 
 	public void setControlador(Controlador miControlador) {
 		this.miControlador = miControlador;
-	}
+	} 
 }

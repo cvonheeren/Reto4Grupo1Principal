@@ -1,10 +1,10 @@
-package VistaTest;
+package controladorTest;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class VistaTest {
+public class PrincipalTest {
 
 	@Test
 	public void test() {

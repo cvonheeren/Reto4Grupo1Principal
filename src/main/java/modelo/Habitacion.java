@@ -24,6 +24,10 @@ public class Habitacion {
 		this.numeroCamas = numeroCamas;
 		this.tipoCama = tipoCama;
 	}
+	
+	public Habitacion() {
+		
+	}
 
 	public int getCodHabitacion() {
 		return codHabitacion;
