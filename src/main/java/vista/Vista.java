@@ -12,6 +12,7 @@ public class Vista extends JFrame {
 	public SeleccionHotel selHotel;
 	public Pago pago;
 	public FinPago finPago;
+	public Despedida despedida;
 	
 	public Vista() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,6 +34,7 @@ public class Vista extends JFrame {
 		selHotel = new SeleccionHotel();
 		pago = new Pago();
 		finPago = new FinPago();
+		despedida = new Despedida();
 	}
 	
 	private void AddPaneles() {
@@ -40,13 +42,15 @@ public class Vista extends JFrame {
 		getContentPane().add(selHotel);
 		getContentPane().add(pago);
 		getContentPane().add(finPago);	
+		getContentPane().add(despedida);	
 	}
 	
 	private void activarVisibilidad() {
 		bienvenida.setVisible(true);
 		selHotel.setVisible(false); 
 		pago.setVisible(false);
-		finPago.setVisible(false);	
+		finPago.setVisible(false);
+		despedida.setVisible(false);
 		setVisible(true);
 	}
 
