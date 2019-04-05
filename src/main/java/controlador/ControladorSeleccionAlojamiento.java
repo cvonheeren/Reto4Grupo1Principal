@@ -1,45 +1,53 @@
 package controlador;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+
 import modelo.Alojamiento;
 import modelo.Hotel;
+import vista.Vista;
 
-public class ControladorSeleccionAlojamiento {
+public class ControladorSeleccionAlojamiento implements ActionListener {
 	
-	Controlador controlador;
+	Controlador cont;
 
-	public ControladorSeleccionAlojamiento(Controlador controlador)
+	public ControladorSeleccionAlojamiento(Controlador cont)
 	{
-		this.controlador=controlador;
+		this.cont=cont;
+		MostrarAlojamientosEnComboBox();
+		anadirListeners();	
 	}
 	
-	public ArrayList<Alojamiento> CargarListaAlojamientos(Controlador controlador)
+	public void MostrarAlojamientosEnComboBox()
 	{
-
-		ResultSet rs;
-		
-		rs=controlador.miModelo.gestorBBDD.HacerConsulta("SELECT * FROM HOTEL");
-		
 		ArrayList<Alojamiento> alojamientos = new ArrayList<Alojamiento>();
-		
-		try {
-			while (rs.next()) {
-				int cod_alojamiento=rs.getInt("COD_HOTEL");
-				String ubicacion=rs.getString("UBICACION");
-				String nombre=rs.getString("NOMBRE");
-				float precio=rs.getFloat("PRECIO");
-				alojamientos.add(new Alojamiento(cod_alojamiento, nombre, ubicacion));
-	        }
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		alojamientos=cont.miModelo.alojamiento.CargarListaAlojamientos(cont);
+		for(int i=0;i<alojamientos.size();i++)
+		{
+			cont.miVista.selHotel.selHotel.addItem(alojamientos.get(i));
 		}
-
-
-		return alojamientos;
+		
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		cont.miVista.selHotel.setVisible(false);
+		cont.miVista.pago.setVisible(true);
+		cont.miModelo.alojamiento=(Alojamiento) cont.miVista.selHotel.selHotel.getSelectedItem();
+		new ControladorPago(cont.miVista, cont.miModelo);
+	}
+	
+	private void anadirListeners()
+	{
+		cont.miVista.selHotel.btnContinuar.addActionListener(this);
+	}
+	
+	
 	
 }

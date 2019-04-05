@@ -11,11 +11,13 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 
+import modelo.Alojamiento;
+
 public class SeleccionHotel extends JPanel {
 
 	public JLabel lblIcono,lblHotel;
 	public JButton btnLogin,btnRegistro,btnContinuar,btnCancelar;
-	public JComboBox<Object> selHotel;
+	public JComboBox<Alojamiento> selHotel;
 	
 	public SeleccionHotel() {
 		
@@ -43,7 +45,7 @@ public class SeleccionHotel extends JPanel {
 		add(lblHotel);
 		
 		// seleccion de hotel
-		selHotel = new JComboBox<Object>();
+		selHotel = new JComboBox<Alojamiento>();
 		selHotel.setBorder(new BevelBorder(BevelBorder.LOWERED, new Color(0, 0, 0), null, null, null));
 		selHotel.setFont(new Font("Agency FB", Font.PLAIN, 20));
 		selHotel.setForeground(new Color(0, 0, 0));

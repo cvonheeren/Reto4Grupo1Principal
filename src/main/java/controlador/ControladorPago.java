@@ -3,6 +3,7 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
@@ -35,7 +36,6 @@ public class ControladorPago implements ActionListener{
 	public ControladorPago(Vista vista, Modelo modelo) {
 		this.vista = vista;
 		this.modelo = modelo;
-		
 		this.introducido = this.vista.pago.lblDineroIntro;
 		this.restante = this.vista.pago.lblDineroRest;
 		this.monedas = new float[0];
@@ -44,7 +44,6 @@ public class ControladorPago implements ActionListener{
 		this.falta = 0;
 		this.moneda = 0;
 		this.sobra = 0;
-		
 	}
 	
 	/**

@@ -20,16 +20,4 @@ public class ControladorTest {
 		assertEquals(miControlador.miModelo, miModelo);
 	}
 	
-	@Test
-	public void testMiModelo() {
-		miControlador.setMiModelo(miModelo);
-		assertEquals(miModelo, miControlador.getMiModelo());
-	}
-	
-	@Test
-	public void testMiVista() {
-		miControlador.setMiVista(miVista);
-		assertEquals(miVista, miControlador.getMiVista());
-	}
-
 }
