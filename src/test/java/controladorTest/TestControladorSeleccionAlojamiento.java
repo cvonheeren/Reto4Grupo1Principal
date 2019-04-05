@@ -16,9 +16,9 @@ public class TestControladorSeleccionAlojamiento {
 	Controlador controlador = new Controlador(miModelo, miVista);
 	ControladorSeleccionAlojamiento controladorSeleccionAlojamiento = new ControladorSeleccionAlojamiento(controlador);
 	
-	@Test
+	/*@Test
 	public void test() {
 		controladorSeleccionAlojamiento.CargarListaAlojamientos(controlador);
-	}
+	}*/
 
 }

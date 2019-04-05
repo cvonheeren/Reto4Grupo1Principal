@@ -7,7 +7,6 @@ public class Controlador {
 
 	public Modelo miModelo;
 	public Vista miVista;
-	public ControladorSeleccionAlojamiento controladorSeleccionAlojamiento;
 	
 	/**
 	 * Constructor
@@ -17,23 +16,7 @@ public class Controlador {
 	public Controlador(Modelo miModelo, Vista miVista) {
 		this.miModelo = miModelo;
 		this.miVista = miVista;
-		this.controladorSeleccionAlojamiento = new ControladorSeleccionAlojamiento(this);
+		ControladorBienvenida controladorBienvenida = new ControladorBienvenida(this);
 	}
 
-	
-	public Modelo getMiModelo() {
-		return miModelo;
-	}
-
-	public void setMiModelo(Modelo miModelo) {
-		this.miModelo = miModelo;
-	}
-
-	public Vista getMiVista() {
-		return miVista;
-	}
-
-	public void setMiVista(Vista miVista) {
-		this.miVista = miVista;
-	}
 }
