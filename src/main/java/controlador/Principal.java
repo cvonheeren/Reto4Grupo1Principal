@@ -28,5 +28,7 @@ public class Principal {
 		
 		//Seteamos el controlador en el modelo para cuando usemos algo del controlador en el modelo
 		miModelo.setControlador(miControlador);
+		
+		miVista.setVisible(true);
 	}
 }
