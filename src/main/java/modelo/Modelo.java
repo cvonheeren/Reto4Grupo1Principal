@@ -10,7 +10,7 @@ public class Modelo {
 	public Hotel hotel = null;
 	public Reserva reserva = null;
 	public Habitacion habitacion = null;
-	
+	public GestorBBDD gestorBBDD;
 	/**
 	 * Constructor
 	 */
@@ -19,6 +19,7 @@ public class Modelo {
 		this.hotel = new Hotel();
 		this.reserva = new Reserva();
 		this.habitacion = new Habitacion();
+		this.gestorBBDD = new GestorBBDD();
 	}
 	
 	

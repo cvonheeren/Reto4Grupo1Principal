@@ -7,6 +7,7 @@ public class Controlador {
 
 	public Modelo miModelo;
 	public Vista miVista;
+	public ControladorSeleccionAlojamiento controladorSeleccionAlojamiento;
 	
 	/**
 	 * Constructor
@@ -16,6 +17,7 @@ public class Controlador {
 	public Controlador(Modelo miModelo, Vista miVista) {
 		this.miModelo = miModelo;
 		this.miVista = miVista;
+		this.controladorSeleccionAlojamiento = new ControladorSeleccionAlojamiento(this);
 	}
 
 	
