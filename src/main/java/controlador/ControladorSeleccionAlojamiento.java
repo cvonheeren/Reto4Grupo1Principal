@@ -40,7 +40,7 @@ public class ControladorSeleccionAlojamiento implements ActionListener {
 		cont.miVista.selHotel.setVisible(false);
 		cont.miVista.pago.setVisible(true);
 		cont.miModelo.alojamiento=(Alojamiento) cont.miVista.selHotel.selHotel.getSelectedItem();
-		new ControladorPago(cont.miVista, cont.miModelo);
+		new ControladorPago(cont);
 	}
 	
 	private void anadirListeners()

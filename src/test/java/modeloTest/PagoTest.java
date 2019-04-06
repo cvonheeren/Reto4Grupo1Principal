@@ -4,37 +4,51 @@ import org.junit.Test;
 import modelo.*;
 
 public class PagoTest {
+	
+	float dinero = 20;
+	float precio = 200;
 
 	Pago pago = new Pago();
 	
 	@Test
-	public void testRedimensionarArrayMayor() {
-		float[] array = new float[0];
-		array = pago.redimensionarArrayMayor(array);
-		assertEquals(1, array.length);
+	public void testConstructor() {
+		assertEquals(0, pago.getPrecioTotal(), 0);
+		assertEquals(0, pago.getDineroIntroducido(), 0);
 	}
 	
 	@Test
-	public void testRedimensionarArrayMenor() {
-		float[] array = new float[2];
-		array = pago.redimensionarArrayMenor(array);
-		assertEquals(1, array.length);
+	public void testPrecio() {
+		pago.setPrecioTotal(precio);
+		assertEquals(precio, pago.getPrecioTotal(), 0);
 	}
 	
 	@Test
-	public void testFalta() {
-		float total = 85.7f;
-		float dinero = 83.5f;
-		float falta = 2.2f;
-		assertEquals(falta, pago.falta(total, dinero), 0);	
+	public void testSumarDinero() {
+		pago.sumarDinero(dinero);
+		assertEquals(dinero, pago.getDineroIntroducido(), 0);
 	}
 	
 	@Test
-	public void testSobra() {
-		float total = 83.5f;
-		float dinero = 85.5f;
-		float sobra = 2.0f;
-		assertEquals(sobra, pago.sobra(total, dinero), 0);	
+	public void testDevolverDinero() {
+		pago.sumarDinero(dinero);
+		pago.devolverDinero();
+		assertEquals(0, pago.getDineroIntroducido(), 0);
+	}
+	
+	@Test
+	public void testCalcularDineroRestante() {
+		pago.setPrecioTotal(precio);
+		pago.sumarDinero(dinero);
+		float falta = 180;
+		assertEquals(falta, pago.calcularDineroRestante(), 0);	
+	}
+	
+	@Test
+	public void testCalcularDineroSobrante() {
+		pago.setPrecioTotal(precio);
+		pago.sumarDinero(dinero);
+		float sobra = -180;
+		assertEquals(sobra, pago.calcularDineroSobrante(), 0);	
 	}
 	
 	@Test

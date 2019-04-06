@@ -2,8 +2,10 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Enumeration;
 
-
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
@@ -13,269 +15,96 @@ import vista.*;
 /**
  * Esta clase se encarga de controlar las funciones del panel de pago
  */
-
-public class ControladorPago implements ActionListener{
+public class ControladorPago {
 	
+	private Controlador cont;
 	private Vista vista;
 	private Modelo modelo;
-	
-	private JLabel introducido, restante;
-	public float total = 0;
-	public float dinero = 0;
-	private float falta = 0;
-	private float moneda = 0;
-	public float sobra = 0;
-	public float[] monedas;
 	
 	/**
 	 * Constructor del controlador de pago
 	 * 
-	 * @param vista: Guarda el objeto vista para poder utilizar los distintos elementos de la interfaz
-	 * @param modelo: Guarda el objeto modelo para poder acceder a los metodos del modelo
+	 * @param cont Objeto controlador principal
 	 */
-	public ControladorPago(Vista vista, Modelo modelo) {
-		this.vista = vista;
-		this.modelo = modelo;
-		this.introducido = this.vista.pago.lblDineroIntro;
-		this.restante = this.vista.pago.lblDineroRest;
-		this.monedas = new float[0];
-		this.total = 0;
-		this.dinero = 0;
-		this.falta = 0;
-		this.moneda = 0;
-		this.sobra = 0;
+	public ControladorPago(Controlador cont) {
+		this.cont = cont;
+		this.vista = cont.miVista;
+		this.modelo = cont.miModelo;
+		modelo.pago.setPrecioTotal(300);
+		vista.pago.actualizarPrecio(modelo.pago.getPrecioTotal());
+		vista.pago.actualizarDineroRestante(modelo.pago.getPrecioTotal());
+		addListeners();
 	}
 	
 	/**
-	 * Generamos los listeners necesarios para el panel
+	 * Añade los listeners a los componentes del panel
 	 */
 	public void addListeners() {
-		this.vista.pago.btn001.addActionListener(this);
-		this.vista.pago.btn002.addActionListener(this);
-		this.vista.pago.btn005.addActionListener(this);
-		this.vista.pago.btn010.addActionListener(this);
-		this.vista.pago.btn020.addActionListener(this);
-		this.vista.pago.btn050.addActionListener(this);
-		this.vista.pago.btn1.addActionListener(this);
-		this.vista.pago.btn2.addActionListener(this);
-		this.vista.pago.btn5.addActionListener(this);
-		this.vista.pago.btn10.addActionListener(this);
-		this.vista.pago.btn20.addActionListener(this);
-		this.vista.pago.btn50.addActionListener(this);
-		this.vista.pago.btn100.addActionListener(this);
-		this.vista.pago.btn200.addActionListener(this);
-		
-		this.vista.pago.btnAtras.addActionListener(this);
-		this.vista.pago.btnCancelar.addActionListener(this);
-		this.vista.pago.btnCancelarPago.addActionListener(this);
-		this.vista.pago.btnContinuar.addActionListener(this);
-	}
-	
-	/**
-	 * Metodo que contiene las acciones realizadas por cada uno de los listeners
-	 */
-	public void actionPerformed(ActionEvent e) {
-		
-		String botonPulsado = ((JButton) e.getSource()).getActionCommand();
-		float importe;
-		
-		switch (botonPulsado) {
-		
-			case "0,01 €":
-				importe = 0.01f;
-				FuncionBotonDinero(importe);
-				break;
-				
-			case "0,02 €":
-				importe = 0.02f;
-				FuncionBotonDinero(importe);
-				break;
-				
-			case "0,05 €":
-				importe = 0.05f;
-				FuncionBotonDinero(importe);
-				break;
-				
-			case "0,10 €":
-				importe = 0.1f;
-				FuncionBotonDinero(importe);
-				break;
-				
-			case "0,20 €":
-				importe = 0.2f;
-				FuncionBotonDinero(importe);
-				break;
-				
-			case "0,50 €":
-				importe = 0.5f;
-				FuncionBotonDinero(importe);
-				break;
-				
-			case "1 €":
-				importe = 1f;
-				FuncionBotonDinero(importe);
-				break;
-				
-			case "2 €":
-				importe = 2f;
-				FuncionBotonDinero(importe);
-				break;
-				
-			case "5 €":
-				importe = 5f;
-				FuncionBotonDinero(importe);
-				break;
-				
-			case "10 €":
-				importe = 10f;
-				FuncionBotonDinero(importe);
-				break;
-				
-			case "20 €":
-				importe = 20f;
-				FuncionBotonDinero(importe);
-				break;
-				
-			case "50 €":
-				importe = 50f;
-				FuncionBotonDinero(importe);
-				break;
-				
-			case "100 €":
-				importe = 100f;
-				FuncionBotonDinero(importe);
-				break;
-				
-			case "200 €":
-				importe = 200f;
-				FuncionBotonDinero(importe);
-				break;
-				
-			case "Atrás":
-				vista.selHotel.setVisible(true);
-				vista.pago.setVisible(false);
-				break;
-				
-			case "Cancelar":
-				vista.bienvenida.setVisible(true);
-				vista.pago.setVisible(false);
-				reset();
-				break;
-				
-			case "Devolver":
-				FuncionDevolver();
-				break;
-				
-			case "Continuar":
-				FuncionContinuar();
-				break;
-				
+		Enumeration<AbstractButton> enumeration = this.vista.pago.botonesDinero.getElements();
+		while (enumeration.hasMoreElements()) {
+		    enumeration.nextElement().addActionListener(new ListenerBotonesDinero());
 		}
+		vista.pago.btnAtras.addActionListener(new ListenerBotonesGenerales());
+		vista.pago.btnCancelar.addActionListener(new ListenerBotonesGenerales());
+		vista.pago.btnCancelarPago.addActionListener(new ListenerBotonesGenerales());
+		vista.pago.btnContinuar.addActionListener(new ListenerBotonesGenerales());
 	}
 	
 	/**
-	 * Realiza las operaciones con el importe de cada boton, tambien almacena las cantidades que se ban introduciendo, se calcula el dinero que fala por introducir o lo que sobra
-	 * @param importe: Variable que guarda el valor monetario de cada uno de los botones de pago, para luego pasarlo como parametro en la funcion hace los calculos con el dinero
+	 * Suma el dinero introducido. Se utiliza en los botones de monedas y billetes
+	 * @param importe Valor a sumar
 	 */
-	public void FuncionBotonDinero(float importe) {
-		int posicion;
-		this.total = this.modelo.precioTotal;
-		dinero = dinero + importe;
-		dinero = Math.round(dinero*100);
-		dinero = dinero/100;
-		monedas = modelo.pago.redimensionarArrayMayor(monedas);
-		posicion = monedas.length - 1;
-		monedas[posicion] = importe;
-		introducido.setText(Float.toString(dinero) + " €");
-		if(dinero < total) {
-			falta = modelo.pago.falta(total, dinero);
-			restante.setText(Float.toString(falta) + " €");
+	public void sumarDinero(float importe) {
+		float dineroIntroducido = modelo.pago.sumarDinero(importe);
+		float dineroRestante = modelo.pago.calcularDineroRestante();
+		vista.pago.actualizarDineroIntroducido(dineroIntroducido);
+		vista.pago.actualizarDineroRestante(dineroRestante);
+		comprobarTodoIntroducido();
+	}
+	
+	/**
+	 * Resta la ultima moneda o billete introducido
+	 */
+	public void devolverDinero() {
+		float dineroIntroducido = modelo.pago.devolverDinero();
+		float dineroRestante = modelo.pago.calcularDineroRestante();
+		vista.pago.actualizarDineroIntroducido(dineroIntroducido);
+		vista.pago.actualizarDineroRestante(dineroRestante);
+		comprobarTodoIntroducido();
+	}
+	
+	/**
+	 * Comprueba si se ha introducido todo el dinero necesario para pagar
+	 * y habilita y deshabilita los botones del panel segun es necesario
+	 */
+	public void comprobarTodoIntroducido() {
+		if(modelo.pago.comprobarFaltaDinero()) {
+			vista.pago.estadoBotonContinuar(false);
+			vista.pago.estadoBotonesPago(true);
+		} else {
+			vista.pago.estadoBotonContinuar(true);
+			vista.pago.estadoBotonesPago(false);
 		}
-		else
-			TodoIntroducido();
-	}
-	
-	/**
-	 * Realiza las operaciones necesarias cuando el usuario pide que se le devuelva la ultima moneda introducida
-	 */
-	public void FuncionDevolver() {
-		int posicion;
-		if(dinero > 0) {
-			posicion = monedas.length - 1;
-			moneda = monedas[posicion];
-			dinero = dinero - moneda;
-			dinero = Math.round(dinero*100); 
-			dinero = dinero/100;
-			introducido.setText(Float.toString(dinero) + " €");
-			monedas = modelo.pago.redimensionarArrayMenor(monedas);
-			if(dinero < total) {
-				falta = modelo.pago.falta(total, dinero);
-				restante.setText(Float.toString(falta) + " €");
-				this.vista.pago.btn001.setEnabled(true);
-				this.vista.pago.btn002.setEnabled(true);
-				this.vista.pago.btn005.setEnabled(true);
-				this.vista.pago.btn010.setEnabled(true);
-				this.vista.pago.btn020.setEnabled(true);
-				this.vista.pago.btn050.setEnabled(true);
-				this.vista.pago.btn1.setEnabled(true);
-				this.vista.pago.btn2.setEnabled(true);
-				this.vista.pago.btn5.setEnabled(true);
-				this.vista.pago.btn10.setEnabled(true);
-				this.vista.pago.btn20.setEnabled(true);
-				this.vista.pago.btn50.setEnabled(true);
-				this.vista.pago.btn100.setEnabled(true);
-				this.vista.pago.btn200.setEnabled(true);
-				
-				this.vista.pago.btnContinuar.setVisible(false);
-				this.vista.pago.btnContinuar.setEnabled(false);
-			}
-			else
-				TodoIntroducido();
-		}
-	}
-	
-	/**
-	 * Funcion que se utiliza una vez que el dinero ha llegado o sobrepasado el total
-	 */
-	public void TodoIntroducido() {
-		
-		introducido.setText(Float.toString(dinero) + " €");
-		restante.setText("0 €");
-		
-		this.vista.pago.btn001.setEnabled(false);
-		this.vista.pago.btn002.setEnabled(false);
-		this.vista.pago.btn005.setEnabled(false);
-		this.vista.pago.btn010.setEnabled(false);
-		this.vista.pago.btn020.setEnabled(false);
-		this.vista.pago.btn050.setEnabled(false);
-		this.vista.pago.btn1.setEnabled(false);
-		this.vista.pago.btn2.setEnabled(false);
-		this.vista.pago.btn5.setEnabled(false);
-		this.vista.pago.btn10.setEnabled(false);
-		this.vista.pago.btn20.setEnabled(false);
-		this.vista.pago.btn50.setEnabled(false);
-		this.vista.pago.btn100.setEnabled(false);
-		this.vista.pago.btn200.setEnabled(false);
-		
-		this.vista.pago.btnContinuar.setVisible(true);
-		this.vista.pago.btnContinuar.setEnabled(true);
-		
 	}
 	
 	/**
 	 * Funcion del boton continuar
 	 */
-	public void FuncionContinuar() {
-		sobra = modelo.pago.sobra(total, dinero);
+	public void continuar() {
+		
+		float precio = modelo.pago.getPrecioTotal();
+		float dineroIntroducido = modelo.pago.getDineroIntroducido();
+		float dineroSobrante = modelo.pago.calcularDineroSobrante();
+		
+		vista.finPago.txtTotal.setText(Float.toString(precio) + " €");
+		vista.finPago.txtPagado.setText(Float.toString(dineroIntroducido) + " €");
+		vista.finPago.txtDevolver.setText(Float.toString(dineroSobrante) + " €");
+		
 		vista.finPago.setVisible(true);
 		vista.pago.setVisible(false);
 		
-		vista.finPago.txtTotal.setText(Float.toString(total) + " €");
-		vista.finPago.txtPagado.setText(Float.toString(dinero) + " €");
-		vista.finPago.txtDevolver.setText(Float.toString(sobra) + " €");
-		
 		// rellenar datos del cliente en el billete	
-		modelo.reserva.setPrecio(modelo.precioTotal);
+		modelo.reserva.setPrecio(modelo.pago.getPrecioTotal());
 		
 		// insertar billete en BBDD
 //		int codBilleteIda = modelo.consultas.insertarBillete(modelo.billeteIda);
@@ -292,11 +121,12 @@ public class ControladorPago implements ActionListener{
 //			modelo.billeteVuelta.setCodBillete(codBilleteVuelta);
 //			
 //		}
-		
+		new ControladorFinPago(cont);
 	}
 	
 	/**
-	 * Funcion del boton de cancelar
+	 * Devuelve el panel pago a sus valores iniciales
+	 * Se utiliza como accion del boton cancelar
 	 */
 	public void reset() {
 		modelo.alojamiento = null;
@@ -304,23 +134,48 @@ public class ControladorPago implements ActionListener{
 		modelo.reserva = null;
 		modelo.habitacion = null;
 		modelo.pago = null;
+		vista.pago.estadoBotonContinuar(false);
+		vista.pago.estadoBotonesPago(true);
+	}
+	
+	/**
+	 * Listener para los botones de las monedas y los billetes
+	 */
+	private class ListenerBotonesDinero implements ActionListener{
 		
-		this.vista.pago.btn001.setEnabled(true);
-		this.vista.pago.btn002.setEnabled(true);
-		this.vista.pago.btn005.setEnabled(true);
-		this.vista.pago.btn010.setEnabled(true);
-		this.vista.pago.btn020.setEnabled(true);
-		this.vista.pago.btn050.setEnabled(true);
-		this.vista.pago.btn1.setEnabled(true);
-		this.vista.pago.btn2.setEnabled(true);
-		this.vista.pago.btn5.setEnabled(true);
-		this.vista.pago.btn10.setEnabled(true);
-		this.vista.pago.btn20.setEnabled(true);
-		this.vista.pago.btn50.setEnabled(true);
-		this.vista.pago.btn100.setEnabled(true);
-		this.vista.pago.btn200.setEnabled(true);
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String botonPulsado = ((JButton) e.getSource()).getName();
+			float importe = Float.parseFloat(botonPulsado);
+			sumarDinero(importe);
+		}
+	}
+	
+	/**
+	 * Listener para los botones generales de la interfaz
+	 */
+	private class ListenerBotonesGenerales implements ActionListener{
 		
-		this.vista.pago.btnContinuar.setVisible(false);
-		this.vista.pago.btnContinuar.setEnabled(false);
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String botonPulsado = ((JButton) e.getSource()).getActionCommand();
+			switch (botonPulsado) {
+				case "Atrás":
+					vista.selHotel.setVisible(true);
+					vista.pago.setVisible(false);
+					break;
+				case "Cancelar":
+					vista.bienvenida.setVisible(true);
+					vista.pago.setVisible(false);
+					reset();
+					break;
+				case "Devolver":
+					devolverDinero();
+					break;
+				case "Continuar":
+					continuar();
+					break;
+			}				
+		}
 	}
 }

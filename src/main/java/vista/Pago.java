@@ -2,7 +2,10 @@ package vista;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.Enumeration;
 
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -12,8 +15,11 @@ import javax.swing.SwingConstants;
 public class Pago extends JPanel {
 	
 	public JPanel panelTotales;
-	public JButton btnContinuar, btnCancelar, btnCancelarPago, btnAtras, btnSeparador, btn200, btn100, btn50, btn20, btn10, btn5, btn2, btn1, btn050, btn020, btn010, btn005, btn002, btn001;
+	public JButton btnContinuar, btnCancelar, btnCancelarPago, btnAtras, btnSeparador;
 	public JLabel lblIcono, lblTotal, lblDineroTotal, lblIntroducido, lblDineroIntro, lblRestante, lblDineroRest;
+	public ButtonGroup botonesDinero = new ButtonGroup();
+	public float[] monedasBilletes = {200, 100, 50, 20, 10, 5, 2, 1, 0.50f, 0.20f, 0.10f, 0.05f, 0.02f, 0.01f };
+	public JButton[] botonesMonedasBilletes = new JButton[14];
 	
 	public Pago() {
 		
@@ -22,7 +28,18 @@ public class Pago extends JPanel {
 		setLayout(null);
 		setBounds(0, 0, 1024, 720);
 		
-		// logo
+		// creacion de componentes
+		crearLogo();
+		crearBotonesGenerales();
+		crearPanelDinero();
+		crearBotonesPago();
+
+	}
+	
+	/**
+	 * Crea el logo y lo añade al panel
+	 */
+	public void crearLogo() {
 		lblIcono = new JLabel("");
 //		lblIcono.setIcon(new ImageIcon(Bienvenida.class.getResource("/img/image2.png")));
 		lblIcono.setOpaque(true);
@@ -32,159 +49,12 @@ public class Pago extends JPanel {
 		lblIcono.setHorizontalAlignment(SwingConstants.LEFT);
 		lblIcono.setBounds(120, 0, 1024, 210);
 		add(lblIcono);
-		
-		/*
-		 * Botones monedas y billetes
-		 */
-		btn200 = new JButton("200 \u20AC");
-		btn200.setFont(new Font("Agency FB", Font.BOLD, 18));
-		btn200.setForeground(new Color(255, 255, 255));
-		btn200.setBackground(new Color(205, 48, 41));
-		btn200.setBorderPainted(false);
-		btn200.setBorder(null);
-		btn200.setSelectedIcon(null);
-		btn200.setBounds(450, 250, 85, 40);
-		add(btn200);
-		
-		btn100 = new JButton("100 \u20AC");
-		btn100.setFont(new Font("Agency FB", Font.BOLD, 18));
-		btn100.setForeground(new Color(255, 255, 255));
-		btn100.setBackground(new Color(205, 48, 41));
-		btn100.setBorderPainted(false);
-		btn100.setBorder(null);
-		btn100.setSelectedIcon(null);
-		btn100.setBounds(450, 300, 85, 40);
-		add(btn100);
-		
-		btn50 = new JButton("50 \u20AC");
-		btn50.setFont(new Font("Agency FB", Font.BOLD, 18));
-		btn50.setForeground(new Color(255, 255, 255));
-		btn50.setBackground(new Color(205, 48, 41));
-		btn50.setBorderPainted(false);
-		btn50.setBorder(null);
-		btn50.setSelectedIcon(null);
-		btn50.setBounds(450, 350, 83, 40);
-		add(btn50);
-		
-		btn20 = new JButton("20 \u20AC");
-		btn20.setFont(new Font("Agency FB", Font.BOLD, 18));
-		btn20.setForeground(new Color(255, 255, 255));
-		btn20.setBackground(new Color(205, 48, 41));
-		btn20.setBorderPainted(false);
-		btn20.setBorder(null);
-		btn20.setSelectedIcon(null);
-		btn20.setBounds(545, 250, 85, 40);
-		add(btn20);
-		
-		btn10 = new JButton("10 \u20AC");
-		btn10.setFont(new Font("Agency FB", Font.BOLD, 18));
-		btn10.setForeground(new Color(255, 255, 255));
-		btn10.setBackground(new Color(205, 48, 41));
-		btn10.setBorderPainted(false);
-		btn10.setBorder(null);
-		btn10.setSelectedIcon(null);
-		btn10.setBounds(545, 300, 85, 40);
-		add(btn10);
-		
-		btn5 = new JButton("5 \u20AC");
-		btn5.setFont(new Font("Agency FB", Font.BOLD, 18));
-		btn5.setForeground(new Color(255, 255, 255));
-		btn5.setBackground(new Color(205, 48, 41));
-		btn5.setBorderPainted(false);
-		btn5.setBorder(null);
-		btn5.setSelectedIcon(null);
-		btn5.setBounds(545, 350, 85, 40);
-		add(btn5);
-		
-		btn2 = new JButton("2 \u20AC");
-		btn2.setFont(new Font("Agency FB", Font.BOLD, 18));
-		btn2.setForeground(new Color(255, 255, 255));
-		btn2.setBackground(new Color(205, 48, 41));
-		btn2.setBorderPainted(false);
-		btn2.setBorder(null);
-		btn2.setSelectedIcon(null);
-		btn2.setBounds(658, 250, 85, 40);
-		add(btn2);
-		
-		btn1 = new JButton("1 \u20AC");
-		btn1.setFont(new Font("Agency FB", Font.BOLD, 18));
-		btn1.setForeground(new Color(255, 255, 255));
-		btn1.setBackground(new Color(205, 48, 41));
-		btn1.setBorderPainted(false);
-		btn1.setBorder(null);
-		btn1.setSelectedIcon(null);
-		btn1.setBounds(658, 300, 85, 40);
-		add(btn1);
-		
-		btn050 = new JButton("0,50 \u20AC");
-		btn050.setFont(new Font("Agency FB", Font.BOLD, 18));
-		btn050.setForeground(new Color(255, 255, 255));
-		btn050.setBackground(new Color(205, 48, 41));
-		btn050.setBorderPainted(false);
-		btn050.setBorder(null);
-		btn050.setSelectedIcon(null);
-		btn050.setBounds(658, 350, 85, 40);
-		add(btn050);
-		
-		btn020 = new JButton("0,20 \u20AC");
-		btn020.setFont(new Font("Agency FB", Font.BOLD, 18));
-		btn020.setForeground(new Color(255, 255, 255));
-		btn020.setBackground(new Color(205, 48, 41));
-		btn020.setBorderPainted(false);
-		btn020.setBorder(null);
-		btn020.setSelectedIcon(null);
-		btn020.setBounds(753, 250, 85, 40);
-		add(btn020);
-		
-		btn010 = new JButton("0,10 \u20AC");
-		btn010.setFont(new Font("Agency FB", Font.BOLD, 18));
-		btn010.setForeground(new Color(255, 255, 255));
-		btn010.setBackground(new Color(205, 48, 41));
-		btn010.setBorderPainted(false);
-		btn010.setBorder(null);
-		btn010.setSelectedIcon(null);
-		btn010.setBounds(753, 300, 85, 40);
-		add(btn010);
-		
-		btn005 = new JButton("0,05 \u20AC");
-		btn005.setFont(new Font("Agency FB", Font.BOLD, 18));
-		btn005.setForeground(new Color(255, 255, 255));
-		btn005.setBackground(new Color(205, 48, 41));
-		btn005.setBorderPainted(false);
-		btn005.setBorder(null);
-		btn005.setSelectedIcon(null);
-		btn005.setBounds(753, 350, 85, 40);
-		add(btn005);
-		
-		btn002 = new JButton("0,02 \u20AC");
-		btn002.setFont(new Font("Agency FB", Font.BOLD, 18));
-		btn002.setForeground(new Color(255, 255, 255));
-		btn002.setBackground(new Color(205, 48, 41));
-		btn002.setBorderPainted(false);
-		btn002.setBorder(null);
-		btn002.setSelectedIcon(null);
-		btn002.setBounds(848, 250, 85, 40);
-		add(btn002);
-		
-		btn001 = new JButton("0,01 \u20AC");
-		btn001.setFont(new Font("Agency FB", Font.BOLD, 18));
-		btn001.setForeground(new Color(255, 255, 255));
-		btn001.setBackground(new Color(205, 48, 41));
-		btn001.setBorderPainted(false);
-		btn001.setBorder(null);
-		btn001.setSelectedIcon(null);
-		btn001.setBounds(848, 300, 85, 40);
-		add(btn001);
-		
-		// separador
-		btnSeparador = new JButton("");
-		btnSeparador.setEnabled(false);
-		btnSeparador.setBounds(640, 250, 5, 140);
-		add(btnSeparador);
-		
-		/*
-		 * Botones
-		 */
+	}
+	
+	/**
+	 * Crea los botones generales de la interfaz y los añade al panel
+	 */
+	public void crearBotonesGenerales() {
 		
 		btnCancelarPago = new JButton("Devolver");
 		btnCancelarPago.setFont(new Font("Agency FB", Font.BOLD, 18));
@@ -228,9 +98,14 @@ public class Pago extends JPanel {
 		btnContinuar.setEnabled(false);
 		btnContinuar.setVisible(false);
 		add(btnContinuar);
-		
-		// Panel donde se muestran los datos del pago al instante:
-		// total a pagar, dinero introducido y dinero restante	
+	}
+	
+	/**
+	 *  Crea el panel donde se muestran los datos al dinero:
+	 *  total a pagar, dinero introducido y dinero restante	
+	 */
+	public void crearPanelDinero() {
+	
 		panelTotales = new JPanel();
 		panelTotales.setBackground(Color.GRAY);
 		panelTotales.setBounds(45, 250, 290, 200);
@@ -269,7 +144,94 @@ public class Pago extends JPanel {
 		lblDineroRest.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblDineroRest.setBounds(130, 135, 121, 32);
 		panelTotales.add(lblDineroRest);
-
+	}
+	
+	/**
+	 * Crea los botones de monedas y billetes y los añade al panel
+	 */
+	public void crearBotonesPago() {
+		
+		for (int i = 0; i < monedasBilletes.length; i++ ) {
+			if (monedasBilletes[i] > 0.5) {
+				botonesMonedasBilletes[i] = new JButton((int)monedasBilletes[i] + " \u20AC");
+			} else {
+				botonesMonedasBilletes[i] = new JButton(monedasBilletes[i] + " \u20AC");
+			}
+			botonesMonedasBilletes[i].setName(Float.toString(monedasBilletes[i]));
+			botonesMonedasBilletes[i].setFont(new Font("Agency FB", Font.BOLD, 18));
+			botonesMonedasBilletes[i].setForeground(new Color(255, 255, 255));
+			botonesMonedasBilletes[i].setBackground(new Color(205, 48, 41));
+			botonesMonedasBilletes[i].setBorderPainted(false);
+			botonesMonedasBilletes[i].setBorder(null);
+			botonesMonedasBilletes[i].setSelectedIcon(null);
+			botonesDinero.add(botonesMonedasBilletes[i]);
+			add(botonesMonedasBilletes[i]);
+		}
+		
+		botonesMonedasBilletes[13].setBounds(450, 250, 85, 40);
+		botonesMonedasBilletes[12].setBounds(450, 300, 85, 40);
+		botonesMonedasBilletes[11].setBounds(450, 350, 83, 40);
+		botonesMonedasBilletes[10].setBounds(545, 250, 85, 40);
+		botonesMonedasBilletes[9].setBounds(545, 300, 85, 40);
+		botonesMonedasBilletes[8].setBounds(545, 350, 85, 40);
+		botonesMonedasBilletes[7].setBounds(658, 250, 85, 40);
+		botonesMonedasBilletes[6].setBounds(658, 300, 85, 40);
+		botonesMonedasBilletes[5].setBounds(658, 350, 85, 40);
+		botonesMonedasBilletes[4].setBounds(753, 250, 85, 40);
+		botonesMonedasBilletes[3].setBounds(753, 300, 85, 40);
+		botonesMonedasBilletes[2].setBounds(753, 350, 85, 40);
+		botonesMonedasBilletes[1].setBounds(848, 250, 85, 40);
+		botonesMonedasBilletes[0].setBounds(848, 300, 85, 40);
+		
+	}
+	
+	/**
+	 * Actualiza el precio que se muestra
+	 * 
+	 * @param precio Nuevo valor del precio
+	 */
+	public void actualizarPrecio(float precio) {
+		lblDineroTotal.setText(Float.toString(precio) + " €");
+	}
+	
+	/**
+	 * Actualiza el dinero introducido que se muestra
+	 * 
+	 * @param dineroIntroducido Nuevo valor del dinero introducido
+	 */
+	public void actualizarDineroIntroducido(float dineroIntroducido) {
+		lblDineroIntro.setText(Float.toString(dineroIntroducido) + " €");
+	}
+	
+	/**
+	 * Actualiza el dinero restante que se muestra
+	 * 
+	 * @param dineroRestante Nuevo valor del dinero restante
+	 */
+	public void actualizarDineroRestante(float dineroRestante) {
+		lblDineroRest.setText(Float.toString(dineroRestante) + " €");
+	}
+	
+	/**
+	 * Deshabilita/habilita el boton continuar
+	 * 
+	 * @param estado Nuevo estado para el boton
+	 */
+	public void estadoBotonContinuar(boolean estado) {
+		btnContinuar.setVisible(estado);
+		btnContinuar.setEnabled(estado);
+	}
+	
+	/**
+	 * Deshabilita/habilita los botones de las monedas y billetes
+	 * 
+	 * @param estado Nuevo estado para el boton
+	 */
+	public void estadoBotonesPago(boolean estado) {
+		Enumeration<AbstractButton> enumeration = botonesDinero.getElements();
+		while (enumeration.hasMoreElements()) {
+		    enumeration.nextElement().setEnabled(estado);
+		}
 	}
 
 }

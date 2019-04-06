@@ -23,6 +23,7 @@ import vista.Vista;
 
 public class ControladorFinPago implements ActionListener {
 	
+	private Controlador cont;
 	public Vista vista;
 	public Modelo modelo;
 	
@@ -31,9 +32,11 @@ public class ControladorFinPago implements ActionListener {
 	 * @param vista Instancia del main frame para poder utilizarlo
 	 * @param modelo instancia del modelo para poder utilizarlo
 	 */
-	public ControladorFinPago(Vista vista, Modelo modelo) {
-		this.vista = vista;
-		this.modelo = modelo;
+	public ControladorFinPago(Controlador cont) {
+		this.cont = cont;
+		this.vista = cont.miVista;
+		this.modelo = cont.miModelo;
+		addListeners();
 	}
 	
 	/**

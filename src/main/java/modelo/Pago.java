@@ -1,60 +1,98 @@
 package modelo;
 
+import java.util.ArrayList;
+
 /**
- * Esta clase se encarga de los calculos del dinero del programa
+ * Realiza los calculos del pago del programa
  */
 public class Pago {
 	
-	/**
-	 * Redimensiona un array que se le pasa por parametro a uno con una posicion mas
-	 * @param array el array que se desea redimensionar
-	 * @return el array nuevo donde se ha copiado el contenido del array que se queria redimensionar
-	 */
-	public float[] redimensionarArrayMayor(float[] array) {
-		int tamano = array.length + 1;
-		float[] arrayNuevo = new float[tamano];
-		System.arraycopy(array, 0, arrayNuevo, 0, array.length);
-		return arrayNuevo;
+	private float precioTotal;
+	private float dineroIntroducido;
+	private ArrayList<Float> monedasIntroducidas;
+	private float dineroRestante;
+	private float dineroSobrante;
+	
+	public Pago() {
+		this.precioTotal = 0;
+		this.dineroIntroducido = 0;
+		this.dineroRestante = 0;
+		this.dineroSobrante = 0;
+		this.monedasIntroducidas = new ArrayList<Float>();
+	}
+
+	public float getPrecioTotal() {
+		return precioTotal;
+	}
+
+	public void setPrecioTotal(float precioTotal) {
+		this.precioTotal = precioTotal;
+	}
+
+	public float getDineroIntroducido() {
+		return dineroIntroducido;
 	}
 	
 	/**
-	 * Redimensiona el array que se le pasa por parametro a uno con una posicion menos
-	 * @param array el array que se desea redimensionar
-	 * @return el array nuevo donde se ha copiado el contenido del array que se queria redimensionar
+	 * Suma el valor pasado por parametro al dinero introducido en total
+	 * 
+	 * @param monedaIntroducida valor que se debe sumar
+	 * @return dinero total introducido despues de la operacion
 	 */
-	public float[] redimensionarArrayMenor(float[] array) {
-		int tamano = array.length - 1;
-		float[] arrayNuevo = new float[tamano];
-		System.arraycopy(array, 0, arrayNuevo, 0, array.length - 1);
-		return arrayNuevo;
+	public float sumarDinero(float monedaIntroducida) {
+		dineroIntroducido += monedaIntroducida;
+		dineroIntroducido = redondear(dineroIntroducido, 2);
+		monedasIntroducidas.add(monedaIntroducida);
+		return dineroIntroducido;
 	}
 	
 	/**
-	 * Metodo que se encarga de calcular el dinero faltante
-	 * @param total Dinero total que se debe introducir
-	 * @param dinero Dinero que se ha introducido hasta el momento
+	 * Resta la última moneda introducida del dinero introducido y la quita del array de monedas
+	 * @return dinero total introducido despues de la operacion
+	 */
+	public float devolverDinero() {
+		float monedaDevolver = monedasIntroducidas.get(monedasIntroducidas.size() - 1);
+		monedasIntroducidas.remove(monedasIntroducidas.size()-1);
+		dineroIntroducido = dineroIntroducido - monedaDevolver;
+		dineroIntroducido = redondear(dineroIntroducido, 2); 
+		return dineroIntroducido;
+	}
+	
+	/**
+	 * Metodo que se encarga de calcular el dinero que falta por introducir
+	 * 
 	 * @return Retorna el dinero que falta por introducir
 	 */
-	public float falta(float total, float dinero){	
-		float falta = 0f;
-		falta = total - dinero;
-		falta = Math.round(falta*100);
-		falta = falta/100;		 		
-		return falta;						
+	public float calcularDineroRestante() {
+		dineroRestante = precioTotal - dineroIntroducido;
+		dineroRestante = redondear(dineroRestante, 2);
+		if (dineroRestante < 0) {
+			dineroRestante = 0;
+		}
+		return dineroRestante;
 	}
 	
 	/**
 	 * Metodo que se encarga de calcular la cantidad de dinero sobrante al realizar el pago
-	 * @param precioTotal Dinero total que se debe introducir
-	 * @param dineroIntroducido Dinero total que se ha introducido
+	 * 
 	 * @return cantidad de dinero sobrante
 	 */
-	public float sobra(float precioTotal, float dineroIntroducido){	
-		return dineroIntroducido-precioTotal;		
+	public float calcularDineroSobrante() {	
+		return dineroIntroducido - precioTotal;
+	}
+	
+	/**
+	 * Comprueba si falta dinero por introducir para realizar el pago
+	 * 
+	 * @return true en caso de que falte dinero por introducir, false en caso contrario
+	 */
+	public boolean comprobarFaltaDinero() {
+		return (dineroIntroducido < precioTotal) ? true : false ;
 	}
 	
 	/**	
-	 * Metodo que se encarga de calcular el menor numero de monedas y billetes que se tienen que dar de devolucion
+	 * Metodo que se encarga de calcular el menor numero de monedas y billetes que se deben que dar de devolucion
+	 * 
 	 * @param sobra dinero sobrante tras realizar el pago
 	 * @return string con el numero de monedas y billetes que se deben devolver
 	 */
@@ -71,16 +109,21 @@ public class Pago {
 	            if (monedasBilletes[i] >= 5) {
 	            	devolver += Integer.toString(cont)+" billetes de " + Integer.toString((int)monedasBilletes[i]) + "€ \n" ;
 	            } else {
-	            	if (monedasBilletes[i] <= 0.5) {
-	            		devolver += Integer.toString(cont)+" monedas de " + Float.toString(monedasBilletes[i]) + "€ \n" ;
-	            	} else {
+	            	if (monedasBilletes[i] > 0.5) {
 	            		devolver += Integer.toString(cont)+" monedas de " + Integer.toString((int)monedasBilletes[i]) + "€ \n" ;
+	            	} else {
+	            		devolver += Integer.toString(cont)+" monedas de " + Float.toString(monedasBilletes[i]) + "€ \n" ;
 	            	}
 	            }
 			}
 		}
-
 		return devolver;
+	}
+	
+	public float redondear(float num, int numDecimales) {
+		num = Math.round(num*100);
+		num = num/100;
+		return num;
 	}
 
 }

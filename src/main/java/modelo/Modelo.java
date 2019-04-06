@@ -12,7 +12,6 @@ public class Modelo {
 	public Habitacion habitacion = null;
 	public Pago pago = null;
 	public GestorBBDD gestorBBDD;
-	public float precioTotal;
 	
 	/**
 	 * Constructor
@@ -24,7 +23,6 @@ public class Modelo {
 		this.habitacion = new Habitacion();
 		this.pago = new Pago();
 		this.gestorBBDD = new GestorBBDD();
-		this.precioTotal = 300;
 	}
 	
 	public Controlador getControlador() {
