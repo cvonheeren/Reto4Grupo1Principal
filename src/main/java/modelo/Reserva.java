@@ -3,12 +3,18 @@ package modelo;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import controlador.Controlador;
 
 public class Reserva {
 
-	protected int codReserva;
-	protected Date fecha;
-	protected float precio;
+	private int codReserva;
+	private int codHotel;
+	private Date fecha;
+	private float precio;
 	
 	/**
 	 * Objeto para guardar la reserva que se está gestionando
@@ -17,8 +23,9 @@ public class Reserva {
 	 * @param fecha Fecha en la cual se realiza
 	 * @param precio Precio
 	 */
-	public Reserva(int codReserva, Date fecha, float precio) {
+	public Reserva(int codReserva, int codHotel, Date fecha, float precio) {
 		this.codReserva = codReserva;
+		this.codHotel = codHotel;
 		this.fecha = fecha;
 		this.precio = precio;
 	}
@@ -51,6 +58,10 @@ public class Reserva {
 		this.precio = precio;
 	}
 	
+	public boolean insertarReserva(Controlador controlador) {
+		return controlador.miModelo.gestorBBDD.insertarDatos("INSERT INTO RESERVAS (COD_RESERVA, COD_HOTEL, PRECIO) values (" + codReserva +", " + codHotel + ", " + precio + ")");
+	}
+	
 	/**
 	 * Metodo que imprime la reserva
 	 * 
@@ -68,7 +79,7 @@ public class Reserva {
 			writer.println("=== DATOS DE LA RESERVA ===");
 			writer.println();
 			writer.println("Código: " + this.codReserva);
-			writer.println("Fecha: " + this.fecha);
+//			writer.println("Fecha: " + this.fecha);
 			writer.println("Precio: " + this.precio);
 			writer.println();
 			writer.println();

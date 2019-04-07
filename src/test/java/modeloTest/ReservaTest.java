@@ -8,7 +8,7 @@ import modelo.Reserva;
 
 public class ReservaTest {
 
-	Reserva reserva = new Reserva(1, null, 400.34f);
+	Reserva reserva = new Reserva(1, 1, null, 400.34f);
 	
 	@Test
 	public void testConstructor() {

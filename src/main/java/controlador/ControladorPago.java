@@ -106,21 +106,9 @@ public class ControladorPago {
 		// rellenar datos del cliente en el billete	
 		modelo.reserva.setPrecio(modelo.pago.getPrecioTotal());
 		
-		// insertar billete en BBDD
-//		int codBilleteIda = modelo.consultas.insertarBillete(modelo.billeteIda);
-//		modelo.reserva.setCodBillete(codBilleteIda);
-//		
-//		// comprobar si existe billete de vuelta
-//		if (modelo.billeteVuelta != null) {
-//			
-//			// rellenar datos del cliente en el billete	
-//			modelo.billeteVuelta.setDni(modelo.cliente.getDni());
-//			
-//			// insertar billete en BBDD
-//			int codBilleteVuelta = modelo.consultas.insertarBillete(modelo.billeteVuelta);
-//			modelo.billeteVuelta.setCodBillete(codBilleteVuelta);
-//			
-//		}
+		// insertar reserva en BBDD
+		modelo.reserva.insertarReserva(cont);
+		
 		new ControladorFinPago(cont);
 	}
 	
