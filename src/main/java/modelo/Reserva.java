@@ -58,8 +58,9 @@ public class Reserva {
 		this.precio = precio;
 	}
 	
-	public boolean insertarReserva(Controlador controlador) {
-		return controlador.miModelo.gestorBBDD.insertarDatos("INSERT INTO RESERVAS (COD_HOTEL, PRECIO) values (" + codHotel + ", " + precio + ")");
+	public int insertarReserva(Controlador controlador) {
+		this.codReserva = controlador.miModelo.gestorBBDD.insertarDatos("INSERT INTO RESERVAS (COD_HOTEL, PRECIO) values (" + codHotel + ", " + precio + ")");
+		return codReserva;
 	}
 	
 	/**
