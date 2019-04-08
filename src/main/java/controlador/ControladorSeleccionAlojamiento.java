@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 
 import modelo.Alojamiento;
+import modelo.AlojamientoLista;
 import modelo.Modelo;
 import vista.Vista;
 
@@ -28,7 +29,9 @@ public class ControladorSeleccionAlojamiento {
 	public void MostrarAlojamientosEnComboBox()
 	{
 		ArrayList<Alojamiento> alojamientos = new ArrayList<Alojamiento>();
-		alojamientos=cont.miModelo.alojamiento.CargarListaAlojamientos(cont);
+		AlojamientoLista alojLista = new AlojamientoLista(cont);
+		alojLista.setAlojamientoLista();
+		alojamientos=alojLista.getAlojamientoLista();
 		vista.selHotel.selHotel.removeAllItems();
 		for(int i=0;i<alojamientos.size();i++)
 		{
