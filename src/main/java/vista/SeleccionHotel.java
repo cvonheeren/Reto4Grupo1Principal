@@ -16,7 +16,7 @@ import modelo.Alojamiento;
 public class SeleccionHotel extends JPanel {
 
 	public JLabel lblIcono,lblHotel;
-	public JButton btnLogin,btnRegistro,btnContinuar,btnCancelar;
+	public JButton btnLogin,btnRegistro,btnContinuar,btnCancelar, btnAtras;
 	public JComboBox<Alojamiento> selHotel;
 	
 	public SeleccionHotel() {
@@ -66,6 +66,15 @@ public class SeleccionHotel extends JPanel {
 		btnCancelar.setSelectedIcon(null);
 		btnCancelar.setBounds(45, 607, 100, 25);
 		add(btnCancelar);
+		
+		btnAtras = new JButton("Atr\u00E1s");
+		btnAtras.setFont(new Font("Agency FB", Font.BOLD, 18));
+		btnAtras.setForeground(new Color(255, 255, 255));
+		btnAtras.setBackground(new Color(205, 48, 41));
+		btnAtras.setBorderPainted(false);
+		btnAtras.setBorder(null);
+		btnAtras.setSelectedIcon(null);
+		add(btnAtras);
 		
 		btnContinuar = new JButton("Continuar");
 		btnContinuar.setFont(new Font("Agency FB", Font.BOLD, 18));
