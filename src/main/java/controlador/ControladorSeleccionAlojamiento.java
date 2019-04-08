@@ -2,24 +2,25 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
 
 import modelo.Alojamiento;
-import modelo.Hotel;
+import modelo.Modelo;
 import vista.Vista;
 
-public class ControladorSeleccionAlojamiento implements ActionListener {
+public class ControladorSeleccionAlojamiento {
 	
-	Controlador cont;
+	private Controlador cont;
+	private Vista vista;
+	private Modelo modelo;
 
 	public ControladorSeleccionAlojamiento(Controlador cont)
 	{
 		this.cont=cont;
+		this.vista = cont.miVista;
+		this.modelo = cont.miModelo;
 		MostrarAlojamientosEnComboBox();
 		anadirListeners();	
 	}
@@ -28,26 +29,57 @@ public class ControladorSeleccionAlojamiento implements ActionListener {
 	{
 		ArrayList<Alojamiento> alojamientos = new ArrayList<Alojamiento>();
 		alojamientos=cont.miModelo.alojamiento.CargarListaAlojamientos(cont);
+		vista.selHotel.selHotel.removeAllItems();
 		for(int i=0;i<alojamientos.size();i++)
 		{
 			cont.miVista.selHotel.selHotel.addItem(alojamientos.get(i));
 		}
 		
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		cont.miVista.selHotel.setVisible(false);
-		cont.miVista.pago.setVisible(true);
-		cont.miModelo.alojamiento=(Alojamiento) cont.miVista.selHotel.selHotel.getSelectedItem();
-		new ControladorPago(cont);
-	}
 	
 	private void anadirListeners()
 	{
-		cont.miVista.selHotel.btnContinuar.addActionListener(this);
+		cont.miVista.selHotel.btnCancelar.addActionListener(new ListenerBotonesGenerales());
+		cont.miVista.selHotel.btnContinuar.addActionListener(new ListenerBotonesGenerales());
+	}
+	
+	/**
+	 * Funcion del boton continuar
+	 */
+	public void continuar() {
+		cont.miVista.selHotel.setVisible(false);
+		cont.miVista.pago.setVisible(true);
+		cont.miModelo.alojamiento = (Alojamiento) cont.miVista.selHotel.selHotel.getSelectedItem();
+		new ControladorPago(cont);
 	}
 	
 	
+	/**
+	 * Devuelve el panel pago a sus valores iniciales
+	 * Se utiliza como accion del boton cancelar
+	 */
+	public void reset() {
+		
+	}
 	
+	/**
+	 * Listener para los botones generales de la interfaz
+	 */
+	private class ListenerBotonesGenerales implements ActionListener{
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String botonPulsado = ((JButton) e.getSource()).getActionCommand();
+			switch (botonPulsado) {
+				case "Cancelar":
+					vista.bienvenida.setVisible(true);
+					vista.selHotel.setVisible(false);
+					reset();
+					break;
+				case "Continuar":
+					continuar();
+					break;
+			}				
+		}
+	}
 }

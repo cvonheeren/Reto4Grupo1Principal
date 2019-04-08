@@ -83,7 +83,7 @@ public class Pago extends JPanel {
 		btnCancelar.setBorderPainted(false);
 		btnCancelar.setBorder(null);
 		btnCancelar.setSelectedIcon(null);
-		btnCancelar.setBounds(45, 607, 100, 25);
+		btnCancelar.setBounds(45, 642, 100, 25);
 		add(btnCancelar);
 		
 		btnContinuar = new JButton("Continuar");
