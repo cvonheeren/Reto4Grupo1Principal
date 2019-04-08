@@ -1,10 +1,7 @@
 package modelo;
 
-import controlador.Controlador;
-
 public class Modelo {
 
-	private Controlador miControlador;
 	
 	public Alojamiento alojamiento = null;
 	public Hotel hotel = null;
@@ -24,12 +21,4 @@ public class Modelo {
 		this.pago = new Pago();
 		this.gestorBBDD = new GestorBBDD();
 	}
-	
-	public Controlador getControlador() {
-		return miControlador;
-	}
-
-	public void setControlador(Controlador miControlador) {
-		this.miControlador = miControlador;
-	} 
 }

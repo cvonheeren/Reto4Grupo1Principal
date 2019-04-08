@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import controlador.Controlador;
 
 public class Reserva {
 
@@ -58,9 +57,9 @@ public class Reserva {
 		this.precio = precio;
 	}
 	
-	public boolean insertarReserva(Controlador controlador) {
+	/*public boolean insertarReserva(Controlador controlador) {
 		return controlador.miModelo.gestorBBDD.insertarDatos("INSERT INTO RESERVAS (COD_RESERVA, COD_HOTEL, PRECIO) values (" + codReserva +", " + codHotel + ", " + precio + ")");
-	}
+	}*/
 	
 	/**
 	 * Metodo que imprime la reserva

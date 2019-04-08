@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import controlador.Controlador;
 import modelo.Alojamiento;
 import modelo.Habitacion;
 import modelo.Hotel;
@@ -13,7 +12,6 @@ import modelo.Reserva;
 
 public class ModeloTest {
 
-	private Controlador controlador = new Controlador(null, null);
 	private Modelo miModelo = new Modelo();
 	
 	@Test
@@ -40,9 +38,4 @@ public class ModeloTest {
 		assertEquals(Habitacion.class, miModelo.habitacion.getClass());
 	}
 	
-	@Test
-	public void testControlador() {
-		miModelo.setControlador(controlador);
-		assertEquals(controlador.getClass(), miModelo.getControlador().getClass());
-	}
 }

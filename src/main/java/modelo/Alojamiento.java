@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import controlador.Controlador;
 
 public class Alojamiento {
 
@@ -52,7 +51,7 @@ public class Alojamiento {
 		this.ubicacion = ubicacion;
 	}
 	
-	public ArrayList<Alojamiento> CargarListaAlojamientos(Controlador controlador)
+	/*public ArrayList<Alojamiento> CargarListaAlojamientos(Controlador controlador)
 	{
 		ResultSet rs=controlador.miModelo.gestorBBDD.HacerConsulta("SELECT * FROM HOTEL ORDER BY UBICACION");
 		ArrayList<Alojamiento> alojamientos = new ArrayList<Alojamiento>();
@@ -70,7 +69,7 @@ public class Alojamiento {
 			e.printStackTrace();
 		}
 		return alojamientos;
-	}
+	}*/
 	 
 	@Override
 	public String toString()
