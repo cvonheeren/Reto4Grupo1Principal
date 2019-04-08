@@ -36,7 +36,7 @@ public class GestorBBDD {
 		return modificarBBDD.hacerConsultaBD(conectar(), string);
 	}
 	
-	public boolean insertarDatos(String string) {
+	public int insertarDatos(String string) {
 		ModificarBBDD modificarBBDD = new ModificarBBDD();
 		return modificarBBDD.insertarDatosBD(conectar(), string);
 	}
