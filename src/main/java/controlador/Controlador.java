@@ -8,6 +8,8 @@ public class Controlador {
 	public Modelo miModelo;
 	public Vista miVista;
 	
+	public ControladorBienvenida controladorBienvenida;
+	
 	/**
 	 * Constructor
 	 * @param miModelo Los objetos y los metodos que los tratan
@@ -16,7 +18,7 @@ public class Controlador {
 	public Controlador(Modelo miModelo, Vista miVista) {
 		this.miModelo = miModelo;
 		this.miVista = miVista;
-		ControladorBienvenida controladorBienvenida = new ControladorBienvenida(this);
+		this.controladorBienvenida = new ControladorBienvenida(this);
 	}
 
 }
