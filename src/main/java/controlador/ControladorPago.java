@@ -117,11 +117,10 @@ public class ControladorPago {
 	 * Se utiliza como accion del boton cancelar
 	 */
 	public void reset() {
-		modelo.alojamiento = null;
-		modelo.hotel = null;
-		modelo.reserva = null;
-		modelo.habitacion = null;
-		modelo.pago = null;
+		modelo.pago.setDineroIntroducido(0);
+		modelo.pago.setDineroRestante(modelo.pago.getPrecioTotal());
+		vista.pago.actualizarDineroIntroducido(modelo.pago.getDineroIntroducido());
+		vista.pago.actualizarDineroRestante(modelo.pago.getDineroRestante());
 		vista.pago.estadoBotonContinuar(false);
 		vista.pago.estadoBotonesPago(true);
 	}

@@ -59,7 +59,7 @@ public class Reserva {
 	}
 	
 	public boolean insertarReserva(Controlador controlador) {
-		return controlador.miModelo.gestorBBDD.insertarDatos("INSERT INTO RESERVAS (COD_RESERVA, COD_HOTEL, PRECIO) values (" + codReserva +", " + codHotel + ", " + precio + ")");
+		return controlador.miModelo.gestorBBDD.insertarDatos("INSERT INTO RESERVAS (COD_HOTEL, PRECIO) values (" + codHotel + ", " + precio + ")");
 	}
 	
 	/**
