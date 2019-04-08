@@ -42,6 +42,14 @@ public class Reserva {
 		this.codReserva = codReserva;
 	}
 
+	public int getCodHotel() {
+		return codHotel;
+	}
+
+	public void setCodHotel(int codHotel) {
+		this.codHotel = codHotel;
+	}
+
 	public Date getFecha() {
 		return fecha;
 	}
@@ -79,7 +87,8 @@ public class Reserva {
 			writer = new PrintWriter(fichero);
 			writer.println("=== DATOS DE LA RESERVA ===");
 			writer.println();
-			writer.println("Código: " + this.codReserva);
+			writer.println("Código Reserva: " + this.codReserva);
+			writer.println("Código Alojamiento: " + this.codHotel);
 //			writer.println("Fecha: " + this.fecha);
 			writer.println("Precio: " + this.precio);
 			writer.println();

@@ -50,6 +50,7 @@ public class ControladorSeleccionAlojamiento {
 		cont.miVista.selHotel.setVisible(false);
 		cont.miVista.pago.setVisible(true);
 		cont.miModelo.alojamiento = (Alojamiento) cont.miVista.selHotel.selHotel.getSelectedItem();
+		cont.miModelo.reserva.setCodHotel(cont.miModelo.alojamiento.getCodAlojamiento());
 		new ControladorPago(cont);
 	}
 	
