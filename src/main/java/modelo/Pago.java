@@ -11,13 +11,11 @@ public class Pago {
 	private float dineroIntroducido;
 	private ArrayList<Float> monedasIntroducidas;
 	private float dineroRestante;
-	private float dineroSobrante;
 	
 	public Pago() {
 		this.precioTotal = 0;
 		this.dineroIntroducido = 0;
 		this.dineroRestante = 0;
-		this.dineroSobrante = 0;
 		this.monedasIntroducidas = new ArrayList<Float>();
 	}
 
@@ -33,6 +31,18 @@ public class Pago {
 		return dineroIntroducido;
 	}
 	
+	public void setDineroIntroducido(float dineroIntroducido) {
+		this.dineroIntroducido = dineroIntroducido;
+	}
+	
+	public float getDineroRestante() {
+		return dineroRestante;
+	}
+
+	public void setDineroRestante(float dineroRestante) {
+		this.dineroRestante = dineroRestante;
+	}
+
 	/**
 	 * Suma el valor pasado por parametro al dinero introducido en total
 	 * 

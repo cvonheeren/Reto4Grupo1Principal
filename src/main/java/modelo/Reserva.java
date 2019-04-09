@@ -41,6 +41,14 @@ public class Reserva {
 		this.codReserva = codReserva;
 	}
 
+	public int getCodHotel() {
+		return codHotel;
+	}
+
+	public void setCodHotel(int codHotel) {
+		this.codHotel = codHotel;
+	}
+
 	public Date getFecha() {
 		return fecha;
 	}
@@ -61,6 +69,11 @@ public class Reserva {
 		return controlador.miModelo.gestorBBDD.insertarDatos("INSERT INTO RESERVAS (COD_RESERVA, COD_HOTEL, PRECIO) values (" + codReserva +", " + codHotel + ", " + precio + ")");
 	}*/
 	
+	/*public int insertarReserva(Controlador controlador) {
+		this.codReserva = controlador.miModelo.gestorBBDD.insertarDatos("INSERT INTO RESERVAS (COD_HOTEL, PRECIO) values (" + codHotel + ", " + precio + ")");
+		return codReserva;
+	}*/
+	
 	/**
 	 * Metodo que imprime la reserva
 	 * 
@@ -77,7 +90,8 @@ public class Reserva {
 			writer = new PrintWriter(fichero);
 			writer.println("=== DATOS DE LA RESERVA ===");
 			writer.println();
-			writer.println("Código: " + this.codReserva);
+			writer.println("Código Reserva: " + this.codReserva);
+			writer.println("Código Alojamiento: " + this.codHotel);
 //			writer.println("Fecha: " + this.fecha);
 			writer.println("Precio: " + this.precio);
 			writer.println();
