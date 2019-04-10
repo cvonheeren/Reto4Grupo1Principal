@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ListenerLogin">
+   <children>
+      <JFXTextField alignment="CENTER" layoutX="231.0" layoutY="38.0" prefHeight="36.0" prefWidth="138.0" text="DNI" />
+      <JFXTextArea layoutX="113.0" layoutY="83.0" prefHeight="12.0" prefWidth="374.0" style="-fx-background-color: #ffffff; -fx-border-color: black; -fx-border-radius: 5;" />
+      <JFXTextField alignment="CENTER" layoutX="231.0" layoutY="138.0" prefHeight="36.0" prefWidth="138.0" text="CONTRASEÑA" />
+      <JFXTextArea layoutX="113.0" layoutY="181.0" prefHeight="36.0" prefWidth="374.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 5;" />
+      <JFXButton layoutX="247.0" layoutY="242.0" prefHeight="36.0" prefWidth="106.0" style="-fx-border-color: black;" text="Login" textAlignment="CENTER" />
+      <JFXTextField alignment="CENTER" layoutX="190.0" layoutY="299.0" prefHeight="36.0" prefWidth="228.0" text="¿No estás registrado?" />
+      <JFXButton layoutX="247.0" layoutY="344.0" prefHeight="36.0" prefWidth="106.0" style="-fx-border-color: black;" text="Regístrate" />
+      <JFXButton layoutX="44.0" layoutY="299.0" prefHeight="36.0" prefWidth="106.0" style="-fx-border-color: black;" onMouseClicked="#Atras" text="Atrás" textAlignment="CENTER" />
+   </children>
+</AnchorPane>
