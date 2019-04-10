@@ -14,6 +14,7 @@ public class GestorBBDD {
 		modificarBBDD = new ModificarBBDD();
 	}
 	
+	
 	public ArrayList<Alojamiento> cargarListaAlojamientos(String string) {
 		ArrayList<Alojamiento> listaAlojamientos = new ArrayList<Alojamiento>();
 		ResultSet result = modificarBBDD.cargarListaAlojamientos(string);

@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXMasonryPane?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ListenerSeleccionAlojamiento">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="573.0" prefWidth="693.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ListenerSeleccionAlojamiento">
    <children>
-      <JFXComboBox fx:id="comboListaAlojamientos" layoutX="29.0" layoutY="172.0" onAction="#RellenarCiudad" prefHeight="39.0" prefWidth="247.0" promptText="Seleccione Alojamiento" />
-      <JFXButton fx:id="btnCancelar" layoutX="29.0" layoutY="346.0" onMouseClicked="#Cancelar" text="Cancelar" />
-      <JFXButton fx:id="btnSiguiente" layoutX="511.0" layoutY="346.0" text="Siguiente" />
-      <JFXComboBox fx:id="comboBoxDestinos" layoutX="29.0" layoutY="104.0" onAction="#ciudadSeleccionada" prefHeight="39.0" prefWidth="247.0" promptText="Seleccione Ciudad" />
+      <JFXButton fx:id="btnCancelar" layoutX="32.0" layoutY="518.0" onMouseClicked="#Cancelar" text="Cancelar" />
+      <JFXButton fx:id="btnSiguiente" layoutX="613.0" layoutY="518.0" text="Siguiente" />
       <JFXDatePicker layoutX="314.0" layoutY="111.0" />
       <JFXDatePicker layoutX="314.0" layoutY="179.0" />
-      <JFXTextField fx:id="fieldBuscador" layoutX="32.0" layoutY="67.0" onAction="#buscar" prefHeight="25.0" prefWidth="247.0" promptText="Buscador" />
+      <JFXTextField fx:id="fieldBuscador" layoutX="40.0" layoutY="99.0" onAction="#buscar" prefHeight="25.0" prefWidth="247.0" promptText="Buscar... Hotel, apartamento, ciudad..." />
+      <FlowPane fx:id="listaAlojamientos" layoutX="20.0" layoutY="250.0" prefHeight="100.0" prefWidth="645.0">
+         <children>
+            <JFXMasonryPane />
+         </children>
+      </FlowPane>
    </children>
 </AnchorPane>

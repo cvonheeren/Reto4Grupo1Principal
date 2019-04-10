@@ -1,5 +1,6 @@
 package aplicacion;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -8,23 +9,32 @@ import java.util.concurrent.TimeoutException;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXMasonryPane;
 import com.jfoenix.controls.JFXTextField;
 
 import core.Principal;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import modelo.Alojamiento;
 import modelo.AlojamientoLista;
 
 public class ListenerSeleccionAlojamiento implements Initializable{
 	
 	
-    @FXML
-    private JFXComboBox<Alojamiento> comboListaAlojamientos;
 
     @FXML
     private JFXButton btnCancelar;
@@ -33,10 +43,11 @@ public class ListenerSeleccionAlojamiento implements Initializable{
     private JFXButton btnSiguiente;
 
     @FXML
-    private JFXComboBox<String> comboBoxDestinos;
-   
-    @FXML
     private JFXTextField fieldBuscador;
+    
+
+    @FXML
+    private FlowPane listaAlojamientos;
     
     @FXML
     void Cancelar(MouseEvent event) {
@@ -44,47 +55,37 @@ public class ListenerSeleccionAlojamiento implements Initializable{
     	Principal.aplicacion.CambiarScene("Bienvenida.fxml");
     }
     
-    @FXML
-    void RellenarCiudad(ActionEvent event) {
-    	System.out.println("Ciudad... " + comboListaAlojamientos.getValue().getUbicacion());
-    	comboBoxDestinos.getSelectionModel().select(comboListaAlojamientos.getValue().getUbicacion());
-    }
     
-    @FXML
-    void ciudadSeleccionada(ActionEvent event) {
-    	//comboListaAlojamientos.getSelectionModel().clearSelection();
-    	RellenarListaAlojamientos();
-    }
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		RellenarListaDestinos();		
-	}
-	
-	public void RellenarListaDestinos()
-	{
-		ArrayList<String> ciudades = new ArrayList<String>();
-
-		ciudades=Principal.modelo.gestorBBDD.cargarListaDestinos();
-		comboBoxDestinos.getItems().setAll(ciudades);
-	}
-	
-	public void RellenarListaAlojamientos()
-	{
-		ArrayList<Alojamiento> alojamientos = new ArrayList<Alojamiento>();
-		alojamientos = Principal.modelo.gestorBBDD.cargarListaAlojamientos(comboBoxDestinos.getValue());
-		comboListaAlojamientos.getItems().setAll(alojamientos);
-	}
     
     @FXML
     void buscar(ActionEvent event) {
     	System.out.println(fieldBuscador.getText());
     	ArrayList<Alojamiento> alojamientos = new ArrayList<Alojamiento>();
 		alojamientos = Principal.modelo.gestorBBDD.cargarListaAlojamientos(fieldBuscador.getText());
-		comboListaAlojamientos.getItems().setAll(alojamientos);
-		comboListaAlojamientos.show();
+		
     }
+
     
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		
+		Node newLoadedPane = null;
+		Node newLoadedPane2 = null;
+		try {
+			newLoadedPane = FXMLLoader.load(getClass().getResource("/vista/Alojamiento.fxml"));
+			newLoadedPane2 = FXMLLoader.load(getClass().getResource("/vista/Alojamiento.fxml"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		listaAlojamientos.getChildren().add(newLoadedPane);
+		listaAlojamientos.getChildren().add(newLoadedPane2);
+	}
+	
+	
     
 }
 
