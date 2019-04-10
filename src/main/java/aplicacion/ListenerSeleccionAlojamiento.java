@@ -3,6 +3,8 @@ package aplicacion;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -12,11 +14,15 @@ import core.Principal;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import modelo.Alojamiento;
+import modelo.AlojamientoLista;
 
 public class ListenerSeleccionAlojamiento implements Initializable{
-
+	
+	
     @FXML
     private JFXComboBox<Alojamiento> comboListaAlojamientos;
 
@@ -39,9 +45,14 @@ public class ListenerSeleccionAlojamiento implements Initializable{
     }
     
     @FXML
+    void RellenarCiudad(ActionEvent event) {
+    	System.out.println("Ciudad... " + comboListaAlojamientos.getValue().getUbicacion());
+    	comboBoxDestinos.getSelectionModel().select(comboListaAlojamientos.getValue().getUbicacion());
+    }
+    
+    @FXML
     void ciudadSeleccionada(ActionEvent event) {
-    	comboListaAlojamientos.setDisable(false);
-    	comboListaAlojamientos.getItems().clear();
+    	//comboListaAlojamientos.getSelectionModel().clearSelection();
     	RellenarListaAlojamientos();
     }
 
@@ -53,15 +64,15 @@ public class ListenerSeleccionAlojamiento implements Initializable{
 	public void RellenarListaDestinos()
 	{
 		ArrayList<String> ciudades = new ArrayList<String>();
-		ciudades=Principal.modelo.alojamientoLista.CargarListaDestinos();
+
+		ciudades=Principal.modelo.gestorBBDD.cargarListaDestinos();
 		comboBoxDestinos.getItems().setAll(ciudades);
-		
 	}
 	
 	public void RellenarListaAlojamientos()
 	{
 		ArrayList<Alojamiento> alojamientos = new ArrayList<Alojamiento>();
-		alojamientos=Principal.modelo.alojamientoLista.CargarListaAlojamientos(comboBoxDestinos.getValue());
+		alojamientos = Principal.modelo.gestorBBDD.cargarListaAlojamientos(comboBoxDestinos.getValue());
 		comboListaAlojamientos.getItems().setAll(alojamientos);
 	}
     
@@ -69,8 +80,9 @@ public class ListenerSeleccionAlojamiento implements Initializable{
     void buscar(ActionEvent event) {
     	System.out.println(fieldBuscador.getText());
     	ArrayList<Alojamiento> alojamientos = new ArrayList<Alojamiento>();
-		alojamientos=Principal.modelo.alojamientoLista.CargarListaAlojamientos(fieldBuscador.getText());
+		alojamientos = Principal.modelo.gestorBBDD.cargarListaAlojamientos(fieldBuscador.getText());
 		comboListaAlojamientos.getItems().setAll(alojamientos);
+		comboListaAlojamientos.show();
     }
     
     
