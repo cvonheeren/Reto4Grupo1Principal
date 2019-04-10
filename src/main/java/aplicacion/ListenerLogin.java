@@ -3,6 +3,7 @@ package aplicacion;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 
 import javafx.fxml.Initializable;
@@ -19,6 +20,9 @@ public class ListenerLogin implements Initializable {
 	
 	@FXML
 	private JFXTextField textareaPass;
+	
+	@FXML
+	private JFXTextArea textoAviso;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -38,6 +42,8 @@ public class ListenerLogin implements Initializable {
 		Cliente cliente = new Cliente(dni, pass);
 		if(cliente.validacion())
 			Principal.aplicacion.CambiarScene("");
+		else
+			textoAviso.setOpacity(1.0);
 	}
 	
 	
