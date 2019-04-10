@@ -64,14 +64,15 @@ public class ListenerSeleccionAlojamiento implements Initializable{
 	public void RellenarListaDestinos()
 	{
 		ArrayList<String> ciudades = new ArrayList<String>();
-		ciudades=Principal.modelo.alojamientoLista.CargarListaDestinos();
-		comboBoxDestinos.getItems().setAll(ciudades);		
+
+		ciudades=Principal.modelo.gestorBBDD.cargarListaDestinos();
+		comboBoxDestinos.getItems().setAll(ciudades);
 	}
 	
 	public void RellenarListaAlojamientos()
 	{
 		ArrayList<Alojamiento> alojamientos = new ArrayList<Alojamiento>();
-		alojamientos=Principal.modelo.alojamientoLista.CargarListaAlojamientos(comboBoxDestinos.getValue());
+		alojamientos = Principal.modelo.gestorBBDD.cargarListaAlojamientos(comboBoxDestinos.getValue());
 		comboListaAlojamientos.getItems().setAll(alojamientos);
 	}
     
@@ -79,7 +80,7 @@ public class ListenerSeleccionAlojamiento implements Initializable{
     void buscar(ActionEvent event) {
     	System.out.println(fieldBuscador.getText());
     	ArrayList<Alojamiento> alojamientos = new ArrayList<Alojamiento>();
-		alojamientos=Principal.modelo.alojamientoLista.CargarListaAlojamientos(fieldBuscador.getText());
+		alojamientos = Principal.modelo.gestorBBDD.cargarListaAlojamientos(fieldBuscador.getText());
 		comboListaAlojamientos.getItems().setAll(alojamientos);
 		comboListaAlojamientos.show();
     }

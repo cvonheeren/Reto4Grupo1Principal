@@ -1,44 +1,36 @@
 package modelo;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
+import java.util.ArrayList;
+import Reto4Grupo1BBDD.AlojamientoBBDD;
 import Reto4Grupo1BBDD.ModificarBBDD;
-import Reto4Grupo1BBDD.Pool;
 
 public class GestorBBDD {
 	
-	Connection conn = null;
-	Pool pool = null;
+	ModificarBBDD modificarBBDD = null;
 
 	public GestorBBDD() {
-		pool = new Pool();
+		modificarBBDD = new ModificarBBDD();
 	}
 	
-	private Connection conectar() {
-		try {
-			conn = pool.getConnection();
-		} catch (SQLException e) {
-			//Implementar logger?
-			System.out.println(e.getMessage());
-			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Error en la base de datos",JOptionPane.ERROR_MESSAGE);
-			System.exit(0);
+	public ArrayList<Alojamiento> cargarListaAlojamientos(String string) {
+		ArrayList<Alojamiento> alojamientos = new ArrayList<Alojamiento>();
+		ArrayList<AlojamientoBBDD> alojamientosBBDD = modificarBBDD.cargarListaAlojamientos(string);
+		for (int i = 0; i < alojamientosBBDD.size(); i++) {
+			alojamientos.add(new Alojamiento(
+				alojamientosBBDD.get(i).getCodAlojamiento(),
+				alojamientosBBDD.get(i).getNombre(),
+				alojamientosBBDD.get(i).getUbicacion())
+			);
 		}
-		return conn;
+		return alojamientos;
 	}
 	
-	public ResultSet HacerConsulta(String string) {
-		ModificarBBDD modificarBBDD = new ModificarBBDD();
-		return modificarBBDD.hacerConsultaBD(conectar(), string);
+	public ArrayList<String> cargarListaDestinos() {
+		return modificarBBDD.cargarListaDestinos();
 	}
 	
 	/*public int insertarDatos(String string) {
-		ModificarBBDD modificarBBDD = new ModificarBBDD();
-		return modificarBBDD.insertarDatosBD(conectar(), string);
+		return modificarBBDD.insertarDatosBD(string);
 	}*/
 	
 }
