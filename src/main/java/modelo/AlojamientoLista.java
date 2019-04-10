@@ -35,7 +35,7 @@ public class AlojamientoLista {
 				//float precio=rs.getFloat("PRECIO");
 				alojamientos.add(new Alojamiento(cod_alojamiento, nombre, ubicacion));
 	        }
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -52,7 +52,7 @@ public class AlojamientoLista {
 				String ubicacion=rs.getString("UBICACION");
 				ciudades.add(ubicacion);
 	        }
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
