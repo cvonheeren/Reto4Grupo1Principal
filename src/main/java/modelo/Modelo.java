@@ -9,6 +9,7 @@ public class Modelo {
 	public Habitacion habitacion = null;
 	public Pago pago = null;
 	public GestorBBDD gestorBBDD;
+	public AlojamientoLista alojamientoLista;
 	
 	/**
 	 * Constructor
@@ -20,5 +21,6 @@ public class Modelo {
 		this.habitacion = new Habitacion();
 		this.pago = new Pago();
 		this.gestorBBDD = new GestorBBDD();
+		this.alojamientoLista = new AlojamientoLista();
 	}
 }

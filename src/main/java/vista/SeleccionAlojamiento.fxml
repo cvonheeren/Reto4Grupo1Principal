@@ -3,15 +3,17 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ListenerSeleccionAlojamiento">
    <children>
-      <JFXComboBox fx:id="comboListaAlojamientos" disable="true" layoutX="29.0" layoutY="172.0" prefHeight="39.0" prefWidth="247.0" />
+      <JFXComboBox fx:id="comboListaAlojamientos" disable="true" layoutX="29.0" layoutY="172.0" prefHeight="39.0" prefWidth="247.0" promptText="Seleccione Alojamiento" />
       <JFXButton fx:id="btnCancelar" layoutX="29.0" layoutY="346.0" onMouseClicked="#Cancelar" text="Cancelar" />
       <JFXButton fx:id="btnSiguiente" layoutX="511.0" layoutY="346.0" text="Siguiente" />
-      <JFXComboBox fx:id="comboBoxDestinos" layoutX="29.0" layoutY="104.0" prefHeight="39.0" prefWidth="247.0" />
+      <JFXComboBox fx:id="comboBoxDestinos" layoutX="29.0" layoutY="104.0" onAction="#ciudadSeleccionada" prefHeight="39.0" prefWidth="247.0" promptText="Seleccione Ciudad" />
       <JFXDatePicker layoutX="314.0" layoutY="111.0" />
       <JFXDatePicker disable="true" layoutX="314.0" layoutY="179.0" />
+      <JFXTextField fx:id="fieldBuscador" layoutX="32.0" layoutY="67.0" onAction="#buscar" prefHeight="25.0" prefWidth="247.0" promptText="Buscador" />
    </children>
 </AnchorPane>

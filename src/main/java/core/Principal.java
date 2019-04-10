@@ -26,7 +26,7 @@ public class Principal extends Application {
 	@Override
     public void start(Stage stage)
     {
-		//modelo = new Modelo();
+		modelo = new Modelo();
 		aplicacion = new Aplicacion(stage);
     }
 }
