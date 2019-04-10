@@ -65,18 +65,8 @@ public class Reserva {
 		this.precio = precio;
 	}
 	
-	/*public boolean insertarReserva(Controlador controlador) {
-		return controlador.miModelo.gestorBBDD.insertarDatos("INSERT INTO RESERVAS (COD_RESERVA, COD_HOTEL, PRECIO) values (" + codReserva +", " + codHotel + ", " + precio + ")");
-	}*/
-	
-	/*public int insertarReserva(Controlador controlador) {
-		this.codReserva = controlador.miModelo.gestorBBDD.insertarDatos("INSERT INTO RESERVAS (COD_HOTEL, PRECIO) values (" + codHotel + ", " + precio + ")");
-		return codReserva;
-	}*/
-	
 	/**
 	 * Metodo que imprime la reserva
-	 * 
 	 * @param path Ruta de impresion de la reserva
 	 */
 	public void imprimirReserva(String path) {

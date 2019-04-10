@@ -45,13 +45,12 @@ public class Pago {
 
 	/**
 	 * Suma el valor pasado por parametro al dinero introducido en total
-	 * 
 	 * @param monedaIntroducida valor que se debe sumar
 	 * @return dinero total introducido despues de la operacion
 	 */
 	public float sumarDinero(float monedaIntroducida) {
 		dineroIntroducido += monedaIntroducida;
-		dineroIntroducido = redondear(dineroIntroducido, 2);
+		dineroIntroducido = redondear(dineroIntroducido);
 		monedasIntroducidas.add(monedaIntroducida);
 		return dineroIntroducido;
 	}
@@ -64,18 +63,17 @@ public class Pago {
 		float monedaDevolver = monedasIntroducidas.get(monedasIntroducidas.size() - 1);
 		monedasIntroducidas.remove(monedasIntroducidas.size()-1);
 		dineroIntroducido = dineroIntroducido - monedaDevolver;
-		dineroIntroducido = redondear(dineroIntroducido, 2); 
+		dineroIntroducido = redondear(dineroIntroducido); 
 		return dineroIntroducido;
 	}
 	
 	/**
 	 * Metodo que se encarga de calcular el dinero que falta por introducir
-	 * 
 	 * @return Retorna el dinero que falta por introducir
 	 */
 	public float calcularDineroRestante() {
 		dineroRestante = precioTotal - dineroIntroducido;
-		dineroRestante = redondear(dineroRestante, 2);
+		dineroRestante = redondear(dineroRestante);
 		if (dineroRestante < 0) {
 			dineroRestante = 0;
 		}
@@ -84,7 +82,6 @@ public class Pago {
 	
 	/**
 	 * Metodo que se encarga de calcular la cantidad de dinero sobrante al realizar el pago
-	 * 
 	 * @return cantidad de dinero sobrante
 	 */
 	public float calcularDineroSobrante() {	
@@ -93,7 +90,6 @@ public class Pago {
 	
 	/**
 	 * Comprueba si falta dinero por introducir para realizar el pago
-	 * 
 	 * @return true en caso de que falte dinero por introducir, false en caso contrario
 	 */
 	public boolean comprobarFaltaDinero() {
@@ -102,8 +98,7 @@ public class Pago {
 	
 	/**	
 	 * Metodo que se encarga de calcular el menor numero de monedas y billetes que se deben que dar de devolucion
-	 * 
-	 * @param sobra dinero sobrante tras realizar el pago
+	 * @param sobra Dinero sobrante tras realizar el pago
 	 * @return string con el numero de monedas y billetes que se deben devolver
 	 */
 	public String calcularMonedasBilletes(float sobra){
@@ -130,7 +125,12 @@ public class Pago {
 		return devolver;
 	}
 	
-	public float redondear(float num, int numDecimales) {
+	/**
+	 * Redondea el numero introducido a dos decimales
+	 * @param num Numero que se quiere redondear
+	 * @return Numero redondeado
+	 */
+	public float redondear(float num) {
 		num = Math.round(num*100);
 		num = num/100;
 		return num;

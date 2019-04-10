@@ -60,8 +60,12 @@ public class GestorBBDD {
 		return cliente;
 	}
 	
-	/*public int insertarDatos(String string) {
-		return modificarBBDD.insertarDatosBD(string);
-	}*/
+	public int insertarReserva(Reserva reserva) {
+		ResultSet result = modificarBBDD.insertarReserva(reserva.getCodHotel(), reserva.getPrecio());
+		result = stmt.getGeneratedKeys();
+		result.next();
+	    int codReserva = result.getInt(1);
+	}
+	
 	
 }
