@@ -60,8 +60,17 @@ public class GestorBBDD {
 		return cliente;
 	}
 	
-	/*public int insertarDatos(String string) {
-		return modificarBBDD.insertarDatosBD(string);
-	}*/
+	public boolean enviarPassword(String password, String dni) {
+		ResultSet result = modificarBBDD.cargarClienteyPass(dni, password);
+		
+		try {
+			if (result.next())
+				return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
 	
 }
