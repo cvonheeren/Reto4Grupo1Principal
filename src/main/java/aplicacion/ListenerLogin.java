@@ -1,19 +1,13 @@
 package aplicacion;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
-
-import javafx.fxml.Initializable;
-
 import javafx.scene.input.MouseEvent;
 import modelo.Cliente;
 import javafx.fxml.FXML;
 import core.Principal;
 
-public class ListenerLogin implements Initializable {
+public class ListenerLogin  {
 
 	@FXML
 	private JFXTextField textareaDni;
@@ -24,10 +18,6 @@ public class ListenerLogin implements Initializable {
 	@FXML
 	private JFXTextArea textoAviso;
 	
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-	}
 
 	@FXML
 	void Atras(MouseEvent event) {
@@ -45,6 +35,4 @@ public class ListenerLogin implements Initializable {
 		else
 			textoAviso.setOpacity(1.0);
 	}
-	
-	
 }

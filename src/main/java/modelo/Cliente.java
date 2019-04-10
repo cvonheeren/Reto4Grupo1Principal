@@ -12,10 +12,11 @@ public class Cliente {
 	}
 
 	public boolean validacion() {
-		
-		
-		
-		return false;
+		GestorBBDD gestor = new GestorBBDD();
+//		if (gestor.cargarCliente(dni) == null)
+//			return false;
+//		else
+			return false;
 	}
 	
 	public String getDni() {
