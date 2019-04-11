@@ -80,10 +80,11 @@ public class ControladorSelAlojamiento implements Initializable {
     	ColumnConstraints column1 = new ColumnConstraints();
     	column1.setPercentWidth(100);
     	grid.getColumnConstraints().add(column1);
-    	
+    	grid.setGridLinesVisible(true);
     	for(int i=0; i<alojamientos.size(); i++) {
     		Alojamiento alojamiento = alojamientos.get(i);
     		AnchorPane anchorPane = new AnchorPane();
+    		
     		
     		
     		
@@ -107,15 +108,19 @@ public class ControladorSelAlojamiento implements Initializable {
     		descripcion.setLayoutX(170);
     		descripcion.setLayoutY(85);
     		
-    		JFXRippler rippler = new JFXRippler(anchorPane);
-    		anchorPane.setStyle("-fx-background-color: #fff; -fx-border-color: #000; -fx-padding: 5px; -fx-border-insets: 5px; -fx-background-insets: 5px;");
-    		grid.getChildren().add(rippler);
+    		
+    		
     		
     		// añade los componentes al anchorpane
         	anchorPane.getChildren().addAll(nombreHotel, descripcion);
         	
-        	// añade el anchorpane al grid
-    		grid.add(anchorPane, 0, i);
+        	AnchorPane paneSuperior = new AnchorPane();
+        	paneSuperior.getChildren().addAll(anchorPane);
+        	JFXRippler rippler = new JFXRippler(anchorPane);
+        	paneSuperior.getChildren().add(rippler);
+    		paneSuperior.setStyle("-fx-background-color: #fff; -fx-border-color: #000; -fx-padding: 5px; -fx-border-insets: 5px; -fx-background-insets: 5px;");
+    		// añade el anchorpane al grid
+    		grid.add(paneSuperior, 0, i);
     	}
 	}
 
