@@ -15,7 +15,7 @@ public class ListenerBienvenida {
 
 	@FXML
     void Comenzar(MouseEvent event) {
-    	Principal.aplicacion.CambiarScene("SeleccionAlojamiento.fxml");
+    	Principal.aplicacion.CambiarScene("SeleccionAlojamiento2.fxml");
     }
 	
 
