@@ -60,6 +60,12 @@ public class GestorBBDD {
 		return cliente;
 	}
 	
+	/**
+	 * Rellenar
+	 * @param password
+	 * @param dni
+	 * @return
+	 */
 	public boolean enviarPassword(String password, String dni) {
 		ResultSet result = modificarBBDD.cargarClienteyPass(dni, password);
 		
