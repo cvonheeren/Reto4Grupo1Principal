@@ -1,40 +1,51 @@
 package aplicacion;
 
-
-import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import javafx.scene.input.MouseEvent;
-import modelo.*;
-import javafx.fxml.FXML;
+
 import core.Principal;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import modelo.Cliente;
 
-public class ControladorLogin  {
+public class ControladorLogin {
 
-	@FXML
-	private JFXTextArea textareaDni;
-	
-	@FXML
-	private JFXTextArea textareaPass;
-	
-	@FXML
-	private JFXTextField textoAviso;
-	
+    @FXML
+    private JFXButton login;
 
-	@FXML
-	void Atras(MouseEvent event) {
-		Principal.aplicacion.CambiarScene("SeleccionAlojamiento.fxml");
+    @FXML
+    private JFXButton atras;
+
+    @FXML
+    private JFXTextField textFieldDNI;
+
+    @FXML
+    private JFXTextField contrasena;
+
+    @FXML
+    private Label textoAviso;
+
+    @FXML
+    void resgistrar(MouseEvent event) {
+
+    }
+    
+    @FXML
+	void atras(MouseEvent event) {
+		Principal.aplicacion.CambiarScene("InfoReserva.fxml");
 	}
 	
 	@FXML
-	void Logear(MouseEvent event) {
-		String dni = textareaDni.getText();
-		String pass = textareaPass.getText();
-		
+	void logear(MouseEvent event) {
+		String dni = textFieldDNI.getText();
+		String pass = contrasena.getText();
 		if(Principal.modelo.gestorBBDD.comprobarCliente(dni, pass)) {
 			Principal.modelo.cliente = new Cliente(dni, pass);
-			Principal.aplicacion.CambiarScene("Bienvenida.fxml");
+			Principal.aplicacion.CambiarScene("Pago.fxml");
 		} else {
 			textoAviso.setOpacity(1.0);
 		}
 	}
+
 }
