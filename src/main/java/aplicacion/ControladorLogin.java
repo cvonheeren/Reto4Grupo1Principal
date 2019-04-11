@@ -1,5 +1,6 @@
 package aplicacion;
 
+
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import javafx.scene.input.MouseEvent;
@@ -7,16 +8,16 @@ import modelo.*;
 import javafx.fxml.FXML;
 import core.Principal;
 
-public class ListenerLogin  {
+public class ControladorLogin  {
 
 	@FXML
-	private JFXTextField textareaDni;
+	private JFXTextArea textareaDni;
 	
 	@FXML
-	private JFXTextField textareaPass;
+	private JFXTextArea textareaPass;
 	
 	@FXML
-	private JFXTextArea textoAviso;
+	private JFXTextField textoAviso;
 	
 
 	@FXML
@@ -31,7 +32,7 @@ public class ListenerLogin  {
 		
 		if(Principal.modelo.gestorBBDD.comprobarCliente(dni, pass)) {
 			Principal.modelo.cliente = new Cliente(dni, pass);
-			Principal.aplicacion.CambiarScene("");
+			Principal.aplicacion.CambiarScene("Bienvenida.fxml");
 		} else {
 			textoAviso.setOpacity(1.0);
 		}

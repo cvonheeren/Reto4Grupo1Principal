@@ -71,6 +71,7 @@ public class GestorBBDD {
 	}
 	
 	/**
+	 * 
 	 * Inserta una reserva en la BBDD
 	 * @param reserva Reserva que se quiere insertar
 	 * @return
@@ -78,6 +79,7 @@ public class GestorBBDD {
 	public int insertarReserva(Reserva reserva) {
 		int codReserva = -1;
 		ResultSet result = modificarBBDD.insertarReserva(reserva.getCodHotel(), reserva.getPrecio());
+
 		try {
 			result.next();
 			codReserva = result.getInt(1);
