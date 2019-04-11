@@ -71,24 +71,14 @@ public class GestorBBDD {
 	}
 	
 	/**
-<<<<<<< HEAD
-	 * Rellenar
-	 * @param password
-	 * @param dni
-	 * @return
-	 */
-	public boolean enviarPassword(String password, String dni) {
-		ResultSet result = modificarBBDD.cargarClienteyPass(dni, password);
-		
-=======
-	 * Inserta una reserva en la BBDD
-	 * @param reserva Reserva que se quiere insertar
+	 * 
+	 * @param reserva
 	 * @return
 	 */
 	public int insertarReserva(Reserva reserva) {
 		int codReserva = -1;
 		ResultSet result = modificarBBDD.insertarReserva(reserva.getCodHotel(), reserva.getPrecio());
->>>>>>> 3ec30f5f5649870ab13c070bb63ab03638e67b59
+
 		try {
 			result.next();
 			codReserva = result.getInt(1);
