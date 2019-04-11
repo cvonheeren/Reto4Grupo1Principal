@@ -45,7 +45,6 @@ public class Pago {
 
 	/**
 	 * Suma el valor pasado por parametro al dinero introducido en total
-	 * 
 	 * @param monedaIntroducida valor que se debe sumar
 	 * @return dinero total introducido despues de la operacion
 	 */
@@ -70,7 +69,6 @@ public class Pago {
 	
 	/**
 	 * Metodo que se encarga de calcular el dinero que falta por introducir
-	 * 
 	 * @return Retorna el dinero que falta por introducir
 	 */
 	public float calcularDineroRestante() {
@@ -84,7 +82,6 @@ public class Pago {
 	
 	/**
 	 * Metodo que se encarga de calcular la cantidad de dinero sobrante al realizar el pago
-	 * 
 	 * @return cantidad de dinero sobrante
 	 */
 	public float calcularDineroSobrante() {	
@@ -93,7 +90,6 @@ public class Pago {
 	
 	/**
 	 * Comprueba si falta dinero por introducir para realizar el pago
-	 * 
 	 * @return true en caso de que falte dinero por introducir, false en caso contrario
 	 */
 	public boolean comprobarFaltaDinero() {
@@ -102,7 +98,6 @@ public class Pago {
 	
 	/**	
 	 * Metodo que se encarga de calcular el menor numero de monedas y billetes que se deben que dar de devolucion
-	 * 
 	 * @param sobra dinero sobrante tras realizar el pago
 	 * @return string con el numero de monedas y billetes que se deben devolver
 	 */
@@ -130,9 +125,16 @@ public class Pago {
 		return devolver;
 	}
 	
+	/**
+	 * Redondea un numero con el numero de decimales especificado
+	 * @param num Numero que se quiere redondear
+	 * @param numDecimales Numero de decimales que se quiere obtener
+	 * @return Numero redondeado
+	 */
 	public float redondear(float num, int numDecimales) {
-		num = Math.round(num*100);
-		num = num/100;
+		int mult = (int)Math.pow(10, numDecimales);
+		num = Math.round(num*mult);
+		num = num/mult;
 		return num;
 	}
 

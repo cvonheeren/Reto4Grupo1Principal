@@ -3,7 +3,7 @@ package aplicacion;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import javafx.scene.input.MouseEvent;
-import modelo.Cliente;
+import modelo.*;
 import javafx.fxml.FXML;
 import core.Principal;
 
@@ -29,10 +29,11 @@ public class ListenerLogin  {
 		String dni = textareaDni.getText();
 		String pass = textareaPass.getText();
 		
-		Cliente cliente = new Cliente(dni, pass);
-		if(cliente.validacion())
+		if(Principal.modelo.gestorBBDD.comprobarCliente(dni, pass)) {
+			Principal.modelo.cliente = new Cliente(dni, pass);
 			Principal.aplicacion.CambiarScene("");
-		else
+		} else {
 			textoAviso.setOpacity(1.0);
+		}
 	}
 }

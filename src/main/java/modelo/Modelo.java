@@ -8,17 +8,14 @@ public class Modelo {
 	public Reserva reserva = null;
 	public Habitacion habitacion = null;
 	public Pago pago = null;
-	public GestorBBDD gestorBBDD;
-	public AlojamientoLista alojamientoLista;
+	public GestorBBDD gestorBBDD = null;
+	public AlojamientoLista alojamientoLista = null;
+	public Cliente cliente = null;
 	
 	/**
 	 * Constructor
 	 */
 	public Modelo() {
-		this.alojamiento = new Alojamiento();
-		this.hotel = new Hotel();
-		this.reserva = new Reserva();
-		this.habitacion = new Habitacion();
 		this.pago = new Pago();
 		this.gestorBBDD = new GestorBBDD();
 		this.alojamientoLista = new AlojamientoLista();
