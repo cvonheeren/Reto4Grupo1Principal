@@ -72,7 +72,8 @@ public class GestorBBDD {
 	
 	/**
 	 * 
-	 * @param reserva
+	 * Inserta una reserva en la BBDD
+	 * @param reserva Reserva que se quiere insertar
 	 * @return
 	 */
 	public int insertarReserva(Reserva reserva) {
