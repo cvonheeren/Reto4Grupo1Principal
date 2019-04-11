@@ -32,7 +32,7 @@ import javafx.stage.Stage;
 import modelo.Alojamiento;
 import modelo.AlojamientoLista;
 
-public class ListenerSeleccionAlojamiento implements Initializable{
+public class ControladorSeleccionAlojamiento implements Initializable{
 	
 	
 
