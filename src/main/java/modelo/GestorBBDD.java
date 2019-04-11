@@ -53,6 +53,20 @@ public class GestorBBDD {
 		return destinos;
 	}
 	
+	public ArrayList<String> cargarListaAlojamientos() {
+		ResultSet result = modificarBBDD.cargarListaAlojamientos();
+		ArrayList<String> destinos = new ArrayList<String>();
+		try {
+			while (result.next()) {
+				String nombre = result.getString("NOMBRE");
+				destinos.add(nombre);
+	        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return destinos;
+	}
+	
 	/**
 	 * Comprueba si el cliente con el dni y contrasena indicados existe en la BBDD
 	 * @param dni DNI que se quiere comprobar
