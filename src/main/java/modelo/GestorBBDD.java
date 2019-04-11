@@ -14,15 +14,20 @@ public class GestorBBDD {
 		modificarBBDD = new ModificarBBDD();
 	}
 	
-	public ArrayList<Alojamiento> cargarListaAlojamientos(String string) {
+	/**
+	 * Obtiene los alojamientos ubicados en la ciudad especificada
+	 * @param ciudad Nombre de la ciudad por la que se quiere restringir la busqueda
+	 * @return ArrayList<Alojamiento> Lista de alojamientos
+	 */
+	public ArrayList<Alojamiento> cargarListaAlojamientos(String ciudad) {
 		ArrayList<Alojamiento> listaAlojamientos = new ArrayList<Alojamiento>();
-		ResultSet result = modificarBBDD.cargarListaAlojamientos(string);
+		ResultSet result = modificarBBDD.cargarListaAlojamientos(ciudad);
 		try {
 			while (result.next()) {
-				int cod_alojamiento = result.getInt("COD_HOTEL");
+				int codAlojamiento = result.getInt("COD_HOTEL");
 				String ubicacion = result.getString("UBICACION");
 				String nombre = result.getString("NOMBRE");
-				listaAlojamientos.add(new Alojamiento(cod_alojamiento, nombre, ubicacion));
+				listaAlojamientos.add(new Alojamiento(codAlojamiento, nombre, ubicacion));
 	        }
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -30,6 +35,10 @@ public class GestorBBDD {
 		return listaAlojamientos;
 	}
 	
+	/**
+	 * Obtiene una lista con los nombres de todas las ciudades
+	 * @return ArrayList<String> Lista de ciudades 
+	 */
 	public ArrayList<String> cargarListaDestinos() {
 		ResultSet result = modificarBBDD.cargarListaDestinos();
 		ArrayList<String> destinos = new ArrayList<String>();
@@ -44,28 +53,38 @@ public class GestorBBDD {
 		return destinos;
 	}
 	
-	public Cliente cargarCliente(String dni) {
-		ResultSet result = modificarBBDD.cargarCliente(dni);
-		Cliente cliente = null;
+	/**
+	 * Comprueba si el cliente con el dni y contrasena indicados existe en la BBDD
+	 * @param dni DNI que se quiere comprobar
+	 * @param password Contrasena que queremos comprobar
+	 * @return 
+	 */
+	public boolean comprobarCliente(String dni, String password) {
+		ResultSet result = modificarBBDD.comprobarCliente(dni, password);	
 		try {
-			while (result.next()) {
-				String dniCliente = result.getString("dni");
-				String nombre = result.getString("nombre");
-				cliente = new Cliente(dniCliente, nombre);
-	        }
+			if (result.next())
+				return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-		return cliente;
+		return false;
 	}
 	
+	/**
+	 * Inserta una reserva en la BBDD
+	 * @param reserva Reserva que se quiere insertar
+	 * @return
+	 */
 	public int insertarReserva(Reserva reserva) {
+		int codReserva = -1;
 		ResultSet result = modificarBBDD.insertarReserva(reserva.getCodHotel(), reserva.getPrecio());
-		result = stmt.getGeneratedKeys();
-		result.next();
-	    int codReserva = result.getInt(1);
+		try {
+			result.next();
+			codReserva = result.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return codReserva;
 	}
-	
 	
 }

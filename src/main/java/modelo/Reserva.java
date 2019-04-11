@@ -1,12 +1,6 @@
 package modelo;
 
-import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
 
 public class Reserva {
 
@@ -65,46 +59,4 @@ public class Reserva {
 		this.precio = precio;
 	}
 	
-	/**
-	 * Metodo que imprime la reserva
-	 * @param path Ruta de impresion de la reserva
-	 */
-	public void imprimirReserva(String path) {
-		
-		FileWriter fichero = null;	
-		PrintWriter writer = null;
-		
-		try {
-			
-			fichero = new FileWriter(path);
-			writer = new PrintWriter(fichero);
-			writer.println("=== DATOS DE LA RESERVA ===");
-			writer.println();
-			writer.println("Código Reserva: " + this.codReserva);
-			writer.println("Código Alojamiento: " + this.codHotel);
-//			writer.println("Fecha: " + this.fecha);
-			writer.println("Precio: " + this.precio);
-			writer.println();
-			writer.println();
-			writer.println("Gracias por reservar con nosotros.");
-			writer.println();
-			writer.println();
-			writer.flush();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (fichero != null) {
-					fichero.close();
-				}
-				if (writer != null) {
-					writer.close();
-				}
-				} catch (Exception e) {
-					e.getStackTrace();
-			}
-		}
-		
-	}
 }

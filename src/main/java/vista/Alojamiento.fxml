@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXRippler?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="301.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="222.0" prefWidth="169.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.AlojamientoVista">
    <children>
-      <JFXRippler prefHeight="140.0" prefWidth="195.0" />
+      <Pane prefHeight="222.0" prefWidth="169.0" style="-fx-background-color: white; -fx-border-color: black;">
+         <children>
+            <Label fx:id="lblNombre" layoutX="14.0" layoutY="103.0" prefHeight="19.0" prefWidth="63.0" text="Nombre" />
+            <Label fx:id="lblPrecio" layoutX="106.0" layoutY="103.0" prefHeight="19.0" prefWidth="63.0" text="€€€€" textAlignment="RIGHT" />
+            <Label fx:id="lblUbicacion" layoutX="14.0" layoutY="142.0" prefHeight="19.0" prefWidth="63.0" text="Ubicacion" textAlignment="RIGHT" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
