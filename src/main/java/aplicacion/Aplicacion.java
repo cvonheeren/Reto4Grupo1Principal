@@ -18,10 +18,12 @@ import javafx.stage.WindowEvent;
 
 public class Aplicacion{
 
-	//public Bienvenida bienvenida;
-
-public Stage stage;
+	public Stage stage;
 	
+	/**
+	 * Lanza la aplicacion
+	 * @param stage El objeto que inicia la app
+	 */
 	public Aplicacion(Stage stage) {
 		
 		this.stage=stage;
@@ -34,9 +36,14 @@ public Stage stage;
 		stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
 		stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
 		
+		//evento de cierre de la app
 		stage.setOnCloseRequest(confirmCloseEventHandler);
 	}
 	
+	/**
+	 * Cambia las escenas
+	 * @param FXMLLink
+	 */
 	public void CambiarScene(String FXMLLink)
 	{
 		Parent FXML = null;
@@ -51,6 +58,9 @@ public Stage stage;
 		stage.show();
 	}
 	
+	/**
+	 * Controla el evento cuando se cierra la app
+	 */
 	private EventHandler<WindowEvent> confirmCloseEventHandler = event -> {
         Alert closeConfirmation = new Alert(
                 Alert.AlertType.CONFIRMATION,
