@@ -21,8 +21,8 @@ public class Aplicacion{
 	public Stage stage;
 	
 	/**
-	 * Lanza la aplicacion
-	 * @param stage El objeto que inicia la app
+	 * Setea algunos datos de la aplicacion
+	 * @param stage El objeto principal de la vista
 	 */
 	public Aplicacion(Stage stage) {
 		
