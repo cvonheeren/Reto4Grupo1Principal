@@ -1,5 +1,11 @@
 package aplicacion;
 
+import java.awt.PaintContext;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.ColorModel;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -12,6 +18,8 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.effects.JFXDepthManager;
 
 import core.Principal;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -102,15 +110,35 @@ public class ControladorSelAlojamiento implements Initializable {
     		Text nombreHotel = new Text(alojamiento.getNombre());
     		nombreHotel.setLayoutX(170);
     		nombreHotel.setLayoutY(30);
-    		nombreHotel.setFill(Color.BLACK);
+    		nombreHotel.setFill(Paint.valueOf("#07c"));
     		nombreHotel.setStyle("-fx-font: 25 arial;");
     		nombreHotel.setLayoutX(170);
     		nombreHotel.setLayoutY(35);
     		
     		// Ubicacion del alojamiento
+    		
+    		FontAwesomeIconView iconoUbicacion = new FontAwesomeIconView(FontAwesomeIcon.MAP_MARKER);
+    		iconoUbicacion.setLayoutX(180);
+    		iconoUbicacion.setLayoutY(60);
+    		iconoUbicacion.setSize("20");
+    		iconoUbicacion.setFill(Paint.valueOf("#555555"));
     		Text ubicacion = new Text(alojamiento.getUbicacion());
     		ubicacion.setLayoutX(200);
     		ubicacion.setLayoutY(60);
+    		
+    		//Estrellas del hotel (Si es un hotel claro)
+    		FontAwesomeIconView iconoEstrella = new FontAwesomeIconView(FontAwesomeIcon.STAR);
+    		iconoEstrella.setLayoutX(20);
+    		iconoEstrella.setLayoutY(25);
+    		iconoEstrella.setSize("15");
+    		iconoEstrella.setFill(Paint.valueOf("#feba02"));
+    		
+    		// precio
+    		Text precio = new Text("100€");
+    		precio.setLayoutX(675);
+    		precio.setLayoutY(80);
+    		precio.setStyle("-fx-font: 20 arial;");
+    		precio.setFill(Paint.valueOf("#0ab21b"));
     		
     		// label - descripcion del alojamiento
     		Text descripcion = new Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. ");
@@ -118,7 +146,7 @@ public class ControladorSelAlojamiento implements Initializable {
     		descripcion.setLayoutY(85);
     		
     		// añade los componentes al anchorpane
-        	anchorPane.getChildren().addAll(nombreHotel, descripcion, ubicacion);
+        	anchorPane.getChildren().addAll(nombreHotel, descripcion, ubicacion, iconoUbicacion, iconoEstrella, precio);
         	
         	AnchorPane paneSuperior = new AnchorPane();
         	paneSuperior.getChildren().addAll(anchorPane);
