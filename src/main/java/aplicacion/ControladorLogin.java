@@ -1,6 +1,7 @@
 package aplicacion;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
 import core.Principal;
@@ -21,10 +22,10 @@ public class ControladorLogin {
     private JFXTextField textFieldDNI;
 
     @FXML
-    private JFXTextField contrasena;
+    private Label textoAviso;
 
     @FXML
-    private Label textoAviso;
+    private JFXPasswordField contrasena;
 
     @FXML
     void resgistrar(MouseEvent event) {

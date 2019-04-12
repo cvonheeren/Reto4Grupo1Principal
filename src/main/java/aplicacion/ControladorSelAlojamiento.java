@@ -24,6 +24,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import modelo.Alojamiento;
+import modelo.Modelo;
 
 public class ControladorSelAlojamiento implements Initializable {
 
@@ -83,7 +84,7 @@ public class ControladorSelAlojamiento implements Initializable {
     		AnchorPane anchorPane = new AnchorPane();
     		
     		// añadimos la accion que se ejecutara al clickar el panel
-    		anchorPane = añadirListenerSeleccion(anchorPane);
+    		anchorPane = añadirListenerSeleccion(anchorPane, alojamiento);
     		
     		// label - nombre del alojamiento
     		Text nombreHotel = new Text(alojamiento.getNombre());
@@ -101,20 +102,23 @@ public class ControladorSelAlojamiento implements Initializable {
         	anchorPane.getChildren().addAll(nombreHotel, descripcion);
         	
         	AnchorPane paneSuperior = new AnchorPane();
+        	paneSuperior.setMinWidth(anchorPane.getWidth());
+        	paneSuperior.setMinHeight(anchorPane.getHeight());
         	paneSuperior.getChildren().addAll(anchorPane);
         	JFXRippler rippler = new JFXRippler(anchorPane);
         	paneSuperior.getChildren().add(rippler);
-    		paneSuperior.setStyle("-fx-background-color: #fff; -fx-border-color: #000; -fx-padding: 5px; -fx-border-insets: 5px; -fx-background-insets: 5px;");
-    		
+    		anchorPane.setStyle("-fx-background-color: #fff; -fx-border-color: #000; -fx-padding: 5px; -fx-border-insets: 5px; -fx-background-insets: 5px;");
+    		anchorPane.setPrefWidth(830);
     		// añade el anchorpane al grid
     		grid.add(paneSuperior, 0, i);
     	}
 	}
 	
-	public AnchorPane añadirListenerSeleccion(AnchorPane anchorPane) {
+	public AnchorPane añadirListenerSeleccion(AnchorPane anchorPane, Alojamiento alojamiento) {
 		anchorPane.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>(){
 			@Override
 			public void handle(Event event) {
+				Principal.modelo.alojamiento=alojamiento;
 				Principal.aplicacion.CambiarScene("InfoReserva.fxml");
 			}
 		});
