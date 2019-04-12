@@ -59,7 +59,9 @@ public class ControladorInfoReserva implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+		cod.setText(Integer.toString(Principal.modelo.alojamiento.getCodAlojamiento()));
+		tipo.setText("Hotel");
+		nombre.setText(Principal.modelo.alojamiento.getNombre());
 	}
 
 }
