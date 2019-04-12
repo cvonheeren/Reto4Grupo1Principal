@@ -15,6 +15,24 @@ public class GestorBBDD {
 	}
 	
 	/**
+	 * Obtiene una lista con los nombres de todas las ciudades
+	 * @return ArrayList<String> Lista de ciudades 
+	 */
+	public ArrayList<String> cargarListaDestinos() {
+		ResultSet result = modificarBBDD.cargarListaDestinos();
+		ArrayList<String> destinos = new ArrayList<String>();
+		try {
+			while (result.next()) {
+				String ubicacion = result.getString("CIUDAD");
+				destinos.add(ubicacion);
+	        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return destinos;
+	}
+	
+	/**
 	 * Obtiene los alojamientos ubicados en la ciudad especificada
 	 * @param ciudad Nombre de la ciudad por la que se quiere restringir la busqueda
 	 * @return ArrayList<Alojamiento> Lista de alojamientos
@@ -24,8 +42,8 @@ public class GestorBBDD {
 		ResultSet result = modificarBBDD.cargarListaAlojamientos(ciudad);
 		try {
 			while (result.next()) {
-				int codAlojamiento = result.getInt("COD_HOTEL");
-				String ubicacion = result.getString("UBICACION");
+				int codAlojamiento = result.getInt("COD_ALOJAMIENTO");
+				String ubicacion = result.getString("CIUDAD");
 				String nombre = result.getString("NOMBRE");
 				listaAlojamientos.add(new Alojamiento(codAlojamiento, nombre, ubicacion));
 	        }
@@ -33,24 +51,6 @@ public class GestorBBDD {
 			e.printStackTrace();
 		}
 		return listaAlojamientos;
-	}
-	
-	/**
-	 * Obtiene una lista con los nombres de todas las ciudades
-	 * @return ArrayList<String> Lista de ciudades 
-	 */
-	public ArrayList<String> cargarListaDestinos() {
-		ResultSet result = modificarBBDD.cargarListaDestinos();
-		ArrayList<String> destinos = new ArrayList<String>();
-		try {
-			while (result.next()) {
-				String ubicacion = result.getString("UBICACION");
-				destinos.add(ubicacion);
-	        }
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return destinos;
 	}
 	
 	public ArrayList<String> cargarListaAlojamientos() {
@@ -65,6 +65,24 @@ public class GestorBBDD {
 			e.printStackTrace();
 		}
 		return destinos;
+	}
+	
+	public ArrayList<Habitacion> cargarListaHabitaciones(int codAlojamiento) {
+		ResultSet result = modificarBBDD.cargarListaHabitaciones(codAlojamiento);
+		ArrayList<Habitacion> habitaciones = new ArrayList<Habitacion>();
+		try {
+			while (result.next()) {
+				int codHabitacion = result.getInt("COD_DORMITORIO ");
+				int ctaCamasSimples = result.getInt("CTD_CAMASSIMPLES");
+				int ctaCamasMatrimonio = result.getInt("CTD_CAMASMATRIMONIO");
+				int ctaCamasInfantil = result.getInt("CTD_CAMASINFANTIL");
+				float tamano = result.getInt("TAMANO");
+				habitaciones.add(new Habitacion(codHabitacion, ctaCamasSimples, ctaCamasMatrimonio, ctaCamasInfantil, tamano));
+	        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return habitaciones;
 	}
 	
 	/**

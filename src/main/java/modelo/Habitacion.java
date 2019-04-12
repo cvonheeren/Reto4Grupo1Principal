@@ -5,8 +5,9 @@ public class Habitacion {
 	protected int codHabitacion;
 	protected int numeroHabitacion;
 	protected float tamano;
-	protected int numeroCamas;
-	protected String tipoCama;
+	protected int ctaCamasSimples;
+	protected int ctaCamasMatrimonio;
+	protected int ctaCamasInfantil;
 	
 	/**
 	 * Habitaciones de los hoteles
@@ -16,13 +17,14 @@ public class Habitacion {
 	 * @param numeroCamas Numero de camas
 	 * @param tipoCama Tipo de cama
 	 */
-	public Habitacion(int codHabitacion, int numerohabitacion, float tamano, int numeroCamas, String tipoCama) {
+	public Habitacion(int codHabitacion, int ctaCamasSimples, int ctaCamasMatrimonio, int ctaCamasInfantil, float tamano) {
 		super();
 		this.codHabitacion = codHabitacion;
-		this.numeroHabitacion = numerohabitacion;
+//		this.numeroHabitacion = numerohabitacion;
+		this.ctaCamasSimples = ctaCamasSimples;
+		this.ctaCamasMatrimonio = ctaCamasMatrimonio;
+		this.ctaCamasInfantil = ctaCamasInfantil;
 		this.tamano = tamano;
-		this.numeroCamas = numeroCamas;
-		this.tipoCama = tipoCama;
 	}
 	
 	public Habitacion() {
@@ -53,19 +55,28 @@ public class Habitacion {
 		this.tamano = tamano;
 	}
 
-	public int getNumeroCamas() {
-		return numeroCamas;
+	public int getCtaCamasSimples() {
+		return ctaCamasSimples;
 	}
 
-	public void setNumeroCamas(int numeroCamas) {
-		this.numeroCamas = numeroCamas;
+	public void setCtaCamasSimples(int ctaCamasSimples) {
+		this.ctaCamasSimples = ctaCamasSimples;
 	}
 
-	public String getTipoCama() {
-		return tipoCama;
+	public int getCtaCamasMatrimonio() {
+		return ctaCamasMatrimonio;
 	}
 
-	public void setTipoCama(String tipoCama) {
-		this.tipoCama = tipoCama;
+	public void setCtaCamasMatrimonio(int ctaCamasMatrimonio) {
+		this.ctaCamasMatrimonio = ctaCamasMatrimonio;
 	}
+
+	public int getCtaCamasInfantil() {
+		return ctaCamasInfantil;
+	}
+
+	public void setCtaCamasInfantil(int ctaCamasInfantil) {
+		this.ctaCamasInfantil = ctaCamasInfantil;
+	}	
+	
 }

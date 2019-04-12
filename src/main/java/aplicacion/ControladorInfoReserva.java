@@ -64,6 +64,9 @@ public class ControladorInfoReserva implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		mapa.getEngine().loadContent("<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2904.936506675277!2d-2.984688684119379!3d43.27370597913605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDPCsDE2JzI1LjMiTiAywrA1OCc1Ny4wIlc!5e0!3m2!1ses!2ses!4v1555066530582!5m2!1ses!2ses\" width=\"350\" height=\"250\" frameborder=\"0\" style=\"border:0\"></iframe>", "text/html");
+		cod.setText(Integer.toString(Principal.modelo.alojamiento.getCodAlojamiento()));
+		tipo.setText("Hotel");
+		nombre.setText(Principal.modelo.alojamiento.getNombre());
 	}
 
 }
