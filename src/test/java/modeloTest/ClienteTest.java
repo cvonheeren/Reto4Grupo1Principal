@@ -25,15 +25,8 @@ public class ClienteTest {
 	@Test
 	public void testContra() {
 		cliente.setContrasenia("njdsvdjv");
-		assertEquals("4242njdsvdjv34", cliente.getContrasenia());
+		assertEquals("njdsvdjv", cliente.getContrasenia());
 	}
 	
-	@Test
-	public void testValidacion() {
-		assertEquals(false, cliente.validacion());
-		
-		cliente.setDni("1234567X");
-		cliente.setContrasenia("Christian");
-		assertEquals(true, cliente.validacion());
-	}
+	
 }
