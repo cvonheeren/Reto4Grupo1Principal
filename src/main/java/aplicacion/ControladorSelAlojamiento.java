@@ -9,6 +9,7 @@ import org.controlsfx.control.textfield.TextFields;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRippler;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.effects.JFXDepthManager;
 
 import core.Principal;
 import javafx.event.Event;
@@ -21,12 +22,20 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import modelo.Alojamiento;
-import modelo.Modelo;
 
 public class ControladorSelAlojamiento implements Initializable {
+	
+
+	@FXML
+    private AnchorPane contenedor;
+
+    @FXML
+    private Pane paneBusqueda;
 
     @FXML
     private JFXTextField textCiudad;
@@ -35,11 +44,14 @@ public class ControladorSelAlojamiento implements Initializable {
     private JFXButton btnBuscar;
     
     @FXML
-    private AnchorPane contenedor;
+    private Pane paneFiltros;
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		ArrayList<String> ciudades = Principal.modelo.gestorBBDD.cargarListaDestinos();
+    	JFXDepthManager.setDepth(paneFiltros, 2);
+    	JFXDepthManager.setDepth(paneBusqueda, 1);
+    	
+    	ArrayList<String> ciudades = Principal.modelo.gestorBBDD.cargarListaDestinos();
 		ciudades.addAll(Principal.modelo.gestorBBDD.cargarListaAlojamientos());
 		TextFields.bindAutoCompletion( textCiudad, ciudades );
 	}
@@ -67,13 +79,13 @@ public class ControladorSelAlojamiento implements Initializable {
     	ColumnConstraints column1 = new ColumnConstraints();
     	column1.setPercentWidth(100);
     	grid.getColumnConstraints().add(column1);
-    	grid.setGridLinesVisible(true);
-    	
+    	grid.setStyle("-fx-background-color: transparent;");
     	// hace que los anchorpanes rellenen todo el espacio disponible en el padre
         AnchorPane.setTopAnchor(grid, 0.0);
         AnchorPane.setBottomAnchor(grid, 0.0);
         AnchorPane.setLeftAnchor(grid, 0.0);
         AnchorPane.setRightAnchor(grid, 0.0);
+        
         
 		// cargamos la arraylist de alojamientos
 		ArrayList<Alojamiento> alojamientos = Principal.modelo.gestorBBDD.cargarListaAlojamientos(textCiudad.getText());
@@ -89,9 +101,16 @@ public class ControladorSelAlojamiento implements Initializable {
     		// label - nombre del alojamiento
     		Text nombreHotel = new Text(alojamiento.getNombre());
     		nombreHotel.setLayoutX(170);
-    		nombreHotel.setLayoutY(50);
+    		nombreHotel.setLayoutY(30);
     		nombreHotel.setFill(Color.BLACK);
-    		nombreHotel.setStyle("-fx-font: 20 arial;");
+    		nombreHotel.setStyle("-fx-font: 25 arial;");
+    		nombreHotel.setLayoutX(170);
+    		nombreHotel.setLayoutY(35);
+    		
+    		// Ubicacion del alojamiento
+    		Text ubicacion = new Text(alojamiento.getUbicacion());
+    		ubicacion.setLayoutX(200);
+    		ubicacion.setLayoutY(60);
     		
     		// label - descripcion del alojamiento
     		Text descripcion = new Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. ");
@@ -99,16 +118,19 @@ public class ControladorSelAlojamiento implements Initializable {
     		descripcion.setLayoutY(85);
     		
     		// añade los componentes al anchorpane
-        	anchorPane.getChildren().addAll(nombreHotel, descripcion);
+        	anchorPane.getChildren().addAll(nombreHotel, descripcion, ubicacion);
         	
         	AnchorPane paneSuperior = new AnchorPane();
-        	paneSuperior.setMinWidth(anchorPane.getWidth());
-        	paneSuperior.setMinHeight(anchorPane.getHeight());
         	paneSuperior.getChildren().addAll(anchorPane);
+        	
         	JFXRippler rippler = new JFXRippler(anchorPane);
+        	rippler.setRipplerFill(Paint.valueOf("#AAAAAA"));
         	paneSuperior.getChildren().add(rippler);
-    		anchorPane.setStyle("-fx-background-color: #fff; -fx-border-color: #000; -fx-padding: 5px; -fx-border-insets: 5px; -fx-background-insets: 5px;");
-    		anchorPane.setPrefWidth(830);
+        	
+    		anchorPane.setStyle("-fx-background-color: #fff; -fx-padding: 5px; -fx-border-insets: 5px; -fx-background-insets: 5px; -fx-border-radius:  1 1 1 1; -fx-background-radius: 5 5 5 5;");
+    		JFXDepthManager.setDepth(anchorPane, 1);
+    		anchorPane.setPrefWidth(contenedor.getWidth()-20);
+    		anchorPane.setMaxWidth(contenedor.getWidth()-20);
     		// añade el anchorpane al grid
     		grid.add(paneSuperior, 0, i);
     	}

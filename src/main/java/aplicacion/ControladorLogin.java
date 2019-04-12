@@ -27,6 +27,8 @@ public class ControladorLogin {
     @FXML
     private JFXPasswordField contrasena;
 
+    
+    
     @FXML
     void resgistrar(MouseEvent event) {
 

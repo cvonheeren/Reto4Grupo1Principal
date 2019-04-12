@@ -49,6 +49,8 @@ public class ControladorSeleccionAlojamiento implements Initializable{
     @FXML
     private FlowPane listaAlojamientos;
     
+   
+    
     @FXML
     void Cancelar(MouseEvent event) {
     	System.out.println("Btn cancelar");
