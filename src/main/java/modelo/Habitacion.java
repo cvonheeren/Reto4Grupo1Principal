@@ -3,11 +3,13 @@ package modelo;
 public class Habitacion {
 
 	protected int codHabitacion;
+	protected String nombre;
 	protected int numeroHabitacion;
 	protected float tamano;
 	protected int ctaCamasSimples;
 	protected int ctaCamasMatrimonio;
 	protected int ctaCamasInfantil;
+	protected int cantidad;
 	
 	/**
 	 * Habitaciones de los hoteles
@@ -17,14 +19,20 @@ public class Habitacion {
 	 * @param numeroCamas Numero de camas
 	 * @param tipoCama Tipo de cama
 	 */
-	public Habitacion(int codHabitacion, int ctaCamasSimples, int ctaCamasMatrimonio, int ctaCamasInfantil, float tamano) {
-		super();
+	public Habitacion(int codHabitacion, String nombre, int ctaCamasSimples, int ctaCamasMatrimonio, int ctaCamasInfantil, float tamano, int cantidad) {
 		this.codHabitacion = codHabitacion;
+		this.nombre = nombre;
 //		this.numeroHabitacion = numerohabitacion;
 		this.ctaCamasSimples = ctaCamasSimples;
 		this.ctaCamasMatrimonio = ctaCamasMatrimonio;
 		this.ctaCamasInfantil = ctaCamasInfantil;
 		this.tamano = tamano;
+		this.cantidad = cantidad;
+	}
+	
+	public Habitacion(int codHabitacion, int cantidad) {
+		this.codHabitacion = codHabitacion;
+		this.cantidad = cantidad;
 	}
 	
 	public Habitacion() {
@@ -37,6 +45,14 @@ public class Habitacion {
 
 	public void setCodHabitacion(int codHabitacion) {
 		this.codHabitacion = codHabitacion;
+	}
+	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public int getNumerohabitacion() {
@@ -77,6 +93,14 @@ public class Habitacion {
 
 	public void setCtaCamasInfantil(int ctaCamasInfantil) {
 		this.ctaCamasInfantil = ctaCamasInfantil;
-	}	
+	}
+
+	public int getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
 	
 }

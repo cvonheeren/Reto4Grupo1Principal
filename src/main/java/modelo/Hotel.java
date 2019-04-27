@@ -7,15 +7,26 @@ public class Hotel extends Alojamiento {
 	/**
 	 * Objeto hijo de Alojamiento del tipo Hotel
 	 * @param codAlojamiento Codigo principal del alojamiento
-	 * @param nombre Nombre
 	 * @param ubicacion Ubicacion
+	 * @param nombre Nombre
+	 * @param descripcion
+	 * @param longitud
+	 * @param latitud
+	 * @param tarifaNormal
+	 * @param tarifaVerano
+	 * @param recargo
+	 * @param desayuno
+	 * @param mediaPension
+	 * @param pensionCompleta
 	 * @param estrellas Numero de estrellas del hotel
 	 */
-	public Hotel(int codAlojamiento, String nombre, String ubicacion, int estrellas) {
-		super(codAlojamiento, nombre, ubicacion);
+	public Hotel(int codAlojamiento, String ubicacion, String nombre, String descripcion, float longitud, float latitud, float tarifaNormal,
+			float tarifaVerano, float recargo, float desayuno, float mediaPension, float pensionCompleta, int estrellas) {
+		
+		super(codAlojamiento, ubicacion, nombre, descripcion, longitud, latitud, tarifaNormal, tarifaVerano, recargo, desayuno, mediaPension, pensionCompleta);
 		this.estrellas = estrellas;
 	}
-	
+
 	public Hotel() {
 		
 	}
