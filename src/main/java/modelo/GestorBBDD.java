@@ -96,6 +96,38 @@ public class GestorBBDD {
 		return habitaciones;
 	}
 	
+	public ArrayList<Habitacion> cargarHabitacionesReservadas(int codAlojamiento) {
+		ResultSet result = modificarBBDD.cargarHabitacionesReservadas(codAlojamiento);
+		ArrayList<Habitacion> habitaciones = new ArrayList<Habitacion>();
+		try {
+			while (result.next()) {
+				int codHabitacion = result.getInt("COD_DORMITORIO");
+				int cantidad = result.getInt("CANTIDAD");
+				habitaciones.add(new Habitacion(codHabitacion, cantidad));
+	        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return habitaciones;
+	}
+	
+	public ArrayList<Habitacion> habitacionesDisponibles(int codAlojamiento) {
+		ArrayList<Habitacion> habitaciones = cargarListaHabitaciones(codAlojamiento);
+		ArrayList<Habitacion> habitacionesReservadas = cargarHabitacionesReservadas(codAlojamiento);
+		for (int i = 0; i < habitaciones.size(); i++) {
+			for (int j = 0; j < habitacionesReservadas.size(); j++) {
+				if (habitaciones.get(i).getCodHabitacion() == habitacionesReservadas.get(j).getCodHabitacion()) {
+					habitaciones.get(i).setCantidad(habitaciones.get(i).getCantidad()-habitacionesReservadas.get(j).getCantidad());
+				}
+			}
+			if (habitaciones.get(i).getCantidad() == 0) {
+				habitaciones.remove(i);
+				i--;
+			}
+		}
+		return habitaciones;
+	}
+	
 	/**
 	 * Comprueba si el cliente con el dni y contrasena indicados existe en la BBDD
 	 * @param dni DNI que se quiere comprobar
