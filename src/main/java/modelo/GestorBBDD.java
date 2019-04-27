@@ -23,7 +23,7 @@ public class GestorBBDD {
 		ArrayList<String> destinos = new ArrayList<String>();
 		try {
 			while (result.next()) {
-				String ubicacion = result.getString("CIUDAD");
+				String ubicacion = result.getString("NOMBRE");
 				destinos.add(ubicacion);
 	        }
 		} catch (SQLException e) {
@@ -43,9 +43,18 @@ public class GestorBBDD {
 		try {
 			while (result.next()) {
 				int codAlojamiento = result.getInt("COD_ALOJAMIENTO");
-				String ubicacion = result.getString("CIUDAD");
-				String nombre = result.getString("NOMBRE");
-				listaAlojamientos.add(new Alojamiento(codAlojamiento, nombre, ubicacion));
+				String ubicacion = result.getString("UBICACIONES.NOMBRE");
+				String nombre = result.getString("ALOJAMIENTOS.NOMBRE");
+				String desc = result.getString("DESCRIPCION");
+				float longitud = result.getFloat("LONGITUD");
+				float latitud = result.getFloat("LATITUD");
+				float tarifaNormal = result.getFloat("TARIFA_NORMAL");
+				float tarifaVerano = result.getFloat("TARIFA_VERANO");
+				float recargo = result.getFloat("REGARGO");
+				float desayuno = result.getFloat("DESAYUNO");
+				float mediaPension = result.getFloat("MEDIA_PENSION");
+				float pensionCompleta = result.getFloat("PENSION_COMPLETA");
+				listaAlojamientos.add(new Alojamiento(codAlojamiento, ubicacion, nombre, desc, longitud, latitud, tarifaNormal, tarifaVerano, recargo, desayuno, mediaPension, pensionCompleta));
 	        }
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -72,12 +81,14 @@ public class GestorBBDD {
 		ArrayList<Habitacion> habitaciones = new ArrayList<Habitacion>();
 		try {
 			while (result.next()) {
-				int codHabitacion = result.getInt("COD_DORMITORIO ");
-				int ctaCamasSimples = result.getInt("CTD_CAMASSIMPLES");
-				int ctaCamasMatrimonio = result.getInt("CTD_CAMASMATRIMONIO");
-				int ctaCamasInfantil = result.getInt("CTD_CAMASINFANTIL");
-				float tamano = result.getInt("TAMANO");
-				habitaciones.add(new Habitacion(codHabitacion, ctaCamasSimples, ctaCamasMatrimonio, ctaCamasInfantil, tamano));
+				int codHabitacion = result.getInt("COD_DORMITORIO");
+				String nombre = "Suite"; //result.getString("NOMBRE");
+				int ctaCamasSimples = result.getInt("CTD_CAMAS_SIMPLES");
+				int ctaCamasMatrimonio = result.getInt("CTD_CAMAS_MATRIMONIO");
+				int ctaCamasInfantil = result.getInt("CTD_CAMAS_INFANTIL");
+				float tamano = result.getFloat("TAMANO");
+				int cantidad = result.getInt("CANTIDAD");
+				habitaciones.add(new Habitacion(codHabitacion, nombre, ctaCamasSimples, ctaCamasMatrimonio, ctaCamasInfantil, tamano, cantidad));
 	        }
 		} catch (SQLException e) {
 			e.printStackTrace();
