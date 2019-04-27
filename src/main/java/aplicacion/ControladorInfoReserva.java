@@ -53,7 +53,7 @@ public class ControladorInfoReserva implements Initializable {
     
     @FXML
     void atras(MouseEvent event) {
-    	Principal.aplicacion.CambiarScene("SeleccionAlojamiento2.fxml");
+    	Principal.aplicacion.CambiarScene("SeleccionHabitacion.fxml");
     }
 
     @FXML

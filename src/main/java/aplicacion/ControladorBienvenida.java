@@ -13,7 +13,7 @@ public class ControladorBienvenida {
 
 	@FXML
     void Comenzar(MouseEvent event) {
-    	Principal.aplicacion.CambiarScene("SeleccionAlojamiento2.fxml");
+    	Principal.aplicacion.CambiarScene("SeleccionAlojamiento.fxml");
     }
 
 }

@@ -169,7 +169,7 @@ public class ControladorSelAlojamiento implements Initializable {
 			@Override
 			public void handle(Event event) {
 				Principal.modelo.alojamiento=alojamiento;
-				Principal.aplicacion.CambiarScene("InfoReserva.fxml");
+				Principal.aplicacion.CambiarScene("SeleccionHabitacion.fxml");
 			}
 		});
 		return anchorPane;
