@@ -18,7 +18,10 @@
       <Pane fx:id="paneFiltros" layoutY="240.0" prefHeight="658.0" prefWidth="338.0" style="-fx-background-color: white;">
          <children>
             <Label layoutX="28.0" layoutY="34.0" prefHeight="28.0" prefWidth="133.0" text="Estrellas" />
-            <JFXSlider blockIncrement="1.0" layoutX="35.0" layoutY="74.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="1" showTickLabels="true" value="3.0" />
+            <JFXSlider blockIncrement="1.0" layoutX="35.0" layoutY="74.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="1" showTickLabels="true" value="3.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXSlider>
          </children>
       </Pane>
       <Pane fx:id="paneBusqueda" prefHeight="240.0" prefWidth="1150.0" style="-fx-background-color: #1976d2;">
@@ -27,9 +30,18 @@
                <font>
                   <Font size="16.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
-            <JFXDatePicker fx:id="fechaSalida" defaultColor="#f57c00" layoutX="780.0" layoutY="120.0" prefHeight="50.0" prefWidth="133.0" showWeekNumbers="false" style="-fx-background-color: #fff; -fx-effect: innershadow( gaussian, rgba( 0, 0, 0, 0.5 ), 5, 0, 0, 0 );" />
-            <JFXDatePicker fx:id="fechaEntrada" defaultColor="#f57c00" layoutX="634.0" layoutY="120.0" onAction="#seleccion" prefHeight="50.0" prefWidth="133.0" showWeekNumbers="false" style="-fx-background-color: #fff; -fx-effect: innershadow( gaussian, rgba( 0, 0, 0, 0.5 ), 5, 0, 0, 0 );" />
+            <JFXDatePicker fx:id="fechaSalida" defaultColor="#f57c00" layoutX="780.0" layoutY="120.0" prefHeight="50.0" prefWidth="133.0" showWeekNumbers="false" style="-fx-background-color: #fff; -fx-effect: innershadow( gaussian, rgba( 0, 0, 0, 0.5 ), 5, 0, 0, 0 );">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXDatePicker>
+            <JFXDatePicker fx:id="fechaEntrada" defaultColor="#f57c00" layoutX="634.0" layoutY="120.0" onAction="#seleccion" prefHeight="50.0" prefWidth="133.0" showWeekNumbers="false" style="-fx-background-color: #fff; -fx-effect: innershadow( gaussian, rgba( 0, 0, 0, 0.5 ), 5, 0, 0, 0 );">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXDatePicker>
             <JFXTextField fx:id="textCiudad" focusColor="#f57c00" layoutX="40.0" layoutY="120.0" onKeyPressed="#AutoBuscar" prefHeight="50.0" prefWidth="582.0" promptText="Ciudades, Hoteles, Apartamentos, Casas..." style="-fx-background-color: #fff; -fx-effect: innershadow( gaussian, rgba( 0, 0, 0, 0.5 ), 5, 0, 0, 0 );" unFocusColor="#1976d2">
                <font>
                   <Font size="18.0" />

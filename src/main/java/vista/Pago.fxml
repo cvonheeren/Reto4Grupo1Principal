@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -47,11 +48,17 @@
                <font>
                   <Font size="16.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <JFXButton fx:id="atras" layoutX="75.0" layoutY="675.0" onMouseClicked="#atras" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="ATRAS" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <JFXButton fx:id="uno" layoutX="420.0" layoutY="145.0" prefHeight="41.0" prefWidth="61.0" style="-fx-background-color: #f57c00;" text="500€" textFill="WHITE" />
             <JFXButton fx:id="uno1" layoutX="501.0" layoutY="145.0" prefHeight="41.0" prefWidth="61.0" style="-fx-background-color: #f57c00;" text="200€" textFill="WHITE" />
