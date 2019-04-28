@@ -8,6 +8,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.ColorModel;
 import java.net.URL;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -22,10 +23,13 @@ import com.jfoenix.effects.JFXDepthManager;
 import core.Principal;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.DateCell;
+import javafx.scene.control.DatePicker;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -36,6 +40,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
+import javafx.util.Callback;
 import modelo.Alojamiento;
 import modelo.Habitacion;
 
@@ -71,7 +76,45 @@ public class ControladorSelAlojamiento implements Initializable {
     	ArrayList<String> ciudades = Principal.modelo.gestorBBDD.cargarListaDestinos();
 		ciudades.addAll(Principal.modelo.gestorBBDD.cargarListaAlojamientos());
 		TextFields.bindAutoCompletion( textCiudad, ciudades );
+
+		// deshabilitar dias anteriores a hoy en ambos DatePickers
+		final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
+		     public DateCell call(final DatePicker datePicker) {
+		         return new DateCell() {
+		             @Override
+		             public void updateItem(LocalDate date, boolean empty) {
+		                 super.updateItem(date, empty);
+		                 LocalDate today = LocalDate.now();
+		                 setDisable(empty || date.compareTo(today) < 0 );
+		             }
+		         };
+		     }
+		 };
+		 fechaEntrada.setDayCellFactory(dayCellFactory);
+		 fechaSalida.setDayCellFactory(dayCellFactory);
+		 
+		 // cambiar los dias deshabilitados en el datepicker 'fechaSalida'
+		 // cuando se selecciona una fecha en el datepicker 'fechaEntrada'
+		 
 	}
+    
+    @FXML
+    void seleccion(ActionEvent event) {
+    	// deshabilitar dias anteriores a hoy en ambos DatePickers
+		final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
+		     public DateCell call(final DatePicker datePicker) {
+		         return new DateCell() {
+		             @Override
+		             public void updateItem(LocalDate date, boolean empty) {
+		                 super.updateItem(date, empty);
+		                 LocalDate today = fechaEntrada.getValue().plusDays(1);
+		                 setDisable(empty || date.compareTo(today) < 0 );
+		             }
+		         };
+		     }
+		 };
+		 fechaSalida.setDayCellFactory(dayCellFactory);
+    }
     
     @FXML
     void AutoBuscar(KeyEvent event) {
