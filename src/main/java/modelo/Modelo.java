@@ -1,5 +1,7 @@
 package modelo;
 
+import java.sql.Date;
+
 public class Modelo {
 
 	
@@ -11,6 +13,8 @@ public class Modelo {
 	public GestorBBDD gestorBBDD = null;
 	public AlojamientoLista alojamientoLista = null;
 	public Cliente cliente = null;
+	public Date fechaEntrada = null;
+	public Date fechaSalida = null;
 	
 	/**
 	 * Constructor

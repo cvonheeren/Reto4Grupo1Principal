@@ -1,5 +1,6 @@
 package modelo;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -62,6 +63,10 @@ public class GestorBBDD {
 		return listaAlojamientos;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public ArrayList<String> cargarListaAlojamientos() {
 		ResultSet result = modificarBBDD.cargarListaAlojamientos();
 		ArrayList<String> destinos = new ArrayList<String>();
@@ -76,6 +81,11 @@ public class GestorBBDD {
 		return destinos;
 	}
 	
+	/**
+	 * 
+	 * @param codAlojamiento
+	 * @return
+	 */
 	public ArrayList<Habitacion> cargarListaHabitaciones(int codAlojamiento) {
 		ResultSet result = modificarBBDD.cargarListaHabitaciones(codAlojamiento);
 		ArrayList<Habitacion> habitaciones = new ArrayList<Habitacion>();
@@ -96,8 +106,20 @@ public class GestorBBDD {
 		return habitaciones;
 	}
 	
-	public ArrayList<Habitacion> cargarHabitacionesReservadas(int codAlojamiento) {
-		ResultSet result = modificarBBDD.cargarHabitacionesReservadas(codAlojamiento);
+	public boolean habitacionDisponible(int codAlojamiento, int codHabitacion, Date fechaEntrada, Date fechaSalida) {
+		
+		return true;
+	}
+	
+	/**
+	 * 
+	 * @param codAlojamiento
+	 * @param fechaEntrada
+	 * @param fechaSalida
+	 * @return
+	 */
+	public ArrayList<Habitacion> cargarHabitacionesReservadas(int codAlojamiento, Date fechaEntrada, Date fechaSalida) {
+		ResultSet result = modificarBBDD.cargarHabitacionesReservadas(codAlojamiento, fechaEntrada, fechaSalida);
 		ArrayList<Habitacion> habitaciones = new ArrayList<Habitacion>();
 		try {
 			while (result.next()) {
@@ -111,9 +133,16 @@ public class GestorBBDD {
 		return habitaciones;
 	}
 	
-	public ArrayList<Habitacion> habitacionesDisponibles(int codAlojamiento) {
+	/**
+	 * 
+	 * @param codAlojamiento
+	 * @param fechaEntrada
+	 * @param fechaSalida
+	 * @return
+	 */
+	public ArrayList<Habitacion> habitacionesDisponibles(int codAlojamiento, Date fechaEntrada, Date fechaSalida) {
 		ArrayList<Habitacion> habitaciones = cargarListaHabitaciones(codAlojamiento);
-		ArrayList<Habitacion> habitacionesReservadas = cargarHabitacionesReservadas(codAlojamiento);
+		ArrayList<Habitacion> habitacionesReservadas = cargarHabitacionesReservadas(codAlojamiento, fechaEntrada, fechaSalida);
 		for (int i = 0; i < habitaciones.size(); i++) {
 			for (int j = 0; j < habitacionesReservadas.size(); j++) {
 				if (habitaciones.get(i).getCodHabitacion() == habitacionesReservadas.get(j).getCodHabitacion()) {

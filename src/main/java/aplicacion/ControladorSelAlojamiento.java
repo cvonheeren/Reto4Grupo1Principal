@@ -7,12 +7,14 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.ColorModel;
 import java.net.URL;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import org.controlsfx.control.textfield.TextFields;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXRippler;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.effects.JFXDepthManager;
@@ -35,6 +37,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import modelo.Alojamiento;
+import modelo.Habitacion;
 
 public class ControladorSelAlojamiento implements Initializable {
 	
@@ -47,6 +50,12 @@ public class ControladorSelAlojamiento implements Initializable {
 
     @FXML
     private JFXTextField textCiudad;
+    
+    @FXML
+    private JFXDatePicker fechaEntrada;
+    
+    @FXML
+    private JFXDatePicker fechaSalida;
 
     @FXML
     private JFXButton btnBuscar;
@@ -101,10 +110,21 @@ public class ControladorSelAlojamiento implements Initializable {
     	for(int i=0; i<alojamientos.size(); i++) {
     		
     		Alojamiento alojamiento = alojamientos.get(i);
+    		Date fechaEntradaDate = Date.valueOf(fechaEntrada.getValue());
+    		Date fechaSalidaDate = Date.valueOf(fechaSalida.getValue());
+    		ArrayList<Habitacion> habitaciones = Principal.modelo.gestorBBDD.habitacionesDisponibles(alojamiento.getCodAlojamiento(), fechaEntradaDate, fechaSalidaDate);
+    		
+    		StringBuilder sb = new StringBuilder();
+    		sb.append("Habitaciones disponibles: \n");
+    		for (Habitacion s : habitaciones) {
+    		    sb.append(s.getNombre() + " ");
+    		    sb.append(s.getCantidad() + "\n");
+    		}
+    		
     		AnchorPane anchorPane = new AnchorPane();
     		
     		// añadimos la accion que se ejecutara al clickar el panel
-    		anchorPane = añadirListenerSeleccion(anchorPane, alojamiento);
+    		anchorPane = añadirListenerSeleccion(anchorPane, alojamiento, fechaEntradaDate, fechaSalidaDate);
     		
     		// label - nombre del alojamiento
     		Text nombreHotel = new Text(alojamiento.getNombre());
@@ -116,7 +136,6 @@ public class ControladorSelAlojamiento implements Initializable {
     		nombreHotel.setLayoutY(35);
     		
     		// Ubicacion del alojamiento
-    		
     		FontAwesomeIconView iconoUbicacion = new FontAwesomeIconView(FontAwesomeIcon.MAP_MARKER);
     		iconoUbicacion.setLayoutX(180);
     		iconoUbicacion.setLayoutY(60);
@@ -145,8 +164,13 @@ public class ControladorSelAlojamiento implements Initializable {
     		descripcion.setLayoutX(170);
     		descripcion.setLayoutY(85);
     		
+    		// label - habitaciones disponibles
+    		Text habDisponibles = new Text(sb.toString());
+    		habDisponibles.setLayoutX(170);
+    		habDisponibles.setLayoutY(115);
+    		
     		// añade los componentes al anchorpane
-        	anchorPane.getChildren().addAll(nombreHotel, descripcion, ubicacion, iconoUbicacion, iconoEstrella, precio);
+        	anchorPane.getChildren().addAll(nombreHotel, descripcion, habDisponibles, ubicacion, iconoUbicacion, iconoEstrella, precio);
         	
         	AnchorPane paneSuperior = new AnchorPane();
         	paneSuperior.getChildren().addAll(anchorPane);
@@ -164,11 +188,13 @@ public class ControladorSelAlojamiento implements Initializable {
     	}
 	}
 	
-	public AnchorPane añadirListenerSeleccion(AnchorPane anchorPane, Alojamiento alojamiento) {
+	public AnchorPane añadirListenerSeleccion(AnchorPane anchorPane, Alojamiento alojamiento, Date fechaEntrada, Date fechaSalida) {
 		anchorPane.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>(){
 			@Override
 			public void handle(Event event) {
-				Principal.modelo.alojamiento=alojamiento;
+				Principal.modelo.alojamiento = alojamiento;
+				Principal.modelo.fechaEntrada = fechaEntrada;
+				Principal.modelo.fechaSalida = fechaSalida;
 				Principal.aplicacion.CambiarScene("SeleccionHabitacion.fxml");
 			}
 		});

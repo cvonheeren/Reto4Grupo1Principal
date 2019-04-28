@@ -80,7 +80,7 @@ public class ControladorSelHabitacion implements Initializable {
         AnchorPane.setRightAnchor(grid, 0.0);
         
 		// cargamos la arraylist de habitaciones
-		ArrayList<Habitacion> habitaciones = Principal.modelo.gestorBBDD.habitacionesDisponibles(alojamiento.getCodAlojamiento());
+		ArrayList<Habitacion> habitaciones = Principal.modelo.gestorBBDD.habitacionesDisponibles(alojamiento.getCodAlojamiento(), Principal.modelo.fechaEntrada, Principal.modelo.fechaSalida);
         
     	for(int i=0; i<habitaciones.size(); i++) {
     		
