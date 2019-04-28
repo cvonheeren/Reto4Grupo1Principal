@@ -12,6 +12,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import org.controlsfx.control.textfield.TextFields;
 
 import com.jfoenix.controls.JFXButton;
@@ -91,16 +94,13 @@ public class ControladorSelAlojamiento implements Initializable {
 		     }
 		 };
 		 fechaEntrada.setDayCellFactory(dayCellFactory);
-		 fechaSalida.setDayCellFactory(dayCellFactory);
-		 
-		 // cambiar los dias deshabilitados en el datepicker 'fechaSalida'
-		 // cuando se selecciona una fecha en el datepicker 'fechaEntrada'
-		 
+		 fechaSalida.setDayCellFactory(dayCellFactory);		 
 	}
     
     @FXML
     void seleccion(ActionEvent event) {
-    	// deshabilitar dias anteriores a hoy en ambos DatePickers
+   	 	// cambiar los dias deshabilitados en el datepicker 'fechaSalida'
+		// cuando se selecciona una fecha en el datepicker 'fechaEntrada'
 		final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
 		     public DateCell call(final DatePicker datePicker) {
 		         return new DateCell() {
@@ -130,6 +130,21 @@ public class ControladorSelAlojamiento implements Initializable {
     }	
 	
 	void Buscar() {
+		
+		if (textCiudad.getText() == "") {
+			JOptionPane.showMessageDialog(new JFrame(), "Debe introducir un destino", "Error",JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		
+		if (fechaEntrada.getValue() == null) {
+			JOptionPane.showMessageDialog(new JFrame(), "Debe introducir una fecha de entrada", "Error",JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		
+		if (fechaSalida.getValue() == null) {
+			JOptionPane.showMessageDialog(new JFrame(), "Debe introducir una fecha de salida", "Error",JOptionPane.ERROR_MESSAGE);
+			return;
+		}
     	
     	// crea y añade el grid al anchorpane 'contenedor', creado por defecto
     	GridPane grid = new GridPane();
@@ -157,11 +172,20 @@ public class ControladorSelAlojamiento implements Initializable {
     		Date fechaSalidaDate = Date.valueOf(fechaSalida.getValue());
     		ArrayList<Habitacion> habitaciones = Principal.modelo.gestorBBDD.habitacionesDisponibles(alojamiento.getCodAlojamiento(), fechaEntradaDate, fechaSalidaDate);
     		
-    		StringBuilder sb = new StringBuilder();
-    		sb.append("Habitaciones disponibles: \n");
+    		String str = "";
+    		str += "Habitaciones disponibles: \n";
     		for (Habitacion s : habitaciones) {
-    		    sb.append(s.getNombre() + " ");
-    		    sb.append(s.getCantidad() + "\n");
+    			str += s.getNombre() + " - ";
+    		    if (s.getCtaCamasSimples() > 0 ) {
+    		    	str += "Camas Individuales: " + s.getCtaCamasSimples() + " - ";
+    		    }
+    		    if (s.getCtaCamasMatrimonio() > 0 ) {
+    		    	str += "Camas Matrimonio: " + s.getCtaCamasMatrimonio() + " - ";
+    		    }
+    		    if (s.getCtaCamasInfantil() > 0 ) {
+    		    	str += "Camas Infantiles: " + s.getCtaCamasInfantil() + " - ";
+    		    }
+    		    str += "Cantidad: " + s.getCantidad() + "\n";
     		}
     		
     		AnchorPane anchorPane = new AnchorPane();
@@ -196,7 +220,7 @@ public class ControladorSelAlojamiento implements Initializable {
     		iconoEstrella.setFill(Paint.valueOf("#feba02"));
     		
     		// precio
-    		Text precio = new Text("100€");
+    		Text precio = new Text("desde\n100€");
     		precio.setLayoutX(675);
     		precio.setLayoutY(80);
     		precio.setStyle("-fx-font: 20 arial;");
@@ -208,7 +232,7 @@ public class ControladorSelAlojamiento implements Initializable {
     		descripcion.setLayoutY(85);
     		
     		// label - habitaciones disponibles
-    		Text habDisponibles = new Text(sb.toString());
+    		Text habDisponibles = new Text(str);
     		habDisponibles.setLayoutX(170);
     		habDisponibles.setLayoutY(115);
     		

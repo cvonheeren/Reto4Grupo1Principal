@@ -92,7 +92,7 @@ public class GestorBBDD {
 		try {
 			while (result.next()) {
 				int codHabitacion = result.getInt("COD_DORMITORIO");
-				String nombre = "Suite"; //result.getString("NOMBRE");
+				String nombre = result.getString("NOMBRE");
 				int ctaCamasSimples = result.getInt("CTD_CAMAS_SIMPLES");
 				int ctaCamasMatrimonio = result.getInt("CTD_CAMAS_MATRIMONIO");
 				int ctaCamasInfantil = result.getInt("CTD_CAMAS_INFANTIL");

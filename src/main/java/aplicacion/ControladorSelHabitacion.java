@@ -14,10 +14,12 @@ import com.jfoenix.effects.JFXDepthManager;
 import core.Principal;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.collections.FXCollections;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -87,6 +89,17 @@ public class ControladorSelHabitacion implements Initializable {
     		Habitacion habitacion = habitaciones.get(i);
     		AnchorPane anchorPane = new AnchorPane();
     		
+    		String str = "";
+		    if (habitacion.getCtaCamasSimples() > 0 ) {
+		    	str += "Camas Individuales: " + habitacion.getCtaCamasSimples() + "\n";
+		    }
+		    if (habitacion.getCtaCamasMatrimonio() > 0 ) {
+		    	str += "Camas Matrimonio: " + habitacion.getCtaCamasMatrimonio() + "\n";
+		    }
+		    if (habitacion.getCtaCamasInfantil() > 0 ) {
+		    	str += "Camas Infantiles: " + habitacion.getCtaCamasInfantil();
+		    }
+    		
     		// añadimos la accion que se ejecutara al clickar el panel
     		//anchorPane = añadirListenerSeleccion(anchorPane, habitacion);
     		
@@ -105,7 +118,7 @@ public class ControladorSelHabitacion implements Initializable {
     		iconoCama.setSize("20");
     		iconoCama.setFill(Paint.valueOf("#555555"));		
     		
-    		Text camas = new Text("Codigo " + habitacion.getCodHabitacion() + ", Cantidad " + habitacion.getCantidad() + ", " + habitacion.getCtaCamasSimples() + " Camas Simples");
+    		Text camas = new Text(str);
     		camas.setLayoutX(200);
     		camas.setLayoutY(60);
     		
@@ -121,8 +134,18 @@ public class ControladorSelHabitacion implements Initializable {
     		descripcion.setLayoutX(170);
     		descripcion.setLayoutY(85);
     		
+    		// ChoiceBox - Cantidad de habitaciones
+    		ArrayList<Integer> numHab = new ArrayList<Integer>();
+    		for (int j = 1; j <= habitacion.getCantidad(); j++) {
+    			numHab.add(j);
+    		}
+    		ChoiceBox cb = new ChoiceBox(FXCollections.observableArrayList(numHab));
+    		cb.getSelectionModel().selectFirst();
+    		cb.setLayoutX(675);
+    		cb.setLayoutY(120);
+    		
     		// añade los componentes al anchorpane
-        	anchorPane.getChildren().addAll(nombreHab, descripcion, camas, iconoCama, precio);
+        	anchorPane.getChildren().addAll(nombreHab, descripcion, camas, iconoCama, precio, cb);
         	
         	AnchorPane paneSuperior = new AnchorPane();
         	paneSuperior.getChildren().addAll(anchorPane);
