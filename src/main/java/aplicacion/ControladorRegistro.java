@@ -21,6 +21,12 @@ public class ControladorRegistro {
 
     @FXML
     private JFXTextField textFieldDNI;
+    
+    @FXML
+    private JFXTextField textFieldNombre;
+
+    @FXML
+    private JFXTextField textFieldApellido;
 
     @FXML
     private JFXPasswordField contrasena;
@@ -33,12 +39,6 @@ public class ControladorRegistro {
 
     @FXML
     private JFXTextField textFieldFechaNac;
-
-    @FXML
-    private JFXTextField textFieldNombre;
-
-    @FXML
-    private JFXTextField textFieldApellido;
     
     @FXML
     private Label labelError;
@@ -50,7 +50,7 @@ public class ControladorRegistro {
 
     @FXML
     void registrarse(MouseEvent event) {
-    	if (comprobarDni() && comprobarContras()) {
+    	if (comprobarDni() ) {
     		Principal.modelo.gestorBBDD.modificarBBDD.insertarCliente(textFieldDNI.getText(), contrasena.getText(), textFieldNombre.getText(), textFieldApellido.getText(), new Date(2, 2, 2), textFieldMail.getText());
     		Principal.aplicacion.CambiarScene("Pago.fxml");
     	}
@@ -60,10 +60,10 @@ public class ControladorRegistro {
     
     @FXML
     boolean comprobarDni() {
-    	if (!Principal.modelo.gestorBBDD.comprobarDni(textFieldDNI.getText()))
-    		return true;
-    	else
+    	if (Principal.modelo.gestorBBDD.comprobarDni(textFieldDNI.getText()))
     		return false;
+    	else
+    		return true;
     }
     
     @FXML
