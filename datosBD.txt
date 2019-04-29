@@ -1,4 +1,4 @@
-url: 192.168.101.13
+url: localhost
 database: bidaiong1
 user: hr
 password: hr

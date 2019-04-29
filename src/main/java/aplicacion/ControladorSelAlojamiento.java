@@ -73,6 +73,7 @@ public class ControladorSelAlojamiento implements Initializable {
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+    	
     	JFXDepthManager.setDepth(paneFiltros, 2);
     	JFXDepthManager.setDepth(paneBusqueda, 1);
     	
@@ -80,6 +81,9 @@ public class ControladorSelAlojamiento implements Initializable {
 		ciudades.addAll(Principal.modelo.gestorBBDD.cargarListaAlojamientos());
 		TextFields.bindAutoCompletion( textCiudad, ciudades );
 
+		fechaEntrada.setValue(LocalDate.now());
+		fechaSalida.setValue(LocalDate.now().plusDays(1));
+		
 		// deshabilitar dias anteriores a hoy en ambos DatePickers
 		final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
 		     public DateCell call(final DatePicker datePicker) {
