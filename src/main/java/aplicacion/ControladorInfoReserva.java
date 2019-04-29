@@ -67,6 +67,9 @@ public class ControladorInfoReserva implements Initializable {
 		cod.setText(Integer.toString(Principal.modelo.alojamiento.getCodAlojamiento()));
 		tipo.setText("Hotel");
 		nombre.setText(Principal.modelo.alojamiento.getNombre());
+		precio.setText(Principal.modelo.alojamiento.getTarifaNormal() + "€");
+		fechaEntrada.setText(Principal.modelo.fechaEntrada.toLocalDate().toString());
+		fechaSalida.setText(Principal.modelo.fechaSalida.toLocalDate().toString());
 	}
 
 }
