@@ -1,6 +1,10 @@
 package modelo;
 
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+
+import core.Principal;
 
 /**
  * Realiza los calculos del pago del programa
@@ -136,6 +140,22 @@ public class Pago {
 		num = Math.round(num*mult);
 		num = num/mult;
 		return num;
+	}
+	
+	public float calcularPrecio(Alojamiento alojamiento, Date fechaEntrada, Date fechaSalida, ArrayList<Habitacion> habReservadas) {
+		// tarifa alojamiento x nº de noches x nº de habitaciones
+		float tarifa = alojamiento.getTarifaNormal();
+		float numNoches = diferenciaDias(fechaEntrada, fechaSalida);
+		int numHabitaciones = 0;
+		for (Habitacion h: habReservadas) {
+			numHabitaciones += h.getCantidad();
+		}
+		return tarifa * numNoches * numHabitaciones;
+	}
+	
+	public float diferenciaDias(Date d1, Date d2) {
+	    long diff = d2.getTime() - d1.getTime();
+	    return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 	}
 
 }

@@ -61,6 +61,7 @@ public class ControladorSelHabitacion implements Initializable {
 
     @FXML
     void siguiente(MouseEvent event) {
+    	Principal.modelo.pago.setPrecioTotal(Principal.modelo.pago.calcularPrecio(Principal.modelo.alojamiento, Principal.modelo.fechaEntrada, Principal.modelo.fechaSalida, Principal.modelo.habitacionesReservadas));
     	Principal.aplicacion.CambiarScene("InfoReserva.fxml");
     }
     

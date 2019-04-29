@@ -80,6 +80,7 @@ public class ControladorInfoReserva implements Initializable {
 		    str += h.getNombre() + " x " + h.getCantidad() + "\n";
 		}
 		habitaciones.setText(str);
+		precio.setText(Float.toString(Principal.modelo.pago.getPrecioTotal()));
 	}
 
 }

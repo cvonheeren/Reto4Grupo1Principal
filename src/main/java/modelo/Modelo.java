@@ -17,7 +17,6 @@ public class Modelo {
 	public Date fechaEntrada = null;
 	public Date fechaSalida = null;
 	public ArrayList<Habitacion> habitacionesReservadas = null;
-	public int precioTotal;
 	
 	/**
 	 * Constructor
@@ -27,6 +26,5 @@ public class Modelo {
 		this.gestorBBDD = new GestorBBDD();
 		this.alojamientoLista = new AlojamientoLista();
 		this.habitacionesReservadas = new ArrayList<Habitacion>();
-		precioTotal = 300;
 	}
 }

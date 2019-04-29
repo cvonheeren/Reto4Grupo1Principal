@@ -3,6 +3,9 @@ package aplicacion;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import com.jfoenix.controls.JFXButton;
 
 import core.Principal;
@@ -39,10 +42,9 @@ public class ControladorPago implements Initializable {
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    	Principal.modelo.pago.setPrecioTotal(Principal.modelo.precioTotal);
-    	precio.setText(Integer.toString(Principal.modelo.precioTotal) + " €");
+    	precio.setText(Float.toString(Principal.modelo.pago.getPrecioTotal()) + " €");
     	introducido.setText("0 €");
-    	restante.setText(Integer.toString(Principal.modelo.precioTotal) + " €");
+    	restante.setText(Float.toString(Principal.modelo.pago.getPrecioTotal()) + " €");
     	crearBotones();
     }
 
@@ -53,7 +55,11 @@ public class ControladorPago implements Initializable {
 
     @FXML
     void siguiente(MouseEvent event) {
-    	Principal.aplicacion.CambiarScene("Factura.fxml");
+    	if (Principal.modelo.pago.calcularDineroRestante() == 0) {
+    		Principal.aplicacion.CambiarScene("Factura.fxml");	
+    	} else {
+    		JOptionPane.showMessageDialog(new JFrame(), "Aun no ha introducido todo el dinero", "Error",JOptionPane.ERROR_MESSAGE);
+    	}
     }
     
     public void crearBotones() {
