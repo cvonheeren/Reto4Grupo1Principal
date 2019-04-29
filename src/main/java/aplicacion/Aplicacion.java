@@ -53,6 +53,7 @@ public class Aplicacion{
 			e.printStackTrace();
 		}
 		Scene scene = new Scene(FXML);
+		scene.getStylesheets().add("reto4.css");
 		stage.setTitle("FXML Welcome");
 		stage.setScene(scene);
 		stage.show();

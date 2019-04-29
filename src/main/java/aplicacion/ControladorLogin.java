@@ -41,14 +41,35 @@ public class ControladorLogin {
 	
 	@FXML
 	void logear(MouseEvent event) {
+		if (validarDatos()) {
+    		logearCliente();
+    	} else {
+    		textoAviso.setOpacity(1);
+    	}
+	}
+	
+	void logearCliente() {
 		String dni = textFieldDNI.getText();
 		String pass = contrasena.getText();
 		if(Principal.modelo.gestorBBDD.comprobarCliente(dni, pass)) {
 			Principal.modelo.cliente = new Cliente(dni, pass);
 			Principal.aplicacion.CambiarScene("Pago.fxml");
 		} else {
-			textoAviso.setOpacity(1.0);
+			textoAviso.setText("DNI y/o contraseña incorrectos.");
+			textoAviso.setOpacity(1);
 		}
 	}
+	
+	boolean validarDatos() {
+    	if (textFieldDNI.getText().isEmpty()) {
+    		textoAviso.setText("Campo 'DNI' vacio.");
+    		return false;
+    	}
+    	if (contrasena.getText().isEmpty()) {
+    		textoAviso.setText("Campo 'Contraseña' vacio.");
+    		return false;
+    	}
+    	return true;
+	 }
 
 }

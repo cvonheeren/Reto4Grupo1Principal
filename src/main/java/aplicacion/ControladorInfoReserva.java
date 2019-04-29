@@ -59,7 +59,11 @@ public class ControladorInfoReserva implements Initializable {
 
     @FXML
     void siguiente(MouseEvent event) {
-    	Principal.aplicacion.CambiarScene("Login.fxml");
+    	if (Principal.modelo.cliente == null) {
+    		Principal.aplicacion.CambiarScene("Login.fxml");
+    	} else {
+    		Principal.aplicacion.CambiarScene("Pago.fxml");	
+    	}
     }
 
 	@Override

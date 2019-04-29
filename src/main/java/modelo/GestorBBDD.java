@@ -116,11 +116,6 @@ public class GestorBBDD {
 		return habitaciones;
 	}
 	
-	public boolean habitacionDisponible(int codAlojamiento, int codHabitacion, Date fechaEntrada, Date fechaSalida) {
-		
-		return true;
-	}
-	
 	/**
 	 * 
 	 * @param codAlojamiento
@@ -209,6 +204,19 @@ public class GestorBBDD {
 	public int insertarReserva(Reserva reserva) {
 		int codReserva = -1;
 		ResultSet result = modificarBBDD.insertarReserva(reserva.getCodHotel(), reserva.getPrecio());
+
+		try {
+			result.next();
+			codReserva = result.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return codReserva;
+	}
+	
+	public int insertarCliente(String dni, String password, String nombre, String apellido, Date fechaNac, String mail) {
+		int codReserva = -1;
+		ResultSet result = modificarBBDD.insertarCliente(dni, password, nombre, apellido, fechaNac, mail);
 
 		try {
 			result.next();

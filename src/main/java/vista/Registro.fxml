@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
@@ -30,34 +31,30 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXTextField fx:id="textFieldDNI" focusColor="#f57c00" layoutX="417.0" layoutY="59.0" prefHeight="40.0" prefWidth="300.0" promptText="DNI" unFocusColor="#1976d2">
+            <JFXTextField fx:id="textFieldDNI" focusColor="#f57c00" layoutX="417.0" layoutY="60.0" prefHeight="40.0" prefWidth="300.0" promptText="DNI" unFocusColor="#1976d2">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </JFXTextField>
-            <JFXTextField fx:id="textFieldNombre" focusColor="#f57c00" layoutX="417.0" layoutY="123.0" prefHeight="40.0" prefWidth="300.0" promptText="NOMBRE" unFocusColor="#1976d2">
+            <JFXTextField fx:id="textFieldNombre" focusColor="#f57c00" layoutX="417.0" layoutY="120.0" prefHeight="40.0" prefWidth="300.0" promptText="NOMBRE" unFocusColor="#1976d2">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </JFXTextField>
-            <JFXTextField fx:id="textFieldApellido" focusColor="#f57c00" layoutX="417.0" layoutY="174.0" prefHeight="40.0" prefWidth="300.0" promptText="APELLIDO" unFocusColor="#1976d2">
+            <JFXTextField fx:id="textFieldApellido" focusColor="#f57c00" layoutX="417.0" layoutY="180.0" prefHeight="40.0" prefWidth="300.0" promptText="APELLIDO" unFocusColor="#1976d2">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </JFXTextField>
-            <JFXPasswordField fx:id="contrasena" focusColor="#f57c00" layoutX="417.0" layoutY="266.0" prefHeight="40.0" prefWidth="300.0" promptText="CONTRASEÑA" unFocusColor="#1976d2" />
-            <JFXPasswordField fx:id="contrasena1" focusColor="#f57c00" layoutX="417.0" layoutY="315.0" prefHeight="40.0" prefWidth="300.0" promptText="REPITA CONTRASEÑA" unFocusColor="#1976d2" />
-            <JFXTextField fx:id="textFieldMail" focusColor="#f57c00" layoutX="417.0" layoutY="393.0" prefHeight="40.0" prefWidth="300.0" promptText="MAIL" unFocusColor="#1976d2">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </JFXTextField>
-            <JFXTextField fx:id="textFieldFechaNac" focusColor="#f57c00" layoutX="417.0" layoutY="438.0" prefHeight="40.0" prefWidth="300.0" promptText="FECHA " unFocusColor="#1976d2">
+            <JFXPasswordField fx:id="contrasena" focusColor="#f57c00" layoutX="417.0" layoutY="240.0" prefHeight="40.0" prefWidth="300.0" promptText="CONTRASEÑA" unFocusColor="#1976d2" />
+            <JFXPasswordField fx:id="contrasena1" focusColor="#f57c00" layoutX="417.0" layoutY="300.0" prefHeight="40.0" prefWidth="300.0" promptText="REPITA CONTRASEÑA" unFocusColor="#1976d2" />
+            <JFXTextField fx:id="textFieldMail" focusColor="#f57c00" layoutX="417.0" layoutY="360.0" prefHeight="40.0" prefWidth="300.0" promptText="MAIL" unFocusColor="#1976d2">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </JFXTextField>
             <Label fx:id="labelError" layoutX="467.0" layoutY="533.0" opacity="0.0" prefHeight="17.0" prefWidth="219.0" text="Error en los datos" textAlignment="CENTER" textFill="RED" />
+            <JFXDatePicker fx:id="fechaNac" defaultColor="#1976d2" layoutX="417.0" layoutY="420.0" prefHeight="40.0" prefWidth="300.0" />
          </children>
       </Pane>
    </children>
