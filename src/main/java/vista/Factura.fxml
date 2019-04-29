@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1150.0" style="-fx-background-color: #1976d2;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorInfoReserva">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1150.0" style="-fx-background-color: #1976d2;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorFactura">
    <children>
       <Pane layoutY="136.0" prefHeight="764.0" prefWidth="1150.0" style="-fx-background-color: #fff;">
          <children>
@@ -24,92 +24,92 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label layoutX="75.0" layoutY="150.0" text="Código alojamiento:">
+            <Label layoutX="75.0" layoutY="285.0" text="Código alojamiento:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="cod" layoutX="250.0" layoutY="150.0">
+            <Label fx:id="cod" layoutX="250.0" layoutY="285.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="75.0" layoutY="200.0" text="Tipo de alojamiento:">
+            <Label layoutX="75.0" layoutY="335.0" text="Tipo de alojamiento:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="tipo" layoutX="250.0" layoutY="200.0">
+            <Label fx:id="tipo" layoutX="250.0" layoutY="335.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="75.0" layoutY="250.0" text="Nombre alojamiento:">
+            <Label layoutX="75.0" layoutY="385.0" text="Nombre alojamiento:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="75.0" layoutY="300.0" text="Fecha de entrada:">
+            <Label layoutX="75.0" layoutY="435.0" text="Fecha de entrada:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="nombre" layoutX="250.0" layoutY="250.0">
+            <Label fx:id="nombre" layoutX="250.0" layoutY="385.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="fechaEntrada" layoutX="250.0" layoutY="300.0">
+            <Label fx:id="fechaEntrada" layoutX="250.0" layoutY="435.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="75.0" layoutY="350.0" text="Fecha de salida:">
+            <Label layoutX="75.0" layoutY="485.0" text="Fecha de salida:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="fechaSalida" layoutX="250.0" layoutY="350.0">
+            <Label fx:id="fechaSalida" layoutX="250.0" layoutY="485.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="600.0" layoutY="150.0" text="Adultos:">
+            <Label layoutX="600.0" layoutY="285.0" text="Adultos:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="600.0" layoutY="200.0" text="Niños:">
+            <Label layoutX="600.0" layoutY="335.0" text="Niños:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="600.0" layoutY="250.0" text="Habitaciones:">
+            <Label layoutX="600.0" layoutY="385.0" text="Habitaciones:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="600.0" layoutY="300.0" text="Precio:">
+            <Label layoutX="600.0" layoutY="435.0" text="Precio:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="adultos" layoutX="775.0" layoutY="150.0">
+            <Label fx:id="adultos" layoutX="775.0" layoutY="285.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="ninos" layoutX="775.0" layoutY="200.0">
+            <Label fx:id="ninos" layoutX="775.0" layoutY="335.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="habitaciones" layoutX="775.0" layoutY="250.0">
+            <Label fx:id="habitaciones" layoutX="775.0" layoutY="385.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="precio" layoutX="775.0" layoutY="300.0">
+            <Label fx:id="precio" layoutX="775.0" layoutY="435.0">
                <font>
                   <Font size="16.0" />
                </font>
@@ -130,7 +130,12 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <WebView fx:id="mapa" layoutX="721.0" layoutY="375.0" maxHeight="266.0" maxWidth="371.0" prefHeight="266.0" prefWidth="371.0" />
+            <WebView fx:id="mapa" layoutX="721.0" layoutY="375.0" maxHeight="250.0" maxWidth="350.0" prefHeight="250.0" prefWidth="350.0" />
+            <Label layoutX="340.0" layoutY="124.0" prefHeight="84.0" prefWidth="471.0" text="Muchas gracias por su compra!" textFill="#1976d2">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

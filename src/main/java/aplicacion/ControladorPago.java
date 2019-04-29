@@ -49,7 +49,7 @@ public class ControladorPago implements Initializable {
 
     @FXML
     void siguiente(MouseEvent event) {
-    	// Principal.aplicacion.CambiarScene("Factura.fxml");
+    	Principal.aplicacion.CambiarScene("Factura.fxml");
     }
 
 }
