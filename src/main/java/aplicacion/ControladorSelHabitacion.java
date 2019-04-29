@@ -136,10 +136,11 @@ public class ControladorSelHabitacion implements Initializable {
     		
     		// ChoiceBox - Cantidad de habitaciones
     		ArrayList<Integer> numHab = new ArrayList<Integer>();
+    		numHab.add(0);
     		for (int j = 1; j <= habitacion.getCantidad(); j++) {
     			numHab.add(j);
     		}
-    		ChoiceBox cb = new ChoiceBox(FXCollections.observableArrayList(numHab));
+    		ChoiceBox<Integer> cb = new ChoiceBox<Integer>(FXCollections.observableArrayList(numHab));
     		cb.getSelectionModel().selectFirst();
     		cb.setLayoutX(675);
     		cb.setLayoutY(120);

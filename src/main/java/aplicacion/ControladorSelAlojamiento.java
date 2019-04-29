@@ -121,6 +121,7 @@ public class ControladorSelAlojamiento implements Initializable {
 		     }
 		 };
 		 fechaSalida.setDayCellFactory(dayCellFactory);
+		 fechaSalida.setValue(fechaEntrada.getValue().plusDays(1));
     }
     
     @FXML
@@ -209,7 +210,6 @@ public class ControladorSelAlojamiento implements Initializable {
     		nombreHotel.setLayoutX(220);
     		nombreHotel.setLayoutY(35);
     		tamanoNombre=(int) ((int) nombreHotel.getBoundsInLocal().getMaxX()+220);
-    		System.out.println(tamanoNombre);
     		
     		//Icono del hotel
     		WebView imagen = new WebView();
@@ -246,7 +246,7 @@ public class ControladorSelAlojamiento implements Initializable {
 	    	}
     		
     		// precio
-    		Text precio = new Text("desde\n100€");
+    		Text precio = new Text("desde\n" + alojamiento.getTarifaNormal() + "€");
     		precio.setLayoutX(675);
     		precio.setLayoutY(80);
     		precio.setStyle("-fx-font: 20 arial;");
