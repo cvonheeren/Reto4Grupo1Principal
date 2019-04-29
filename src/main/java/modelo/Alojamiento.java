@@ -15,7 +15,8 @@ public class Alojamiento {
 	protected float recargo;
 	protected float desayuno;
 	protected float mediaPension;
-	protected float pensionCompleta;	
+	protected float pensionCompleta;
+	protected String imgurl;
 	
 	/**
 	 * Objeto padre Alojamiento
@@ -34,7 +35,7 @@ public class Alojamiento {
 	 */
 	public Alojamiento(int codAlojamiento, String ubicacion, String nombre, String descripcion, float longitud,
 			float latitud, float tarifaNormal, float tarifaVerano, float recargo, float desayuno, float mediaPension,
-			float pensionCompleta) {
+			float pensionCompleta, String imgurl) {
 		this.codAlojamiento = codAlojamiento;
 		this.ubicacion = ubicacion;
 		this.nombre = nombre;
@@ -47,6 +48,7 @@ public class Alojamiento {
 		this.desayuno = desayuno;
 		this.mediaPension = mediaPension;
 		this.pensionCompleta = pensionCompleta;
+		this.imgurl = imgurl;
 	}
 
 	public Alojamiento() {
@@ -147,6 +149,16 @@ public class Alojamiento {
 
 	public void setPensionCompleta(float pensionCompleta) {
 		this.pensionCompleta = pensionCompleta;
+	}
+	
+	
+
+	public String getImgurl() {
+		return imgurl;
+	}
+
+	public void setImgurl(String imgurl) {
+		this.imgurl = imgurl;
 	}
 
 	@Override
