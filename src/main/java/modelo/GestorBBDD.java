@@ -9,7 +9,7 @@ import Reto4Grupo1BBDD.ModificarBBDD;
 
 public class GestorBBDD {
 	
-	ModificarBBDD modificarBBDD = null;
+	public ModificarBBDD modificarBBDD = null;
 
 	public GestorBBDD() {
 		modificarBBDD = new ModificarBBDD();
@@ -165,6 +165,22 @@ public class GestorBBDD {
 	 */
 	public boolean comprobarCliente(String dni, String password) {
 		ResultSet result = modificarBBDD.comprobarCliente(dni, password);	
+		try {
+			if (result.next())
+				return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	/**
+	 * Comprueba que un dni exista en la BBDD
+	 * @param dni El dni a comprobar
+	 * @return True si existe false si no
+	 */
+	public boolean comprobarDni(String dni) {
+		ResultSet result = modificarBBDD.comprobarDni(dni);	
 		try {
 			if (result.next())
 				return true;

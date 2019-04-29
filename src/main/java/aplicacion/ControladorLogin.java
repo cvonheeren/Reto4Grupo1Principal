@@ -31,7 +31,7 @@ public class ControladorLogin {
     
     @FXML
     void resgistrar(MouseEvent event) {
-
+    	Principal.aplicacion.CambiarScene("Registro.fxml");
     }
     
     @FXML
