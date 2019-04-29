@@ -1,6 +1,7 @@
 package modelo;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class Modelo {
 
@@ -15,6 +16,7 @@ public class Modelo {
 	public Cliente cliente = null;
 	public Date fechaEntrada = null;
 	public Date fechaSalida = null;
+	public ArrayList<Habitacion> habitacionesReservadas = null;
 	
 	/**
 	 * Constructor
@@ -23,5 +25,6 @@ public class Modelo {
 		this.pago = new Pago();
 		this.gestorBBDD = new GestorBBDD();
 		this.alojamientoLista = new AlojamientoLista();
+		this.habitacionesReservadas = new ArrayList<Habitacion>();
 	}
 }

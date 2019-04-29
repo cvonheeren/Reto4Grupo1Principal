@@ -15,6 +15,7 @@ import core.Principal;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -47,6 +48,11 @@ public class ControladorSelHabitacion implements Initializable {
 
     @FXML
     private JFXButton siguiente;
+    
+    @Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		cargarHabitaciones(Principal.modelo.alojamiento);
+	}
 
     @FXML
     void atras(MouseEvent event) {
@@ -58,11 +64,6 @@ public class ControladorSelHabitacion implements Initializable {
     	Principal.aplicacion.CambiarScene("InfoReserva.fxml");
     }
     
-    @Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		cargarHabitaciones(Principal.modelo.alojamiento);
-	}	
-	
 	void cargarHabitaciones(Alojamiento alojamiento) {
     	
     	// crea y añade el grid al anchorpane 'contenedor', creado por defecto
@@ -91,17 +92,14 @@ public class ControladorSelHabitacion implements Initializable {
     		
     		String str = "";
 		    if (habitacion.getCtaCamasSimples() > 0 ) {
-		    	str += "Camas Individuales: " + habitacion.getCtaCamasSimples() + "\n";
+		    	str += "Cama Individual x " + habitacion.getCtaCamasSimples() + "\n";
 		    }
 		    if (habitacion.getCtaCamasMatrimonio() > 0 ) {
-		    	str += "Camas Matrimonio: " + habitacion.getCtaCamasMatrimonio() + "\n";
+		    	str += "Cama Matrimonio x " + habitacion.getCtaCamasMatrimonio() + "\n";
 		    }
 		    if (habitacion.getCtaCamasInfantil() > 0 ) {
-		    	str += "Camas Infantiles: " + habitacion.getCtaCamasInfantil();
+		    	str += "Cama Infantil x " + habitacion.getCtaCamasInfantil();
 		    }
-    		
-    		// añadimos la accion que se ejecutara al clickar el panel
-    		//anchorPane = añadirListenerSeleccion(anchorPane, habitacion);
     		
     		// label - nombre de la habitacion
     		Text nombreHab = new Text(habitacion.getNombre());
@@ -136,14 +134,16 @@ public class ControladorSelHabitacion implements Initializable {
     		
     		// ChoiceBox - Cantidad de habitaciones
     		ArrayList<Integer> numHab = new ArrayList<Integer>();
-    		numHab.add(0);
-    		for (int j = 1; j <= habitacion.getCantidad(); j++) {
+    		for (int j = 0; j <= habitacion.getCantidad(); j++) {
     			numHab.add(j);
     		}
     		ChoiceBox<Integer> cb = new ChoiceBox<Integer>(FXCollections.observableArrayList(numHab));
     		cb.getSelectionModel().selectFirst();
     		cb.setLayoutX(675);
     		cb.setLayoutY(120);
+    		cb.setOnAction((e) -> {
+    			guardarHabitacion(habitacion, cb.getValue());
+            });
     		
     		// añade los componentes al anchorpane
         	anchorPane.getChildren().addAll(nombreHab, descripcion, camas, iconoCama, precio, cb);
@@ -165,14 +165,21 @@ public class ControladorSelHabitacion implements Initializable {
     	}
 	}
 	
-	public AnchorPane añadirListenerSeleccion(AnchorPane anchorPane) {
-		anchorPane.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>(){
-			@Override
-			public void handle(Event event) {
-				Principal.aplicacion.CambiarScene("InfoReserva.fxml");
+	public void guardarHabitacion(Habitacion habitacion, int cantidad) {
+		ArrayList<Habitacion> habitacionesReservadas = Principal.modelo.habitacionesReservadas;
+		if (habitacionesReservadas.size() == 0) {
+			Principal.modelo.habitacionesReservadas.add(habitacion);
+			Principal.modelo.habitacionesReservadas.get(habitacionesReservadas.size()-1).setCantidad(cantidad);
+			return;
+		}
+		for (int i = 0;i < habitacionesReservadas.size(); i++) {
+			if (habitacionesReservadas.get(i).getNombre().equals(habitacion.getNombre())) {
+				habitacionesReservadas.get(i).setCantidad(cantidad);
+				return;
 			}
-		});
-		return anchorPane;
+		}
+		Principal.modelo.habitacionesReservadas.add(habitacion);
+		Principal.modelo.habitacionesReservadas.get(habitacionesReservadas.size()-1).setCantidad(cantidad);
 	}
 
 }

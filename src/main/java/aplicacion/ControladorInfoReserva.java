@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.web.WebView;
+import modelo.Habitacion;
 
 public class ControladorInfoReserva implements Initializable {
 
@@ -70,6 +71,11 @@ public class ControladorInfoReserva implements Initializable {
 		precio.setText(Principal.modelo.alojamiento.getTarifaNormal() + "€");
 		fechaEntrada.setText(Principal.modelo.fechaEntrada.toLocalDate().toString());
 		fechaSalida.setText(Principal.modelo.fechaSalida.toLocalDate().toString());
+		String str = "";
+		for (Habitacion h: Principal.modelo.habitacionesReservadas) {
+		    str += h.getNombre() + " x " + h.getCantidad() + "\n";
+		}
+		habitaciones.setText(str);
 	}
 
 }

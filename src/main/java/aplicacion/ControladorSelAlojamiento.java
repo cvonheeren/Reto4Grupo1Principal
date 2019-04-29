@@ -186,13 +186,13 @@ public class ControladorSelAlojamiento implements Initializable {
     		for (Habitacion s : habitaciones) {
     			str += s.getNombre() + " - ";
     		    if (s.getCtaCamasSimples() > 0 ) {
-    		    	str += "Camas Individuales: " + s.getCtaCamasSimples() + " - ";
+    		    	str += "Cama Individual x " + s.getCtaCamasSimples() + " - ";
     		    }
     		    if (s.getCtaCamasMatrimonio() > 0 ) {
-    		    	str += "Camas Matrimonio: " + s.getCtaCamasMatrimonio() + " - ";
+    		    	str += "Cama Matrimonio x " + s.getCtaCamasMatrimonio() + " - ";
     		    }
     		    if (s.getCtaCamasInfantil() > 0 ) {
-    		    	str += "Camas Infantiles: " + s.getCtaCamasInfantil() + " - ";
+    		    	str += "Cama Infantil x " + s.getCtaCamasInfantil() + " - ";
     		    }
     		    str += "Cantidad: " + s.getCantidad() + "\n";
     		}
