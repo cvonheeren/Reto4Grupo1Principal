@@ -39,8 +39,8 @@ public class ControladorRegistro {
 
     @FXML
     void registrarse(MouseEvent event) {
-    	if (contrasena.getText() == contrasena1.getText() && !Principal.modelo.gestorBBDD.comprobarCliente(textFieldDNI.getText(), contrasena.getText()))
-    		ModificarBBDD.insertarCliente(textFieldDNI.getText(), contrasena.getText(), "", "", "" , '2008-11-11', "");
+    	//if (contrasena.getText() == contrasena1.getText() && !Principal.modelo.gestorBBDD.comprobarCliente(textFieldDNI.getText(), contrasena.getText()))
+    		//ModificarBBDD.insertarCliente(textFieldDNI.getText(), contrasena.getText(), "", "", "" , '2008-11-11', "");
     	
     }
 	

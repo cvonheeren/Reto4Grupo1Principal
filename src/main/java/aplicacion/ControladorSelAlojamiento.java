@@ -42,10 +42,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.web.WebView;
 import javafx.util.Callback;
 import modelo.Alojamiento;
 import modelo.Habitacion;
+import modelo.Hotel;
 
 public class ControladorSelAlojamiento implements Initializable {
 	
@@ -172,6 +175,7 @@ public class ControladorSelAlojamiento implements Initializable {
     	for(int i=0; i<alojamientos.size(); i++) {
     		
     		Alojamiento alojamiento = alojamientos.get(i);
+    		
     		Date fechaEntradaDate = Date.valueOf(fechaEntrada.getValue());
     		Date fechaSalidaDate = Date.valueOf(fechaSalida.getValue());
     		ArrayList<Habitacion> habitaciones = Principal.modelo.gestorBBDD.habitacionesDisponibles(alojamiento.getCodAlojamiento(), fechaEntradaDate, fechaSalidaDate);
@@ -197,31 +201,49 @@ public class ControladorSelAlojamiento implements Initializable {
     		// añadimos la accion que se ejecutara al clickar el panel
     		anchorPane = añadirListenerSeleccion(anchorPane, alojamiento, fechaEntradaDate, fechaSalidaDate);
     		
+    		int tamanoNombre;
     		// label - nombre del alojamiento
     		Text nombreHotel = new Text(alojamiento.getNombre());
-    		nombreHotel.setLayoutX(170);
-    		nombreHotel.setLayoutY(30);
     		nombreHotel.setFill(Paint.valueOf("#07c"));
-    		nombreHotel.setStyle("-fx-font: 25 arial;");
-    		nombreHotel.setLayoutX(170);
+    		nombreHotel.setFont(new Font("arial",25));
+    		nombreHotel.setLayoutX(220);
     		nombreHotel.setLayoutY(35);
+    		tamanoNombre=(int) ((int) nombreHotel.getBoundsInLocal().getMaxX()+220);
+    		System.out.println(tamanoNombre);
+    		
+    		//Icono del hotel
+    		WebView imagen = new WebView();
+    		imagen.setLayoutX(10);
+    		imagen.setLayoutY(10);
+    		imagen.setPrefSize(200, 200);
+    		imagen.getEngine().loadContent("<img src=\"" + alojamiento.getImgurl() + "\" width=\"190\" height=\"180\" frameborder=\"0\" style=\"border:0\"></img>", "text/html");
+    		anchorPane.getChildren().add(imagen);
     		
     		// Ubicacion del alojamiento
     		FontAwesomeIconView iconoUbicacion = new FontAwesomeIconView(FontAwesomeIcon.MAP_MARKER);
-    		iconoUbicacion.setLayoutX(180);
+    		iconoUbicacion.setLayoutX(220);
     		iconoUbicacion.setLayoutY(60);
     		iconoUbicacion.setSize("20");
     		iconoUbicacion.setFill(Paint.valueOf("#555555"));
     		Text ubicacion = new Text(alojamiento.getUbicacion());
-    		ubicacion.setLayoutX(200);
+    		ubicacion.setLayoutX(240);
     		ubicacion.setLayoutY(60);
     		
     		//Estrellas del hotel (Si es un hotel claro)
-    		FontAwesomeIconView iconoEstrella = new FontAwesomeIconView(FontAwesomeIcon.STAR);
-    		iconoEstrella.setLayoutX(20);
-    		iconoEstrella.setLayoutY(25);
-    		iconoEstrella.setSize("15");
-    		iconoEstrella.setFill(Paint.valueOf("#feba02"));
+	    	if(alojamiento instanceof Hotel)
+	    	{
+		    	int coordX=tamanoNombre+10;
+	    		for(int e=0;e<((Hotel) alojamiento).getEstrellas();e++)
+		    	{
+		    		FontAwesomeIconView iconoEstrella = new FontAwesomeIconView(FontAwesomeIcon.STAR);
+		    		iconoEstrella.setLayoutX(coordX);
+			    	iconoEstrella.setLayoutY(35);
+			    	iconoEstrella.setSize("15");
+			    	iconoEstrella.setFill(Paint.valueOf("#feba02"));
+			    	anchorPane.getChildren().add(iconoEstrella);
+			    	coordX=coordX+15;
+		    	}
+	    	}
     		
     		// precio
     		Text precio = new Text("desde\n100€");
@@ -232,16 +254,16 @@ public class ControladorSelAlojamiento implements Initializable {
     		
     		// label - descripcion del alojamiento
     		Text descripcion = new Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. ");
-    		descripcion.setLayoutX(170);
+    		descripcion.setLayoutX(220);
     		descripcion.setLayoutY(85);
     		
     		// label - habitaciones disponibles
     		Text habDisponibles = new Text(str);
-    		habDisponibles.setLayoutX(170);
+    		habDisponibles.setLayoutX(220);
     		habDisponibles.setLayoutY(115);
     		
     		// añade los componentes al anchorpane
-        	anchorPane.getChildren().addAll(nombreHotel, descripcion, habDisponibles, ubicacion, iconoUbicacion, iconoEstrella, precio);
+        	anchorPane.getChildren().addAll(nombreHotel, descripcion, habDisponibles, ubicacion, iconoUbicacion, precio);
         	
         	AnchorPane paneSuperior = new AnchorPane();
         	paneSuperior.getChildren().addAll(anchorPane);

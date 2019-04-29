@@ -55,7 +55,17 @@ public class GestorBBDD {
 				float desayuno = result.getFloat("DESAYUNO");
 				float mediaPension = result.getFloat("MEDIA_PENSION");
 				float pensionCompleta = result.getFloat("PENSION_COMPLETA");
-				listaAlojamientos.add(new Alojamiento(codAlojamiento, ubicacion, nombre, desc, longitud, latitud, tarifaNormal, tarifaVerano, recargo, desayuno, mediaPension, pensionCompleta));
+				String tipoAloj = result.getString("TIPO");
+				String imgurl = result.getString("IMGURL");
+				if(tipoAloj.equals("H"))
+				{
+					int estrellas = result.getInt("ESTRELLAS");
+					listaAlojamientos.add(new Hotel(codAlojamiento, ubicacion, nombre, desc, longitud, latitud, tarifaNormal, tarifaVerano, recargo, desayuno, mediaPension, pensionCompleta, estrellas, imgurl));
+				}
+				else
+				{
+					listaAlojamientos.add(new Alojamiento(codAlojamiento, ubicacion, nombre, desc, longitud, latitud, tarifaNormal, tarifaVerano, recargo, desayuno, mediaPension, pensionCompleta, imgurl));
+				}
 	        }
 		} catch (SQLException e) {
 			e.printStackTrace();
