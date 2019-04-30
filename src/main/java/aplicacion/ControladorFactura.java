@@ -65,6 +65,10 @@ public class ControladorFactura {
     }
     
     @FXML
+    void Inicio(MouseEvent event) {
+    }
+    
+    @FXML
     void Imprimir(MouseEvent event) {
     	String pathReserva = preguntarGuadar();
 		
