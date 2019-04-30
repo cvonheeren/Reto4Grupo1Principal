@@ -56,6 +56,7 @@ public class ControladorPago implements Initializable {
     @FXML
     void siguiente(MouseEvent event) {
     	comprobarTodoIntroducido();
+    	Principal.modelo.gestorBBDD.insertarReserva(Principal.modelo.alojamiento, Principal.modelo.cliente, Principal.modelo.pago, Principal.modelo.fechaEntrada, Principal.modelo.fechaSalida);
     }
     
     public void crearBotones() {
@@ -104,7 +105,7 @@ public class ControladorPago implements Initializable {
 		String dineroRestante =  Float.toString(Principal.modelo.pago.calcularDineroRestante());
 		introducido.setText(dineroIntroducido + " €");
 		restante.setText(dineroRestante + " €");
-		comprobarTodoIntroducido();
+		//comprobarTodoIntroducido();
 	}
 	
 	/**

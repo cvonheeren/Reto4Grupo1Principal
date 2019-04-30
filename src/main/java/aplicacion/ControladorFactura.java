@@ -51,16 +51,9 @@ public class ControladorFactura {
     
     @FXML
     private JFXButton btnimprimir;
-    
+
     @FXML
-    void imprimir(MouseEvent event) {
-    	String pathReserva = preguntarGuadar();
-		
-		// creamos el archivo de texto
-		Principal.modelo.generarFactura.crearTxtReserva(pathReserva, Principal.modelo.reserva);
-		
-		// abrimos el archivos en el programa predeterminado
-		abrirArchivo(pathReserva);
+    void Inicio(MouseEvent event) {
 
     }
     
@@ -69,7 +62,7 @@ public class ControladorFactura {
     	String pathReserva = preguntarGuadar();
 		
 		// creamos el archivo de texto
-		Principal.modelo.generarFactura.crearTxtReserva(pathReserva, Principal.modelo.reserva);
+		Principal.modelo.generarFactura.crearTxtReserva(pathReserva, Principal.modelo.alojamiento.getCodAlojamiento(), Principal.modelo.pago.getPrecioTotal());
 		
 		// abrimos el archivos en el programa predeterminado
 		abrirArchivo(pathReserva);

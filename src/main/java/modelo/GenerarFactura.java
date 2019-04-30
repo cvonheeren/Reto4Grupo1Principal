@@ -10,7 +10,7 @@ public class GenerarFactura {
 	 * @param path Ruta donde crear el archivo
 	 * @param reserva Objeto reserva del que se quiere imprimir los datos
 	 */
-	public void crearTxtReserva(String path, Reserva reserva) {
+	public void crearTxtReserva(String path, int codAlojamiento, float precio ) {
 		
 		FileWriter fichero = null;	
 		PrintWriter writer = null;
@@ -21,10 +21,10 @@ public class GenerarFactura {
 			writer = new PrintWriter(fichero);
 			writer.println("=== DATOS DE LA RESERVA ===");
 			writer.println();
-			writer.println("Código Reserva: " + reserva.getCodReserva());
-			writer.println("Código Alojamiento: " + reserva.getCodHotel());
+			writer.println("Código Reserva: " + 16);
+			writer.println("Código Alojamiento: " + codAlojamiento);
 //			writer.println("Fecha: " + this.fecha);
-			writer.println("Precio: " + reserva.getPrecio());
+			writer.println("Precio: " + precio);
 			writer.println();
 			writer.println();
 			writer.println("Gracias por reservar con nosotros.");

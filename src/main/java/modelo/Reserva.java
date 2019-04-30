@@ -1,13 +1,18 @@
 package modelo;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class Reserva {
 
 	private int codReserva;
-	private int codHotel;
-	private Date fecha;
+	private int codCliente;
+	private int codAlojamiento;
+	private Date fechaCompra;
+	private Date fechaEntrada;
+	private Date fechaSalida;
 	private float precio;
+	public ArrayList<Habitacion> habitacionesReservadas;
 	
 	/**
 	 * Objeto para guardar la reserva que se está gestionando
@@ -16,11 +21,15 @@ public class Reserva {
 	 * @param fecha Fecha en la cual se realiza
 	 * @param precio Precio
 	 */
-	public Reserva(int codReserva, int codHotel, Date fecha, float precio) {
+	public Reserva(int codReserva, int codCliente, int codAlojamiento, Date fechaCompra, Date fechaEntrada, Date fechaSalida, float precio) {
 		this.codReserva = codReserva;
-		this.codHotel = codHotel;
-		this.fecha = fecha;
+		this.codCliente = codCliente;
+		this.codAlojamiento = codAlojamiento;
+		this.fechaCompra = fechaEntrada;
+		this.fechaEntrada = fechaEntrada;
+		this.fechaSalida = fechaEntrada;
 		this.precio = precio;
+		this.habitacionesReservadas = new ArrayList<Habitacion>();
 	}
 	
 	public Reserva() {
@@ -35,20 +44,44 @@ public class Reserva {
 		this.codReserva = codReserva;
 	}
 
-	public int getCodHotel() {
-		return codHotel;
+	public int getCodCliente() {
+		return codCliente;
 	}
 
-	public void setCodHotel(int codHotel) {
-		this.codHotel = codHotel;
+	public void setCodCliente(int codCliente) {
+		this.codCliente = codCliente;
 	}
 
-	public Date getFecha() {
-		return fecha;
+	public int getCodAlojamiento() {
+		return codAlojamiento;
 	}
 
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
+	public void setCodAlojamiento(int codAlojamiento) {
+		this.codAlojamiento = codAlojamiento;
+	}
+
+	public Date getFechaCompra() {
+		return fechaCompra;
+	}
+
+	public void setFechaCompra(Date fechaCompra) {
+		this.fechaCompra = fechaCompra;
+	}
+
+	public Date getFechaEntrada() {
+		return fechaEntrada;
+	}
+
+	public void setFechaEntrada(Date fechaEntrada) {
+		this.fechaEntrada = fechaEntrada;
+	}
+
+	public Date getFechaSalida() {
+		return fechaSalida;
+	}
+
+	public void setFechaSalida(Date fechaSalida) {
+		this.fechaSalida = fechaSalida;
 	}
 
 	public float getPrecio() {
