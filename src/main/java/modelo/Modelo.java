@@ -12,6 +12,7 @@ public class Modelo {
 	public Habitacion habitacion = null;
 	public Pago pago = null;
 	public GestorBBDD gestorBBDD = null;
+	public GenerarFactura generarFactura = null;
 	public AlojamientoLista alojamientoLista = null;
 	public Cliente cliente = null;
 	public Date fechaEntrada = null;
@@ -26,5 +27,6 @@ public class Modelo {
 		this.gestorBBDD = new GestorBBDD();
 		this.alojamientoLista = new AlojamientoLista();
 		this.habitacionesReservadas = new ArrayList<Habitacion>();
+		this.generarFactura = new GenerarFactura();
 	}
 }

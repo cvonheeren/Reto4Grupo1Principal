@@ -55,11 +55,7 @@ public class ControladorPago implements Initializable {
 
     @FXML
     void siguiente(MouseEvent event) {
-    	if (Principal.modelo.pago.calcularDineroRestante() == 0) {
-    		Principal.aplicacion.CambiarScene("Factura.fxml");	
-    	} else {
-    		JOptionPane.showMessageDialog(new JFrame(), "Aun no ha introducido todo el dinero", "Error",JOptionPane.ERROR_MESSAGE);
-    	}
+    	comprobarTodoIntroducido();
     }
     
     public void crearBotones() {
@@ -116,13 +112,11 @@ public class ControladorPago implements Initializable {
 	 * y habilita y deshabilita los botones del panel segun es necesario
 	 */
 	public void comprobarTodoIntroducido() {
-		if(Principal.modelo.pago.comprobarFaltaDinero()) {
-//			vista.pago.estadoBotonContinuar(false);
-//			vista.pago.estadoBotonesPago(true);
-		} else {
-//			vista.pago.estadoBotonContinuar(true);
-//			vista.pago.estadoBotonesPago(false);
-		}
+		if (Principal.modelo.pago.calcularDineroRestante() == 0) {
+    		Principal.aplicacion.CambiarScene("Factura.fxml");	
+    	} else {
+    		JOptionPane.showMessageDialog(new JFrame(), "Aun no ha introducido todo el dinero", "Error",JOptionPane.ERROR_MESSAGE);
+    	}
 	}
 
 }

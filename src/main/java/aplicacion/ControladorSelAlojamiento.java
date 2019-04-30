@@ -101,7 +101,9 @@ public class ControladorSelAlojamiento implements Initializable {
 		     }
 		 };
 		 fechaEntrada.setDayCellFactory(dayCellFactory);
-		 fechaSalida.setDayCellFactory(dayCellFactory);		 
+		 fechaSalida.setDayCellFactory(dayCellFactory);	
+		 
+		 Buscar();
 	}
     
     @FXML
