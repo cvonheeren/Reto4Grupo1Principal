@@ -29,7 +29,7 @@ public class Aplicacion{
 		this.stage=stage;
 		
 		//Codigo para cambiar de escena
-		CambiarScene("Bienvenida.fxml");
+		CambiarScene("SeleccionAlojamiento.fxml");
 		
 		// centra el stage (frame principal) en la pantalla
 		Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();

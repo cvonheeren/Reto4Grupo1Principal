@@ -36,22 +36,23 @@ public class ControladorFactura {
     private Label precio;
 
     @FXML
-    private JFXButton siguiente;
-
-    @FXML
-    private JFXButton atras;
+    private JFXButton inicio;
 
     @FXML
     private WebView mapa;
 
     @FXML
-    void atras(MouseEvent event) {
-
-    }
+    private JFXButton btnimprimir;
 
     @FXML
-    void siguiente(MouseEvent event) {
+    void Inicio(MouseEvent event) {
 
     }
+    
+    @FXML
+    void Imprimir(MouseEvent event) {
+
+    }
+    
 
 }
