@@ -12,7 +12,9 @@ public class Reserva {
 	private Date fechaEntrada;
 	private Date fechaSalida;
 	private float precio;
-	public ArrayList<Habitacion> habitacionesReservadas;
+	private Alojamiento alojamiento = null;
+	private ArrayList<Habitacion> habitacionesReservadas = null;
+	private int ctdHabitaciones;
 	
 	/**
 	 * Objeto para guardar la reserva que se está gestionando
@@ -30,10 +32,12 @@ public class Reserva {
 		this.fechaSalida = fechaEntrada;
 		this.precio = precio;
 		this.habitacionesReservadas = new ArrayList<Habitacion>();
+		this.ctdHabitaciones = 0;
 	}
 	
 	public Reserva() {
-		
+		this.habitacionesReservadas = new ArrayList<Habitacion>();
+		this.ctdHabitaciones = 0;
 	}
 
 	public int getCodReserva() {
@@ -90,6 +94,32 @@ public class Reserva {
 
 	public void setPrecio(float precio) {
 		this.precio = precio;
+	}
+
+	public Alojamiento getAlojamiento() {
+		return alojamiento;
+	}
+
+	public void setAlojamiento(Alojamiento alojamiento) {
+		this.alojamiento = alojamiento;
+	}
+
+	public ArrayList<Habitacion> getHabitacionesReservadas() {
+		return habitacionesReservadas;
+	}
+
+	public void setHabitacionesReservadas(ArrayList<Habitacion> habitacionesReservadas) {
+		this.habitacionesReservadas = habitacionesReservadas;
+	}
+	
+	public void addHabitacion(Habitacion habitacion) {
+		this.habitacionesReservadas.add(habitacion);
+		this.ctdHabitaciones++;
+	}
+	
+	public void removeHabitacion(Habitacion habitacion) {
+		this.habitacionesReservadas.remove(habitacion);
+		this.ctdHabitaciones--;
 	}
 	
 }

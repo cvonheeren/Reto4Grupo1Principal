@@ -99,8 +99,8 @@ public class ControladorPasos implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		cargarInfoAloj(Principal.modelo.alojamiento);
-		cargarHabitaciones(Principal.modelo.alojamiento);
+		cargarInfoAloj(Principal.modelo.reserva.getAlojamiento());
+		cargarHabitaciones(Principal.modelo.reserva.getAlojamiento());
 		
 	}
 	
@@ -131,7 +131,7 @@ public class ControladorPasos implements Initializable {
         AnchorPane.setRightAnchor(grid, 0.0);
         
 		// cargamos la arraylist de habitaciones
-		ArrayList<Habitacion> habitaciones = Principal.modelo.gestorBBDD.habitacionesDisponibles(alojamiento.getCodAlojamiento(), Principal.modelo.fechaEntrada, Principal.modelo.fechaSalida);
+		ArrayList<Habitacion> habitaciones = Principal.modelo.gestorBBDD.habitacionesDisponibles(alojamiento.getCodAlojamiento(), Principal.modelo.reserva.getFechaEntrada(), Principal.modelo.reserva.getFechaSalida());
         
     	for(int i=0; i<habitaciones.size(); i++) {
     		
@@ -216,10 +216,10 @@ public class ControladorPasos implements Initializable {
 	}
 	
 	public void guardarHabitacion(Habitacion habitacion, int cantidad) {
-		ArrayList<Habitacion> habitacionesReservadas = Principal.modelo.habitacionesReservadas;
+		ArrayList<Habitacion> habitacionesReservadas = Principal.modelo.reserva.getHabitacionesReservadas();
 		if (habitacionesReservadas.size() == 0) {
-			Principal.modelo.habitacionesReservadas.add(habitacion);
-			Principal.modelo.habitacionesReservadas.get(habitacionesReservadas.size()-1).setCantidad(cantidad);
+			Principal.modelo.reserva.addHabitacion(habitacion);
+			Principal.modelo.reserva.getHabitacionesReservadas().get(habitacionesReservadas.size()-1).setCantidad(cantidad);
 			return;
 		}
 		for (int i = 0;i < habitacionesReservadas.size(); i++) {
@@ -228,8 +228,8 @@ public class ControladorPasos implements Initializable {
 				return;
 			}
 		}
-		Principal.modelo.habitacionesReservadas.add(habitacion);
-		Principal.modelo.habitacionesReservadas.get(habitacionesReservadas.size()-1).setCantidad(cantidad);
+		Principal.modelo.reserva.addHabitacion(habitacion);
+		Principal.modelo.reserva.getHabitacionesReservadas().get(habitacionesReservadas.size()-1).setCantidad(cantidad);
 	}
 
 }

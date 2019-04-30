@@ -68,15 +68,15 @@ public class ControladorInfoReserva implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		mapa.getEngine().loadContent("<iframe src=\"https://maps.google.com/maps?q=" + Principal.modelo.alojamiento.getLongitud() + "," + Principal.modelo.alojamiento.getLatitud() + "&hl=es;z=14&amp;output=embed\" width=\"350\" height=\"250\" frameborder=\"0\" style=\"border:0\"></iframe>", "text/html");
-		cod.setText(Integer.toString(Principal.modelo.alojamiento.getCodAlojamiento()));
-		tipo.setText("Hotel");
-		nombre.setText(Principal.modelo.alojamiento.getNombre());
-		precio.setText(Principal.modelo.alojamiento.getTarifaNormal() + "€");
-		fechaEntrada.setText(Principal.modelo.fechaEntrada.toLocalDate().toString());
-		fechaSalida.setText(Principal.modelo.fechaSalida.toLocalDate().toString());
+		mapa.getEngine().loadContent("<iframe src=\"https://maps.google.com/maps?q=" + Principal.modelo.reserva.getAlojamiento().getLongitud() + "," + Principal.modelo.reserva.getAlojamiento().getLatitud() + "&hl=es;z=14&amp;output=embed\" width=\"350\" height=\"250\" frameborder=\"0\" style=\"border:0\"></iframe>", "text/html");
+		cod.setText(Integer.toString(Principal.modelo.reserva.getAlojamiento().getCodAlojamiento()));
+		tipo.setText("Hotel"); // CAMBIAR!!
+		nombre.setText(Principal.modelo.reserva.getAlojamiento().getNombre());
+		precio.setText(Principal.modelo.reserva.getAlojamiento().getTarifaNormal() + "€");
+		fechaEntrada.setText(Principal.modelo.reserva.getFechaEntrada().toLocalDate().toString());
+		fechaSalida.setText(Principal.modelo.reserva.getFechaSalida().toLocalDate().toString());
 		String str = "";
-		for (Habitacion h: Principal.modelo.habitacionesReservadas) {
+		for (Habitacion h: Principal.modelo.reserva.getHabitacionesReservadas()) {
 		    str += h.getNombre() + " x " + h.getCantidad() + "\n";
 		}
 		habitaciones.setText(str);
