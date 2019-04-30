@@ -114,15 +114,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <JFXButton fx:id="siguiente" layoutX="915.0" layoutY="675.0" onMouseClicked="#siguiente" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="PAGAR" textFill="WHITE">
-               <font>
-                  <Font size="16.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
-            <JFXButton fx:id="atras" layoutX="75.0" layoutY="675.0" onMouseClicked="#atras" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="ATRAS" textFill="WHITE">
+            <JFXButton fx:id="inicio" layoutX="915.0" layoutY="675.0" onMouseClicked="#Inicio" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="INICIO" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
@@ -136,6 +128,7 @@
                   <Font size="32.0" />
                </font>
             </Label>
+            <JFXButton fx:id="btnimprimir" layoutX="1006.0" layoutY="277.0" onMouseClicked="#Imprimir" prefHeight="42.0" prefWidth="45.0" style="-fx-background-color: #f57c00;" text="Imp" textFill="WHITE" />
          </children>
       </Pane>
    </children>

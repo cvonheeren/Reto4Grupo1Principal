@@ -44,10 +44,7 @@ public class ControladorFactura {
     private Label precio;
 
     @FXML
-    private JFXButton siguiente;
-
-    @FXML
-    private JFXButton atras;
+    private JFXButton inicio;
 
     @FXML
     private WebView mapa;
@@ -66,15 +63,16 @@ public class ControladorFactura {
 		abrirArchivo(pathReserva);
 
     }
-
+    
     @FXML
-    void atras(MouseEvent event) {
-
-    }
-
-    @FXML
-    void siguiente(MouseEvent event) {
-
+    void Imprimir(MouseEvent event) {
+    	String pathReserva = preguntarGuadar();
+		
+		// creamos el archivo de texto
+		Principal.modelo.generarFactura.crearTxtReserva(pathReserva, Principal.modelo.reserva);
+		
+		// abrimos el archivos en el programa predeterminado
+		abrirArchivo(pathReserva);
     }
     
     /**
