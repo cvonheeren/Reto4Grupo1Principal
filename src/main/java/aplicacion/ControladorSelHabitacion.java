@@ -51,7 +51,7 @@ public class ControladorSelHabitacion implements Initializable {
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		cargarHabitaciones(Principal.modelo.alojamiento);
+		cargarHabitaciones(Principal.modelo.reserva.getAlojamiento());
 	}
 
     @FXML
@@ -61,9 +61,26 @@ public class ControladorSelHabitacion implements Initializable {
 
     @FXML
     void siguiente(MouseEvent event) {
-    	Principal.modelo.pago.setPrecioTotal(Principal.modelo.pago.calcularPrecio(Principal.modelo.alojamiento, Principal.modelo.fechaEntrada, Principal.modelo.fechaSalida, Principal.modelo.habitacionesReservadas));
+    	Principal.modelo.pago.setPrecioTotal(Principal.modelo.pago.calcularPrecio(Principal.modelo.reserva.getAlojamiento(), Principal.modelo.reserva.getFechaEntrada(), Principal.modelo.reserva.getFechaSalida(), Principal.modelo.reserva.getHabitacionesReservadas()));
     	Principal.aplicacion.CambiarScene("InfoReserva.fxml");
     }
+    
+    public void guardarHabitacion(Habitacion habitacion, int cantidad) {
+		ArrayList<Habitacion> habitacionesReservadas = Principal.modelo.reserva.getHabitacionesReservadas();
+		if (habitacionesReservadas.size() == 0) {
+			Principal.modelo.reserva.addHabitacion(habitacion);
+			Principal.modelo.reserva.getHabitacionesReservadas().get(habitacionesReservadas.size()-1).setCantidad(cantidad);
+			return;
+		}
+		for (int i = 0;i < habitacionesReservadas.size(); i++) {
+			if (habitacionesReservadas.get(i).getNombre().equals(habitacion.getNombre())) {
+				habitacionesReservadas.get(i).setCantidad(cantidad);
+				return;
+			}
+		}
+		Principal.modelo.reserva.addHabitacion(habitacion);
+		Principal.modelo.reserva.getHabitacionesReservadas().get(habitacionesReservadas.size()-1).setCantidad(cantidad);
+	}
     
 	void cargarHabitaciones(Alojamiento alojamiento) {
     	
@@ -84,7 +101,7 @@ public class ControladorSelHabitacion implements Initializable {
         AnchorPane.setRightAnchor(grid, 0.0);
         
 		// cargamos la arraylist de habitaciones
-		ArrayList<Habitacion> habitaciones = Principal.modelo.gestorBBDD.habitacionesDisponibles(alojamiento.getCodAlojamiento(), Principal.modelo.fechaEntrada, Principal.modelo.fechaSalida);
+		ArrayList<Habitacion> habitaciones = Principal.modelo.gestorBBDD.habitacionesDisponibles(alojamiento.getCodAlojamiento(), Principal.modelo.reserva.getFechaEntrada(), Principal.modelo.reserva.getFechaSalida());
         
     	for(int i=0; i<habitaciones.size(); i++) {
     		
@@ -164,23 +181,6 @@ public class ControladorSelHabitacion implements Initializable {
     		grid.add(paneSuperior, 0, i);
     		
     	}
-	}
-	
-	public void guardarHabitacion(Habitacion habitacion, int cantidad) {
-		ArrayList<Habitacion> habitacionesReservadas = Principal.modelo.habitacionesReservadas;
-		if (habitacionesReservadas.size() == 0) {
-			Principal.modelo.habitacionesReservadas.add(habitacion);
-			Principal.modelo.habitacionesReservadas.get(habitacionesReservadas.size()-1).setCantidad(cantidad);
-			return;
-		}
-		for (int i = 0;i < habitacionesReservadas.size(); i++) {
-			if (habitacionesReservadas.get(i).getNombre().equals(habitacion.getNombre())) {
-				habitacionesReservadas.get(i).setCantidad(cantidad);
-				return;
-			}
-		}
-		Principal.modelo.habitacionesReservadas.add(habitacion);
-		Principal.modelo.habitacionesReservadas.get(habitacionesReservadas.size()-1).setCantidad(cantidad);
 	}
 
 }

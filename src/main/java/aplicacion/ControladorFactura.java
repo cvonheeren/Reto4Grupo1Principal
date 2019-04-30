@@ -58,15 +58,11 @@ public class ControladorFactura {
     }
     
     @FXML
-    void Inicio(MouseEvent event) {
-    }
-    
-    @FXML
     void Imprimir(MouseEvent event) {
     	String pathReserva = preguntarGuadar();
 		
 		// creamos el archivo de texto
-		Principal.modelo.generarFactura.crearTxtReserva(pathReserva, Principal.modelo.alojamiento.getCodAlojamiento(), Principal.modelo.pago.getPrecioTotal());
+		Principal.modelo.generarFactura.crearTxtReserva(pathReserva, Principal.modelo.reserva.getAlojamiento().getCodAlojamiento(), Principal.modelo.pago.getPrecioTotal());
 		
 		// abrimos el archivos en el programa predeterminado
 		abrirArchivo(pathReserva);

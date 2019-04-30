@@ -201,9 +201,9 @@ public class GestorBBDD {
 	 * @param reserva Reserva que se quiere insertar
 	 * @return
 	 */
-	public int insertarReserva(Alojamiento alojamiento, Cliente cliente, Pago pago, Date fecha1, Date fecha2) {
+	public int insertarReserva(Reserva reserva) {
 		int codReserva = -1;
-		ResultSet result = modificarBBDD.insertarReserva(alojamiento.getCodAlojamiento(), pago.getPrecioTotal(), fecha1, fecha2);
+		ResultSet result = modificarBBDD.insertarReserva(reserva.getAlojamiento().getCodAlojamiento(), reserva.getPrecio(), reserva.getFechaEntrada(), reserva.getFechaSalida());
 
 		try {
 			result.next();

@@ -25,8 +25,6 @@ import modelo.Habitacion;
 
 public class ControladorPago implements Initializable {
 
-
-
     @FXML
     private Pane paneBase;
 
@@ -106,15 +104,15 @@ public class ControladorPago implements Initializable {
     	tabPane.getTabs().add(tab2);
     	paneBase.getChildren().add(tabPane);
     	
-		mapa.getEngine().loadContent("<iframe src=\"https://maps.google.com/maps?q=" + Principal.modelo.alojamiento.getLongitud() + "," + Principal.modelo.alojamiento.getLatitud() + "&hl=es;z=14&amp;output=embed\" width=\"350\" height=\"250\" frameborder=\"0\" style=\"border:0\"></iframe>", "text/html");
-		cod.setText(Integer.toString(Principal.modelo.alojamiento.getCodAlojamiento()));
+		mapa.getEngine().loadContent("<iframe src=\"https://maps.google.com/maps?q=" + Principal.modelo.reserva.getAlojamiento().getLongitud() + "," + Principal.modelo.reserva.getAlojamiento().getLatitud() + "&hl=es;z=14&amp;output=embed\" width=\"350\" height=\"250\" frameborder=\"0\" style=\"border:0\"></iframe>", "text/html");
+		cod.setText(Integer.toString(Principal.modelo.reserva.getAlojamiento().getCodAlojamiento()));
 		tipo.setText("Hotel");
-		nombre.setText(Principal.modelo.alojamiento.getNombre());
-		precio.setText(Principal.modelo.alojamiento.getTarifaNormal() + "€");
-		fechaEntrada.setText(Principal.modelo.fechaEntrada.toLocalDate().toString());
-		fechaSalida.setText(Principal.modelo.fechaSalida.toLocalDate().toString());
+		nombre.setText(Principal.modelo.reserva.getAlojamiento().getNombre());
+		precio.setText(Principal.modelo.reserva.getAlojamiento().getTarifaNormal() + "€");
+		fechaEntrada.setText(Principal.modelo.reserva.getFechaEntrada().toLocalDate().toString());
+		fechaSalida.setText(Principal.modelo.reserva.getFechaSalida().toLocalDate().toString());
 		String str = "";
-		for (Habitacion h: Principal.modelo.habitacionesReservadas) {
+		for (Habitacion h: Principal.modelo.reserva.getHabitacionesReservadas()) {
 		    str += h.getNombre() + " x " + h.getCantidad() + "\n";
 		}
 		habitaciones.setText(str);
@@ -132,7 +130,8 @@ public class ControladorPago implements Initializable {
     @FXML
     void siguiente(MouseEvent event) {
     	comprobarTodoIntroducido();
-    	Principal.modelo.gestorBBDD.insertarReserva(Principal.modelo.alojamiento, Principal.modelo.cliente, Principal.modelo.pago, Principal.modelo.fechaEntrada, Principal.modelo.fechaSalida);
+    	int codReserva = Principal.modelo.gestorBBDD.insertarReserva(Principal.modelo.reserva);
+    	Principal.modelo.reserva.setCodReserva(codReserva);
     }
     
     public void crearBotones() {

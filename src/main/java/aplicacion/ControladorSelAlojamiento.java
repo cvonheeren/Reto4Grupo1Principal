@@ -287,9 +287,12 @@ public class ControladorSelAlojamiento implements Initializable {
 		anchorPane.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>(){
 			@Override
 			public void handle(Event event) {
-				Principal.modelo.alojamiento = alojamiento;
-				Principal.modelo.fechaEntrada = fechaEntrada;
-				Principal.modelo.fechaSalida = fechaSalida;
+//				Principal.modelo.alojamiento = alojamiento;
+//				Principal.modelo.fechaEntrada = fechaEntrada;
+//				Principal.modelo.fechaSalida = fechaSalida;
+				Principal.modelo.reserva.setAlojamiento(alojamiento);
+				Principal.modelo.reserva.setFechaEntrada(fechaEntrada);
+				Principal.modelo.reserva.setFechaSalida(fechaSalida);
 				Principal.aplicacion.CambiarScene("SeleccionHabitacion.fxml");
 			}
 		});
