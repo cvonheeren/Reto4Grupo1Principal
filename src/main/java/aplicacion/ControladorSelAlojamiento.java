@@ -290,7 +290,7 @@ public class ControladorSelAlojamiento implements Initializable {
 				Principal.modelo.alojamiento = alojamiento;
 				Principal.modelo.fechaEntrada = fechaEntrada;
 				Principal.modelo.fechaSalida = fechaSalida;
-				Principal.aplicacion.CambiarScene("SeleccionHabitacion.fxml");
+				Principal.aplicacion.CambiarScene("Pasos.fxml");
 			}
 		});
 		return anchorPane;

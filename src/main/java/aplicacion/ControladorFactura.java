@@ -51,11 +51,6 @@ public class ControladorFactura {
     
     @FXML
     private JFXButton btnimprimir;
-
-    @FXML
-    void Inicio(MouseEvent event) {
-
-    }
     
     @FXML
     void Inicio(MouseEvent event) {

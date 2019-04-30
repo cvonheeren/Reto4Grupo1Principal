@@ -104,6 +104,8 @@ public class ControladorPago implements Initializable {
     	tab2.setText("tab Pago");
     	tab2.setContent(tabPago);
     	tabPane.getTabs().add(tab2);
+    	tabPane.getSelectionModel().select(1);
+    	
     	paneBase.getChildren().add(tabPane);
     	
 		mapa.getEngine().loadContent("<iframe src=\"https://maps.google.com/maps?q=" + Principal.modelo.alojamiento.getLongitud() + "," + Principal.modelo.alojamiento.getLatitud() + "&hl=es;z=14&amp;output=embed\" width=\"350\" height=\"250\" frameborder=\"0\" style=\"border:0\"></iframe>", "text/html");
