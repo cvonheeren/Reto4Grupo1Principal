@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTabPane;
+import com.jfoenix.effects.JFXDepthManager;
 
 import core.Principal;
 import javafx.event.Event;
@@ -14,10 +16,55 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.web.WebView;
+import modelo.Habitacion;
 
 public class ControladorPago implements Initializable {
+
+
+
+    @FXML
+    private Pane paneBase;
+
+    @FXML
+    private Pane tabInfo;
+
+    @FXML
+    private Label cod;
+
+    @FXML
+    private Label tipo;
+
+    @FXML
+    private Label nombre;
+
+    @FXML
+    private Label fechaEntrada;
+
+    @FXML
+    private Label fechaSalida;
+
+    @FXML
+    private Label adultos;
+
+    @FXML
+    private Label ninos;
+
+    @FXML
+    private Label habitaciones;
+
+    @FXML
+    private Label precio1;
+
+    @FXML
+    private Pane tabPago;
+
+    @FXML
+    private AnchorPane contenedor;
 
     @FXML
     private Label precio;
@@ -33,9 +80,9 @@ public class ControladorPago implements Initializable {
 
     @FXML
     private JFXButton atras;
-    
+   
     @FXML
-    private AnchorPane contenedor;
+    private WebView mapa;
     
     private float[] monedasBilletes = {500, 200, 100, 50, 20, 10, 5, 2, 1, 0.50f, 0.20f, 0.10f, 0.05f, 0.02f, 0.01f };
     public JFXButton[] botonesMonedasBilletes = new JFXButton[15];
@@ -46,6 +93,35 @@ public class ControladorPago implements Initializable {
     	introducido.setText("0 €");
     	restante.setText(Float.toString(Principal.modelo.pago.getPrecioTotal()) + " €");
     	crearBotones();
+    	
+    	JFXTabPane tabPane = new JFXTabPane();
+    	tabPane.setPrefSize(1150, 664);
+    	Tab tab = new Tab();
+    	tab.setText("tab Info");
+    	tab.setContent(tabInfo);
+    	tabPane.getTabs().add(tab);
+    	Tab tab2 = new Tab();
+    	tab2.setText("tab Pago");
+    	tab2.setContent(tabPago);
+    	tabPane.getTabs().add(tab2);
+    	paneBase.getChildren().add(tabPane);
+    	
+		mapa.getEngine().loadContent("<iframe src=\"https://maps.google.com/maps?q=" + Principal.modelo.alojamiento.getLongitud() + "," + Principal.modelo.alojamiento.getLatitud() + "&hl=es;z=14&amp;output=embed\" width=\"350\" height=\"250\" frameborder=\"0\" style=\"border:0\"></iframe>", "text/html");
+		cod.setText(Integer.toString(Principal.modelo.alojamiento.getCodAlojamiento()));
+		tipo.setText("Hotel");
+		nombre.setText(Principal.modelo.alojamiento.getNombre());
+		precio.setText(Principal.modelo.alojamiento.getTarifaNormal() + "€");
+		fechaEntrada.setText(Principal.modelo.fechaEntrada.toLocalDate().toString());
+		fechaSalida.setText(Principal.modelo.fechaSalida.toLocalDate().toString());
+		String str = "";
+		for (Habitacion h: Principal.modelo.habitacionesReservadas) {
+		    str += h.getNombre() + " x " + h.getCantidad() + "\n";
+		}
+		habitaciones.setText(str);
+		precio.setText(Float.toString(Principal.modelo.pago.getPrecioTotal()));
+    	
+    	
+    	
     }
 
     @FXML
@@ -64,8 +140,8 @@ public class ControladorPago implements Initializable {
     
     public void crearBotones() {
     	AnchorPane anchorPane = new AnchorPane();
-    	int x = 0;
-    	int y = 0;
+    	int x = 400;
+    	int y = 200;
     	for (int i = 0; i < monedasBilletes.length; i++ ) {
 			if (monedasBilletes[i] > 0.5) {
 				botonesMonedasBilletes[i] = new JFXButton((int)monedasBilletes[i] + " \u20AC");
@@ -75,7 +151,7 @@ public class ControladorPago implements Initializable {
 			botonesMonedasBilletes[i].setId(Float.toString(monedasBilletes[i]));
 			if (i == 3 || i == 7 || i == 11) {
 				y += 50;
-				x = 0;
+				x = 400;
 			}
 			x += 70;
 			botonesMonedasBilletes[i].setLayoutX(x);
