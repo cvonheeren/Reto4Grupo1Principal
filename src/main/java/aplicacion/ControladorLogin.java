@@ -6,57 +6,52 @@ import com.jfoenix.controls.JFXTextField;
 
 import core.Principal;
 import javafx.fxml.FXML;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import modelo.Cliente;
 
 public class ControladorLogin {
+   
+	private Label textoAviso;
+	private JFXTextField textFieldDNI;
+	private JFXPasswordField contrasena;
+	private Hyperlink linkRegistro;
 
-    @FXML
-    private JFXButton login;
+	
+	public ControladorLogin(Label textoAviso, JFXTextField textFieldDNI, JFXPasswordField contrasena,
+			Hyperlink linkRegistro) {
+		super();
+		this.textoAviso = textoAviso;
+		this.textFieldDNI = textFieldDNI;
+		this.contrasena = contrasena;
+		this.linkRegistro = linkRegistro;
+	}
 
-    @FXML
-    private JFXButton atras;
-
-    @FXML
-    private JFXTextField textFieldDNI;
-
-    @FXML
-    private Label textoAviso;
-
-    @FXML
-    private JFXPasswordField contrasena;
-
-    
-    
-    @FXML
-    void resgistrar(MouseEvent event) {
+	void resgistrar(MouseEvent event) {
     	Principal.aplicacion.CambiarScene("Registro.fxml");
     }
     
-    @FXML
-	void atras(MouseEvent event) {
-		Principal.aplicacion.CambiarScene("InfoReserva.fxml");
-	}
 	
-	@FXML
-	void logear(MouseEvent event) {
+	boolean logear() {
 		if (validarDatos()) {
-    		logearCliente();
+    		return logearCliente();
     	} else {
     		textoAviso.setOpacity(1);
+    		return false;
     	}
 	}
 	
-	void logearCliente() {
+	boolean logearCliente() {
 		String dni = textFieldDNI.getText();
 		String pass = contrasena.getText();
 		if(Principal.modelo.gestorBBDD.comprobarCliente(dni, pass)) {
 			Principal.modelo.cliente = new Cliente(dni, pass);
-			Principal.aplicacion.CambiarScene("Pago.fxml");
+			return true;
 		} else {
 			textoAviso.setText("DNI y/o contraseña incorrectos.");
 			textoAviso.setOpacity(1);
+			return false;
 		}
 	}
 	

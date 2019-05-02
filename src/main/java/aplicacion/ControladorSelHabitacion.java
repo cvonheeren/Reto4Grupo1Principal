@@ -35,36 +35,14 @@ import modelo.Alojamiento;
 import modelo.Habitacion;
 import modelo.Modelo;
 
-public class ControladorSelHabitacion implements Initializable {
+public class ControladorSelHabitacion{
     
-    @FXML
-    private AnchorPane contenedor;
-
-    @FXML
-    private Label titulo;
-
-    @FXML
-    private JFXButton atras;
-
-    @FXML
-    private JFXButton siguiente;
+	private AnchorPane paneHabitacion;
     
-    @Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		cargarHabitaciones(Principal.modelo.reserva.getAlojamiento());
+    public ControladorSelHabitacion(AnchorPane paneHabitacion) {
+		this.paneHabitacion = paneHabitacion;
 	}
 
-    @FXML
-    void atras(MouseEvent event) {
-    	Principal.aplicacion.CambiarScene("SeleccionAlojamiento.fxml");
-    }
-
-    @FXML
-    void siguiente(MouseEvent event) {
-    	Principal.modelo.pago.setPrecioTotal(Principal.modelo.pago.calcularPrecio(Principal.modelo.reserva.getAlojamiento(), Principal.modelo.reserva.getFechaEntrada(), Principal.modelo.reserva.getFechaSalida(), Principal.modelo.reserva.getHabitacionesReservadas()));
-    	Principal.aplicacion.CambiarScene("InfoReserva.fxml");
-    }
-    
     public void guardarHabitacion(Habitacion habitacion, int cantidad) {
 		ArrayList<Habitacion> habitacionesReservadas = Principal.modelo.reserva.getHabitacionesReservadas();
 		if (habitacionesReservadas.size() == 0) {
@@ -82,11 +60,11 @@ public class ControladorSelHabitacion implements Initializable {
 		Principal.modelo.reserva.getHabitacionesReservadas().get(habitacionesReservadas.size()-1).setCantidad(cantidad);
 	}
     
-	void cargarHabitaciones(Alojamiento alojamiento) {
+void cargarHabitaciones(Alojamiento alojamiento) {
     	
     	// crea y añade el grid al anchorpane 'contenedor', creado por defecto
     	GridPane grid = new GridPane();
-    	contenedor.getChildren().setAll(grid);
+    	paneHabitacion.getChildren().setAll(grid);
     	
     	// hace que la columna 1 del grid ocupe todo el espacio disponible en el padre
     	ColumnConstraints column1 = new ColumnConstraints();
@@ -175,12 +153,12 @@ public class ControladorSelHabitacion implements Initializable {
         	
     		anchorPane.setStyle("-fx-background-color: #fff; -fx-padding: 5px; -fx-border-insets: 5px; -fx-background-insets: 5px; -fx-border-radius:  1 1 1 1; -fx-background-radius: 5 5 5 5;");
     		JFXDepthManager.setDepth(anchorPane, 1);
-    		anchorPane.setPrefWidth(contenedor.getWidth()-20);
-    		anchorPane.setMaxWidth(contenedor.getWidth()-20);
+    		anchorPane.setPrefWidth(paneHabitacion.getWidth()-20);
+    		anchorPane.setMaxWidth(paneHabitacion.getWidth()-20);
     		// añade el anchorpane al grid
     		grid.add(paneSuperior, 0, i);
     		
     	}
-	}
+}
 
 }

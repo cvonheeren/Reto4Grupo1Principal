@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -40,7 +45,26 @@
                   </Tab>
                   <Tab closable="false" text="Iniciar Sesion">
                     <content>
-                      <AnchorPane fx:id="tabLogin" />
+                      <AnchorPane fx:id="tabLogin">
+                           <children>
+                              <Label fx:id="textoAviso" layoutX="441.0" layoutY="63.0" opacity="0.0" text="DNI y/o contraseña incorrectos." />
+                              <JFXTextField fx:id="textFieldDNI" focusColor="#f57c00" layoutX="375.0" layoutY="133.0" prefHeight="40.0" prefWidth="300.0" promptText="DNI" text="12345678A" unFocusColor="#1976d2">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </JFXTextField>
+                              <JFXPasswordField fx:id="contrasena" focusColor="#f57c00" layoutX="375.0" layoutY="191.0" prefHeight="40.0" prefWidth="300.0" promptText="CONTRASEÑA" text="1234" unFocusColor="#1976d2" />
+                              <Label layoutX="387.0" layoutY="304.0" text="¿No estás registrado?">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Hyperlink fx:id="linkRegistro" layoutX="551.0" layoutY="300.0" onAction="#registrar" text="Regístrate" textFill="#f57c00">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Hyperlink>
+                           </children></AnchorPane>
                     </content>
                   </Tab>
                   <Tab closable="false" text="Pago">
