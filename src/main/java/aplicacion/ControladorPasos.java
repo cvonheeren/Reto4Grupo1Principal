@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXRippler;
 import com.jfoenix.controls.JFXTabPane;
@@ -77,6 +78,30 @@ public class ControladorPasos implements Initializable {
     private Hyperlink linkRegistro;
 
     @FXML
+    private JFXButton login;
+
+    @FXML
+    private JFXTextField textFieldDNI1;
+
+    @FXML
+    private JFXTextField textFieldNombre;
+
+    @FXML
+    private JFXTextField textFieldApellido;
+
+    @FXML
+    private JFXPasswordField contrasena1;
+
+    @FXML
+    private JFXTextField textFieldMail;
+
+    @FXML
+    private Label labelError;
+
+    @FXML
+    private JFXDatePicker fechaNac;
+
+    @FXML
     private AnchorPane panePago;
 
     @FXML
@@ -91,10 +116,6 @@ public class ControladorPasos implements Initializable {
     @FXML
     private JFXButton btnInformacion;
 
-    @FXML
-    void registrar(ActionEvent event) {
-
-    }
 
     @FXML
     void Informacion(ActionEvent event) {
@@ -118,6 +139,11 @@ public class ControladorPasos implements Initializable {
     		}
     		
     	}
+    }
+    
+    @FXML
+    void registrarse(MouseEvent event) {
+
     }
 
     @FXML
