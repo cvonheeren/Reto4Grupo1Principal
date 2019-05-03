@@ -62,6 +62,16 @@ public class GestorBBDD {
 					int estrellas = result.getInt("ESTRELLAS");
 					listaAlojamientos.add(new Hotel(codAlojamiento, ubicacion, nombre, desc, longitud, latitud, tarifaNormal, tarifaVerano, recargo, desayuno, mediaPension, pensionCompleta, estrellas, imgurl));
 				}
+				else if(tipoAloj.equals("A"))
+				{
+					int piso = result.getInt("ALTURA");
+					listaAlojamientos.add(new Apartamento(codAlojamiento, ubicacion, nombre, desc, longitud, latitud, tarifaNormal, tarifaVerano, recargo, desayuno, mediaPension, pensionCompleta, imgurl, piso));
+				}
+				else if(tipoAloj.equals("C"))
+				{
+					//FALTA DE AÑADIR LA CANTIDAD DE BAÑOS Y EL AREA
+					listaAlojamientos.add(new Casa(codAlojamiento, ubicacion, nombre, desc, longitud, latitud, tarifaNormal, tarifaVerano, recargo, desayuno, mediaPension, pensionCompleta, imgurl, 0, 0));
+				}
 				else
 				{
 					listaAlojamientos.add(new Alojamiento(codAlojamiento, ubicacion, nombre, desc, longitud, latitud, tarifaNormal, tarifaVerano, recargo, desayuno, mediaPension, pensionCompleta, imgurl));

@@ -4,6 +4,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
@@ -35,10 +38,9 @@ import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
 import modelo.Alojamiento;
 import modelo.Habitacion;
+import modelo.Hotel;
 
 public class ControladorPasos implements Initializable {
-
-	int panelSeleccionado = 0;
 	
 	private ControladorLogin controladorLogin;
 	private ControladorInformacionAloj controladorInformacionAloj;
@@ -54,6 +56,9 @@ public class ControladorPasos implements Initializable {
     private JFXTabPane tabPane;
 
     @FXML
+    private Tab idTabInfo;
+
+    @FXML
     private AnchorPane paneInfo;
 
     @FXML
@@ -66,13 +71,22 @@ public class ControladorPasos implements Initializable {
     private TextArea descAloj;
 
     @FXML
+    private WebView mapa;
+
+    @FXML
+    private Tab idTabHab;
+
+    @FXML
     private AnchorPane paneHabitacion;
+
+    @FXML
+    private Tab idTabServ;
 
     @FXML
     private AnchorPane paneServ;
 
     @FXML
-    private Tab tabLogin;
+    private Tab idTabLogin;
 
     @FXML
     private AnchorPane paneLogin;
@@ -114,6 +128,9 @@ public class ControladorPasos implements Initializable {
     private Label labelError;
 
     @FXML
+    private Tab idTabPago;
+
+    @FXML
     private AnchorPane panePago;
 
     @FXML
@@ -127,6 +144,9 @@ public class ControladorPasos implements Initializable {
 
     @FXML
     private AnchorPane contenedorPago;
+
+    @FXML
+    private Tab idTabFin;
 
     @FXML
     private AnchorPane paneFinal;
@@ -152,41 +172,44 @@ public class ControladorPasos implements Initializable {
 
     @FXML
     void Informacion(ActionEvent event) {
-    	tabPane.getSelectionModel().select(0);
-    	panelSeleccionado=0;
+    	tabPane.getSelectionModel().select(idTabInfo);	
     }
 
     @FXML
     void siguiente(ActionEvent event) {
-    	if(panelSeleccionado<tabPane.getTabs().size())
-    	{
-    		boolean sigTab=true;
-    		switch(tabPane.getSelectionModel().getSelectedIndex())
-    		{
-    		case 2:
+    		switch(tabPane.getSelectionModel().getSelectedItem().getId())
+    		{   			
+    		case "idTabInfo":
+    			if(Principal.modelo.reserva.getAlojamiento() instanceof Hotel)
+    				tabPane.getSelectionModel().select(idTabHab);
+    			else
+    				tabPane.getSelectionModel().select(idTabServ);
+    		break;	
+    		case "idTabHab":
+    			if(comprobarHabitacionSeleccionada())
+    				tabPane.getSelectionModel().select(idTabServ);
+    		break;
+    		case "idTabServ":
     			if(!(Principal.modelo.cliente==null))
+    				tabPane.getSelectionModel().select(idTabPago);
+    			else
+    				tabPane.getSelectionModel().select(idTabLogin);
+    			break;
+    		case "idTabLogin":
+    			if(controladorLogin.logear())
     			{
-    				panelSeleccionado=4;
-    				tabPane.getSelectionModel().select(panelSeleccionado);
-    				sigTab=false;
+    				tabPane.getTabs().remove(idTabLogin);
+    				tabPane.getSelectionModel().select(idTabPago);
     			}
     			break;
-    		case 3:
-    			sigTab=controladorLogin.logear();
+    		case "idTabPago":
+    			tabPane.getSelectionModel().select(idTabFin);
     			break;
-    		
-    		case 5:
+    			
+    		case "idTabFin":
     			Principal.IniciarPrograma();
     			break;
     		}
-    		if(sigTab)
-    		{
-    			panelSeleccionado++;
-            	tabPane.getSelectionModel().select(panelSeleccionado);
-    		}
-    		
-    		
-    	}
     }
     
     @FXML
@@ -196,10 +219,9 @@ public class ControladorPasos implements Initializable {
 
     @FXML
     void volver(ActionEvent event) {
-    	if(panelSeleccionado>0)
+    	if(tabPane.getSelectionModel().getSelectedIndex()>0)
     	{
-    		panelSeleccionado--;
-        	tabPane.getSelectionModel().select(panelSeleccionado);
+        	tabPane.getSelectionModel().select(tabPane.getSelectionModel().getSelectedIndex()-1);
     	}
     }
 
@@ -209,11 +231,22 @@ public class ControladorPasos implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		snackbar = new JFXSnackbar(anchorPaneBase);
 		snackbar.getStylesheets().setAll("reto4.css");
-		controladorInformacionAloj = new ControladorInformacionAloj(img, nombAloj, descAloj, paneInfo);
+		controladorInformacionAloj = new ControladorInformacionAloj(img, nombAloj, descAloj, paneInfo, mapa);
 		controladorInformacionAloj.cargarInfoAloj(Principal.modelo.reserva.getAlojamiento());
 		
-		controladorSelHabitacion = new ControladorSelHabitacion(paneHabitacion, this);
-		controladorSelHabitacion.cargarHabitaciones(Principal.modelo.reserva.getAlojamiento());
+		if(Principal.modelo.reserva.getAlojamiento() instanceof Hotel)
+		{
+			controladorSelHabitacion = new ControladorSelHabitacion(paneHabitacion);
+			controladorSelHabitacion.cargarHabitaciones(Principal.modelo.reserva.getAlojamiento());
+		}
+		else
+		{
+			tabPane.getTabs().remove(idTabHab);
+		}
+		if(Principal.modelo.cliente!=null)
+		{
+			tabPane.getTabs().remove(idTabLogin);
+		}
 		
 		controladorLogin = new ControladorLogin(textoAviso, textFieldDNI, contrasena, this);
 		controladorRegistro = new  ControladorRegistro(textFieldDNIReg, textFieldNombreReg, textFieldApellidoReg, textFieldMailReg, contrasenaReg, contrasenaRegRep, fechaNacReg, btnReg, this);
@@ -228,5 +261,25 @@ public class ControladorPasos implements Initializable {
 		snackbar.enqueue(new SnackbarEvent(nodo));
 	}
 	
+	public boolean comprobarHabitacionSeleccionada() {
+		boolean sigTab = true;
+		ArrayList<Habitacion> habitacionesReservadas = Principal.modelo.reserva.getHabitacionesReservadas();
+		if (habitacionesReservadas.size() == 0) {
+			sigTab = false;
+			JOptionPane.showMessageDialog(new JFrame(), "Debe seleccionar al menos una habitación", "Error", JOptionPane.ERROR_MESSAGE);
+		} else {
+			boolean select = false;
+			for (int i = 0; i < habitacionesReservadas.size(); i++) {
+				if (habitacionesReservadas.get(i).getCantidad() > 0) {
+					select = true;
+				}
+			}
+			if (!select) {
+				sigTab = false;
+				JOptionPane.showMessageDialog(new JFrame(), "Debe seleccionar al menos una habitación", "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		return sigTab;
+	}
 	
 }

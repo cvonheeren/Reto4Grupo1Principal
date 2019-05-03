@@ -22,28 +22,29 @@
          <children>
             <JFXTabPane fx:id="tabPane" prefHeight="655.0" prefWidth="1050.0" style="-fx-background-color: white;">
                <tabs>
-                  <Tab text="Informacion">
+                  <Tab fx:id="idTabInfo" text="Informacion">
                     <content>
                       <AnchorPane fx:id="paneInfo">
                            <children>
                               <WebView fx:id="img" layoutX="24.0" layoutY="37.0" prefHeight="350.0" prefWidth="450.0" />
                               <Text fx:id="nombAloj" layoutX="525.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" wrappingWidth="269.13671875" />
                               <TextArea fx:id="descAloj" layoutX="525.0" layoutY="132.0" prefHeight="215.0" prefWidth="459.0" text="Descripcion" />
+                              <WebView fx:id="mapa" layoutX="41.0" layoutY="404.0" prefHeight="200.0" prefWidth="400.0" />
                            </children>
                         </AnchorPane>
                     </content>
                   </Tab>
-                  <Tab closable="false" text="Seleccione Habitacion">
+                  <Tab fx:id="idTabHab" closable="false" text="Seleccione Habitacion">
                     <content>
                       <AnchorPane fx:id="paneHabitacion" />
                     </content>
                   </Tab>
-                  <Tab closable="false" disable="true" text="Seleccione Servicios">
+                  <Tab fx:id="idTabServ" closable="false" disable="true" text="Seleccione Servicios">
                     <content>
                       <AnchorPane fx:id="paneServ" />
                     </content>
                   </Tab>
-                  <Tab fx:id="tabLogin" closable="false" text="Iniciar Sesion">
+                  <Tab fx:id="idTabLogin" closable="false" text="Iniciar Sesion">
                     <content>
                       <AnchorPane fx:id="paneLogin">
                            <children>
@@ -98,7 +99,7 @@
                            </children></AnchorPane>
                     </content>
                   </Tab>
-                  <Tab closable="false" text="Pago">
+                  <Tab fx:id="idTabPago" closable="false" text="Pago">
                     <content>
                       <AnchorPane fx:id="panePago">
                            <children>
@@ -136,7 +137,7 @@
                            </children></AnchorPane>
                     </content>
                   </Tab>
-                  <Tab closable="false" text="Disfrute">
+                  <Tab fx:id="idTabFin" closable="false" text="Disfrute">
                     <content>
                       <AnchorPane fx:id="paneFinal" />
                     </content>
