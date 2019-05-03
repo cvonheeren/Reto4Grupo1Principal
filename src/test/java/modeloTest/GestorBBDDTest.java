@@ -77,4 +77,23 @@ public class GestorBBDDTest {
 		assertEquals(test2.getClass(), test.getClass());
 	}
 	
+	
+	@Test
+	public void testComprobarCliente() {
+		String dni1 = "79066869E";
+		String pass1 = "1234";
+		String dni2 = "1";
+		
+		assertTrue(gestorTest.comprobarCliente(dni1, pass1));
+		assertFalse(gestorTest.comprobarCliente(dni2, pass1));
+	}
+	
+	@Test
+	public void testComprobarDni() {
+		String dni1 = "79066869E";
+		String dni2 = "1";
+		
+		assertTrue(gestorTest.comprobarDni(dni1));
+		assertFalse(gestorTest.comprobarDni(dni2));
+	}
 }

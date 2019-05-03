@@ -4,10 +4,14 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import modelo.Alojamiento;
+
+import modelo.Cliente;
+import modelo.GenerarFactura;
+import modelo.GestorBBDD;
 import modelo.Habitacion;
-import modelo.Hotel;
+
 import modelo.Modelo;
+import modelo.Pago;
 import modelo.Reserva;
 
 public class ModeloTest {
@@ -15,15 +19,15 @@ public class ModeloTest {
 	private Modelo miModelo = new Modelo();
 	
 	@Test
-	public void testAlojamiento() {
-		assertNotEquals(null, miModelo.alojamiento);
-		assertEquals(Alojamiento.class, miModelo.alojamiento.getClass());
+	public void testpago() {
+		assertNotEquals(null, miModelo.pago);
+		assertEquals(Pago.class, miModelo.pago.getClass());
 	}
 	
 	@Test
-	public void testHotel() {
-		assertNotEquals(null, miModelo.hotel);
-		assertEquals(Hotel.class, miModelo.hotel.getClass());
+	public void testcliente() {
+		assertEquals(null, miModelo.cliente);
+		assertNotEquals(Cliente.class, miModelo.cliente.getClass());
 	}
 	
 	@Test
@@ -34,8 +38,20 @@ public class ModeloTest {
 	
 	@Test
 	public void testHabitacion() {
-		assertNotEquals(null, miModelo.habitacion);
-		assertEquals(Habitacion.class, miModelo.habitacion.getClass());
+		assertEquals(null, miModelo.habitacion);
+		assertNotEquals(Habitacion.class, miModelo.habitacion.getClass());
+	}
+	
+	@Test
+	public void testgestorBBDD() {
+		assertNotEquals(null, miModelo.gestorBBDD);
+		assertEquals(GestorBBDD.class, miModelo.gestorBBDD.getClass());
+	}
+	
+	@Test
+	public void testgenerarFactura() {
+		assertNotEquals(null, miModelo.generarFactura);
+		assertEquals(GenerarFactura.class, miModelo.generarFactura.getClass());
 	}
 	
 }
