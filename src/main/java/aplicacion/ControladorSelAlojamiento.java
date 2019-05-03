@@ -47,6 +47,8 @@ import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
 import javafx.util.Callback;
 import modelo.Alojamiento;
+import modelo.Apartamento;
+import modelo.Casa;
 import modelo.Habitacion;
 import modelo.Hotel;
 
@@ -259,6 +261,26 @@ public class ControladorSelAlojamiento implements Initializable {
 			    	anchorPane.getChildren().add(iconoEstrella);
 			    	coordX=coordX+15;
 		    	}
+	    	}
+	    	else if(alojamiento instanceof Apartamento)
+	    	{
+		    	int coordX=tamanoNombre+10;
+		    		FontAwesomeIconView iconoLlave = new FontAwesomeIconView(FontAwesomeIcon.KEY);
+		    		iconoLlave.setLayoutX(coordX);
+		    		iconoLlave.setLayoutY(35);
+		    		iconoLlave.setSize("15");
+		    		iconoLlave.setFill(Paint.valueOf("#555555"));
+			    	anchorPane.getChildren().add(iconoLlave);
+	    	}
+	    	else if(alojamiento instanceof Casa)
+	    	{
+	    		int coordX=tamanoNombre+10;
+	    		FontAwesomeIconView iconoCasa = new FontAwesomeIconView(FontAwesomeIcon.HOME);
+	    		iconoCasa.setLayoutX(coordX);
+	    		iconoCasa.setLayoutY(35);
+	    		iconoCasa.setSize("15");
+	    		iconoCasa.setFill(Paint.valueOf("#555555"));
+		    	anchorPane.getChildren().add(iconoCasa);
 	    	}
     		
     		// precio

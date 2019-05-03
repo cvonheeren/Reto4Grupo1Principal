@@ -147,6 +147,9 @@ public class ControladorPasos implements Initializable {
     private JFXButton btnCancelar;
     
     @FXML
+    private WebView mapa;
+    
+    @FXML
     void cancelar(ActionEvent event) {
     	Principal.IniciarPrograma();
     }
@@ -215,7 +218,7 @@ public class ControladorPasos implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		snackbar = new JFXSnackbar(anchorPaneBase);
 		snackbar.getStylesheets().setAll("reto4.css");
-		controladorInformacionAloj = new ControladorInformacionAloj(img, nombAloj, descAloj, paneInfo);
+		controladorInformacionAloj = new ControladorInformacionAloj(img, nombAloj, descAloj, paneInfo, mapa);
 		controladorInformacionAloj.cargarInfoAloj(Principal.modelo.reserva.getAlojamiento());
 		
 		controladorSelHabitacion = new ControladorSelHabitacion(paneHabitacion);
