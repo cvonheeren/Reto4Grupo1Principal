@@ -1,6 +1,7 @@
 package aplicacion;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,7 +12,9 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
 import core.Principal;
-
+import javafx.scene.control.DateCell;
+import javafx.scene.control.DatePicker;
+import javafx.util.Callback;
 import modelo.Cliente;
 
 public class ControladorRegistro {
@@ -35,8 +38,28 @@ public class ControladorRegistro {
 		this.fechaNacReg = fechaNacReg;
 		this.btnReg = btnReg;
 		this.controladorPasos = controladorPasos;
+		limitarFecha();
+		
 	}
 
+	void limitarFecha() {
+		fechaNacReg.setValue(LocalDate.now().minusYears(18));
+		
+		final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
+		     public DateCell call(final DatePicker datePicker) {
+		         return new DateCell() {
+		             @Override
+		             public void updateItem(LocalDate date, boolean empty) {
+		                 super.updateItem(date, empty);
+		                 LocalDate today = LocalDate.now().minusYears(18);
+		                 setDisable(empty || date.compareTo(today) > 0 );
+		             }
+		         };
+		     }
+		 };
+		 
+		 fechaNacReg.setDayCellFactory(dayCellFactory);
+	}
 
     void registrarse() {
     	if (validarDatos()) {
@@ -60,6 +83,10 @@ public class ControladorRegistro {
     boolean validarDatos() {
     	if (textFieldDNIReg.getText().isEmpty()) {
     		controladorPasos.MostrarMensaje("Campo 'DNI' vacio.");
+    		return false;
+    	}
+    	if (!validarNif(textFieldDNIReg.getText())) {
+    		controladorPasos.MostrarMensaje("El DNI está en un formato inválido.");
     		return false;
     	}
     	if (textFieldNombreReg.getText().isEmpty()) {
@@ -86,23 +113,26 @@ public class ControladorRegistro {
     		controladorPasos.MostrarMensaje("Campo Fecha de Nacimiento vacio.");
     		return false;
     	}
+    	if (fechaNacReg.getValue().isAfter(LocalDate.now().minusYears(18))) {
+    		controladorPasos.MostrarMensaje("No puedes registrarte siendo menor de edad.");
+    		return false;
+    	}
     	if (Principal.modelo.gestorBBDD.comprobarDni(textFieldDNIReg.getText())) {
     		controladorPasos.MostrarMensaje("El DNI introducido ya existe.");
+    		return false;
+    	}
+    	if (!validarPass(contrasenaReg.getText())) {
+    		controladorPasos.MostrarMensaje("La contraseñas introducida debe tener al menos 8 caractéres, uno mayúscula, otro minúscula, un número y un caracter especial sin admitirse espacios.");
     		return false;
     	}
     	if (!contrasenaReg.getText().equals(contrasenaRegRep.getText())) {
     		controladorPasos.MostrarMensaje("Las contraseñas introducidas no son correctas.");
     		return false;
     	}
-    	if (!validarNif(textFieldDNIReg.getText())) {
-    		controladorPasos.MostrarMensaje("El DNI está en un formato inválido.");
-    		return false;
-    	}
-    	
     	return true;
     }
 	
-    public boolean validarNif(String nif){
+    public boolean validarNif(String nif) {
         boolean correcto = false;
         Pattern pattern = Pattern.compile("(\\d{1,8})([TRWAGMYFPDXBNJZSQVHLCKEtrwagmyfpdxbnjzsqvhlcke])");
         Matcher matcher = pattern.matcher(nif);
@@ -123,5 +153,13 @@ public class ControladorRegistro {
             correcto = false;
 
         return correcto;
+    }
+    
+    public boolean validarPass(String password) {
+		 String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.])(?=\\S+$).{8,}";
+	     if(password.matches(pattern))
+	    	 return true;
+	     else
+	    	 return false;
     }
 }
