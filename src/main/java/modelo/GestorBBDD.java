@@ -199,7 +199,7 @@ public class GestorBBDD {
 	 * 
 	 * Inserta una reserva en la BBDD
 	 * @param reserva Reserva que se quiere insertar
-	 * @return
+	 * @return Devuelve el codigo de la reserva que se genera en sql
 	 */
 	public int insertarReserva(Reserva reserva) {
 		int codReserva = -1;
@@ -214,6 +214,16 @@ public class GestorBBDD {
 		return codReserva;
 	}
 	
+	/**
+	 * Inserta un nuevo cliente en la BBDD
+	 * @param dni Su dni
+	 * @param password Su contrasenia
+	 * @param nombre Su nombre etc.
+	 * @param apellido
+	 * @param fechaNac Su fecha de nacimiento
+	 * @param mail
+	 * @return Devuelve el codigo de la reserva que se genera en sql
+	 */
 	public int insertarCliente(String dni, String password, String nombre, String apellido, Date fechaNac, String mail) {
 		int codReserva = -1;
 		ResultSet result = modificarBBDD.insertarCliente(dni, password, nombre, apellido, fechaNac, mail);
