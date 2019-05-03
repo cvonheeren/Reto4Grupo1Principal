@@ -140,6 +140,14 @@ public class ControladorPasos implements Initializable {
     @FXML
     private JFXButton btnInformacion;
 
+    @FXML
+    private JFXButton btnCancelar;
+    
+    @FXML
+    void cancelar(ActionEvent event) {
+    	Principal.IniciarPrograma();
+    }
+
 
 
     @FXML
@@ -166,8 +174,11 @@ public class ControladorPasos implements Initializable {
     		case 3:
     			sigTab=controladorLogin.logear();
     			break;
-    		}
     		
+    		case 5:
+    			Principal.IniciarPrograma();
+    			break;
+    		}
     		if(sigTab)
     		{
     			panelSeleccionado++;

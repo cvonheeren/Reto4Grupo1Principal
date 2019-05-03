@@ -10,7 +10,7 @@ public class Principal extends Application {
 
 	public static Modelo modelo;
 	public static Aplicacion aplicacion;
-	
+	private static Stage stage;
 	/**
 	 * Método que inicia el programa
 	 * @param args
@@ -26,7 +26,13 @@ public class Principal extends Application {
 	@Override
     public void start(Stage stage)
     {
+		this.stage=stage;
+		IniciarPrograma();
+    }
+	
+	public static void IniciarPrograma()
+	{
 		modelo = new Modelo();
 		aplicacion = new Aplicacion(stage);
-    }
+	}
 }
