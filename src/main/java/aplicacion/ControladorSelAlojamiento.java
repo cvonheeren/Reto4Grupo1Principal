@@ -101,7 +101,21 @@ public class ControladorSelAlojamiento implements Initializable {
 		     }
 		 };
 		 fechaEntrada.setDayCellFactory(dayCellFactory);
-		 fechaSalida.setDayCellFactory(dayCellFactory);	
+		 
+		 final Callback<DatePicker, DateCell> dayCellFactory2 = new Callback<DatePicker, DateCell>() {
+		     public DateCell call(final DatePicker datePicker) {
+		         return new DateCell() {
+		             @Override
+		             public void updateItem(LocalDate date, boolean empty) {
+		                 super.updateItem(date, empty);
+		                 LocalDate entryday = fechaEntrada.getValue().plusDays(1);
+		                 setDisable(empty || date.compareTo(entryday) < 0 );
+		             }
+		         };
+		     }
+		 };
+		 fechaSalida.setDayCellFactory(dayCellFactory2);
+		 fechaSalida.setValue(fechaEntrada.getValue().plusDays(1));
 		 
 		 Buscar();
 	}
@@ -116,8 +130,8 @@ public class ControladorSelAlojamiento implements Initializable {
 		             @Override
 		             public void updateItem(LocalDate date, boolean empty) {
 		                 super.updateItem(date, empty);
-		                 LocalDate today = fechaEntrada.getValue().plusDays(1);
-		                 setDisable(empty || date.compareTo(today) < 0 );
+		                 LocalDate entryday = fechaEntrada.getValue().plusDays(1);
+		                 setDisable(empty || date.compareTo(entryday) < 0 );
 		             }
 		         };
 		     }
