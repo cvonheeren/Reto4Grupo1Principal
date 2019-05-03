@@ -1,49 +1,28 @@
 package aplicacion;
 
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
-
-import org.controlsfx.control.textfield.TextFields;
-
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRippler;
-import com.jfoenix.controls.JFXSnackbar;
-import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.effects.JFXDepthManager;
 
 import core.Principal;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import modelo.Alojamiento;
 import modelo.Habitacion;
-import modelo.Modelo;
 
 public class ControladorSelHabitacion{
     
 	private AnchorPane paneHabitacion;
-	private ControladorPasos controladorPasos;
     
-    public ControladorSelHabitacion(AnchorPane paneHabitacion, ControladorPasos controladorPasos) {
+    public ControladorSelHabitacion(AnchorPane paneHabitacion) {
 		this.paneHabitacion = paneHabitacion;
-		this.controladorPasos = controladorPasos;
 	}
 
     public void guardarHabitacion(Habitacion habitacion, int cantidad) {
@@ -63,7 +42,7 @@ public class ControladorSelHabitacion{
 		Principal.modelo.reserva.getHabitacionesReservadas().get(habitacionesReservadas.size()-1).setCantidad(cantidad);
 	}
     
-void cargarHabitaciones(Alojamiento alojamiento) {
+    public void cargarHabitaciones(Alojamiento alojamiento) {
     	
     	// crea y añade el grid al anchorpane 'contenedor', creado por defecto
     	GridPane grid = new GridPane();

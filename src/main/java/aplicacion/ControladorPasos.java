@@ -4,6 +4,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
@@ -163,6 +166,8 @@ public class ControladorPasos implements Initializable {
     		boolean sigTab=true;
     		switch(tabPane.getSelectionModel().getSelectedIndex())
     		{
+    		case 1:
+    			sigTab = comprobarHabitacionSeleccionada();
     		case 2:
     			if(!(Principal.modelo.cliente==null))
     			{
@@ -179,6 +184,7 @@ public class ControladorPasos implements Initializable {
     			Principal.IniciarPrograma();
     			break;
     		}
+    		
     		if(sigTab)
     		{
     			panelSeleccionado++;
@@ -212,7 +218,7 @@ public class ControladorPasos implements Initializable {
 		controladorInformacionAloj = new ControladorInformacionAloj(img, nombAloj, descAloj, paneInfo);
 		controladorInformacionAloj.cargarInfoAloj(Principal.modelo.reserva.getAlojamiento());
 		
-		controladorSelHabitacion = new ControladorSelHabitacion(paneHabitacion, this);
+		controladorSelHabitacion = new ControladorSelHabitacion(paneHabitacion);
 		controladorSelHabitacion.cargarHabitaciones(Principal.modelo.reserva.getAlojamiento());
 		
 		controladorLogin = new ControladorLogin(textoAviso, textFieldDNI, contrasena, this);
@@ -228,5 +234,25 @@ public class ControladorPasos implements Initializable {
 		snackbar.enqueue(new SnackbarEvent(nodo));
 	}
 	
+	public boolean comprobarHabitacionSeleccionada() {
+		boolean sigTab = true;
+		ArrayList<Habitacion> habitacionesReservadas = Principal.modelo.reserva.getHabitacionesReservadas();
+		if (habitacionesReservadas.size() == 0) {
+			sigTab = false;
+			JOptionPane.showMessageDialog(new JFrame(), "Debe seleccionar al menos una habitación", "Error", JOptionPane.ERROR_MESSAGE);
+		} else {
+			boolean select = false;
+			for (int i = 0; i < habitacionesReservadas.size(); i++) {
+				if (habitacionesReservadas.get(i).getCantidad() > 0) {
+					select = true;
+				}
+			}
+			if (!select) {
+				sigTab = false;
+				JOptionPane.showMessageDialog(new JFrame(), "Debe seleccionar al menos una habitación", "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		return sigTab;
+	}
 	
 }
