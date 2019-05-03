@@ -43,9 +43,9 @@
                       <AnchorPane fx:id="paneServ" />
                     </content>
                   </Tab>
-                  <Tab fx:id="tabLogin" closable="false" text="Iniciar Sesion">
+                  <Tab closable="false" text="Iniciar Sesion">
                     <content>
-                      <AnchorPane fx:id="paneLogin">
+                      <AnchorPane fx:id="tabLogin">
                            <children>
                               <AnchorPane layoutX="34.0" layoutY="42.0" prefHeight="480.0" prefWidth="398.0" style="-fx-background-color: #dddddd;">
                                  <children>
@@ -100,40 +100,7 @@
                   </Tab>
                   <Tab closable="false" text="Pago">
                     <content>
-                      <AnchorPane fx:id="panePago">
-                           <children>
-                              <Label layoutX="96.0" layoutY="239.0" text="Restante">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="70.0" layoutY="202.0" text="Introducido">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="111.0" layoutY="165.0" text="Precio">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="lblPrecio" layoutX="173.0" layoutY="165.0" prefHeight="25.0" prefWidth="95.0">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="lblIntroducido" layoutX="165.0" layoutY="202.0" prefHeight="25.0" prefWidth="111.0">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="lblRestante" layoutX="173.0" layoutY="239.0" prefHeight="25.0" prefWidth="125.0">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <AnchorPane fx:id="contenedorPago" prefHeight="664.0" prefWidth="20.0" />
-                           </children></AnchorPane>
+                      <AnchorPane fx:id="panePago" />
                     </content>
                   </Tab>
                   <Tab closable="false" text="Disfrute">

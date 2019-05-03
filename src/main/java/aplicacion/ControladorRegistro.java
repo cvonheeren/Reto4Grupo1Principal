@@ -5,6 +5,7 @@ import java.sql.Date;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXTextField;
 
 import core.Principal;
@@ -15,64 +16,50 @@ import modelo.Cliente;
 
 public class ControladorRegistro {
 
-	@FXML
-    private JFXButton login;
+	private JFXTextField textFieldDNIReg, textFieldNombreReg, textFieldApellidoReg, textFieldMailReg;
+	private JFXPasswordField contrasenaReg, contrasenaRegRep;
+	private JFXDatePicker fechaNacReg;
+	private JFXButton btnReg;
+	private ControladorPasos controladorPasos;
 
-    @FXML
-    private JFXButton atras;
+	public ControladorRegistro(JFXTextField textFieldDNIReg, JFXTextField textFieldNombreReg,
+			JFXTextField textFieldApellidoReg, JFXTextField textFieldMailReg, JFXPasswordField contrasenaReg,
+			JFXPasswordField contrasenaRegRep, JFXDatePicker fechaNacReg, JFXButton btnReg, ControladorPasos controladorPasos) {
+		super();
+		this.textFieldDNIReg = textFieldDNIReg;
+		this.textFieldNombreReg = textFieldNombreReg;
+		this.textFieldApellidoReg = textFieldApellidoReg;
+		this.textFieldMailReg = textFieldMailReg;
+		this.contrasenaReg = contrasenaReg;
+		this.contrasenaRegRep = contrasenaRegRep;
+		this.fechaNacReg = fechaNacReg;
+		this.btnReg = btnReg;
+		this.controladorPasos = controladorPasos;
+	}
 
-    @FXML
-    private JFXTextField textFieldDNI;
-    
-    @FXML
-    private JFXTextField textFieldNombre;
 
-    @FXML
-    private JFXTextField textFieldApellido;
-
-    @FXML
-    private JFXPasswordField contrasena;
-
-    @FXML
-    private JFXPasswordField contrasena1;
-
-    @FXML
-    private JFXTextField textFieldMail;
-
-    @FXML
-    private JFXDatePicker fechaNac;
-    
-    @FXML
-    private Label labelError;
-
-    @FXML
-    void atras(MouseEvent event) {
-    	Principal.aplicacion.CambiarScene("Login.fxml");
-    }
-
-    @FXML
-    void registrarse(MouseEvent event) {
+    void registrarse() {
     	if (validarDatos()) {
     		registrarCliente();
     	}
-    	else
-    		labelError.setOpacity(1);
+    	//else
+    		//labelError.setOpacity(1);
     }
     
     void registrarCliente() {
-    	int codCliente = Principal.modelo.gestorBBDD.insertarCliente(textFieldDNI.getText(), contrasena.getText(), textFieldNombre.getText(), textFieldApellido.getText(), Date.valueOf(fechaNac.getValue()), textFieldMail.getText());
+    	int codCliente = Principal.modelo.gestorBBDD.insertarCliente(textFieldDNIReg.getText(), contrasenaReg.getText(), textFieldNombreReg.getText(), textFieldApellidoReg.getText(), Date.valueOf(fechaNacReg.getValue()), textFieldMailReg.getText());
 		if (codCliente != -1) {
-			Principal.modelo.cliente = new Cliente(textFieldDNI.getText(), contrasena.getText());
-			Principal.aplicacion.CambiarScene("Pago.fxml");
+			Principal.modelo.cliente = new Cliente(textFieldDNIReg.getText(), contrasenaReg.getText());
+			controladorPasos.MostrarMensaje("Usuario registrado correctamente");
+			//Principal.aplicacion.CambiarScene("Pago.fxml");
 		} else {
-			labelError.setOpacity(1);
-			labelError.setText("No se ha podido efectuar el registro.");
+			controladorPasos.MostrarMensaje("No se ha podido efectuar el registro.");
 		}
     }
     
     @FXML
     boolean comprobarDni() {
-    	if (Principal.modelo.gestorBBDD.comprobarDni(textFieldDNI.getText()))
+    	if (Principal.modelo.gestorBBDD.comprobarDni(textFieldDNIReg.getText()))
     		return false;
     	else
     		return true;
@@ -80,47 +67,47 @@ public class ControladorRegistro {
     
     @FXML
     boolean comprobarContras() {
-    	if (contrasena.getText().equals(contrasena1.getText()))
+    	if (contrasenaReg.getText().equals(contrasenaRegRep.getText()))
     		return true;
     	else
     		return false;
     }
     
     boolean validarDatos() {
-    	if (textFieldDNI.getText().isEmpty()) {
-    		labelError.setText("Campo 'DNI' vacio.");
+    	if (textFieldDNIReg.getText().isEmpty()) {
+    		controladorPasos.MostrarMensaje("Campo 'DNI' vacio.");
     		return false;
     	}
-    	if (textFieldNombre.getText().isEmpty()) {
-    		labelError.setText("Campo 'Nombre' vacio.");
+    	if (textFieldNombreReg.getText().isEmpty()) {
+    		controladorPasos.MostrarMensaje("Campo 'Nombre' vacio.");
     		return false;
     	}
-    	if (textFieldApellido.getText().isEmpty()) {
-    		labelError.setText("Campo 'Apellido' vacio.");
+    	if (textFieldApellidoReg.getText().isEmpty()) {
+    		controladorPasos.MostrarMensaje("Campo 'Apellido' vacio.");
     		return false;
     	}
-    	if (contrasena.getText().isEmpty()) {
-    		labelError.setText("Campo 'Contraseña' vacio.");
+    	if (contrasenaReg.getText().isEmpty()) {
+    		controladorPasos.MostrarMensaje("Campo 'Contraseña' vacio.");
     		return false;
     	}
-    	if (contrasena1.getText().isEmpty()) {
-    		labelError.setText("Campo 'Contraseña1' vacio.");
+    	if (contrasenaRegRep.getText().isEmpty()) {
+    		controladorPasos.MostrarMensaje("Campo 'Contraseña1' vacio.");
     		return false;
     	}
-    	if (textFieldMail.getText().isEmpty()) {
-    		labelError.setText("Campo 'Email' vacio.");
+    	if (textFieldMailReg.getText().isEmpty()) {
+    		controladorPasos.MostrarMensaje("Campo 'Email' vacio.");
     		return false;
     	}
-    	if (fechaNac.getValue() == null) {
-    		labelError.setText("Campo Fecha de Nacimiento vacio.");
+    	if (fechaNacReg.getValue() == null) {
+    		controladorPasos.MostrarMensaje("Campo Fecha de Nacimiento vacio.");
     		return false;
     	}
     	if (!comprobarDni()) {
-    		labelError.setText("El DNI introducido ya existe.");
+    		controladorPasos.MostrarMensaje("El DNI introducido ya existe.");
     		return false;
     	}
     	if (!comprobarContras()) {
-    		labelError.setText("Las contraseñas introducidas no son correctas.");
+    		controladorPasos.MostrarMensaje("Las contraseñas introducidas no son correctas.");
     		return false;
     	}
     	return true;

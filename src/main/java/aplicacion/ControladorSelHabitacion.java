@@ -8,6 +8,7 @@ import org.controlsfx.control.textfield.TextFields;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRippler;
+import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.effects.JFXDepthManager;
 
@@ -38,9 +39,11 @@ import modelo.Modelo;
 public class ControladorSelHabitacion{
     
 	private AnchorPane paneHabitacion;
+	private ControladorPasos controladorPasos;
     
-    public ControladorSelHabitacion(AnchorPane paneHabitacion) {
+    public ControladorSelHabitacion(AnchorPane paneHabitacion, ControladorPasos controladorPasos) {
 		this.paneHabitacion = paneHabitacion;
+		this.controladorPasos = controladorPasos;
 	}
 
     public void guardarHabitacion(Habitacion habitacion, int cantidad) {

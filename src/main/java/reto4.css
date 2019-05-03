@@ -9,3 +9,19 @@
 .fondo {
 	-fx-background-color: #1976d2;
 }
+
+.jfx-snackbar-content {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 20px;
+}
+
+
+.jfx-tab-pane .headers-region
+{
+  -fx-background-color: #1976d2;
+}
+
+.jfx-tab-pane .tab-header-background
+{
+  -fx-background-color: #1976d2;
+}

@@ -23,117 +23,23 @@ import javafx.scene.layout.Pane;
 import javafx.scene.web.WebView;
 import modelo.Habitacion;
 
-public class ControladorPago implements Initializable {
-
-    @FXML
-    private Pane paneBase;
-
-    @FXML
-    private Pane tabInfo;
-
-    @FXML
-    private Label cod;
-
-    @FXML
-    private Label tipo;
-
-    @FXML
-    private Label nombre;
-
-    @FXML
-    private Label fechaEntrada;
-
-    @FXML
-    private Label fechaSalida;
-
-    @FXML
-    private Label adultos;
-
-    @FXML
-    private Label ninos;
-
-    @FXML
-    private Label habitaciones;
-
-    @FXML
-    private Label precio1;
-
-    @FXML
-    private Pane tabPago;
-
-    @FXML
-    private AnchorPane contenedor;
-
-    @FXML
-    private Label precio;
-
-    @FXML
-    private Label introducido;
-
-    @FXML
-    private Label restante;
-
-    @FXML
-    private JFXButton sigiuente;
-
-    @FXML
-    private JFXButton atras;
-   
-    @FXML
-    private WebView mapa;
+public class ControladorPago {
     
     private float[] monedasBilletes = {500, 200, 100, 50, 20, 10, 5, 2, 1, 0.50f, 0.20f, 0.10f, 0.05f, 0.02f, 0.01f };
+    private AnchorPane contenedor;
+    private Label introducido, precio, restante;
     public JFXButton[] botonesMonedasBilletes = new JFXButton[15];
     
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public ControladorPago(AnchorPane contenedor, Label precio, Label introducido, Label restante) {
+    	this.contenedor=contenedor;
+    	this.introducido=introducido;
+    	this.precio=precio;
+    	this.restante=restante;
     	precio.setText(Float.toString(Principal.modelo.pago.getPrecioTotal()) + " €");
     	introducido.setText("0 €");
     	restante.setText(Float.toString(Principal.modelo.pago.getPrecioTotal()) + " €");
     	crearBotones();
     	
-    	JFXTabPane tabPane = new JFXTabPane();
-    	tabPane.setPrefSize(1150, 664);
-    	Tab tab = new Tab();
-    	tab.setText("tab Info");
-    	tab.setContent(tabInfo);
-    	tabPane.getTabs().add(tab);
-    	Tab tab2 = new Tab();
-    	tab2.setText("tab Pago");
-    	tab2.setContent(tabPago);
-    	tabPane.getTabs().add(tab2);
-    	tabPane.getSelectionModel().select(1);
-    	
-    	paneBase.getChildren().add(tabPane);
-    	
-		mapa.getEngine().loadContent("<iframe src=\"https://maps.google.com/maps?q=" + Principal.modelo.reserva.getAlojamiento().getLongitud() + "," + Principal.modelo.reserva.getAlojamiento().getLatitud() + "&hl=es;z=14&amp;output=embed\" width=\"350\" height=\"250\" frameborder=\"0\" style=\"border:0\"></iframe>", "text/html");
-		cod.setText(Integer.toString(Principal.modelo.reserva.getAlojamiento().getCodAlojamiento()));
-		tipo.setText("Hotel");
-		nombre.setText(Principal.modelo.reserva.getAlojamiento().getNombre());
-		precio.setText(Principal.modelo.reserva.getAlojamiento().getTarifaNormal() + "€");
-		fechaEntrada.setText(Principal.modelo.reserva.getFechaEntrada().toLocalDate().toString());
-		fechaSalida.setText(Principal.modelo.reserva.getFechaSalida().toLocalDate().toString());
-		String str = "";
-		for (Habitacion h: Principal.modelo.reserva.getHabitacionesReservadas()) {
-		    str += h.getNombre() + " x " + h.getCantidad() + "\n";
-		}
-		habitaciones.setText(str);
-		precio.setText(Float.toString(Principal.modelo.pago.getPrecioTotal()));
-    	
-    	
-    	
-    }
-
-    @FXML
-    void atras(MouseEvent event) {
-    	Principal.aplicacion.CambiarScene("InfoReserva.fxml");
-    }
-
-    @FXML
-    void siguiente(MouseEvent event) {
-    	comprobarTodoIntroducido();
-    	int codReserva = Principal.modelo.gestorBBDD.insertarReserva(Principal.modelo.reserva);
-    	Principal.modelo.reserva.setCodReserva(codReserva);
     }
     
     public void crearBotones() {

@@ -8,6 +8,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXRippler;
+import com.jfoenix.controls.JFXSnackbar;
+import com.jfoenix.controls.JFXSnackbar.SnackbarEvent;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.effects.JFXDepthManager;
@@ -22,6 +24,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -40,6 +43,12 @@ public class ControladorPasos implements Initializable {
 	private ControladorLogin controladorLogin;
 	private ControladorInformacionAloj controladorInformacionAloj;
 	private ControladorSelHabitacion controladorSelHabitacion;
+	private ControladorRegistro controladorRegistro;
+	private ControladorPago controladorPago;
+	private JFXSnackbar snackbar;
+
+    @FXML
+    private AnchorPane anchorPaneBase;
 
     @FXML
     private JFXTabPane tabPane;
@@ -63,7 +72,34 @@ public class ControladorPasos implements Initializable {
     private AnchorPane paneServ;
 
     @FXML
-    private AnchorPane tabLogin;
+    private Tab tabLogin;
+
+    @FXML
+    private AnchorPane paneLogin;
+
+    @FXML
+    private JFXButton btnReg;
+
+    @FXML
+    private JFXTextField textFieldDNIReg;
+
+    @FXML
+    private JFXTextField textFieldNombreReg;
+
+    @FXML
+    private JFXTextField textFieldApellidoReg;
+
+    @FXML
+    private JFXPasswordField contrasenaReg;
+
+    @FXML
+    private JFXPasswordField contrasenaRegRep;
+
+    @FXML
+    private JFXTextField textFieldMailReg;
+
+    @FXML
+    private JFXDatePicker fechaNacReg;
 
     @FXML
     private Label textoAviso;
@@ -75,34 +111,22 @@ public class ControladorPasos implements Initializable {
     private JFXPasswordField contrasena;
 
     @FXML
-    private Hyperlink linkRegistro;
-
-    @FXML
-    private JFXButton login;
-
-    @FXML
-    private JFXTextField textFieldDNI1;
-
-    @FXML
-    private JFXTextField textFieldNombre;
-
-    @FXML
-    private JFXTextField textFieldApellido;
-
-    @FXML
-    private JFXPasswordField contrasena1;
-
-    @FXML
-    private JFXTextField textFieldMail;
-
-    @FXML
     private Label labelError;
 
     @FXML
-    private JFXDatePicker fechaNac;
+    private AnchorPane panePago;
 
     @FXML
-    private AnchorPane panePago;
+    private Label lblPrecio;
+
+    @FXML
+    private Label lblIntroducido;
+
+    @FXML
+    private Label lblRestante;
+
+    @FXML
+    private AnchorPane contenedorPago;
 
     @FXML
     private AnchorPane paneFinal;
@@ -117,6 +141,7 @@ public class ControladorPasos implements Initializable {
     private JFXButton btnInformacion;
 
 
+
     @FXML
     void Informacion(ActionEvent event) {
     	tabPane.getSelectionModel().select(0);
@@ -128,22 +153,34 @@ public class ControladorPasos implements Initializable {
     	if(panelSeleccionado<tabPane.getTabs().size())
     	{
     		boolean sigTab=true;
-    		if(tabPane.getSelectionModel().getSelectedIndex()==3)
+    		switch(tabPane.getSelectionModel().getSelectedIndex())
     		{
+    		case 2:
+    			if(!(Principal.modelo.cliente==null))
+    			{
+    				panelSeleccionado=4;
+    				tabPane.getSelectionModel().select(panelSeleccionado);
+    				sigTab=false;
+    			}
+    			break;
+    		case 3:
     			sigTab=controladorLogin.logear();
+    			break;
     		}
+    		
     		if(sigTab)
     		{
     			panelSeleccionado++;
             	tabPane.getSelectionModel().select(panelSeleccionado);
     		}
     		
+    		
     	}
     }
     
     @FXML
     void registrarse(MouseEvent event) {
-
+    	controladorRegistro.registrarse();
     }
 
     @FXML
@@ -159,13 +196,26 @@ public class ControladorPasos implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		snackbar = new JFXSnackbar(anchorPaneBase);
+		snackbar.getStylesheets().setAll("reto4.css");
 		controladorInformacionAloj = new ControladorInformacionAloj(img, nombAloj, descAloj, paneInfo);
 		controladorInformacionAloj.cargarInfoAloj(Principal.modelo.reserva.getAlojamiento());
 		
-		controladorSelHabitacion = new ControladorSelHabitacion(paneHabitacion);
+		controladorSelHabitacion = new ControladorSelHabitacion(paneHabitacion, this);
 		controladorSelHabitacion.cargarHabitaciones(Principal.modelo.reserva.getAlojamiento());
 		
-		controladorLogin = new ControladorLogin(textoAviso, textFieldDNI, contrasena, linkRegistro);
+		controladorLogin = new ControladorLogin(textoAviso, textFieldDNI, contrasena, this);
+		controladorRegistro = new  ControladorRegistro(textFieldDNIReg, textFieldNombreReg, textFieldApellidoReg, textFieldMailReg, contrasenaReg, contrasenaRegRep, fechaNacReg, btnReg, this);
+		
+		controladorPago = new ControladorPago(contenedorPago, lblPrecio, lblIntroducido, lblRestante);
+		
 	}
+	
+	public void MostrarMensaje(String mensaje)
+	{
+		Text nodo = new Text(mensaje);
+		snackbar.enqueue(new SnackbarEvent(nodo));
+	}
+	
 	
 }

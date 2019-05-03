@@ -17,15 +17,16 @@ public class ControladorLogin {
 	private JFXTextField textFieldDNI;
 	private JFXPasswordField contrasena;
 	private Hyperlink linkRegistro;
+	private ControladorPasos controladorPasos;
 
 	
-	public ControladorLogin(Label textoAviso, JFXTextField textFieldDNI, JFXPasswordField contrasena,
-			Hyperlink linkRegistro) {
+	public ControladorLogin(Label textoAviso, JFXTextField textFieldDNI, JFXPasswordField contrasena, ControladorPasos controladorPasos) {
 		super();
 		this.textoAviso = textoAviso;
 		this.textFieldDNI = textFieldDNI;
 		this.contrasena = contrasena;
 		this.linkRegistro = linkRegistro;
+		this.controladorPasos = controladorPasos;
 	}
 
 	void resgistrar(MouseEvent event) {
@@ -37,7 +38,7 @@ public class ControladorLogin {
 		if (validarDatos()) {
     		return logearCliente();
     	} else {
-    		textoAviso.setOpacity(1);
+    		//textoAviso.setOpacity(1);
     		return false;
     	}
 	}
@@ -49,19 +50,18 @@ public class ControladorLogin {
 			Principal.modelo.cliente = new Cliente(dni, pass);
 			return true;
 		} else {
-			textoAviso.setText("DNI y/o contraseña incorrectos.");
-			textoAviso.setOpacity(1);
+			controladorPasos.MostrarMensaje("DNI y/o contraseña incorrectos.");
 			return false;
 		}
 	}
 	
 	boolean validarDatos() {
     	if (textFieldDNI.getText().isEmpty()) {
-    		textoAviso.setText("Campo 'DNI' vacio.");
+    		controladorPasos.MostrarMensaje("Campo 'DNI' vacio.");
     		return false;
     	}
     	if (contrasena.getText().isEmpty()) {
-    		textoAviso.setText("Campo 'Contraseña' vacio.");
+    		controladorPasos.MostrarMensaje("Campo 'Contraseña' vacio.");
     		return false;
     	}
     	return true;

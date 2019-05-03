@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+
+                      <AnchorPane fx:id="paneInfo">
+                           <children>
+                              <WebView fx:id="img" layoutX="24.0" layoutY="37.0" prefHeight="350.0" prefWidth="450.0" />
+                              <Text fx:id="nombAloj" layoutX="525.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" wrappingWidth="269.13671875" />
+                              <TextArea fx:id="descAloj" layoutX="525.0" layoutY="132.0" prefHeight="215.0" prefWidth="459.0" text="Descripcion" />
+                           </children>
+                        </AnchorPane>
+
