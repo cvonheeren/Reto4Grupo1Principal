@@ -1,17 +1,17 @@
 package aplicacion;
 
 import java.sql.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXSnackbar;
+
 import com.jfoenix.controls.JFXTextField;
 
 import core.Principal;
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
+
 import modelo.Cliente;
 
 public class ControladorRegistro {
@@ -57,22 +57,6 @@ public class ControladorRegistro {
 		}
     }
     
-    @FXML
-    boolean comprobarDni() {
-    	if (Principal.modelo.gestorBBDD.comprobarDni(textFieldDNIReg.getText()))
-    		return false;
-    	else
-    		return true;
-    }
-    
-    @FXML
-    boolean comprobarContras() {
-    	if (contrasenaReg.getText().equals(contrasenaRegRep.getText()))
-    		return true;
-    	else
-    		return false;
-    }
-    
     boolean validarDatos() {
     	if (textFieldDNIReg.getText().isEmpty()) {
     		controladorPasos.MostrarMensaje("Campo 'DNI' vacio.");
@@ -102,15 +86,42 @@ public class ControladorRegistro {
     		controladorPasos.MostrarMensaje("Campo Fecha de Nacimiento vacio.");
     		return false;
     	}
-    	if (!comprobarDni()) {
+    	if (Principal.modelo.gestorBBDD.comprobarDni(textFieldDNIReg.getText())) {
     		controladorPasos.MostrarMensaje("El DNI introducido ya existe.");
     		return false;
     	}
-    	if (!comprobarContras()) {
+    	if (!contrasenaReg.getText().equals(contrasenaRegRep.getText())) {
     		controladorPasos.MostrarMensaje("Las contraseñas introducidas no son correctas.");
     		return false;
     	}
+    	if (!validarNif(textFieldDNIReg.getText())) {
+    		controladorPasos.MostrarMensaje("El DNI está en un formato inválido.");
+    		return false;
+    	}
+    	
     	return true;
     }
 	
+    public boolean validarNif(String nif){
+        boolean correcto = false;
+        Pattern pattern = Pattern.compile("(\\d{1,8})([TRWAGMYFPDXBNJZSQVHLCKEtrwagmyfpdxbnjzsqvhlcke])");
+        Matcher matcher = pattern.matcher(nif);
+
+        if(matcher.matches()) {
+            String letra = matcher.group(2);
+            String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
+            int index = Integer.parseInt(matcher.group(1));
+            index = index%23;
+            String reference = letras.substring(index,index+1);
+            
+            if(reference.equalsIgnoreCase(letra))
+                correcto = true;
+            else 
+                correcto = false;
+        } 
+        else 
+            correcto = false;
+
+        return correcto;
+    }
 }
