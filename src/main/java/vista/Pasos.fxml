@@ -22,7 +22,7 @@
          <children>
             <JFXTabPane fx:id="tabPane" prefHeight="655.0" prefWidth="1050.0" style="-fx-background-color: white;">
                <tabs>
-                  <Tab text="Informacion">
+                  <Tab fx:id="idTabInfo" text="Informacion">
                     <content>
                       <AnchorPane fx:id="paneInfo">
                            <children>
@@ -34,17 +34,17 @@
                         </AnchorPane>
                     </content>
                   </Tab>
-                  <Tab closable="false" text="Seleccione Habitacion">
+                  <Tab fx:id="idTabHab" closable="false" text="Seleccione Habitacion">
                     <content>
                       <AnchorPane fx:id="paneHabitacion" />
                     </content>
                   </Tab>
-                  <Tab closable="false" disable="true" text="Seleccione Servicios">
+                  <Tab fx:id="idTabServ" closable="false" disable="true" text="Seleccione Servicios">
                     <content>
                       <AnchorPane fx:id="paneServ" />
                     </content>
                   </Tab>
-                  <Tab fx:id="tabLogin" closable="false" text="Iniciar Sesion">
+                  <Tab fx:id="idTabLogin" closable="false" text="Iniciar Sesion">
                     <content>
                       <AnchorPane fx:id="paneLogin">
                            <children>
@@ -99,7 +99,7 @@
                            </children></AnchorPane>
                     </content>
                   </Tab>
-                  <Tab closable="false" text="Pago">
+                  <Tab fx:id="idTabPago" closable="false" text="Pago">
                     <content>
                       <AnchorPane fx:id="panePago">
                            <children>
@@ -137,7 +137,7 @@
                            </children></AnchorPane>
                     </content>
                   </Tab>
-                  <Tab closable="false" text="Disfrute">
+                  <Tab fx:id="idTabFin" closable="false" text="Disfrute">
                     <content>
                       <AnchorPane fx:id="paneFinal" />
                     </content>
