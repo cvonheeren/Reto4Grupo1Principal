@@ -11,6 +11,7 @@ public class Principal extends Application {
 	public static Modelo modelo;
 	public static Aplicacion aplicacion;
 	private static Stage stage;
+	
 	/**
 	 * Método que inicia el programa
 	 * @param args
@@ -20,19 +21,20 @@ public class Principal extends Application {
 	}
 
 	/**
-	 * Método que crea el modelo y la vista y las instancia al constructor del controlador
+	 * Inicia el programa
 	 */
-	
 	@Override
-    public void start(Stage stage)
-    {
-		this.stage=stage;
-		IniciarPrograma();
+    public void start(Stage stage) {
+		Principal.stage = stage;
+		iniciarPrograma();
     }
 	
-	public static void IniciarPrograma()
-	{
+	/**
+	 * Carga el modelo y el controlador
+	 */
+	public static void iniciarPrograma() {
 		modelo = new Modelo();
 		aplicacion = new Aplicacion(stage);
 	}
+	
 }

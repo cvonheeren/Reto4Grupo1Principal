@@ -4,8 +4,6 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-import core.Principal;
-
 /**
  * Realiza los calculos del pago del programa
  */

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="paneLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1150.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorLogin2">
+	<children>
+		<Label layoutX="732.0" layoutY="183.0" text="¿No estás registrado?">
+	 		<font>
+	    		<Font size="16.0" />
+	 		</font>
+		</Label>
+		<AnchorPane layoutX="609.0" layoutY="240.0" prefHeight="522.0" prefWidth="398.0" style="-fx-background-color: #dddddd;">
+	       	<children>
+				<JFXButton fx:id="btnReg" layoutX="110.0" layoutY="448.0" onAction="#registrarse" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="REGISTRARSE" textFill="WHITE">
+			 		<font>
+			    		<Font size="16.0" />
+			 		</font>
+			 		<cursor>
+			      		<Cursor fx:constant="HAND" />
+				   </cursor>
+				</JFXButton>
+				<JFXTextField fx:id="textFieldDNIReg" focusColor="#f57c00" layoutX="40.0" layoutY="20.0" prefHeight="40.0" prefWidth="300.0" promptText="DNI" unFocusColor="#1976d2">
+				   <opaqueInsets>
+				      <Insets />
+				   </opaqueInsets>
+				</JFXTextField>
+				<JFXTextField fx:id="textFieldNombreReg" focusColor="#f57c00" layoutX="40.0" layoutY="80.0" prefHeight="40.0" prefWidth="300.0" promptText="NOMBRE" unFocusColor="#1976d2">
+				   <opaqueInsets>
+				      <Insets />
+				   </opaqueInsets>
+				</JFXTextField>
+				<JFXTextField fx:id="textFieldApellidoReg" focusColor="#f57c00" layoutX="40.0" layoutY="140.0" prefHeight="40.0" prefWidth="300.0" promptText="APELLIDO" unFocusColor="#1976d2">
+				   <opaqueInsets>
+				      <Insets />
+				   </opaqueInsets>
+				</JFXTextField>
+				<JFXPasswordField fx:id="contrasenaReg" focusColor="#f57c00" layoutX="40.0" layoutY="200.0" prefHeight="40.0" prefWidth="300.0" promptText="CONTRASEÑA" unFocusColor="#1976d2" />
+				<JFXPasswordField fx:id="contrasenaRegRep" focusColor="#f57c00" layoutX="40.0" layoutY="260.0" prefHeight="40.0" prefWidth="300.0" promptText="REPITA CONTRASEÑA" unFocusColor="#1976d2" />
+				<JFXTextField fx:id="textFieldMailReg" focusColor="#f57c00" layoutX="40.0" layoutY="320.0" prefHeight="40.0" prefWidth="300.0" promptText="MAIL" unFocusColor="#1976d2">
+				   <opaqueInsets>
+				      <Insets />
+				   </opaqueInsets>
+				</JFXTextField>
+				<JFXDatePicker fx:id="fechaNacReg" defaultColor="#1976d2" layoutX="40.0" layoutY="380.0" prefHeight="40.0" prefWidth="300.0" />
+			</children>
+		</AnchorPane>
+		<AnchorPane layoutX="156.0" layoutY="240.0" prefHeight="222.0" prefWidth="316.0" style="-fx-background-color: #fff;">
+	       	<children>
+      				<JFXTextField fx:id="textFieldDNI" focusColor="#f57c00" layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="300.0" promptText="DNI" text="12345678A" unFocusColor="#1976d2">
+      				   <opaqueInsets>
+      				      <Insets />
+      				   </opaqueInsets>
+      				</JFXTextField>
+				<JFXPasswordField fx:id="contrasena" focusColor="#f57c00" layoutX="10.0" layoutY="80.0" prefHeight="40.0" prefWidth="300.0" promptText="CONTRASEÑA" text="1234" unFocusColor="#1976d2" />
+				<JFXButton fx:id="btnLogin" layoutX="76.0" layoutY="150.0" onAction="#logear" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="INICIAR SESION" textFill="WHITE">
+				   <font>
+				      <Font size="16.0" />
+				   </font>
+				   <cursor>
+				      <Cursor fx:constant="HAND" />
+				   </cursor>
+				</JFXButton>
+      		</children>
+		</AnchorPane>
+      <JFXButton fx:id="btnVolver" layoutX="66.0" layoutY="796.0" onAction="#volver" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="VOLVER" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+	</children>
+</AnchorPane>

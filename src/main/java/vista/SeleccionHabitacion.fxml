@@ -1,38 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.Cursor?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1150.0" style="-fx-background-color: #1976d2;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorSelHabitacion">
+<AnchorPane fx:controller="aplicacion.ControladorSelHabitacion" prefHeight="900.0" prefWidth="1150.0" style="-fx-background-color: #1976d2;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane layoutY="136.0" prefHeight="764.0" prefWidth="1150.0" style="-fx-background-color: #fff;">
          <children>
-            <AnchorPane fx:id="contenedor" layoutX="160.0" layoutY="105.0" prefHeight="548.0" prefWidth="830.0" />
-            <Label fx:id="titulo" layoutX="75.0" layoutY="41.0" text="HABITACIONES DISPONIBLES EN EL HOTEL SELECCIONADO:">
+            <AnchorPane fx:id="paneHabitacion" layoutX="160.0" layoutY="105.0" prefHeight="548.0" prefWidth="830.0" />
+            <Label fx:id="titulo" layoutX="75.0" layoutY="41.0" text="SELECCIONE HABITACIONES:">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <JFXButton fx:id="atras" layoutX="75.0" layoutY="675.0" onMouseClicked="#atras" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="ATRAS" textFill="WHITE">
-               <font>
-                  <Font size="16.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
-            <JFXButton fx:id="siguiente" layoutX="915.0" layoutY="675.0" onMouseClicked="#siguiente" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="RESERVAR" textFill="WHITE">
-               <font>
-                  <Font size="16.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
          </children>
       </Pane>
    </children>

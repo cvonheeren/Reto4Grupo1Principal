@@ -1,45 +1,35 @@
 package aplicacion;
 
+import java.net.URL;
 import java.util.ArrayList;
-import com.jfoenix.controls.JFXRippler;
-import com.jfoenix.effects.JFXDepthManager;
+import java.util.ResourceBundle;
 
-import core.Principal;
+import com.jfoenix.controls.*;
+import javafx.scene.layout.*;
+import javafx.scene.control.*;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Text;
+import com.jfoenix.effects.JFXDepthManager;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.FXCollections;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.Text;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import core.Principal;
 import modelo.Alojamiento;
 import modelo.Habitacion;
 
-public class ControladorSelHabitacion{
+public class ControladorSelHabitacion implements Initializable {
     
+	@FXML
 	private AnchorPane paneHabitacion;
+	
+	@FXML
+	private Label titulo;
     
-    public ControladorSelHabitacion(AnchorPane paneHabitacion) {
-		this.paneHabitacion = paneHabitacion;
-	}
-
-    public void guardarHabitacion(Habitacion habitacion, int cantidad) {
-		ArrayList<Habitacion> habitacionesReservadas = Principal.modelo.reserva.getHabitacionesReservadas();
-		if (habitacionesReservadas.size() == 0) {
-			Principal.modelo.reserva.addHabitacion(habitacion);
-			Principal.modelo.reserva.getHabitacionesReservadas().get(habitacionesReservadas.size()-1).setCantidad(cantidad);
-			return;
-		}
-		for (int i = 0;i < habitacionesReservadas.size(); i++) {
-			if (habitacionesReservadas.get(i).getNombre().equals(habitacion.getNombre())) {
-				habitacionesReservadas.get(i).setCantidad(cantidad);
-				return;
-			}
-		}
-		Principal.modelo.reserva.addHabitacion(habitacion);
-		Principal.modelo.reserva.getHabitacionesReservadas().get(habitacionesReservadas.size()-1).setCantidad(cantidad);
+    @Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		cargarHabitaciones(Principal.modelo.reserva.getAlojamiento());
 	}
     
     public void cargarHabitaciones(Alojamiento alojamiento) {
@@ -137,10 +127,33 @@ public class ControladorSelHabitacion{
     		JFXDepthManager.setDepth(anchorPane, 1);
     		anchorPane.setPrefWidth(paneHabitacion.getWidth()-20);
     		anchorPane.setMaxWidth(paneHabitacion.getWidth()-20);
+    		
     		// añade el anchorpane al grid
     		grid.add(paneSuperior, 0, i);
     		
     	}
-}
+    }
+    
+    /**
+     * 
+     * @param habitacion
+     * @param cantidad
+     */
+    public void guardarHabitacion(Habitacion habitacion, int cantidad) {
+		ArrayList<Habitacion> habitacionesReservadas = Principal.modelo.reserva.getHabitacionesReservadas();
+		if (habitacionesReservadas.size() == 0) {
+			Principal.modelo.reserva.addHabitacion(habitacion);
+			Principal.modelo.reserva.getHabitacionesReservadas().get(habitacionesReservadas.size()-1).setCantidad(cantidad);
+			return;
+		}
+		for (int i = 0;i < habitacionesReservadas.size(); i++) {
+			if (habitacionesReservadas.get(i).getNombre().equals(habitacion.getNombre())) {
+				habitacionesReservadas.get(i).setCantidad(cantidad);
+				return;
+			}
+		}
+		Principal.modelo.reserva.addHabitacion(habitacion);
+		Principal.modelo.reserva.getHabitacionesReservadas().get(habitacionesReservadas.size()-1).setCantidad(cantidad);
+	}
 
 }

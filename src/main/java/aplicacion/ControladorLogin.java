@@ -6,41 +6,40 @@ import com.jfoenix.controls.JFXTextField;
 
 import core.Principal;
 import javafx.fxml.FXML;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import modelo.Cliente;
 
 public class ControladorLogin {
-   
-	private Label textoAviso;
-	private JFXTextField textFieldDNI;
-	private JFXPasswordField contrasena;
-	private Hyperlink linkRegistro;
-	private ControladorPasos controladorPasos;
-
 	
-	public ControladorLogin(Label textoAviso, JFXTextField textFieldDNI, JFXPasswordField contrasena, ControladorPasos controladorPasos) {
-		super();
-		this.textoAviso = textoAviso;
-		this.textFieldDNI = textFieldDNI;
-		this.contrasena = contrasena;
-		this.linkRegistro = linkRegistro;
-		this.controladorPasos = controladorPasos;
-	}
+	@FXML
+	private AnchorPane paneLogin;
+	
+    @FXML
+    private JFXButton login, atras;
 
+    @FXML
+    private JFXTextField textFieldDNI;
+
+    @FXML
+    private JFXPasswordField contrasena;
+    
+    @FXML
+	void atras(MouseEvent event) {
+		Principal.aplicacion.CambiarScene("Pasos.fxml");
+	}
+    
+    @FXML
 	void resgistrar(MouseEvent event) {
     	Principal.aplicacion.CambiarScene("Registro.fxml");
     }
-    
 	
-	boolean logear() {
+    @FXML
+	boolean logear(MouseEvent event) {
 		if (validarDatos()) {
     		return logearCliente();
-    	} else {
-    		//textoAviso.setOpacity(1);
-    		return false;
     	}
+    	return false;
 	}
 	
 	boolean logearCliente() {
@@ -50,21 +49,21 @@ public class ControladorLogin {
 			Principal.modelo.cliente = new Cliente(dni, pass);
 			return true;
 		} else {
-			controladorPasos.MostrarMensaje("DNI y/o contraseña incorrectos.");
+			Principal.aplicacion.mostrarMensaje(paneLogin, "DNI y/o contraseña incorrectos.");
 			return false;
 		}
 	}
 	
 	boolean validarDatos() {
     	if (textFieldDNI.getText().isEmpty()) {
-    		controladorPasos.MostrarMensaje("Campo 'DNI' vacio.");
+    		Principal.aplicacion.mostrarMensaje(paneLogin, "Campo 'DNI' vacio.");
     		return false;
     	}
     	if (contrasena.getText().isEmpty()) {
-    		controladorPasos.MostrarMensaje("Campo 'Contraseña' vacio.");
+    		Principal.aplicacion.mostrarMensaje(paneLogin, "Campo 'Contraseña' vacio.");
     		return false;
     	}
     	return true;
 	 }
-
+	
 }

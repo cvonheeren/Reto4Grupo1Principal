@@ -1,11 +1,5 @@
 package aplicacion;
 
-import java.awt.PaintContext;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Rectangle2D;
-import java.awt.image.ColorModel;
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -40,7 +34,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -54,7 +47,6 @@ import modelo.Hotel;
 
 public class ControladorSelAlojamiento implements Initializable {
 	
-
 	@FXML
     private AnchorPane contenedor;
 
@@ -81,178 +73,122 @@ public class ControladorSelAlojamiento implements Initializable {
     	
     	JFXDepthManager.setDepth(paneFiltros, 2);
     	JFXDepthManager.setDepth(paneBusqueda, 1);
-    	
-    	ArrayList<String> ciudades = Principal.modelo.gestorBBDD.cargarListaDestinos();
-		ciudades.addAll(Principal.modelo.gestorBBDD.cargarListaAlojamientos());
-		TextFields.bindAutoCompletion( textCiudad, ciudades );
 
 		fechaEntrada.setValue(LocalDate.now());
 		fechaSalida.setValue(LocalDate.now().plusDays(1));
 		
-		// deshabilitar dias anteriores a hoy en ambos DatePickers
-		final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
-		     public DateCell call(final DatePicker datePicker) {
-		         return new DateCell() {
-		             @Override
-		             public void updateItem(LocalDate date, boolean empty) {
-		                 super.updateItem(date, empty);
-		                 LocalDate today = LocalDate.now();
-		                 setDisable(empty || date.compareTo(today) < 0 );
-		             }
-		         };
-		     }
-		 };
-		 fechaEntrada.setDayCellFactory(dayCellFactory);
-		 
-		 final Callback<DatePicker, DateCell> dayCellFactory2 = new Callback<DatePicker, DateCell>() {
-		     public DateCell call(final DatePicker datePicker) {
-		         return new DateCell() {
-		             @Override
-		             public void updateItem(LocalDate date, boolean empty) {
-		                 super.updateItem(date, empty);
-		                 LocalDate entryday = fechaEntrada.getValue().plusDays(1);
-		                 setDisable(empty || date.compareTo(entryday) < 0 );
-		             }
-		         };
-		     }
-		 };
-		 fechaSalida.setDayCellFactory(dayCellFactory2);
-		 fechaSalida.setValue(fechaEntrada.getValue().plusDays(1));
-		 
-		 Buscar();
+		fechaEntrada = deshabilitarFechas(fechaEntrada, LocalDate.now());
+		fechaSalida = deshabilitarFechas(fechaSalida, LocalDate.now().plusDays(1));
+		
+		cargarAutocompletar();
+		cargarAlojamientos();
 	}
     
     @FXML
     void seleccion(ActionEvent event) {
    	 	// cambiar los dias deshabilitados en el datepicker 'fechaSalida'
 		// cuando se selecciona una fecha en el datepicker 'fechaEntrada'
-		final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
-		     public DateCell call(final DatePicker datePicker) {
-		         return new DateCell() {
-		             @Override
-		             public void updateItem(LocalDate date, boolean empty) {
-		                 super.updateItem(date, empty);
-		                 LocalDate entryday = fechaEntrada.getValue().plusDays(1);
-		                 setDisable(empty || date.compareTo(entryday) < 0 );
-		             }
-		         };
-		     }
-		 };
-		 fechaSalida.setDayCellFactory(dayCellFactory);
-		 fechaSalida.setValue(fechaEntrada.getValue().plusDays(1));
+    	fechaSalida = deshabilitarFechas(fechaSalida, fechaEntrada.getValue().plusDays(1));
+		fechaSalida.setValue(fechaEntrada.getValue().plusDays(1));
     }
     
     @FXML
     void AutoBuscar(KeyEvent event) {
-    	if(event.getCode() == KeyCode.ENTER)
-    	{
-    		Buscar();
+    	if(event.getCode() == KeyCode.ENTER) {
+    		ejecutarBusqueda();
     	}
     }
 
     @FXML
     void BtnBuscarPulsado(MouseEvent event) {
-    	Buscar();
-    }	
-	
-	void Buscar() {
-		
-		if (textCiudad.getText() == "") {
+    	ejecutarBusqueda();
+    }
+    
+    /**
+     * 
+     */
+    public void cargarAutocompletar() {
+    	ArrayList<String> ciudades = Principal.modelo.gestorBBDD.cargarListaDestinos();
+		ciudades.addAll(Principal.modelo.gestorBBDD.cargarListaAlojamientos());
+		TextFields.bindAutoCompletion( textCiudad, ciudades );
+    }
+    
+    /**
+     * Deshabilitar dias anteriores a la fecha que se pasa por parametro
+     * @param datePicker
+     * @param fecha
+     * @return
+     */
+    public JFXDatePicker deshabilitarFechas(JFXDatePicker datePicker, LocalDate fecha) {
+    	final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
+		     public DateCell call(final DatePicker datePicker) {
+		         return new DateCell() {
+		             @Override
+		             public void updateItem(LocalDate date, boolean empty) {
+		                 super.updateItem(date, empty);
+		                 setDisable(empty || date.compareTo(fecha) < 0 );
+		             }
+		         };
+		     }
+		 };
+		 datePicker.setDayCellFactory(dayCellFactory);
+		 return datePicker;
+    }
+    
+    /**
+     * 
+     */
+    public void ejecutarBusqueda() {
+    	if (textCiudad.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(new JFrame(), "Debe introducir un destino", "Error",JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		
-		if (fechaEntrada.getValue() == null) {
-			JOptionPane.showMessageDialog(new JFrame(), "Debe introducir una fecha de entrada", "Error",JOptionPane.ERROR_MESSAGE);
-			return;
-		}
-		
-		if (fechaSalida.getValue() == null) {
-			JOptionPane.showMessageDialog(new JFrame(), "Debe introducir una fecha de salida", "Error",JOptionPane.ERROR_MESSAGE);
-			return;
-		}
-    	
-    	// crea y añade el grid al anchorpane 'contenedor', creado por defecto
-    	GridPane grid = new GridPane();
+    	cargarAlojamientos();
+    }
+	
+    /**
+     * Carga y muestra los alojamientos correspondientes a la 
+     */
+	public void cargarAlojamientos() {
+    
+    	GridPane grid = crearGrid();
     	contenedor.getChildren().setAll(grid);
     	
-    	// hace que la columna 1 del grid ocupe todo el espacio disponible en el padre
-    	ColumnConstraints column1 = new ColumnConstraints();
-    	column1.setPercentWidth(100);
-    	grid.getColumnConstraints().add(column1);
-    	grid.setStyle("-fx-background-color: transparent;");
     	// hace que los anchorpanes rellenen todo el espacio disponible en el padre
         AnchorPane.setTopAnchor(grid, 0.0);
         AnchorPane.setBottomAnchor(grid, 0.0);
         AnchorPane.setLeftAnchor(grid, 0.0);
         AnchorPane.setRightAnchor(grid, 0.0);
-        
-        
-		// cargamos la arraylist de alojamientos
+       
 		ArrayList<Alojamiento> alojamientos = Principal.modelo.gestorBBDD.cargarListaAlojamientos(textCiudad.getText());
         
     	for(int i=0; i<alojamientos.size(); i++) {
     		
     		Alojamiento alojamiento = alojamientos.get(i);
-    		
-    		Date fechaEntradaDate = Date.valueOf(fechaEntrada.getValue());
-    		Date fechaSalidaDate = Date.valueOf(fechaSalida.getValue());
-    		ArrayList<Habitacion> habitaciones = Principal.modelo.gestorBBDD.habitacionesDisponibles(alojamiento.getCodAlojamiento(), fechaEntradaDate, fechaSalidaDate);
-    		
-    		String str = "";
-    		str += "Habitaciones disponibles: \n";
-    		for (Habitacion s : habitaciones) {
-    			str += s.getNombre() + " - ";
-    		    if (s.getCtaCamasSimples() > 0 ) {
-    		    	str += "Cama Individual x " + s.getCtaCamasSimples() + " - ";
-    		    }
-    		    if (s.getCtaCamasMatrimonio() > 0 ) {
-    		    	str += "Cama Matrimonio x " + s.getCtaCamasMatrimonio() + " - ";
-    		    }
-    		    if (s.getCtaCamasInfantil() > 0 ) {
-    		    	str += "Cama Infantil x " + s.getCtaCamasInfantil() + " - ";
-    		    }
-    		    str += "Cantidad: " + s.getCantidad() + "\n";
-    		}
+    		ArrayList<Habitacion> habitaciones = buscarHabDisponibles(alojamiento);
+    		String str = mostrarHabitaciones(habitaciones);
     		
     		AnchorPane anchorPane = new AnchorPane();
+    		anchorPane = añadirListenerSeleccion(anchorPane, alojamiento);
     		
-    		// añadimos la accion que se ejecutara al clickar el panel
-    		anchorPane = añadirListenerSeleccion(anchorPane, alojamiento, fechaEntradaDate, fechaSalidaDate);
-    		
-    		int tamanoNombre;
     		// label - nombre del alojamiento
-    		Text nombreHotel = new Text(alojamiento.getNombre());
-    		nombreHotel.setFill(Paint.valueOf("#07c"));
-    		nombreHotel.setFont(new Font("arial",25));
-    		nombreHotel.setLayoutX(220);
-    		nombreHotel.setLayoutY(35);
-    		tamanoNombre=(int) ((int) nombreHotel.getBoundsInLocal().getMaxX()+220);
+    		Text nombreHotel = crearNombre(alojamiento.getNombre());
     		
-    		//Icono del hotel
-    		WebView imagen = new WebView();
-    		imagen.setLayoutX(10);
-    		imagen.setLayoutY(10);
-    		imagen.setPrefSize(200, 200);
-    		imagen.getEngine().loadContent("<img src=\"" + alojamiento.getImgurl() + "\" width=\"190\" height=\"180\" frameborder=\"0\" style=\"border:0\"></img>", "text/html");
-    		anchorPane.getChildren().add(imagen);
+    		//Icono de ubicacion
+    		WebView imagen = crearImagen(alojamiento.getImgurl());
     		
     		// Ubicacion del alojamiento
-    		FontAwesomeIconView iconoUbicacion = new FontAwesomeIconView(FontAwesomeIcon.MAP_MARKER);
-    		iconoUbicacion.setLayoutX(220);
-    		iconoUbicacion.setLayoutY(60);
-    		iconoUbicacion.setSize("20");
-    		iconoUbicacion.setFill(Paint.valueOf("#555555"));
+    		FontAwesomeIconView iconoUbicacion = crearIconoUbicacion();
+    		
     		Text ubicacion = new Text(alojamiento.getUbicacion());
     		ubicacion.setLayoutX(240);
     		ubicacion.setLayoutY(60);
     		
     		//Estrellas del hotel (Si es un hotel claro)
-	    	if(alojamiento instanceof Hotel)
-	    	{
+    		int tamanoNombre = (int) ((int) nombreHotel.getBoundsInLocal().getMaxX()+220);
+	    	if(alojamiento instanceof Hotel) {	
 		    	int coordX=tamanoNombre+10;
-	    		for(int e=0;e<((Hotel) alojamiento).getEstrellas();e++)
-		    	{
+	    		for(int e=0;e<((Hotel) alojamiento).getEstrellas();e++) {
 		    		FontAwesomeIconView iconoEstrella = new FontAwesomeIconView(FontAwesomeIcon.STAR);
 		    		iconoEstrella.setLayoutX(coordX);
 			    	iconoEstrella.setLayoutY(35);
@@ -261,19 +197,15 @@ public class ControladorSelAlojamiento implements Initializable {
 			    	anchorPane.getChildren().add(iconoEstrella);
 			    	coordX=coordX+15;
 		    	}
-	    	}
-	    	else if(alojamiento instanceof Apartamento)
-	    	{
-		    	int coordX=tamanoNombre+10;
+	    	} else if(alojamiento instanceof Apartamento) {
+		    	int coordX = tamanoNombre + 10;
 		    		FontAwesomeIconView iconoLlave = new FontAwesomeIconView(FontAwesomeIcon.KEY);
 		    		iconoLlave.setLayoutX(coordX);
 		    		iconoLlave.setLayoutY(35);
 		    		iconoLlave.setSize("15");
 		    		iconoLlave.setFill(Paint.valueOf("#555555"));
 			    	anchorPane.getChildren().add(iconoLlave);
-	    	}
-	    	else if(alojamiento instanceof Casa)
-	    	{
+	    	} else if(alojamiento instanceof Casa) {
 	    		int coordX=tamanoNombre+10;
 	    		FontAwesomeIconView iconoCasa = new FontAwesomeIconView(FontAwesomeIcon.HOME);
 	    		iconoCasa.setLayoutX(coordX);
@@ -301,7 +233,7 @@ public class ControladorSelAlojamiento implements Initializable {
     		habDisponibles.setLayoutY(115);
     		
     		// añade los componentes al anchorpane
-        	anchorPane.getChildren().addAll(nombreHotel, descripcion, habDisponibles, ubicacion, iconoUbicacion, precio);
+        	anchorPane.getChildren().addAll(nombreHotel, descripcion, habDisponibles, ubicacion, iconoUbicacion, precio, imagen);
         	
         	AnchorPane paneSuperior = new AnchorPane();
         	paneSuperior.getChildren().addAll(anchorPane);
@@ -319,15 +251,119 @@ public class ControladorSelAlojamiento implements Initializable {
     	}
 	}
 	
-	public AnchorPane añadirListenerSeleccion(AnchorPane anchorPane, Alojamiento alojamiento, Date fechaEntrada, Date fechaSalida) {
+	/**
+     * Crea y añade el grid al anchorpane 'contenedor', creado por defecto
+     * @return
+     */
+    public GridPane crearGrid() {
+    	GridPane grid = new GridPane();
+    	
+    	// hace que la columna 1 del grid ocupe todo el espacio disponible en el padre
+    	ColumnConstraints column1 = new ColumnConstraints();
+    	column1.setPercentWidth(100);
+    	grid.getColumnConstraints().add(column1);
+    	
+    	// pone el color de fondo transparente
+    	grid.setStyle("-fx-background-color: transparent;");
+    	
+    	return grid;
+    }
+    
+    /**
+     * 
+     * @param nombre
+     * @return
+     */
+    public Text crearNombre(String nombre) {
+    	Text text = new Text(nombre);
+		text.setFill(Paint.valueOf("#07c"));
+		text.setFont(new Font("arial",25));
+		text.setLayoutX(220);
+		text.setLayoutY(35);
+		return text;
+    }
+    
+    /**
+     * 
+     * @param url
+     * @return
+     */
+    public WebView crearImagen(String url) {
+    	WebView imagen = new WebView();
+		imagen.setLayoutX(10);
+		imagen.setLayoutY(10);
+		imagen.setPrefSize(200, 200);
+		imagen.getEngine().loadContent("<img src=\"" + url + "\" width=\"190\" height=\"180\" frameborder=\"0\" style=\"border:0\"></img>", "text/html");
+		return imagen;
+    }
+    
+    /**
+     * 
+     * @return
+     */
+    public FontAwesomeIconView crearIconoUbicacion() {
+    	FontAwesomeIconView iconoUbicacion = new FontAwesomeIconView(FontAwesomeIcon.MAP_MARKER);
+		iconoUbicacion.setLayoutX(220);
+		iconoUbicacion.setLayoutY(60);
+		iconoUbicacion.setSize("20");
+		iconoUbicacion.setFill(Paint.valueOf("#555555"));
+		return iconoUbicacion;
+    }
+    
+    /**
+     * 
+     * @param alojamiento
+     * @return
+     */
+    public ArrayList<Habitacion> buscarHabDisponibles(Alojamiento alojamiento) {
+    	Date fechaEntradaDate = Date.valueOf(fechaEntrada.getValue());
+		Date fechaSalidaDate = Date.valueOf(fechaSalida.getValue());
+		ArrayList<Habitacion> habitaciones = Principal.modelo.gestorBBDD.habitacionesDisponibles(alojamiento.getCodAlojamiento(), fechaEntradaDate, fechaSalidaDate);
+		return habitaciones;
+    }
+    
+    /**
+     * 
+     * @param habitaciones
+     * @return
+     */
+    public String mostrarHabitaciones(ArrayList<Habitacion> habitaciones) {
+    	String str = "";
+		str += "Habitaciones disponibles: \n";
+		for (Habitacion s : habitaciones) {
+			str += s.getNombre() + " - ";
+		    if (s.getCtaCamasSimples() > 0 ) {
+		    	str += "Cama Individual x " + s.getCtaCamasSimples() + " - ";
+		    }
+		    if (s.getCtaCamasMatrimonio() > 0 ) {
+		    	str += "Cama Matrimonio x " + s.getCtaCamasMatrimonio() + " - ";
+		    }
+		    if (s.getCtaCamasInfantil() > 0 ) {
+		    	str += "Cama Infantil x " + s.getCtaCamasInfantil() + " - ";
+		    }
+		    str += "Cantidad: " + s.getCantidad() + "\n";
+		}
+		return str;
+    }
+	
+	/**
+	 * 
+	 * @param anchorPane
+	 * @param alojamiento
+	 * @param fechaEntrada
+	 * @param fechaSalida
+	 * @return
+	 */
+	public AnchorPane añadirListenerSeleccion(AnchorPane anchorPane, Alojamiento alojamiento) {
 		anchorPane.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>(){
 			@Override
 			public void handle(Event event) {
-
+				Date fechaEntradaDate = Date.valueOf(fechaEntrada.getValue());
+				Date fechaSalidaDate = Date.valueOf(fechaSalida.getValue());
 				Principal.modelo.reserva.setAlojamiento(alojamiento);
-				Principal.modelo.reserva.setFechaEntrada(fechaEntrada);
-				Principal.modelo.reserva.setFechaSalida(fechaSalida);
-				Principal.aplicacion.CambiarScene("Pasos.fxml");
+				Principal.modelo.reserva.setFechaEntrada(fechaEntradaDate);
+				Principal.modelo.reserva.setFechaSalida(fechaSalidaDate);
+				Principal.aplicacion.CambiarScene("PaneInfo.fxml");
 			}
 		});
 		return anchorPane;

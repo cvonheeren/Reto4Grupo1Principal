@@ -7,8 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTabPane;
-import com.jfoenix.effects.JFXDepthManager;
 
 import core.Principal;
 import javafx.event.Event;
@@ -16,30 +14,29 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.web.WebView;
-import modelo.Habitacion;
 
-public class ControladorPago {
+public class ControladorPago implements Initializable {
+
+    @FXML
+    private Label precio, introducido, restante;
+
+    @FXML
+    private JFXButton sigiuente, atras;
+    
+    @FXML
+    private AnchorPane contenedor;
     
     private float[] monedasBilletes = {500, 200, 100, 50, 20, 10, 5, 2, 1, 0.50f, 0.20f, 0.10f, 0.05f, 0.02f, 0.01f };
-    private AnchorPane contenedor;
-    private Label introducido, precio, restante;
     public JFXButton[] botonesMonedasBilletes = new JFXButton[15];
     
-    public ControladorPago(AnchorPane contenedor, Label precio, Label introducido, Label restante) {
-    	this.contenedor=contenedor;
-    	this.introducido=introducido;
-    	this.precio=precio;
-    	this.restante=restante;
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
     	precio.setText(Float.toString(Principal.modelo.pago.getPrecioTotal()) + " €");
     	introducido.setText("0 €");
     	restante.setText(Float.toString(Principal.modelo.pago.getPrecioTotal()) + " €");
     	crearBotones();
-    	
     }
     
     public void crearBotones() {

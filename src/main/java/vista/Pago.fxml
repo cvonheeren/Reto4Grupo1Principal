@@ -10,166 +10,41 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1150.0" style="-fx-background-color: #1976d2;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorPago">
+<AnchorPane fx:controller="aplicacion.ControladorPago" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1150.0" style="-fx-background-color: #1976d2;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane fx:id="paneBase" layoutY="136.0" prefHeight="764.0" prefWidth="1150.0" style="-fx-background-color: #fff;">
          <children>
-            <Pane fx:id="tabInfo" prefHeight="664.0" prefWidth="1150.0">
-               <children>
-                  <Separator layoutX="53.0" layoutY="101.0" prefHeight="2.0" prefWidth="1000.0" style="-fx-background-color: #f57c00;">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </Separator>
-                  <Label layoutX="60.0" layoutY="62.0" text="DATOS DE LA RESERVA" textFill="#222222">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="60.0" layoutY="133.0" text="Código alojamiento:">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="cod" layoutX="229.0" layoutY="133.0" prefHeight="25.0" prefWidth="133.0">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="59.0" layoutY="170.0" text="Tipo de alojamiento:">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="tipo" layoutX="229.0" layoutY="170.0" prefHeight="25.0" prefWidth="133.0">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="56.0" layoutY="201.0" text="Nombre alojamiento:">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="53.0" layoutY="274.0" text="Fecha de entrada:">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="nombre" layoutX="229.0" layoutY="201.0" prefHeight="25.0" prefWidth="133.0">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="fechaEntrada" layoutX="229.0" layoutY="274.0" prefHeight="25.0" prefWidth="133.0">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="53.0" layoutY="312.0" text="Fecha de salida:">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="fechaSalida" layoutX="229.0" layoutY="312.0" prefHeight="25.0" prefWidth="133.0">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="575.0" layoutY="133.0" text="Adultos:">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="56.0" layoutY="239.0" text="Niños:">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="53.0" layoutY="350.0" text="Habitaciones:">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="575.0" layoutY="170.0" text="Precio:">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="adultos" layoutX="658.0" layoutY="133.0" prefHeight="25.0" prefWidth="111.0">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="ninos" layoutX="658.0" layoutY="170.0" prefHeight="25.0" prefWidth="111.0">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="habitaciones" layoutX="53.0" layoutY="387.0" prefHeight="25.0" prefWidth="125.0">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="precio1" layoutX="658.0" layoutY="170.0" prefHeight="25.0" prefWidth="111.0">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <WebView fx:id="mapa" layoutX="714.0" layoutY="337.0" prefHeight="276.0" prefWidth="384.0" />
-               </children>
-            </Pane>
-            <Pane fx:id="tabPago" prefHeight="664.0" prefWidth="1150.0">
-               <children>
-                  <Label layoutX="60.0" layoutY="205.0" text="Restante">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="60.0" layoutY="167.0" text="Introducido">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="60.0" layoutY="128.0" text="Precio">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="precio" layoutX="247.0" layoutY="128.0" prefHeight="25.0" prefWidth="95.0">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="introducido" layoutX="255.0" layoutY="167.0" prefHeight="25.0" prefWidth="111.0">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="restante" layoutX="255.0" layoutY="205.0" prefHeight="25.0" prefWidth="125.0">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <AnchorPane fx:id="contenedor" prefHeight="664.0" prefWidth="20.0" />
-               </children>
-            </Pane>
-            <JFXButton fx:id="sigiuente" layoutX="931.0" layoutY="683.0" onMouseClicked="#siguiente" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="PAGAR" textFill="WHITE">
-               <font>
-                  <Font size="16.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
-            <JFXButton fx:id="atras" layoutX="36.0" layoutY="683.0" onMouseClicked="#atras" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="ATRAS" textFill="WHITE">
-               <font>
-                  <Font size="16.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
+			<Label layoutX="60.0" layoutY="205.0" text="Restante">
+			   <font>
+			      <Font size="16.0" />
+			   </font>
+			</Label>
+			<Label layoutX="60.0" layoutY="167.0" text="Introducido">
+			   <font>
+			      <Font size="16.0" />
+			   </font>
+			</Label>
+			<Label layoutX="60.0" layoutY="128.0" text="Precio">
+			   <font>
+			      <Font size="16.0" />
+			   </font>
+			</Label>
+			<Label fx:id="precio" layoutX="247.0" layoutY="128.0" prefHeight="25.0" prefWidth="95.0">
+			   <font>
+			      <Font size="16.0" />
+			   </font>
+			</Label>
+			<Label fx:id="introducido" layoutX="255.0" layoutY="167.0" prefHeight="25.0" prefWidth="111.0">
+			   <font>
+			      <Font size="16.0" />
+			   </font>
+			</Label>
+			<Label fx:id="restante" layoutX="255.0" layoutY="205.0" prefHeight="25.0" prefWidth="125.0">
+			   <font>
+			      <Font size="16.0" />
+			   </font>
+			</Label>
+			<AnchorPane fx:id="contenedor" prefHeight="664.0" prefWidth="20.0" />
          </children>
       </Pane>
    </children>

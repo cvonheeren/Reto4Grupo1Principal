@@ -16,131 +16,23 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane fx:id="anchorPaneBase" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1050.0" styleClass="fondo" stylesheets="@../reto4.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorPasos">
+<AnchorPane fx:id="anchorPaneBase" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1150.0" styleClass="fondo" stylesheets="@../reto4.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorPasos">
    <children>
-      <Pane layoutX="1.0" layoutY="133.0" prefHeight="655.0" prefWidth="1050.0">
+      <Pane layoutX="1.0" layoutY="133.0" prefHeight="655.0" prefWidth="1150.0">
          <children>
-            <JFXTabPane fx:id="tabPane" prefHeight="655.0" prefWidth="1050.0" style="-fx-background-color: white;">
+            <JFXTabPane fx:id="tabPane" prefHeight="655.0" prefWidth="1150.0" style="-fx-background-color: #fff;">
                <tabs>
-                  <Tab fx:id="idTabInfo" text="Informacion">
-                    <content>
-                      <AnchorPane fx:id="paneInfo">
-                           <children>
-                              <WebView fx:id="img" layoutX="24.0" layoutY="37.0" prefHeight="350.0" prefWidth="450.0" />
-                              <Text fx:id="nombAloj" layoutX="525.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" wrappingWidth="269.13671875" />
-                              <TextArea fx:id="descAloj" layoutX="525.0" layoutY="132.0" prefHeight="215.0" prefWidth="459.0" text="Descripcion" />
-                              <WebView fx:id="mapa" layoutX="41.0" layoutY="404.0" prefHeight="200.0" prefWidth="400.0" />
-                           </children>
-                        </AnchorPane>
-                    </content>
-                  </Tab>
                   <Tab fx:id="idTabHab" closable="false" text="Seleccione Habitacion">
-                    <content>
-                      <AnchorPane fx:id="paneHabitacion" />
-                    </content>
+                  	<fx:include fx:id="SeleccionHabitacion" source="SeleccionHabitacion.fxml"/>
                   </Tab>
                   <Tab fx:id="idTabServ" closable="false" disable="true" text="Seleccione Servicios">
-                    <content>
-                      <AnchorPane fx:id="paneServ" />
-                    </content>
-                  </Tab>
-                  <Tab fx:id="idTabLogin" closable="false" text="Iniciar Sesion">
-                    <content>
-                      <AnchorPane fx:id="paneLogin">
-                           <children>
-                              <AnchorPane layoutX="34.0" layoutY="42.0" prefHeight="480.0" prefWidth="398.0" style="-fx-background-color: #dddddd;">
-                                 <children>
-                                    <Label layoutX="14.0" layoutY="14.0" text="¿No estás registrado?">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <JFXButton fx:id="btnReg" layoutX="113.0" layoutY="402.0" onMouseClicked="#registrarse" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="REGISTRARSE" textFill="WHITE">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                    </JFXButton>
-                                    <JFXTextField fx:id="textFieldDNIReg" focusColor="#f57c00" layoutX="43.0" layoutY="50.0" prefHeight="40.0" prefWidth="300.0" promptText="DNI" unFocusColor="#1976d2">
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                    </JFXTextField>
-                                    <JFXTextField fx:id="textFieldNombreReg" focusColor="#f57c00" layoutX="43.0" layoutY="91.0" prefHeight="40.0" prefWidth="300.0" promptText="NOMBRE" unFocusColor="#1976d2">
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                    </JFXTextField>
-                                    <JFXTextField fx:id="textFieldApellidoReg" focusColor="#f57c00" layoutX="43.0" layoutY="140.0" prefHeight="40.0" prefWidth="300.0" promptText="APELLIDO" unFocusColor="#1976d2">
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                    </JFXTextField>
-                                    <JFXPasswordField fx:id="contrasenaReg" focusColor="#f57c00" layoutX="43.0" layoutY="188.0" prefHeight="40.0" prefWidth="300.0" promptText="CONTRASEÑA" unFocusColor="#1976d2" />
-                                    <JFXPasswordField fx:id="contrasenaRegRep" focusColor="#f57c00" layoutX="43.0" layoutY="228.0" prefHeight="40.0" prefWidth="300.0" promptText="REPITA CONTRASEÑA" unFocusColor="#1976d2" />
-                                    <JFXTextField fx:id="textFieldMailReg" focusColor="#f57c00" layoutX="43.0" layoutY="278.0" prefHeight="40.0" prefWidth="300.0" promptText="MAIL" unFocusColor="#1976d2">
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                    </JFXTextField>
-                                    <JFXDatePicker fx:id="fechaNacReg" defaultColor="#1976d2" layoutX="43.0" layoutY="344.0" prefHeight="40.0" prefWidth="300.0" />
-                                 </children>
-                              </AnchorPane>
-                              <Label fx:id="textoAviso" layoutX="441.0" layoutY="63.0" opacity="0.0" text="DNI y/o contraseña incorrectos." />
-                              <JFXTextField fx:id="textFieldDNI" focusColor="#f57c00" layoutX="638.0" layoutY="142.0" prefHeight="40.0" prefWidth="300.0" promptText="DNI" text="12345678A" unFocusColor="#1976d2">
-                                 <opaqueInsets>
-                                    <Insets />
-                                 </opaqueInsets>
-                              </JFXTextField>
-                              <JFXPasswordField fx:id="contrasena" focusColor="#f57c00" layoutX="638.0" layoutY="200.0" prefHeight="40.0" prefWidth="300.0" promptText="CONTRASEÑA" text="1234" unFocusColor="#1976d2" />
-                              <Label fx:id="labelError" layoutX="92.0" layoutY="487.0" opacity="0.0" prefHeight="17.0" prefWidth="219.0" text="Error en los datos" textAlignment="CENTER" textFill="RED" />
-                           </children></AnchorPane>
-                    </content>
+
                   </Tab>
                   <Tab fx:id="idTabPago" closable="false" text="Pago">
-                    <content>
-                      <AnchorPane fx:id="panePago">
-                           <children>
-                              <Label layoutX="96.0" layoutY="239.0" text="Restante">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="70.0" layoutY="202.0" text="Introducido">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="111.0" layoutY="165.0" text="Precio">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="lblPrecio" layoutX="173.0" layoutY="165.0" prefHeight="25.0" prefWidth="95.0">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="lblIntroducido" layoutX="165.0" layoutY="202.0" prefHeight="25.0" prefWidth="111.0">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="lblRestante" layoutX="173.0" layoutY="239.0" prefHeight="25.0" prefWidth="125.0">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <AnchorPane fx:id="contenedorPago" prefHeight="664.0" prefWidth="20.0" />
-                           </children></AnchorPane>
-                    </content>
+					<fx:include fx:id="Pago" source="Pago.fxml"/>
                   </Tab>
                   <Tab fx:id="idTabFin" closable="false" text="Disfrute">
-                    <content>
-                      <AnchorPane fx:id="paneFinal" />
-                    </content>
+					<fx:include fx:id="Factura" source="Factura.fxml"/>
                   </Tab>
                </tabs>
             </JFXTabPane>
@@ -167,7 +59,7 @@
             <Font size="36.0" />
          </font>
       </Text>
-      <JFXButton fx:id="btnInformacion" layoutX="312.0" layoutY="823.0" onAction="#Informacion" prefHeight="50.0" prefWidth="151.0" style="-fx-background-color: #f57c00;" text="INFORMACION" textFill="WHITE">
+      <JFXButton fx:id="btnInformacion" layoutX="312.0" layoutY="823.0" onAction="#informacion" prefHeight="50.0" prefWidth="151.0" style="-fx-background-color: #f57c00;" text="INFORMACION" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
@@ -176,6 +68,14 @@
          </cursor>
       </JFXButton>
       <JFXButton fx:id="btnCancelar" layoutX="13.0" layoutY="823.0" onAction="#cancelar" prefHeight="50.0" prefWidth="119.0" style="-fx-background-color: #ff4444;" text="X CANCELAR" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btnLogin" layoutX="947.0" layoutY="61.0" onAction="#login" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="INICIAR SESION" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>

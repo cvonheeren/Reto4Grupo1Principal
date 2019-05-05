@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.web.WebView?>
+
+<AnchorPane prefHeight="900.0" prefWidth="1150.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorInformacionAloj">
+   <children>
+		<ImageView fx:id="img" fitHeight="241.0" fitWidth="428.0" layoutX="77.0" layoutY="174.0" pickOnBounds="true" preserveRatio="true" />
+      	<Text fx:id="nombAloj" layoutX="588.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" wrappingWidth="269.13671875" />
+      	<Label fx:id="descAloj" layoutX="588.0" layoutY="206.0" prefHeight="200.0" prefWidth="378.0" text="Descripcion" />
+      	<WebView fx:id="mapa" layoutX="588.0" layoutY="425.0" prefHeight="281.0" prefWidth="399.0" />
+      	<JFXButton fx:id="atras" layoutX="77.0" layoutY="800.0" onAction="#atras" onMouseClicked="#atras" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="ATRAS" textFill="WHITE">
+         	<font>
+            	<Font size="16.0" />
+         	</font>
+	         <cursor>
+	            <Cursor fx:constant="HAND" />
+	         </cursor>
+		</JFXButton>
+	    <JFXButton fx:id="reservar" layoutX="907.0" layoutY="793.0" onAction="#reservar" onMouseClicked="#atras" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="RESERVAR" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Label fx:id="habitaciones" layoutX="90.0" layoutY="525.0" prefHeight="200.0" prefWidth="378.0" text="Habitaciones" />
+   </children>
+</AnchorPane>
