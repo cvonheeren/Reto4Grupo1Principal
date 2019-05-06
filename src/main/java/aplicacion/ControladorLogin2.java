@@ -11,6 +11,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.effects.JFXDepthManager;
+import com.sun.media.jfxmediaimpl.platform.Platform;
 
 import core.Principal;
 import javafx.event.ActionEvent;
@@ -63,14 +65,18 @@ public class ControladorLogin2 implements Initializable {
     @FXML
     private JFXButton btnVolver;
     
+    @FXML
+    private AnchorPane paneReg;
+    
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		//JFXDepthManager.setDepth(paneReg, 2);
 		limitarFecha();
 	}
     
     @FXML
     void volver(ActionEvent event) {
-    	Principal.aplicacion.CambiarScene("Pasos.fxml");
+    	Principal.aplicacion.stageLogin.close();
     }
 
     @FXML
@@ -80,7 +86,10 @@ public class ControladorLogin2 implements Initializable {
 			String pass = contrasena.getText();
 			if(Principal.modelo.gestorBBDD.comprobarCliente(dni, pass)) {
 				Principal.modelo.cliente = new Cliente(dni, pass);
-				Principal.aplicacion.CambiarScene("Pasos.fxml");
+				try {Principal.aplicacion.controladorPasos.SesionIniciada();}catch(Exception e) {}
+				try {Principal.aplicacion.controladorSelAlojamiento.SesionIniciada();}catch(Exception e) {}
+				
+				Principal.aplicacion.stageLogin.close();
 				//Principal.aplicacion.mostrarMensaje(paneLogin, "Usuario logeado correctamente");
 			} else {
 				Principal.aplicacion.mostrarMensaje(paneLogin, "DNI y/o contraseña incorrectos.");

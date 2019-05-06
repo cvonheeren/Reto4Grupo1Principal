@@ -10,14 +10,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="paneLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1150.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorLogin2">
+<AnchorPane fx:id="paneLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="702.0" prefWidth="906.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorLogin2">
 	<children>
-		<Label layoutX="732.0" layoutY="183.0" text="¿No estás registrado?">
+      <AnchorPane layoutX="-6.0" layoutY="554.0" prefHeight="152.0" prefWidth="915.0" style="-fx-background-color: #1976d2;" />
+		<Label layoutX="582.0" layoutY="87.0" text="¿No estás registrado?">
 	 		<font>
 	    		<Font size="16.0" />
 	 		</font>
 		</Label>
-		<AnchorPane layoutX="609.0" layoutY="240.0" prefHeight="522.0" prefWidth="398.0" style="-fx-background-color: #dddddd;">
+		<AnchorPane layoutX="459.0" layoutY="132.0" prefHeight="522.0" prefWidth="398.0" style="-fx-background-color: #dddddd;">
 	       	<children>
 				<JFXButton fx:id="btnReg" layoutX="110.0" layoutY="448.0" onAction="#registrarse" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="REGISTRARSE" textFill="WHITE">
 			 		<font>
@@ -52,7 +53,7 @@
 				<JFXDatePicker fx:id="fechaNacReg" defaultColor="#1976d2" layoutX="40.0" layoutY="380.0" prefHeight="40.0" prefWidth="300.0" />
 			</children>
 		</AnchorPane>
-		<AnchorPane layoutX="156.0" layoutY="240.0" prefHeight="222.0" prefWidth="316.0" style="-fx-background-color: #fff;">
+		<AnchorPane layoutX="67.0" layoutY="87.0" prefHeight="222.0" prefWidth="316.0" style="-fx-background-color: #fff;">
 	       	<children>
       				<JFXTextField fx:id="textFieldDNI" focusColor="#f57c00" layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="300.0" promptText="DNI" text="12345678A" unFocusColor="#1976d2">
       				   <opaqueInsets>
@@ -70,7 +71,7 @@
 				</JFXButton>
       		</children>
 		</AnchorPane>
-      <JFXButton fx:id="btnVolver" layoutX="66.0" layoutY="796.0" onAction="#volver" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="VOLVER" textFill="WHITE">
+      <JFXButton fx:id="btnVolver" layoutX="145.0" layoutY="575.0" onAction="#volver" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="VOLVER" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
