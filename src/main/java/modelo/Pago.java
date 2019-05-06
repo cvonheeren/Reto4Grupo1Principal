@@ -2,6 +2,8 @@ package modelo;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -140,17 +142,57 @@ public class Pago {
 		return num;
 	}
 	
+	/**
+	 * 
+	 * @param alojamiento
+	 * @param fechaEntrada
+	 * @param fechaSalida
+	 * @param habReservadas
+	 * @return
+	 */
 	public float calcularPrecio(Alojamiento alojamiento, Date fechaEntrada, Date fechaSalida, ArrayList<Habitacion> habReservadas) {
 		// tarifa alojamiento x nº de noches x nº de habitaciones
 		float tarifa = alojamiento.getTarifaNormal();
 		float numNoches = diferenciaDias(fechaEntrada, fechaSalida);
 		int numHabitaciones = 0;
+		float contadorRecargo = 0;
+		
+		Calendar fecha1 = new GregorianCalendar();
+        fecha1.setTime(fechaEntrada);
+        Calendar fecha2 = new GregorianCalendar();
+        fecha2.setTime(fechaSalida);
+        Calendar fechaAux = new GregorianCalendar();
+        
+        ArrayList<Calendar> lista = new  ArrayList<Calendar>();
+        
+        for (int i = 0; i < fecha1.compareTo(fecha2); i++) {
+        	fechaAux = Calendar.getInstance();
+        	fechaAux.setTime(fechaEntrada);
+        	fechaAux.add(Calendar.DATE, i);
+        	lista.add(fechaAux);
+		}
+        
+        GestorDeFechas gestorF = new GestorDeFechas();
+        
+        for (int i = 0; i < lista.size(); i++) {
+			if(gestorF.comprobarSiEsVerano(lista.get(i)))
+				contadorRecargo = contadorRecargo + (tarifa * 1.2f);
+			if(gestorF.tipoDeFecha(lista.get(i)))
+				contadorRecargo = contadorRecargo + (tarifa * 1.2f);
+		}
+		
 		for (Habitacion h: habReservadas) {
 			numHabitaciones += h.getCantidad();
 		}
-		return tarifa * numNoches * numHabitaciones;
+		return (tarifa * numNoches * numHabitaciones) + contadorRecargo;
 	}
 	
+	/**
+	 * 
+	 * @param d1
+	 * @param d2
+	 * @return
+	 */
 	public float diferenciaDias(Date d1, Date d2) {
 	    long diff = d2.getTime() - d1.getTime();
 	    return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
