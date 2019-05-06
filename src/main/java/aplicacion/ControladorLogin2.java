@@ -70,7 +70,7 @@ public class ControladorLogin2 implements Initializable {
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		//JFXDepthManager.setDepth(paneReg, 2);
+		JFXDepthManager.setDepth(paneReg, 2);
 		limitarFecha();
 	}
     
@@ -99,6 +99,7 @@ public class ControladorLogin2 implements Initializable {
 
     @FXML
     void registrarse(ActionEvent event) {
+    	
     	if (validarDatosRegistro()) {
     		int codCliente = Principal.modelo.gestorBBDD.insertarCliente(textFieldDNIReg.getText(), contrasenaReg.getText(), textFieldNombreReg.getText(), textFieldApellidoReg.getText(), Date.valueOf(fechaNacReg.getValue()), textFieldMailReg.getText());
     		if (codCliente != -1) {
