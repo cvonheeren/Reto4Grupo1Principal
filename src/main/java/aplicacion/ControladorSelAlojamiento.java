@@ -79,6 +79,9 @@ public class ControladorSelAlojamiento implements Initializable {
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	
+    	if(Principal.modelo.cliente!=null)
+    		SesionIniciada();
+    	
     	JFXDepthManager.setDepth(paneFiltros, 2);
     	JFXDepthManager.setDepth(paneBusqueda, 1);
 
@@ -186,11 +189,11 @@ public class ControladorSelAlojamiento implements Initializable {
     	for(int i=0; i<alojamientos.size(); i++) {
     		
     		Alojamiento alojamiento = alojamientos.get(i);
-    		ArrayList<Habitacion> habitaciones = buscarHabDisponibles(alojamiento);
-    		String str = mostrarHabitaciones(habitaciones);
+    		
     		
     		AnchorPane anchorPane = new AnchorPane();
     		anchorPane = añadirListenerSeleccion(anchorPane, alojamiento);
+    		
     		
     		// label - nombre del alojamiento
     		Text nombreHotel = crearNombre(alojamiento.getNombre());
@@ -205,7 +208,6 @@ public class ControladorSelAlojamiento implements Initializable {
     		ubicacion.setLayoutX(240);
     		ubicacion.setLayoutY(60);
     		
-    		//Estrellas del hotel (Si es un hotel claro)
     		int tamanoNombre = (int) ((int) nombreHotel.getBoundsInLocal().getMaxX()+220);
 	    	if(alojamiento instanceof Hotel) {	
 		    	int coordX=tamanoNombre+10;
@@ -218,6 +220,18 @@ public class ControladorSelAlojamiento implements Initializable {
 			    	anchorPane.getChildren().add(iconoEstrella);
 			    	coordX=coordX+15;
 		    	}
+	    		
+	    		ArrayList<Habitacion> habitaciones = buscarHabDisponibles(alojamiento);
+        		String str = mostrarHabitaciones(habitaciones);
+        		
+        		// label - habitaciones disponibles
+        		Text habDisponibles = new Text(str);
+        		habDisponibles.setLayoutX(220);
+        		habDisponibles.setLayoutY(155);
+        		habDisponibles.maxWidth(50);
+        		anchorPane.getChildren().add(habDisponibles);
+	    		
+	    		
 	    	} else if(alojamiento instanceof Apartamento) {
 		    	int coordX = tamanoNombre + 10;
 		    		FontAwesomeIconView iconoLlave = new FontAwesomeIconView(FontAwesomeIcon.KEY);
@@ -237,24 +251,22 @@ public class ControladorSelAlojamiento implements Initializable {
 	    	}
     		
     		// precio
-    		Text precio = new Text("desde\n" + alojamiento.getTarifaNormal() + "€");
+    		Text precio = new Text("Desde\n" + alojamiento.getTarifaNormal() + "€");
     		precio.setLayoutX(675);
-    		precio.setLayoutY(80);
+    		precio.setLayoutY(180);
     		precio.setStyle("-fx-font: 20 arial;");
     		precio.setFill(Paint.valueOf("#0ab21b"));
     		
     		// label - descripcion del alojamiento
-    		Text descripcion = new Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. ");
+    		Label descripcion = new Label(alojamiento.getDescripcion());
     		descripcion.setLayoutX(220);
     		descripcion.setLayoutY(85);
-    		
-    		// label - habitaciones disponibles
-    		Text habDisponibles = new Text(str);
-    		habDisponibles.setLayoutX(220);
-    		habDisponibles.setLayoutY(115);
+    		descripcion.setPrefWidth(500);
+    		descripcion.setPrefHeight(50);
+    		descripcion.setWrapText(true);
     		
     		// añade los componentes al anchorpane
-        	anchorPane.getChildren().addAll(nombreHotel, descripcion, habDisponibles, ubicacion, iconoUbicacion, precio, imagen);
+        	anchorPane.getChildren().addAll(nombreHotel, descripcion, ubicacion, iconoUbicacion, precio, imagen);
         	
         	AnchorPane paneSuperior = new AnchorPane();
         	paneSuperior.getChildren().addAll(anchorPane);
