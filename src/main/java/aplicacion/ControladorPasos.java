@@ -97,6 +97,7 @@ public class ControladorPasos implements Initializable {
 				if(!(Principal.modelo.cliente==null)) {
 					tabPane.getSelectionModel().select(idTabPago);
 				} else {
+					Principal.aplicacion.controladorPasos=this;
 					Principal.aplicacion.CargarSceneLogin();
 				}
 				break;
