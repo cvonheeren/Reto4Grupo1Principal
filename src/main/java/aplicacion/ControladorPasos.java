@@ -1,6 +1,8 @@
 package aplicacion;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -11,11 +13,12 @@ import com.jfoenix.controls.JFXTabPane;
 import core.Principal;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
 import modelo.Habitacion;
 import modelo.Hotel;
 
-public class ControladorPasos {
+public class ControladorPasos implements Initializable {
 	
 	@FXML
     private JFXTabPane tabPane;
@@ -25,6 +28,16 @@ public class ControladorPasos {
 	
 	@FXML
     private JFXButton btnLogin, btnSiguiente, btnAtras, btnInformacion, btnCancelar;
+	
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		if(Principal.modelo.reserva.getAlojamiento() instanceof Hotel) {
+			tabPane.getSelectionModel().select(idTabHab);
+		} else {
+			tabPane.getSelectionModel().select(idTabServ);
+			tabPane.getTabs().remove(idTabHab);
+		}
+	}
 	
 	@FXML
     void login(ActionEvent event) {
@@ -43,14 +56,7 @@ public class ControladorPasos {
 
     @FXML
     void siguiente(ActionEvent event) {
-		switch(tabPane.getSelectionModel().getSelectedItem().getId()) {
-			case "idTabInfo":
-				if(Principal.modelo.reserva.getAlojamiento() instanceof Hotel) {
-					tabPane.getSelectionModel().select(idTabHab);
-				} else {
-					tabPane.getSelectionModel().select(idTabServ);
-				}
-				break;	
+		switch(tabPane.getSelectionModel().getSelectedItem().getId()) {	
 				
 			case "idTabHab":
 				if(comprobarHabitacionSeleccionada())
