@@ -86,6 +86,18 @@ public class Aplicacion {
 		}
 	}
 	
+	public void verMapa(String FXMLLink) {
+		Parent FXML = loadFXML(FXMLLink);
+		if (FXML != null) {
+			Stage stage = new Stage();
+			Scene scene = new Scene(FXML);
+			scene.getStylesheets().add("reto4.css");
+			stage.setTitle("Mapa");
+			stage.setScene(scene);
+			stage.show();
+		}
+	}
+
 	public void CargarSceneLogin()
 	{
 		Parent FXML = loadFXML("Login2.fxml");

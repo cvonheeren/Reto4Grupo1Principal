@@ -1,6 +1,6 @@
 package modelo;
 
-
+import java.util.ArrayList;
 
 public class Alojamiento {
 
@@ -17,6 +17,7 @@ public class Alojamiento {
 	protected float mediaPension;
 	protected float pensionCompleta;
 	protected String imgurl;
+	private ArrayList<Habitacion> habitaciones = null;
 	
 	/**
 	 * Objeto padre Alojamiento
@@ -151,8 +152,6 @@ public class Alojamiento {
 		this.pensionCompleta = pensionCompleta;
 	}
 	
-	
-
 	public String getImgurl() {
 		return imgurl;
 	}
@@ -160,10 +159,17 @@ public class Alojamiento {
 	public void setImgurl(String imgurl) {
 		this.imgurl = imgurl;
 	}
+	
+	public ArrayList<Habitacion> getHabitaciones() {
+		return habitaciones;
+	}
+
+	public void setHabitaciones(ArrayList<Habitacion> habitaciones) {
+		this.habitaciones = habitaciones;
+	}
 
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return nombre + " (" + ubicacion + ")";
 	}
 }

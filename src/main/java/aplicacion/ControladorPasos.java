@@ -76,7 +76,7 @@ public class ControladorPasos implements Initializable {
 	
 	@FXML
     void cancelar(ActionEvent event) {
-    	Principal.iniciarPrograma();
+    	Principal.aplicacion.CambiarScene("SeleccionAlojamiento.fxml");
     }
 
     @FXML
