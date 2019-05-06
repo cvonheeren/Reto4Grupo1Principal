@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Tab;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -26,6 +27,7 @@ import javafx.stage.WindowEvent;
 public class Aplicacion {
 
 	public Stage stage;
+	public Stage stageLogin;
 	private JFXSnackbar snackbar;
 	
 	@FXML
@@ -70,6 +72,19 @@ public class Aplicacion {
 			stage.setTitle("FXML Welcome");
 			stage.setScene(scene);
 			stage.show();
+		}
+	}
+	
+	public void CargarSceneLogin()
+	{
+		Parent FXML = loadFXML("Login2.fxml");
+		if (FXML != null) {
+			Scene scene = new Scene(FXML);
+			scene.getStylesheets().add("reto4.css");
+			stageLogin = new Stage();
+			stageLogin.setTitle("FXML Welcome");
+			stageLogin.setScene(scene);
+			stageLogin.show();
 		}
 	}
 	

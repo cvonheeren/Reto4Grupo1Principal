@@ -61,7 +61,7 @@ public class ControladorPasos {
 				if(!(Principal.modelo.cliente==null)) {
 					tabPane.getSelectionModel().select(idTabPago);
 				} else {
-					Principal.aplicacion.CambiarScene("Login2.fxml");
+					Principal.aplicacion.CargarSceneLogin();
 				}
 				break;
 				

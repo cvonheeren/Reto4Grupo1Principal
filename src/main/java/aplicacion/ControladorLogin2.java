@@ -11,6 +11,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.sun.media.jfxmediaimpl.platform.Platform;
 
 import core.Principal;
 import javafx.event.ActionEvent;
@@ -80,7 +81,7 @@ public class ControladorLogin2 implements Initializable {
 			String pass = contrasena.getText();
 			if(Principal.modelo.gestorBBDD.comprobarCliente(dni, pass)) {
 				Principal.modelo.cliente = new Cliente(dni, pass);
-				Principal.aplicacion.CambiarScene("Pasos.fxml");
+				Principal.aplicacion.stageLogin.close();
 				//Principal.aplicacion.mostrarMensaje(paneLogin, "Usuario logeado correctamente");
 			} else {
 				Principal.aplicacion.mostrarMensaje(paneLogin, "DNI y/o contraseña incorrectos.");
