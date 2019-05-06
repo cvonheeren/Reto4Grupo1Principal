@@ -3,6 +3,8 @@ package modelo;
 import java.sql.Date;
 import java.util.ArrayList;
 
+
+
 public class Reserva {
 
 	private int codReserva;
@@ -129,5 +131,6 @@ public class Reserva {
 	public void setCtdHabitaciones(int ctdHabitaciones) {
 		this.ctdHabitaciones = ctdHabitaciones;
 	}
+	
 	
 }

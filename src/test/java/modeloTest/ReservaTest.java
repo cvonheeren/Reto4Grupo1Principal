@@ -2,7 +2,9 @@ package modeloTest;
 
 import static org.junit.Assert.*;
 
+
 import java.util.ArrayList;
+
 
 import org.junit.Test;
 
@@ -34,6 +36,7 @@ public class ReservaTest {
 		assertEquals(habitacionesReservadas, reserva2.getHabitacionesReservadas());
 	}
 
+	
 	@Test
 	public void testReserva() {
 		reserva.setCodReserva(1);

@@ -11,26 +11,47 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
 
 import core.Principal;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
+import javafx.scene.input.MouseEvent;
 import modelo.Habitacion;
 import modelo.Hotel;
 
 public class ControladorPasos implements Initializable {
 	
 	@FXML
-    private JFXTabPane tabPane;
+    public JFXTabPane tabPane;
 	
 	@FXML
-    private Tab idTabInfo, idTabHab, idTabServ, idTabPago, idTabFin;
+    public Tab idTabInfo, idTabHab, idTabServ, idTabPago, idTabFin;
+	
+	@FXML
+	public Hyperlink lblSesion;
+	
+	@FXML
+	public Label lblSaludo;
+	
+    @FXML
+    private FontAwesomeIconView iconInfo;
+	
 	
 	@FXML
     private JFXButton btnLogin, btnSiguiente, btnAtras, btnInformacion, btnCancelar;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		if(Principal.modelo.cliente!=null)
+		{
+			SesionIniciada();
+		}
+		
 		if(Principal.modelo.reserva.getAlojamiento() instanceof Hotel) {
 			tabPane.getSelectionModel().select(idTabHab);
 		} else {
@@ -40,13 +61,22 @@ public class ControladorPasos implements Initializable {
 	}
 	
 	@FXML
-    void login(ActionEvent event) {
-		Principal.aplicacion.CambiarScene("Login2.fxml");
+    void IniciarCerrar(ActionEvent event) {
+		Principal.aplicacion.controladorPasos=this;
+		if(Principal.modelo.cliente==null)
+		{
+			Principal.aplicacion.CargarSceneLogin();
+		}
+		else
+		{
+			Principal.iniciarPrograma();
+		}
+		
     }
 	
 	@FXML
     void cancelar(ActionEvent event) {
-    	Principal.iniciarPrograma();
+    	Principal.aplicacion.CambiarScene("SeleccionAlojamiento.fxml");
     }
 
     @FXML
@@ -67,7 +97,8 @@ public class ControladorPasos implements Initializable {
 				if(!(Principal.modelo.cliente==null)) {
 					tabPane.getSelectionModel().select(idTabPago);
 				} else {
-					Principal.aplicacion.CambiarScene("Login2.fxml");
+					Principal.aplicacion.controladorPasos=this;
+					Principal.aplicacion.CargarSceneLogin();
 				}
 				break;
 				
@@ -86,6 +117,12 @@ public class ControladorPasos implements Initializable {
     	if(tabPane.getSelectionModel().getSelectedIndex()>0) {
         	tabPane.getSelectionModel().select(tabPane.getSelectionModel().getSelectedIndex()-1);
     	}
+    }
+    
+    @FXML
+    void mostrarInfo(MouseEvent event)
+    {
+    	Principal.aplicacion.CargarpopupInfo(iconInfo.localToScreen(iconInfo.getBoundsInLocal()));
     }
     
     public boolean comprobarHabitacionSeleccionada() {
@@ -107,6 +144,18 @@ public class ControladorPasos implements Initializable {
 			}
 		}
 		return sigTab;
+	}
+    
+    public void SelecionarTab(Tab tab)
+    {
+    	tabPane.getSelectionModel().select(tab);
+    }
+
+	public void SesionIniciada() {
+
+		lblSaludo.setText("Hola, " + Principal.modelo.cliente.getDni());
+		lblSesion.setText("Cerrar Sesion");
+			
 	}
 
 }

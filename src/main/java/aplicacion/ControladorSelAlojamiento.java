@@ -28,6 +28,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -69,8 +70,17 @@ public class ControladorSelAlojamiento implements Initializable {
     @FXML
     private Pane paneFiltros;
     
+    @FXML
+    private Label lblSaludo;
+
+    @FXML
+    private Hyperlink lblSesion;
+    
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+    	
+    	if(Principal.modelo.cliente!=null)
+    		SesionIniciada();
     	
     	JFXDepthManager.setDepth(paneFiltros, 2);
     	JFXDepthManager.setDepth(paneBusqueda, 1);
@@ -103,6 +113,19 @@ public class ControladorSelAlojamiento implements Initializable {
     @FXML
     void BtnBuscarPulsado(MouseEvent event) {
     	ejecutarBusqueda();
+    }
+    
+    @FXML
+    void IniciarCerrar(ActionEvent event) {
+    	Principal.aplicacion.controladorSelAlojamiento=this;
+    	if(Principal.modelo.cliente==null)
+		{
+			Principal.aplicacion.CargarSceneLogin();
+		}
+		else
+		{
+			Principal.iniciarPrograma();
+		}
     }
     
     /**
@@ -166,12 +189,10 @@ public class ControladorSelAlojamiento implements Initializable {
     	for(int i=0; i<alojamientos.size(); i++) {
     		
     		Alojamiento alojamiento = alojamientos.get(i);
-    		ArrayList<Habitacion> habitaciones = buscarHabDisponibles(alojamiento);
-    		alojamiento.setHabitaciones(habitaciones);
-    		String str = mostrarHabitaciones(habitaciones);
     		
     		AnchorPane anchorPane = new AnchorPane();
     		anchorPane = añadirListenerSeleccion(anchorPane, alojamiento);
+    		
     		
     		// label - nombre del alojamiento
     		Text nombreHotel = crearNombre(alojamiento.getNombre());
@@ -207,6 +228,19 @@ public class ControladorSelAlojamiento implements Initializable {
 			    	anchorPane.getChildren().add(iconoEstrella);
 			    	coordX=coordX+15;
 		    	}
+	    		
+	    		ArrayList<Habitacion> habitaciones = buscarHabDisponibles(alojamiento);
+	    		alojamiento.setHabitaciones(habitaciones);
+        		String str = mostrarHabitaciones(habitaciones);
+        		
+        		// label - habitaciones disponibles
+        		Text habDisponibles = new Text(str);
+        		habDisponibles.setLayoutX(220);
+        		habDisponibles.setLayoutY(155);
+        		habDisponibles.maxWidth(50);
+        		anchorPane.getChildren().add(habDisponibles);
+	    		
+	    		
 	    	} else if(alojamiento instanceof Apartamento) {
 		    	int coordX = tamanoNombre + 10;
 		    		FontAwesomeIconView iconoLlave = new FontAwesomeIconView(FontAwesomeIcon.KEY);
@@ -226,24 +260,22 @@ public class ControladorSelAlojamiento implements Initializable {
 	    	}
     		
     		// precio
-    		Text precio = new Text("desde\n" + alojamiento.getTarifaNormal() + "€");
+    		Text precio = new Text("Desde\n" + alojamiento.getTarifaNormal() + "€");
     		precio.setLayoutX(675);
-    		precio.setLayoutY(80);
+    		precio.setLayoutY(180);
     		precio.setStyle("-fx-font: 20 arial;");
     		precio.setFill(Paint.valueOf("#0ab21b"));
     		
     		// label - descripcion del alojamiento
-    		Text descripcion = new Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. ");
+    		Label descripcion = new Label(alojamiento.getDescripcion());
     		descripcion.setLayoutX(220);
     		descripcion.setLayoutY(85);
-    		
-    		// label - habitaciones disponibles
-    		Text habDisponibles = new Text(str);
-    		habDisponibles.setLayoutX(220);
-    		habDisponibles.setLayoutY(115);
+    		descripcion.setPrefWidth(500);
+    		descripcion.setPrefHeight(50);
+    		descripcion.setWrapText(true);
     		
     		// añade los componentes al anchorpane
-        	anchorPane.getChildren().addAll(nombreHotel, imagen, mapa, ubicacion, iconoUbicacion, descripcion, habDisponibles, precio);
+        	anchorPane.getChildren().addAll(nombreHotel, descripcion, ubicacion, iconoUbicacion, precio, imagen, mapa);
         	
         	AnchorPane paneSuperior = new AnchorPane();
         	paneSuperior.getChildren().addAll(anchorPane);
@@ -382,6 +414,11 @@ public class ControladorSelAlojamiento implements Initializable {
 			}
 		});
 		return anchorPane;
+	}
+
+	public void SesionIniciada() {
+		lblSaludo.setText("Hola, " + Principal.modelo.cliente.getDni());
+		lblSesion.setText("Cerrar Sesion");
 	}
 
 }
