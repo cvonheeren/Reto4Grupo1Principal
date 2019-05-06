@@ -1,18 +1,22 @@
 package aplicacion;
 
 import java.net.URL;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.*;
 import javafx.scene.layout.*;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import com.jfoenix.effects.JFXDepthManager;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.collections.FXCollections;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import core.Principal;
@@ -130,8 +134,20 @@ public class ControladorSelHabitacion implements Initializable {
     		
     		// añade el anchorpane al grid
     		grid.add(paneSuperior, 0, i);
+    	
+    		
+    		anchorPane.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>(){
+    			@Override
+    			public void handle(Event event) {
+    				cb.getSelectionModel().selectNext();
+    				guardarHabitacion(habitacion, cb.getValue());
+    			}
+    		});
     		
     	}
+    	
+    	
+    	
     }
     
     /**
