@@ -121,5 +121,13 @@ public class Reserva {
 		this.habitacionesReservadas.remove(habitacion);
 		this.ctdHabitaciones--;
 	}
+
+	public int getCtdHabitaciones() {
+		return ctdHabitaciones;
+	}
+
+	public void setCtdHabitaciones(int ctdHabitaciones) {
+		this.ctdHabitaciones = ctdHabitaciones;
+	}
 	
 }

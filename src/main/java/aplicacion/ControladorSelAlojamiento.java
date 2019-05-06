@@ -27,6 +27,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -166,6 +167,7 @@ public class ControladorSelAlojamiento implements Initializable {
     		
     		Alojamiento alojamiento = alojamientos.get(i);
     		ArrayList<Habitacion> habitaciones = buscarHabDisponibles(alojamiento);
+    		alojamiento.setHabitaciones(habitaciones);
     		String str = mostrarHabitaciones(habitaciones);
     		
     		AnchorPane anchorPane = new AnchorPane();
@@ -183,6 +185,14 @@ public class ControladorSelAlojamiento implements Initializable {
     		Text ubicacion = new Text(alojamiento.getUbicacion());
     		ubicacion.setLayoutX(240);
     		ubicacion.setLayoutY(60);
+    		
+    		Hyperlink mapa = new Hyperlink("Ver Mapa");
+    		int tamanoUbicacion = (int) ((int) ubicacion.getBoundsInLocal().getMaxX()+240+10);
+    		mapa.setLayoutX(tamanoUbicacion);
+    		mapa.setLayoutY(44);
+    		mapa.setOnAction((e) -> {
+    			verMapa(alojamiento);
+            });
     		
     		//Estrellas del hotel (Si es un hotel claro)
     		int tamanoNombre = (int) ((int) nombreHotel.getBoundsInLocal().getMaxX()+220);
@@ -233,7 +243,7 @@ public class ControladorSelAlojamiento implements Initializable {
     		habDisponibles.setLayoutY(115);
     		
     		// añade los componentes al anchorpane
-        	anchorPane.getChildren().addAll(nombreHotel, descripcion, habDisponibles, ubicacion, iconoUbicacion, precio, imagen);
+        	anchorPane.getChildren().addAll(nombreHotel, imagen, mapa, ubicacion, iconoUbicacion, descripcion, habDisponibles, precio);
         	
         	AnchorPane paneSuperior = new AnchorPane();
         	paneSuperior.getChildren().addAll(anchorPane);
@@ -250,6 +260,11 @@ public class ControladorSelAlojamiento implements Initializable {
     		grid.add(paneSuperior, 0, i);
     	}
 	}
+	
+	 void verMapa(Alojamiento alojamiento) {
+		Principal.modelo.reserva.setAlojamiento(alojamiento);
+		Principal.aplicacion.verMapa("Mapa.fxml");
+    }
 	
 	/**
      * Crea y añade el grid al anchorpane 'contenedor', creado por defecto
