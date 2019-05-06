@@ -2,10 +2,9 @@ package modeloTest;
 
 import static org.junit.Assert.*;
 
-import java.sql.Date;
+
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+
 
 import org.junit.Test;
 
@@ -37,28 +36,6 @@ public class ReservaTest {
 		assertEquals(habitacionesReservadas, reserva2.getHabitacionesReservadas());
 	}
 
-	@Test
-	public void testtipoDeFecha() {
-		Calendar fecha1 = new GregorianCalendar();
-        fecha1.set(2019, 5, 15);
-		
-		Calendar fecha2 = new GregorianCalendar();
-        fecha2.set(2019, 6, 30);
-		
-		assertTrue(reserva.tipoDeFecha(fecha1));
-		assertFalse(reserva.tipoDeFecha(fecha2));
-	}
-	
-	@Test
-	public void testComprobarSiEsVerano() {
-		Calendar fecha = new GregorianCalendar();
-        fecha.set(2019, 8, 15);
-        Calendar fecha2 = new GregorianCalendar();
-        fecha2.set(2019, 9, 15);
-
-		assertTrue(reserva.comprobarSiEsVerano(fecha));
-		assertFalse(reserva.comprobarSiEsVerano(fecha2));
-	}
 	
 	@Test
 	public void testReserva() {
