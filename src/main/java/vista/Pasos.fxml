@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXDatePicker?>
-<?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTabPane?>
-<?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.geometry.Insets?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.web.WebView?>
 
 <AnchorPane fx:id="anchorPaneBase" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1150.0" styleClass="fondo" stylesheets="@../reto4.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorPasos">
    <children>
@@ -23,22 +18,22 @@
             <JFXTabPane fx:id="tabPane" prefHeight="655.0" prefWidth="1150.0" style="-fx-background-color: #fff;">
                <tabs>
                   <Tab fx:id="idTabHab" closable="false" text="Seleccione Habitacion">
-                  	<fx:include fx:id="SeleccionHabitacion" source="SeleccionHabitacion.fxml"/>
+                  	<fx:include fx:id="SeleccionHabitacion" source="SeleccionHabitacion.fxml" />
                   </Tab>
                   <Tab fx:id="idTabServ" closable="false" disable="true" text="Seleccione Servicios">
 
                   </Tab>
                   <Tab fx:id="idTabPago" closable="false" text="Pago">
-					<fx:include fx:id="Pago" source="Pago.fxml"/>
+					<fx:include fx:id="Pago" source="Pago.fxml" />
                   </Tab>
                   <Tab fx:id="idTabFin" closable="false" text="Disfrute">
-					<fx:include fx:id="Factura" source="Factura.fxml"/>
+					<fx:include fx:id="Factura" source="Factura.fxml" />
                   </Tab>
                </tabs>
             </JFXTabPane>
          </children>
       </Pane>
-      <JFXButton fx:id="btnSiguiente" layoutX="851.0" layoutY="823.0" onAction="#siguiente" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="Siguiente" textFill="WHITE">
+      <JFXButton fx:id="btnSiguiente" layoutX="923.0" layoutY="822.0" onAction="#siguiente" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="Siguiente" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
@@ -54,11 +49,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <Text fill="WHITE" layoutX="560.0" layoutY="862.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total: 0€" textAlignment="RIGHT" wrappingWidth="272.13671875">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Text>
       <JFXButton fx:id="btnInformacion" layoutX="312.0" layoutY="823.0" onAction="#informacion" prefHeight="50.0" prefWidth="151.0" style="-fx-background-color: #f57c00;" text="INFORMACION" textFill="WHITE">
          <font>
             <Font size="16.0" />
@@ -75,13 +65,16 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="btnLogin" layoutX="947.0" layoutY="61.0" onAction="#login" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="INICIAR SESION" textFill="WHITE">
+      <Label fx:id="lblSaludo" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="832.0" layoutY="61.0" prefHeight="17.0" prefWidth="151.0" text="Hola, Anonimo" textAlignment="RIGHT" textFill="WHITE">
          <font>
-            <Font size="16.0" />
+            <Font size="18.0" />
          </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </JFXButton>
+      </Label>
+      <Hyperlink fx:id="lblSesion" layoutX="983.0" layoutY="56.0" onAction="#IniciarCerrar" prefHeight="37.0" prefWidth="151.0" text="Identifiquese" textFill="#f57c00">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Hyperlink>
+      <FontAwesomeIconView fx:id="iconInfo" fill="WHITE" glyphName="INFO" layoutX="872.0" layoutY="861.0" onMouseClicked="#mostrarInfo" size="40" />
    </children>
 </AnchorPane>

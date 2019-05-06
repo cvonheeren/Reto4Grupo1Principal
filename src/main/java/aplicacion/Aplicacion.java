@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXSnackbar.SnackbarEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Bounds;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,10 +19,12 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 public class Aplicacion {
@@ -29,6 +32,9 @@ public class Aplicacion {
 	public Stage stage;
 	public Stage stageLogin;
 	private JFXSnackbar snackbar;
+	public ControladorPasos controladorPasos;
+	public Stage stagePopupInfo;
+	public ControladorSelAlojamiento controladorSelAlojamiento;
 	
 	@FXML
     private Pane anchorPaneBase;
@@ -60,6 +66,11 @@ public class Aplicacion {
 		stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
 	}
 	
+	public void centrarPopup(Bounds bounds) {
+		stagePopupInfo.setX(stage.getX()+700);
+		stagePopupInfo.setY(stage.getY()+525);
+	}
+	
 	/**
 	 * Cambia de escena (vista)
 	 * @param FXMLLink
@@ -85,6 +96,21 @@ public class Aplicacion {
 			stageLogin.setTitle("FXML Welcome");
 			stageLogin.setScene(scene);
 			stageLogin.show();
+		}
+	}
+	
+	public void CargarpopupInfo(Bounds bounds)
+	{
+		Parent FXML = loadFXML("PopupInfo.fxml");
+		if (FXML != null) {
+			Scene scene = new Scene(FXML);
+			scene.setFill(Color.TRANSPARENT);
+			scene.getStylesheets().add("reto4.css");
+			stagePopupInfo = new Stage(StageStyle.TRANSPARENT);
+			stagePopupInfo.setTitle("FXML Welcome");
+			stagePopupInfo.setScene(scene);
+			stagePopupInfo.show();
+			centrarPopup(bounds);
 		}
 	}
 	
@@ -124,6 +150,7 @@ public class Aplicacion {
             event.consume();
         }
     };
+	
     
     public void mostrarMensaje(AnchorPane anchorpane, String mensaje) {
 		Text nodo = new Text(mensaje);

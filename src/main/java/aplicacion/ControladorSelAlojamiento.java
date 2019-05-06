@@ -27,6 +27,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -68,6 +70,12 @@ public class ControladorSelAlojamiento implements Initializable {
     @FXML
     private Pane paneFiltros;
     
+    @FXML
+    private Label lblSaludo;
+
+    @FXML
+    private Hyperlink lblSesion;
+    
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	
@@ -102,6 +110,19 @@ public class ControladorSelAlojamiento implements Initializable {
     @FXML
     void BtnBuscarPulsado(MouseEvent event) {
     	ejecutarBusqueda();
+    }
+    
+    @FXML
+    void IniciarCerrar(ActionEvent event) {
+    	Principal.aplicacion.controladorSelAlojamiento=this;
+    	if(Principal.modelo.cliente==null)
+		{
+			Principal.aplicacion.CargarSceneLogin();
+		}
+		else
+		{
+			Principal.iniciarPrograma();
+		}
     }
     
     /**
@@ -367,6 +388,11 @@ public class ControladorSelAlojamiento implements Initializable {
 			}
 		});
 		return anchorPane;
+	}
+
+	public void SesionIniciada() {
+		lblSaludo.setText("Hola, " + Principal.modelo.cliente.getDni());
+		lblSesion.setText("Cerrar Sesion");
 	}
 
 }
