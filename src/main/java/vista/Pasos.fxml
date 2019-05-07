@@ -20,7 +20,7 @@
                   <Tab fx:id="idTabHab" closable="false" text="Seleccione Habitacion">
                   	<fx:include fx:id="SeleccionHabitacion" source="SeleccionHabitacion.fxml" />
                   </Tab>
-                  <Tab fx:id="idTabServ" closable="false" disable="true" text="Seleccione Servicios">
+                  <Tab fx:id="idTabServ" closable="false" text="Seleccione Servicios">
 
                   </Tab>
                   <Tab fx:id="idTabPago" closable="false" text="Pago">
@@ -75,6 +75,9 @@
             <Font size="18.0" />
          </font>
       </Hyperlink>
-      <FontAwesomeIconView fx:id="iconInfo" fill="WHITE" glyphName="INFO" layoutX="872.0" layoutY="861.0" onMouseClicked="#mostrarInfo" size="40" />
+      <FontAwesomeIconView fx:id="iconInfo" fill="WHITE" glyphName="INFO" layoutX="872.0" layoutY="861.0" onMouseClicked="#mostrarInfo" size="40">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></FontAwesomeIconView>
    </children>
 </AnchorPane>
