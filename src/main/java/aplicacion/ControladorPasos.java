@@ -1,6 +1,8 @@
 package aplicacion;
 
 import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -108,6 +110,8 @@ public class ControladorPasos implements Initializable {
 			case "idTabPago":
 				if (Principal.modelo.pago.calcularDineroRestante() == 0) {
 					tabPane.getSelectionModel().select(idTabFin);
+					Date fechaCompra = Date.valueOf(LocalDate.now());
+					Principal.modelo.reserva.setFechaCompra(fechaCompra);
 					int codReserva = Principal.modelo.gestorBBDD.insertarReserva(Principal.modelo.reserva);
 			    	Principal.modelo.reserva.setCodReserva(codReserva);
 		    	} else {

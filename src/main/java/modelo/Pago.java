@@ -165,7 +165,7 @@ public class Pago {
         
         ArrayList<Calendar> lista = new  ArrayList<Calendar>();
         
-        System.out.println((fecha2.getTimeInMillis() - fecha1.getTimeInMillis())/86400000);
+//        System.out.println((fecha2.getTimeInMillis() - fecha1.getTimeInMillis())/86400000);
         
         for (int i = 0; i < (fecha2.getTimeInMillis() - fecha1.getTimeInMillis())/86400000; i++) {
         	fechaAux = Calendar.getInstance();

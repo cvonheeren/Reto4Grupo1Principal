@@ -236,7 +236,7 @@ public class GestorBBDD {
 	 */
 	public int insertarReserva(Reserva reserva) {
 		int codReserva = -1;
-		ResultSet result = modificarBBDD.insertarReserva(reserva.getAlojamiento().getCodAlojamiento(), reserva.getPrecio(), reserva.getFechaEntrada(), reserva.getFechaSalida());
+		ResultSet result = modificarBBDD.insertarReserva(reserva.getAlojamiento().getCodAlojamiento(), reserva.getPrecio(), reserva.getFechaCompra(), reserva.getFechaEntrada(), reserva.getFechaSalida());
 
 		try {
 			result.next();
