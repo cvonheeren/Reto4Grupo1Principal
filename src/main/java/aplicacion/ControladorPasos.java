@@ -97,6 +97,7 @@ public class ControladorPasos implements Initializable {
 				
 			case "idTabServ":
 				if(Principal.modelo.cliente != null) {
+					Principal.aplicacion.controladorPago.ActulizarTarifa();
 					tabPane.getSelectionModel().select(idTabPago);
 				} else {
 					Principal.aplicacion.controladorPasos=this;
