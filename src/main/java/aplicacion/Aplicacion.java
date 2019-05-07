@@ -121,6 +121,7 @@ public class Aplicacion {
 			stagePopupInfo = new Stage(StageStyle.TRANSPARENT);
 			stagePopupInfo.setTitle("FXML Welcome");
 			stagePopupInfo.setScene(scene);
+			stagePopupInfo.setAlwaysOnTop(true);
 			stagePopupInfo.show();
 			centrarPopup(bounds);
 		}

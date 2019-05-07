@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Polygon?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseExited="#cerrar" prefHeight="388.0" prefWidth="441.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorPopupInfo">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="388.0" prefWidth="441.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorPopupInfo">
    <children>
       <Polygon fill="WHITE" layoutX="212.0" layoutY="316.0" opacity="0.75" points="-29.0, 39.0, 13.0, 40.0, 1.0, 3.0" rotate="180.0" stroke="BLACK" strokeType="INSIDE" />
       <AnchorPane layoutX="14.0" layoutY="12.0" opacity="0.75" prefHeight="309.0" prefWidth="414.0" style="-fx-background-color: white; -fx-border-color: black;">
          <children>
+            <FontAwesomeIconView glyphName="CLOSE" layoutX="381.0" layoutY="33.0" onMouseClicked="#cerrar" size="30">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </FontAwesomeIconView>
             <Label layoutX="14.0" layoutY="23.0" prefHeight="32.0" prefWidth="109.0" text="Nombre" />
             <Label layoutX="14.0" layoutY="65.0" prefHeight="32.0" prefWidth="109.0" text="Ubicación" />
-            <Label fx:id="lblNombre" layoutX="133.0" layoutY="23.0" prefHeight="32.0" prefWidth="109.0" />
-            <Label fx:id="lblUbicacion" layoutX="133.0" layoutY="65.0" prefHeight="32.0" prefWidth="109.0" />
-            <Label layoutX="20.0" layoutY="254.0" prefHeight="32.0" prefWidth="124.0" text="TOTAL 0€" />
+            <Label fx:id="lblNombre" layoutX="133.0" layoutY="23.0" prefHeight="32.0" prefWidth="260.0" />
+            <Label fx:id="lblUbicacion" layoutX="133.0" layoutY="65.0" prefHeight="32.0" prefWidth="260.0" />
+            <Label fx:id="lblPrecioTotal" layoutX="20.0" layoutY="254.0" prefHeight="32.0" prefWidth="124.0" text="TOTAL 0€" />
+            <Label layoutX="14.0" layoutY="112.0" prefHeight="32.0" prefWidth="109.0" text="Habitaciones" />
+            <Label fx:id="lblHabitaciones" layoutX="133.0" layoutY="112.0" prefHeight="32.0" prefWidth="260.0" wrapText="true" />
          </children>
       </AnchorPane>
    </children>

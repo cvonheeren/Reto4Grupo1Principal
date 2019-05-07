@@ -41,7 +41,7 @@ public class ControladorPasos implements Initializable {
 	
 	
 	@FXML
-    private JFXButton btnLogin, btnSiguiente, btnAtras, btnInformacion, btnCancelar;
+    private JFXButton btnLogin, btnSiguiente, btnAtras, btnCancelar;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
