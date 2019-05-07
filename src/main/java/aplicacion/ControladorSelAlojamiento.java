@@ -191,7 +191,8 @@ public class ControladorSelAlojamiento implements Initializable {
     		Alojamiento alojamiento = alojamientos.get(i);
     		
     		AnchorPane anchorPane = new AnchorPane();
-    		anchorPane = añadirListenerSeleccion(anchorPane, alojamiento);    		
+    		anchorPane = añadirListenerSeleccion(anchorPane, alojamiento);
+    		anchorPane.setPrefHeight(170);
     		
     		// label - nombre del alojamiento
     		Text nombreHotel = crearNombre(alojamiento.getNombre());
@@ -212,17 +213,7 @@ public class ControladorSelAlojamiento implements Initializable {
     		mapa.setLayoutY(54);
     		mapa.setOnAction((e) -> {
     			verMapa(alojamiento);
-            });
-    		
-    		JFXButton btnVerMas = new JFXButton("Ver Más");
-    		btnVerMas.setLayoutX(650);
-    		btnVerMas.setLayoutY(anchorPane.getBoundsInLocal().getMaxY()-60);
-    		btnVerMas.setPrefSize(80, 40);
-    		btnVerMas.setStyle("-fx-background-color: #f57c00; -fx-text-fill: white;");
-    		btnVerMas.setOnAction((e) -> {
-    			verInfo(alojamiento);
-            });
-    		
+            });    		
     		
     		//Estrellas del hotel (Si es un hotel claro)
     		int tamanoNombre = (int) ((int) nombreHotel.getBoundsInLocal().getMaxX()+220+5);
@@ -354,6 +345,15 @@ public class ControladorSelAlojamiento implements Initializable {
     		descripcion.setPrefWidth(500);
     		descripcion.setPrefHeight(50);
     		descripcion.setWrapText(true);
+    		
+    		JFXButton btnVerMas = new JFXButton("Ver Más");
+    		btnVerMas.setLayoutX(650);
+    		btnVerMas.setLayoutY(anchorPane.getPrefHeight());
+    		btnVerMas.setPrefSize(80, 40);
+    		btnVerMas.setStyle("-fx-background-color: #f57c00; -fx-text-fill: white;");
+    		btnVerMas.setOnAction((e) -> {
+    			verInfo(alojamiento);
+            });
     		
     		// añade los componentes al anchorpane
         	anchorPane.getChildren().addAll(nombreHotel, descripcion, ubicacion, iconoUbicacion, precio, imagen, mapa, btnVerMas);

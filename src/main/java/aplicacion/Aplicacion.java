@@ -35,6 +35,7 @@ public class Aplicacion {
 	public Stage stagePopupInfo;
 	public ControladorSelAlojamiento controladorSelAlojamiento;
 	public ControladorPago controladorPago;
+	public ControladorInformacionAloj controladorInformacionAloj;
 	
 	@FXML
     private Pane anchorPaneBase;
