@@ -165,7 +165,9 @@ public class Pago {
         
         ArrayList<Calendar> lista = new  ArrayList<Calendar>();
         
-        for (int i = 0; i < fecha1.compareTo(fecha2); i++) {
+        System.out.println((fecha2.getTimeInMillis() - fecha1.getTimeInMillis())/86400000);
+        
+        for (int i = 0; i < (fecha2.getTimeInMillis() - fecha1.getTimeInMillis())/86400000; i++) {
         	fechaAux = Calendar.getInstance();
         	fechaAux.setTime(fechaEntrada);
         	fechaAux.add(Calendar.DATE, i);
@@ -176,9 +178,9 @@ public class Pago {
         
         for (int i = 0; i < lista.size(); i++) {
 			if(gestorF.comprobarSiEsVerano(lista.get(i)))
-				contadorRecargo = contadorRecargo + (tarifa * 1.2f);
+				contadorRecargo = contadorRecargo + (tarifa * alojamiento.tarifaVerano);
 			if(gestorF.tipoDeFecha(lista.get(i)))
-				contadorRecargo = contadorRecargo + (tarifa * 1.2f);
+				contadorRecargo = contadorRecargo + (tarifa * alojamiento.recargo);
 		}
 		
 		for (Habitacion h: habReservadas) {
