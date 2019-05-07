@@ -17,7 +17,7 @@ public class Alojamiento {
 	protected float mediaPension;
 	protected float pensionCompleta;
 	protected String imgurl;
-	private ArrayList<Habitacion> habitaciones = null;
+	protected ArrayList<Habitacion> habitaciones = null;
 	
 	/**
 	 * Objeto padre Alojamiento

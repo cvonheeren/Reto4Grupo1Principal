@@ -81,11 +81,14 @@ public class ControladorPago implements Initializable {
 	 * @param importe Valor a sumar
 	 */
 	public void sumarDinero(float importe) {
-		String dineroIntroducido = Float.toString(Principal.modelo.pago.sumarDinero(importe));
-		String dineroRestante =  Float.toString(Principal.modelo.pago.calcularDineroRestante());
-		introducido.setText(dineroIntroducido + " €");
-		restante.setText(dineroRestante + " €");
-		//comprobarTodoIntroducido();
+		if (Principal.modelo.pago.calcularDineroRestante() == 0) {
+			JOptionPane.showMessageDialog(new JFrame(), "Ya ha introducido todo el dinero", "Error", JOptionPane.ERROR_MESSAGE);
+		} else {
+			String dineroIntroducido = Float.toString(Principal.modelo.pago.sumarDinero(importe));
+			String dineroRestante =  Float.toString(Principal.modelo.pago.calcularDineroRestante());
+			introducido.setText(dineroIntroducido + " €");
+			restante.setText(dineroRestante + " €");
+		}
 	}
 	
 	/**
@@ -96,7 +99,7 @@ public class ControladorPago implements Initializable {
 		if (Principal.modelo.pago.calcularDineroRestante() == 0) {
     		Principal.aplicacion.CambiarScene("Factura.fxml");	
     	} else {
-    		JOptionPane.showMessageDialog(new JFrame(), "Aun no ha introducido todo el dinero", "Error",JOptionPane.ERROR_MESSAGE);
+    		JOptionPane.showMessageDialog(new JFrame(), "Aun no ha introducido todo el dinero", "Error", JOptionPane.ERROR_MESSAGE);
     	}
 	}
 

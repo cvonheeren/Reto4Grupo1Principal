@@ -15,7 +15,7 @@ public class ControladorMapa implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		mapa.getEngine().loadContent("<iframe src=\"https://maps.google.com/maps?q=" + Principal.modelo.reserva.getAlojamiento().getLongitud() + "," + Principal.modelo.reserva.getAlojamiento().getLatitud() + "&hl=es;z=14&amp;output=embed\" width=\"1130\" height=\"880\" frameborder=\"0\" style=\"border:0\" scrolling=\"no\"></iframe>", "text/html");
+		mapa.getEngine().loadContent("<iframe src=\"https://maps.google.com/maps?q=" + Principal.modelo.reserva.getAlojamiento().getLongitud() + "," + Principal.modelo.reserva.getAlojamiento().getLatitud() + "&hl=es;z=14&amp;output=embed\" width=\"990\" height=\"780\" frameborder=\"0\" style=\"border:0\" scrolling=\"no\"></iframe>", "text/html");
 	}
 
 }

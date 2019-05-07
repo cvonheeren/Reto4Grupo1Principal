@@ -11,9 +11,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
 
 import core.Principal;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -89,12 +87,16 @@ public class ControladorPasos implements Initializable {
 		switch(tabPane.getSelectionModel().getSelectedItem().getId()) {	
 				
 			case "idTabHab":
-				if(comprobarHabitacionSeleccionada())
+				if(comprobarHabitacionSeleccionada()) {
+					float precio = Principal.modelo.pago.calcularPrecio(Principal.modelo.reserva.getAlojamiento(), Principal.modelo.reserva.getFechaEntrada(), Principal.modelo.reserva.getFechaSalida(), Principal.modelo.reserva.getHabitacionesReservadas());
+					Principal.modelo.pago.setPrecioTotal(precio);
+					Principal.modelo.reserva.setPrecio(precio);
 					tabPane.getSelectionModel().select(idTabServ);
+				}
 				break;
 				
 			case "idTabServ":
-				if(!(Principal.modelo.cliente==null)) {
+				if(Principal.modelo.cliente != null) {
 					tabPane.getSelectionModel().select(idTabPago);
 				} else {
 					Principal.aplicacion.controladorPasos=this;
@@ -103,7 +105,13 @@ public class ControladorPasos implements Initializable {
 				break;
 				
 			case "idTabPago":
-				tabPane.getSelectionModel().select(idTabFin);
+				if (Principal.modelo.pago.calcularDineroRestante() == 0) {
+					tabPane.getSelectionModel().select(idTabFin);
+					int codReserva = Principal.modelo.gestorBBDD.insertarReserva(Principal.modelo.reserva);
+			    	Principal.modelo.reserva.setCodReserva(codReserva);
+		    	} else {
+		    		JOptionPane.showMessageDialog(new JFrame(), "Aun no ha introducido todo el dinero", "Error",JOptionPane.ERROR_MESSAGE);
+		    	}
 				break;
 				
 			case "idTabFin":

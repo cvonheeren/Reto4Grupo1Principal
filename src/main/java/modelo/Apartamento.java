@@ -1,8 +1,11 @@
 package modelo;
 
-public class Apartamento extends Alojamiento{
+import java.util.ArrayList;
 
-	protected int piso;
+public class Apartamento extends Alojamiento {
+
+	private int piso;
+	private ArrayList<Estancia> estancias = null;
 
 	/**
 	 * Objeto hijo de Alojamiento del tipo Apartamento
@@ -23,10 +26,11 @@ public class Apartamento extends Alojamiento{
 	 */
 	public Apartamento(int codAlojamiento, String ubicacion, String nombre, String descripcion, float longitud, float latitud,
 			float tarifaNormal, float tarifaVerano, float recargo, float desayuno, float mediaPension,
-			float pensionCompleta, String imgurl, int piso) {
+			float pensionCompleta, String imgurl, int piso, ArrayList<Estancia> estancias) {
 		super(codAlojamiento, ubicacion, nombre, descripcion, longitud, latitud, tarifaNormal, tarifaVerano, recargo,
 				desayuno, mediaPension, pensionCompleta, imgurl);
 		this.piso = piso;
+		this.estancias = estancias;
 	}
 
 	public int getPiso() {
@@ -35,5 +39,13 @@ public class Apartamento extends Alojamiento{
 
 	public void setPiso(int piso) {
 		this.piso = piso;
+	}
+	
+	public ArrayList<Estancia> getEstancias() {
+		return estancias;
+	}
+
+	public void setEstancias(ArrayList<Estancia> estancias) {
+		this.estancias = estancias;
 	}
 }

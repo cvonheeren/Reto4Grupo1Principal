@@ -85,11 +85,11 @@ public class ControladorLogin2 implements Initializable {
 			String pass = contrasena.getText();
 			if(Principal.modelo.gestorBBDD.comprobarCliente(dni, pass)) {
 				Principal.modelo.cliente = new Cliente(dni, pass);
+				Principal.modelo.reserva.setCliente(new Cliente(dni, pass));
 				try {Principal.aplicacion.controladorPasos.SesionIniciada();}catch(Exception e) {}
 				try {Principal.aplicacion.controladorSelAlojamiento.SesionIniciada();}catch(Exception e) {}
 				
 				Principal.aplicacion.stageLogin.close();
-				//Principal.aplicacion.mostrarMensaje(paneLogin, "Usuario logeado correctamente");
 			} else {
 				Principal.aplicacion.mostrarMensaje(paneLogin, "DNI y/o contraseña incorrectos.");
 			}
@@ -103,8 +103,8 @@ public class ControladorLogin2 implements Initializable {
     		int codCliente = Principal.modelo.gestorBBDD.insertarCliente(textFieldDNIReg.getText(), contrasenaReg.getText(), textFieldNombreReg.getText(), textFieldApellidoReg.getText(), Date.valueOf(fechaNacReg.getValue()), textFieldMailReg.getText());
     		if (codCliente != -1) {
     			Principal.modelo.cliente = new Cliente(textFieldDNIReg.getText(), contrasenaReg.getText());
+    			Principal.modelo.reserva.setCliente(new Cliente(textFieldDNIReg.getText(), contrasenaReg.getText()));
     			Principal.aplicacion.CambiarScene("Pasos.fxml");
-    			//Principal.aplicacion.mostrarMensaje(paneLogin, "Usuario registrado correctamente");
     		} else {
     			Principal.aplicacion.mostrarMensaje(paneLogin, "No se ha podido efectuar el registro.");
     		}

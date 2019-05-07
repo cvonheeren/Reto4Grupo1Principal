@@ -2,7 +2,7 @@ package modelo;
 
 public class Hotel extends Alojamiento {
 
-	protected int estrellas;
+	private int estrellas;
 	
 	/**
 	 * Objeto hijo de Alojamiento del tipo Hotel

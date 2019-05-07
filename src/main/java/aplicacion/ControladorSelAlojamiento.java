@@ -44,6 +44,7 @@ import javafx.util.Callback;
 import modelo.Alojamiento;
 import modelo.Apartamento;
 import modelo.Casa;
+import modelo.Estancia;
 import modelo.Habitacion;
 import modelo.Hotel;
 
@@ -132,9 +133,9 @@ public class ControladorSelAlojamiento implements Initializable {
      * 
      */
     public void cargarAutocompletar() {
-    	ArrayList<String> ciudades = Principal.modelo.gestorBBDD.cargarListaDestinos();
-		ciudades.addAll(Principal.modelo.gestorBBDD.cargarListaAlojamientos());
-		TextFields.bindAutoCompletion( textCiudad, ciudades );
+    	ArrayList<String> autocompletar = Principal.modelo.gestorBBDD.cargarNombresDestinos();
+    	autocompletar.addAll(Principal.modelo.gestorBBDD.cargarNombresAlojamientos());
+		TextFields.bindAutoCompletion( textCiudad, autocompletar );
     }
     
     /**
@@ -177,22 +178,15 @@ public class ControladorSelAlojamiento implements Initializable {
     
     	GridPane grid = crearGrid();
     	contenedor.getChildren().setAll(grid);
-    	
-    	// hace que los anchorpanes rellenen todo el espacio disponible en el padre
-        AnchorPane.setTopAnchor(grid, 0.0);
-        AnchorPane.setBottomAnchor(grid, 0.0);
-        AnchorPane.setLeftAnchor(grid, 0.0);
-        AnchorPane.setRightAnchor(grid, 0.0);
        
-		ArrayList<Alojamiento> alojamientos = Principal.modelo.gestorBBDD.cargarListaAlojamientos(textCiudad.getText());
+		ArrayList<Alojamiento> alojamientos = Principal.modelo.gestorBBDD.cargarAlojamientos(textCiudad.getText());
         
     	for(int i=0; i<alojamientos.size(); i++) {
     		
     		Alojamiento alojamiento = alojamientos.get(i);
     		
     		AnchorPane anchorPane = new AnchorPane();
-    		anchorPane = añadirListenerSeleccion(anchorPane, alojamiento);
-    		
+    		anchorPane = añadirListenerSeleccion(anchorPane, alojamiento);    		
     		
     		// label - nombre del alojamiento
     		Text nombreHotel = crearNombre(alojamiento.getNombre());
@@ -204,78 +198,160 @@ public class ControladorSelAlojamiento implements Initializable {
     		FontAwesomeIconView iconoUbicacion = crearIconoUbicacion();
     		
     		Text ubicacion = new Text(alojamiento.getUbicacion());
-    		ubicacion.setLayoutX(240);
-    		ubicacion.setLayoutY(60);
+    		ubicacion.setLayoutX(245);
+    		ubicacion.setLayoutY(70);
     		
     		Hyperlink mapa = new Hyperlink("Ver Mapa");
     		int tamanoUbicacion = (int) ((int) ubicacion.getBoundsInLocal().getMaxX()+240+10);
     		mapa.setLayoutX(tamanoUbicacion);
-    		mapa.setLayoutY(44);
+    		mapa.setLayoutY(54);
     		mapa.setOnAction((e) -> {
     			verMapa(alojamiento);
             });
     		
+    		JFXButton btnVerMas = new JFXButton("Ver Más");
+    		btnVerMas.setLayoutX(650);
+    		btnVerMas.setLayoutY(anchorPane.getBoundsInLocal().getMaxY()-60);
+    		btnVerMas.setPrefSize(80, 40);
+    		btnVerMas.setStyle("-fx-background-color: #f57c00; -fx-text-fill: white;");
+    		btnVerMas.setOnAction((e) -> {
+    			verInfo(alojamiento);
+            });
+    		
+    		
     		//Estrellas del hotel (Si es un hotel claro)
-    		int tamanoNombre = (int) ((int) nombreHotel.getBoundsInLocal().getMaxX()+220);
-	    	if(alojamiento instanceof Hotel) {	
+    		int tamanoNombre = (int) ((int) nombreHotel.getBoundsInLocal().getMaxX()+220+5);
+    		
+	    	if(alojamiento instanceof Hotel) {
+	    		
+	    		// muestra los iconos estrella
 		    	int coordX=tamanoNombre+10;
 	    		for(int e=0;e<((Hotel) alojamiento).getEstrellas();e++) {
 		    		FontAwesomeIconView iconoEstrella = new FontAwesomeIconView(FontAwesomeIcon.STAR);
 		    		iconoEstrella.setLayoutX(coordX);
-			    	iconoEstrella.setLayoutY(35);
+			    	iconoEstrella.setLayoutY(40);
 			    	iconoEstrella.setSize("15");
 			    	iconoEstrella.setFill(Paint.valueOf("#feba02"));
 			    	anchorPane.getChildren().add(iconoEstrella);
 			    	coordX=coordX+15;
 		    	}
 	    		
+	    		// Muestra las habitaciones disponibles
+	    		Label lblHabitaciones = new Label("Habitaciones disponibles:");
+	    		lblHabitaciones.setStyle("-fx-font-weight: bold");
+	    		lblHabitaciones.setLayoutX(225);
+	    		lblHabitaciones.setLayoutY(130);
+	    		anchorPane.getChildren().add(lblHabitaciones);
+	    		
 	    		ArrayList<Habitacion> habitaciones = buscarHabDisponibles(alojamiento);
 	    		alojamiento.setHabitaciones(habitaciones);
         		String str = mostrarHabitaciones(habitaciones);
-        		
-        		// label - habitaciones disponibles
         		Text habDisponibles = new Text(str);
-        		habDisponibles.setLayoutX(220);
-        		habDisponibles.setLayoutY(155);
+        		habDisponibles.setLayoutX(225);
+        		habDisponibles.setLayoutY(165);
         		habDisponibles.maxWidth(50);
         		anchorPane.getChildren().add(habDisponibles);
 	    		
-	    		
 	    	} else if(alojamiento instanceof Apartamento) {
+	    		
+	    		// Muestra las habitaciones disponibles
+	    		Label lblHabitaciones = new Label("Habitaciones:");
+	    		lblHabitaciones.setStyle("-fx-font-weight: bold");
+	    		lblHabitaciones.setLayoutX(325);
+	    		lblHabitaciones.setLayoutY(130);
+	    		anchorPane.getChildren().add(lblHabitaciones);
+	    		
+	    		ArrayList<Habitacion> habitaciones = buscarHabDisponibles(alojamiento);
+	    		alojamiento.setHabitaciones(habitaciones);
+        		String str1 = mostrarHabitaciones(habitaciones);
+        		Text habDisponibles = new Text(str1);
+        		habDisponibles.setLayoutX(325);
+        		habDisponibles.setLayoutY(165);
+        		habDisponibles.maxWidth(50);
+        		anchorPane.getChildren().add(habDisponibles);
+	    			
+    			// Muestra las estancias
+	    		Label lblEstancias = new Label("Estancias:");
+	    		lblEstancias.setStyle("-fx-font-weight: bold");
+	    		lblEstancias.setLayoutX(225);
+	    		lblEstancias.setLayoutY(130);
+	    		anchorPane.getChildren().add(lblEstancias);
+	    		
+	    		String str2 = mostrarEstancias(((Apartamento)alojamiento).getEstancias());
+        		Text estancias = new Text(str2);
+        		estancias.setLayoutX(225);
+        		estancias.setLayoutY(165);
+        		estancias.maxWidth(50);
+        		anchorPane.getChildren().add(estancias);
+    			
+    			// muestra el icono llave
 		    	int coordX = tamanoNombre + 10;
-		    		FontAwesomeIconView iconoLlave = new FontAwesomeIconView(FontAwesomeIcon.KEY);
-		    		iconoLlave.setLayoutX(coordX);
-		    		iconoLlave.setLayoutY(35);
-		    		iconoLlave.setSize("15");
-		    		iconoLlave.setFill(Paint.valueOf("#555555"));
-			    	anchorPane.getChildren().add(iconoLlave);
+	    		FontAwesomeIconView iconoLlave = new FontAwesomeIconView(FontAwesomeIcon.KEY);
+	    		iconoLlave.setLayoutX(coordX);
+	    		iconoLlave.setLayoutY(40);
+	    		iconoLlave.setSize("15");
+	    		iconoLlave.setFill(Paint.valueOf("#555555"));
+		    	anchorPane.getChildren().add(iconoLlave);
+			    	
 	    	} else if(alojamiento instanceof Casa) {
+	    		
+	    		// Muestra las habitaciones disponibles
+	    		Label lblHabitaciones = new Label("Habitaciones:");
+	    		lblHabitaciones.setStyle("-fx-font-weight: bold");
+	    		lblHabitaciones.setLayoutX(325);
+	    		lblHabitaciones.setLayoutY(130);
+	    		anchorPane.getChildren().add(lblHabitaciones);
+	    		
+	    		ArrayList<Habitacion> habitaciones = buscarHabDisponibles(alojamiento);
+	    		alojamiento.setHabitaciones(habitaciones);
+        		String str1 = mostrarHabitaciones(habitaciones);
+        		Text habDisponibles = new Text(str1);
+        		habDisponibles.setLayoutX(325);
+        		habDisponibles.setLayoutY(165);
+        		habDisponibles.maxWidth(50);
+        		anchorPane.getChildren().add(habDisponibles);
+	    		
+    			// Muestra las estancias
+        		Label lblEstancias = new Label("Estancias:");
+        		lblEstancias.setStyle("-fx-font-weight: bold");
+	    		lblEstancias.setLayoutX(225);
+	    		lblEstancias.setLayoutY(130);
+	    		anchorPane.getChildren().add(lblEstancias);
+	    		
+	    		String str2 = mostrarEstancias(((Casa)alojamiento).getEstancias());
+	    		Text estancias = new Text(str2);
+        		estancias.setLayoutX(225);
+        		estancias.setLayoutY(165);
+        		estancias.maxWidth(50);
+        		anchorPane.getChildren().add(estancias);
+	    		
+	    		// muestra el icono casa
 	    		int coordX=tamanoNombre+10;
 	    		FontAwesomeIconView iconoCasa = new FontAwesomeIconView(FontAwesomeIcon.HOME);
 	    		iconoCasa.setLayoutX(coordX);
-	    		iconoCasa.setLayoutY(35);
+	    		iconoCasa.setLayoutY(40);
 	    		iconoCasa.setSize("15");
 	    		iconoCasa.setFill(Paint.valueOf("#555555"));
 		    	anchorPane.getChildren().add(iconoCasa);
 	    	}
     		
     		// precio
-    		Text precio = new Text("Desde\n" + alojamiento.getTarifaNormal() + "€");
-    		precio.setLayoutX(675);
-    		precio.setLayoutY(180);
+    		Text precio = new Text(alojamiento.getTarifaNormal() + "€");
+    		precio.setLayoutX(660);
+    		precio.setLayoutY(40);
     		precio.setStyle("-fx-font: 20 arial;");
     		precio.setFill(Paint.valueOf("#0ab21b"));
     		
     		// label - descripcion del alojamiento
     		Label descripcion = new Label(alojamiento.getDescripcion());
-    		descripcion.setLayoutX(220);
-    		descripcion.setLayoutY(85);
+    		descripcion.setLayoutX(225);
+    		descripcion.setLayoutY(75);
     		descripcion.setPrefWidth(500);
     		descripcion.setPrefHeight(50);
     		descripcion.setWrapText(true);
     		
     		// añade los componentes al anchorpane
-        	anchorPane.getChildren().addAll(nombreHotel, descripcion, ubicacion, iconoUbicacion, precio, imagen, mapa);
+        	anchorPane.getChildren().addAll(nombreHotel, descripcion, ubicacion, iconoUbicacion, precio, imagen, mapa, btnVerMas);
         	
         	AnchorPane paneSuperior = new AnchorPane();
         	paneSuperior.getChildren().addAll(anchorPane);
@@ -286,8 +362,9 @@ public class ControladorSelAlojamiento implements Initializable {
         	
     		anchorPane.setStyle("-fx-background-color: #fff; -fx-padding: 5px; -fx-border-insets: 5px; -fx-background-insets: 5px; -fx-border-radius:  1 1 1 1; -fx-background-radius: 5 5 5 5;");
     		JFXDepthManager.setDepth(anchorPane, 1);
-    		anchorPane.setPrefWidth(contenedor.getWidth()-20);
-    		anchorPane.setMaxWidth(contenedor.getWidth()-20);
+    		anchorPane.setPrefWidth(750);
+    		anchorPane.setMaxWidth(750);
+
     		// añade el anchorpane al grid
     		grid.add(paneSuperior, 0, i);
     	}
@@ -324,9 +401,9 @@ public class ControladorSelAlojamiento implements Initializable {
     public Text crearNombre(String nombre) {
     	Text text = new Text(nombre);
 		text.setFill(Paint.valueOf("#07c"));
-		text.setFont(new Font("arial",25));
-		text.setLayoutX(220);
-		text.setLayoutY(35);
+		text.setFont(new Font("arial",18));
+		text.setLayoutX(225);
+		text.setLayoutY(40);
 		return text;
     }
     
@@ -350,8 +427,8 @@ public class ControladorSelAlojamiento implements Initializable {
      */
     public FontAwesomeIconView crearIconoUbicacion() {
     	FontAwesomeIconView iconoUbicacion = new FontAwesomeIconView(FontAwesomeIcon.MAP_MARKER);
-		iconoUbicacion.setLayoutX(220);
-		iconoUbicacion.setLayoutY(60);
+		iconoUbicacion.setLayoutX(225);
+		iconoUbicacion.setLayoutY(70);
 		iconoUbicacion.setSize("20");
 		iconoUbicacion.setFill(Paint.valueOf("#555555"));
 		return iconoUbicacion;
@@ -376,19 +453,21 @@ public class ControladorSelAlojamiento implements Initializable {
      */
     public String mostrarHabitaciones(ArrayList<Habitacion> habitaciones) {
     	String str = "";
-		str += "Habitaciones disponibles: \n";
 		for (Habitacion s : habitaciones) {
-			str += s.getNombre() + " - ";
-		    if (s.getCtaCamasSimples() > 0 ) {
-		    	str += "Cama Individual x " + s.getCtaCamasSimples() + " - ";
-		    }
-		    if (s.getCtaCamasMatrimonio() > 0 ) {
-		    	str += "Cama Matrimonio x " + s.getCtaCamasMatrimonio() + " - ";
-		    }
-		    if (s.getCtaCamasInfantil() > 0 ) {
-		    	str += "Cama Infantil x " + s.getCtaCamasInfantil() + " - ";
-		    }
-		    str += "Cantidad: " + s.getCantidad() + "\n";
+			str += s.getNombre().toLowerCase() + " x " + s.getCantidad() + "\n";
+		}
+		return str;
+    }
+    
+    /**
+     * 
+     * @param habitaciones
+     * @return
+     */
+    public String mostrarEstancias(ArrayList<Estancia> estancias) {
+    	String str = "";
+		for (Estancia s : estancias) {
+			str += s.getNombre().toLowerCase() + " x "+ s.getCantidad() + "\n";
 		}
 		return str;
     }
@@ -405,15 +484,19 @@ public class ControladorSelAlojamiento implements Initializable {
 		anchorPane.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>(){
 			@Override
 			public void handle(Event event) {
-				Date fechaEntradaDate = Date.valueOf(fechaEntrada.getValue());
-				Date fechaSalidaDate = Date.valueOf(fechaSalida.getValue());
-				Principal.modelo.reserva.setAlojamiento(alojamiento);
-				Principal.modelo.reserva.setFechaEntrada(fechaEntradaDate);
-				Principal.modelo.reserva.setFechaSalida(fechaSalidaDate);
-				Principal.aplicacion.CambiarScene("PaneInfo.fxml");
+				verInfo(alojamiento);
 			}
 		});
 		return anchorPane;
+	}
+	
+	public void verInfo(Alojamiento alojamiento) {
+		Date fechaEntradaDate = Date.valueOf(fechaEntrada.getValue());
+		Date fechaSalidaDate = Date.valueOf(fechaSalida.getValue());
+		Principal.modelo.reserva.setAlojamiento(alojamiento);
+		Principal.modelo.reserva.setFechaEntrada(fechaEntradaDate);
+		Principal.modelo.reserva.setFechaSalida(fechaSalidaDate);
+		Principal.aplicacion.CambiarScene("PaneInfo.fxml");
 	}
 
 	public void SesionIniciada() {

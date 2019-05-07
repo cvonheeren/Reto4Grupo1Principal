@@ -1,7 +1,6 @@
 package aplicacion;
 
 import java.net.URL;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -26,7 +25,7 @@ import modelo.Habitacion;
 public class ControladorSelHabitacion implements Initializable {
     
 	@FXML
-	private AnchorPane paneHabitacion;
+	private AnchorPane paneHabitacion, main;
 	
 	@FXML
 	private Label titulo;
@@ -139,8 +138,12 @@ public class ControladorSelHabitacion implements Initializable {
     		anchorPane.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>(){
     			@Override
     			public void handle(Event event) {
-    				cb.getSelectionModel().selectNext();
-    				guardarHabitacion(habitacion, cb.getValue());
+    				if(cb.getValue() < habitacion.getCantidad()) {
+    					cb.getSelectionModel().selectNext();
+    					guardarHabitacion(habitacion, cb.getValue());
+    				} else {
+    					Principal.aplicacion.mostrarMensaje(main, "No quedan más habitaciones");
+    				}
     			}
     		});
     		

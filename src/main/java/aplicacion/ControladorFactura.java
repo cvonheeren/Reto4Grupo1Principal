@@ -57,7 +57,7 @@ public class ControladorFactura {
     	String pathReserva = preguntarGuadar();
 		
 		// creamos el archivo de texto
-		Principal.modelo.generarFactura.crearTxtReserva(pathReserva, Principal.modelo.reserva.getAlojamiento().getCodAlojamiento(), Principal.modelo.pago.getPrecioTotal());
+		Principal.modelo.generarFactura.crearTxtReserva(pathReserva, Principal.modelo.reserva);
 		
 		// abrimos el archivos en el programa predeterminado
 		abrirArchivo(pathReserva);

@@ -14,11 +14,11 @@
 <AnchorPane prefHeight="900.0" prefWidth="1150.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorInformacionAloj">
    <children>
 		<ImageView fx:id="img" fitHeight="302.0" fitWidth="440.0" layoutX="70.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true" />
-      	<Text fx:id="nombAloj" layoutX="550.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" wrappingWidth="536.13671875">
+      	<Text fx:id="nombAloj" layoutX="550.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre" wrappingWidth="390.13671875">
          <font>
             <Font size="24.0" />
          </font></Text>
-      	<Label fx:id="descAloj" alignment="TOP_LEFT" layoutX="551.0" layoutY="315.0" prefHeight="200.0" prefWidth="500.0" text="Descripcion" wrapText="true">
+      	<Label fx:id="descAloj" alignment="TOP_LEFT" layoutX="550.0" layoutY="315.0" prefHeight="144.0" prefWidth="500.0" text="Descripcion" wrapText="true">
          <padding>
             <Insets bottom="10.0" right="10.0" top="10.0" />
          </padding></Label>
@@ -38,7 +38,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <Label fx:id="habitaciones" alignment="TOP_LEFT" layoutX="70.0" layoutY="595.0" prefHeight="169.0" prefWidth="1035.0" text="Habitaciones">
+      <Label fx:id="habitaciones" alignment="TOP_LEFT" layoutX="550.0" layoutY="494.0" prefHeight="169.0" prefWidth="250.0">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -51,7 +51,7 @@
          </font>
       </Hyperlink>
       <AnchorPane prefHeight="190.0" prefWidth="1150.0" style="-fx-background-color: #1976d2;" />
-      <Label fx:id="tituloHab" layoutX="70.0" layoutY="559.0" text="Habitaciones disponibles:">
+      <Label fx:id="tituloHab" layoutX="550.0" layoutY="467.0" text="Habitaciones disponibles:">
          <font>
             <Font size="18.0" />
          </font>
@@ -62,5 +62,14 @@
             <Font size="14.0" />
          </font>
       </Text>
+      <Label fx:id="estancias" alignment="TOP_LEFT" layoutX="818.0" layoutY="494.0" prefHeight="169.0" prefWidth="250.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="10.0" right="10.0" top="10.0" />
+         </padding>
+      </Label>
+      <Label fx:id="precio" layoutX="979.0" layoutY="239.0" prefHeight="50.0" prefWidth="89.0" text="Label" />
    </children>
 </AnchorPane>

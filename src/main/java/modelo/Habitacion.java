@@ -2,14 +2,13 @@ package modelo;
 
 public class Habitacion {
 
-	protected int codHabitacion;
-	protected String nombre;
-	protected int numeroHabitacion;
-	protected float tamano;
-	protected int ctaCamasSimples;
-	protected int ctaCamasMatrimonio;
-	protected int ctaCamasInfantil;
-	protected int cantidad;
+	private int codHabitacion;
+	private String nombre;
+	private float tamano;
+	private int ctaCamasSimples;
+	private int ctaCamasMatrimonio;
+	private int ctaCamasInfantil;
+	private int cantidad;
 	
 	/**
 	 * Habitaciones de los hoteles
@@ -22,7 +21,6 @@ public class Habitacion {
 	public Habitacion(int codHabitacion, String nombre, int ctaCamasSimples, int ctaCamasMatrimonio, int ctaCamasInfantil, float tamano, int cantidad) {
 		this.codHabitacion = codHabitacion;
 		this.nombre = nombre;
-//		this.numeroHabitacion = numerohabitacion;
 		this.ctaCamasSimples = ctaCamasSimples;
 		this.ctaCamasMatrimonio = ctaCamasMatrimonio;
 		this.ctaCamasInfantil = ctaCamasInfantil;
@@ -53,14 +51,6 @@ public class Habitacion {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public int getNumerohabitacion() {
-		return numeroHabitacion;
-	}
-
-	public void setNumerohabitacion(int numerohabitacion) {
-		this.numeroHabitacion = numerohabitacion;
 	}
 
 	public float getTamano() {

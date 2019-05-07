@@ -1,9 +1,12 @@
 package modelo;
 
-public class Casa extends Alojamiento{
+import java.util.ArrayList;
 
-	int banios;
-	float area;
+public class Casa extends Alojamiento {
+
+	private int banios;
+	private float area;
+	private ArrayList<Estancia> estancias = null;
 	
 	/**
 	 * Objeto hijo de Alojamiento del tipo Casa
@@ -25,11 +28,12 @@ public class Casa extends Alojamiento{
 	 */
 	public Casa(int codAlojamiento, String ubicacion, String nombre, String descripcion, float longitud, float latitud,
 			float tarifaNormal, float tarifaVerano, float recargo, float desayuno, float mediaPension,
-			float pensionCompleta, String imgurl, int banios, float area) {
+			float pensionCompleta, String imgurl, ArrayList<Estancia> estancias) {
 		super(codAlojamiento, ubicacion, nombre, descripcion, longitud, latitud, tarifaNormal, tarifaVerano, recargo,
 				desayuno, mediaPension, pensionCompleta, imgurl);
-		this.banios = banios;
-		this.area = area;
+		this.estancias = estancias;
+		this.banios = numBanios();
+		this.area = calcularArea();
 	}
 
 	public int getBanios() {
@@ -47,4 +51,38 @@ public class Casa extends Alojamiento{
 	public void setArea(float area) {
 		this.area = area;
 	}
+
+	public ArrayList<Estancia> getEstancias() {
+		return estancias;
+	}
+
+	public void setEstancias(ArrayList<Estancia> estancias) {
+		this.estancias = estancias;
+	}
+	
+	private int numBanios() {
+		int suma = 0;
+		for (Estancia e: this.estancias) {
+			if ( e.getNombre() == "BANIO") {
+				suma++;
+			}
+		}
+		return suma;
+	}
+	
+	private float calcularArea() {
+		float suma = 0;
+		if (this.estancias != null) {
+			for (Estancia e: this.estancias) {
+				suma += e.getTamano();
+			}
+		}
+		if (this.habitaciones != null) {
+			for (Habitacion h: this.habitaciones) {
+				suma += h.getTamano();
+			}
+		}
+		return suma;
+	}
+	
 }

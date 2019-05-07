@@ -19,8 +19,8 @@ public class GestorBBDD {
 	 * Obtiene una lista con los nombres de todas las ciudades
 	 * @return ArrayList<String> Lista de ciudades 
 	 */
-	public ArrayList<String> cargarListaDestinos() {
-		ResultSet result = modificarBBDD.cargarListaDestinos();
+	public ArrayList<String> cargarNombresDestinos() {
+		ResultSet result = modificarBBDD.cargarNombresDestinos();
 		ArrayList<String> destinos = new ArrayList<String>();
 		try {
 			while (result.next()) {
@@ -38,9 +38,9 @@ public class GestorBBDD {
 	 * @param ciudad Nombre de la ciudad por la que se quiere restringir la busqueda
 	 * @return ArrayList<Alojamiento> Lista de alojamientos
 	 */
-	public ArrayList<Alojamiento> cargarListaAlojamientos(String ciudad) {
+	public ArrayList<Alojamiento> cargarAlojamientos(String ciudad) {
 		ArrayList<Alojamiento> listaAlojamientos = new ArrayList<Alojamiento>();
-		ResultSet result = modificarBBDD.cargarListaAlojamientos(ciudad);
+		ResultSet result = modificarBBDD.cargarAlojamientos(ciudad);
 		try {
 			while (result.next()) {
 				int codAlojamiento = result.getInt("COD_ALOJAMIENTO");
@@ -65,12 +65,13 @@ public class GestorBBDD {
 				else if(tipoAloj.equals("A"))
 				{
 					int piso = result.getInt("ALTURA");
-					listaAlojamientos.add(new Apartamento(codAlojamiento, ubicacion, nombre, desc, longitud, latitud, tarifaNormal, tarifaVerano, recargo, desayuno, mediaPension, pensionCompleta, imgurl, piso));
+					ArrayList<Estancia> estancias = cargarEstancias(codAlojamiento);
+					listaAlojamientos.add(new Apartamento(codAlojamiento, ubicacion, nombre, desc, longitud, latitud, tarifaNormal, tarifaVerano, recargo, desayuno, mediaPension, pensionCompleta, imgurl, piso, estancias));
 				}
 				else if(tipoAloj.equals("C"))
 				{
-					//FALTA DE AÑADIR LA CANTIDAD DE BAÑOS Y EL AREA
-					listaAlojamientos.add(new Casa(codAlojamiento, ubicacion, nombre, desc, longitud, latitud, tarifaNormal, tarifaVerano, recargo, desayuno, mediaPension, pensionCompleta, imgurl, 0, 0));
+					ArrayList<Estancia> estancias = cargarEstancias(codAlojamiento);
+					listaAlojamientos.add(new Casa(codAlojamiento, ubicacion, nombre, desc, longitud, latitud, tarifaNormal, tarifaVerano, recargo, desayuno, mediaPension, pensionCompleta, imgurl, estancias));
 				}
 				else
 				{
@@ -87,8 +88,8 @@ public class GestorBBDD {
 	 * 
 	 * @return
 	 */
-	public ArrayList<String> cargarListaAlojamientos() {
-		ResultSet result = modificarBBDD.cargarListaAlojamientos();
+	public ArrayList<String> cargarNombresAlojamientos() {
+		ResultSet result = modificarBBDD.cargarNombresAlojamientos();
 		ArrayList<String> destinos = new ArrayList<String>();
 		try {
 			while (result.next()) {
@@ -106,12 +107,12 @@ public class GestorBBDD {
 	 * @param codAlojamiento
 	 * @return
 	 */
-	public ArrayList<Habitacion> cargarListaHabitaciones(int codAlojamiento) {
-		ResultSet result = modificarBBDD.cargarListaHabitaciones(codAlojamiento);
+	public ArrayList<Habitacion> cargarHabitaciones(int codAlojamiento) {
+		ResultSet result = modificarBBDD.cargarHabitaciones(codAlojamiento);
 		ArrayList<Habitacion> habitaciones = new ArrayList<Habitacion>();
 		try {
 			while (result.next()) {
-				int codHabitacion = result.getInt("COD_DORMITORIO");
+				int codHabitacion = result.getInt("COD_HABITACION");
 				String nombre = result.getString("NOMBRE");
 				int ctaCamasSimples = result.getInt("CTD_CAMAS_SIMPLES");
 				int ctaCamasMatrimonio = result.getInt("CTD_CAMAS_MATRIMONIO");
@@ -138,7 +139,7 @@ public class GestorBBDD {
 		ArrayList<Habitacion> habitaciones = new ArrayList<Habitacion>();
 		try {
 			while (result.next()) {
-				int codHabitacion = result.getInt("COD_DORMITORIO");
+				int codHabitacion = result.getInt("COD_HABITACION");
 				int cantidad = result.getInt("CANTIDAD");
 				habitaciones.add(new Habitacion(codHabitacion, cantidad));
 	        }
@@ -156,7 +157,7 @@ public class GestorBBDD {
 	 * @return
 	 */
 	public ArrayList<Habitacion> habitacionesDisponibles(int codAlojamiento, Date fechaEntrada, Date fechaSalida) {
-		ArrayList<Habitacion> habitaciones = cargarListaHabitaciones(codAlojamiento);
+		ArrayList<Habitacion> habitaciones = cargarHabitaciones(codAlojamiento);
 		ArrayList<Habitacion> habitacionesReservadas = cargarHabitacionesReservadas(codAlojamiento, fechaEntrada, fechaSalida);
 		for (int i = 0; i < habitaciones.size(); i++) {
 			for (int j = 0; j < habitacionesReservadas.size(); j++) {
@@ -170,6 +171,28 @@ public class GestorBBDD {
 			}
 		}
 		return habitaciones;
+	}
+	
+	/**
+	 * 
+	 * @param codAlojamiento
+	 * @return
+	 */
+	public ArrayList<Estancia> cargarEstancias(int codAlojamiento) {
+		ResultSet result = modificarBBDD.cargarEstancias(codAlojamiento);
+		ArrayList<Estancia> estancias = new ArrayList<Estancia>();
+		try {
+			while (result.next()) {
+				int codEstancia = result.getInt("COD_ESTANCIA");
+				String nombre = result.getString("NOMBRE");
+				float tamano = result.getFloat("TAMANO");
+				int cantidad = result.getInt("CANTIDAD");
+				estancias.add(new Estancia(codEstancia, nombre, tamano, cantidad));
+	        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return estancias;
 	}
 	
 	/**
