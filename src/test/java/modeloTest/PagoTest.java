@@ -76,7 +76,7 @@ public class PagoTest {
         Alojamiento aloh = new Alojamiento(1, "", "", "", 1, 1, 1, 1.2f, 1.2f, 1.2f, 1, 1, "");
         ArrayList<Habitacion> habReservadas = null;
        
-        assertEquals(1.2f + 2, pago.calcularPrecio(aloh, fecha1, fecha2, habReservadas), 0.00001);   
+        assertEquals(1.2f+2, pago.calcularPrecio(aloh, fecha1, fecha2, habReservadas), 0.00001);   
     }
 
 

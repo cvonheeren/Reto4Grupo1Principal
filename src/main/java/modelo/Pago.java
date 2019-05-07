@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.concurrent.TimeUnit;
 
+
 /**
  * Realiza los calculos del pago del programa
  */
@@ -157,24 +158,30 @@ public class Pago {
 		int numHabitaciones = 0;
 		float contadorRecargo = 0;
 		
-		Calendar fecha1 = new GregorianCalendar();
-        fecha1.setTime(fechaEntrada);
-        Calendar fecha2 = new GregorianCalendar();
-        fecha2.setTime(fechaSalida);
-        Calendar fechaAux = new GregorianCalendar();
+		Calendar fecha1 =  new GregorianCalendar();
+		fecha1 = toCalendar(fechaEntrada);
+       //fecha1.setTime(fechaEntrada);
+        Calendar fecha2 =  new GregorianCalendar();
+        fecha2 = toCalendar(fechaSalida);
+        //fecha2.setTime(fechaSalida);
+        Calendar fechaAux =  new GregorianCalendar();
+        fechaAux = toCalendar(fechaEntrada);
         
         ArrayList<Calendar> lista = new  ArrayList<Calendar>();
         
-        System.out.println((fecha2.getTimeInMillis() - fecha1.getTimeInMillis())/86400000);
-        
         for (int i = 0; i < (fecha2.getTimeInMillis() - fecha1.getTimeInMillis())/86400000; i++) {
-        	fechaAux = Calendar.getInstance();
-        	fechaAux.setTime(fechaEntrada);
-        	fechaAux.add(Calendar.DATE, i);
+        	
+        	//fechaAux.setTime(fechaEntrada);
+        	fechaAux.add(Calendar.DAY_OF_YEAR, i);
         	lista.add(fechaAux);
 		}
         
         GestorDeFechas gestorF = new GestorDeFechas();
+        
+//        System.out.println(fechaEntrada);
+//        System.out.println(lista.get(0));
+//        System.out.println(lista.get(1));
+//        System.out.println(lista.get(2));
         
         for (int i = 0; i < lista.size(); i++) {
 			if(gestorF.comprobarSiEsVerano(lista.get(i)))
@@ -200,4 +207,10 @@ public class Pago {
 	    return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 	}
 
+	
+	public static Calendar toCalendar(Date date){ 
+		  Calendar cal = Calendar.getInstance();
+		  cal.setTime(date);
+		  return cal;
+		}
 }

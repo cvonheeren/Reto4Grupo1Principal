@@ -45,8 +45,8 @@ public class Alojamiento {
 		this.latitud = latitud;
 		this.tarifaNormal = tarifaNormal;
 		//hacer el select para cada alojamienro, de momento es general para todos un 20% mas
-		this.tarifaVerano = tarifaNormal * 1.2f;
-		this.recargo = tarifaNormal * 1.2f;
+		this.tarifaVerano = this.tarifaNormal * 1.2f;
+		this.recargo = this.tarifaNormal * 1.2f;
 		
 		this.desayuno = desayuno;
 		this.mediaPension = mediaPension;
