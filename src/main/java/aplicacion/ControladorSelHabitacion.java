@@ -92,16 +92,16 @@ public class ControladorSelHabitacion implements Initializable {
     		camas.setLayoutY(60);
     		
     		// precio
-    		Text precio = new Text("100€");
+    		/*Text precio = new Text(Principal.modelo.reserva);
     		precio.setLayoutX(675);
     		precio.setLayoutY(80);
     		precio.setStyle("-fx-font: 20 arial;");
-    		precio.setFill(Paint.valueOf("#0ab21b"));
+    		precio.setFill(Paint.valueOf("#0ab21b"));*/
     		
     		// label - descripcion del habitacion
-    		Text descripcion = new Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. ");
+    		/*Text descripcion = new Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. ");
     		descripcion.setLayoutX(170);
-    		descripcion.setLayoutY(85);
+    		descripcion.setLayoutY(85);*/
     		
     		// ChoiceBox - Cantidad de habitaciones
     		ArrayList<Integer> numHab = new ArrayList<Integer>();
@@ -117,7 +117,7 @@ public class ControladorSelHabitacion implements Initializable {
             });
     		
     		// añade los componentes al anchorpane
-        	anchorPane.getChildren().addAll(nombreHab, descripcion, camas, iconoCama, precio, cb);
+        	anchorPane.getChildren().addAll(nombreHab, camas, iconoCama, cb);
         	
         	AnchorPane paneSuperior = new AnchorPane();
         	paneSuperior.getChildren().addAll(anchorPane);

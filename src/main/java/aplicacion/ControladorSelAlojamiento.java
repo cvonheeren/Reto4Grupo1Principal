@@ -93,7 +93,12 @@ public class ControladorSelAlojamiento implements Initializable {
 		fechaSalida = deshabilitarFechas(fechaSalida, LocalDate.now().plusDays(1));
 		
 		cargarAutocompletar();
-		cargarAlojamientos();
+		Text busqueda = new Text("No ha realizado ninguna busqueda aun.");
+		busqueda.setLayoutX(245);
+		busqueda.setLayoutY(70);
+		busqueda.setFont(new Font("arial",16));
+		contenedor.getChildren().setAll(busqueda);
+//		cargarAlojamientos();
 	}
     
     @FXML

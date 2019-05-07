@@ -97,6 +97,7 @@ public class ControladorPasos implements Initializable {
 				
 			case "idTabServ":
 				if(Principal.modelo.cliente != null) {
+					Principal.aplicacion.controladorPago.ActulizarTarifa();
 					tabPane.getSelectionModel().select(idTabPago);
 				} else {
 					Principal.aplicacion.controladorPasos=this;
@@ -110,7 +111,7 @@ public class ControladorPasos implements Initializable {
 					int codReserva = Principal.modelo.gestorBBDD.insertarReserva(Principal.modelo.reserva);
 			    	Principal.modelo.reserva.setCodReserva(codReserva);
 		    	} else {
-		    		JOptionPane.showMessageDialog(new JFrame(), "Aun no ha introducido todo el dinero", "Error",JOptionPane.ERROR_MESSAGE);
+		    		JOptionPane.showMessageDialog(new JFrame(), "Aun no ha introducido todo el dinero", "Error", JOptionPane.ERROR_MESSAGE);
 		    	}
 				break;
 				
