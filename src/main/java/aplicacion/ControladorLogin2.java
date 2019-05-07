@@ -88,7 +88,7 @@ public class ControladorLogin2 implements Initializable {
 				Principal.modelo.reserva.setCliente(new Cliente(dni, pass));
 				try {Principal.aplicacion.controladorPasos.SesionIniciada();}catch(Exception e) {}
 				try {Principal.aplicacion.controladorSelAlojamiento.SesionIniciada();}catch(Exception e) {}
-				
+				try {Principal.aplicacion.controladorInformacionAloj.SesionIniciada();}catch(Exception e) {}
 				Principal.aplicacion.stageLogin.close();
 			} else {
 				Principal.aplicacion.mostrarMensaje(paneLogin, "DNI y/o contraseña incorrectos.");

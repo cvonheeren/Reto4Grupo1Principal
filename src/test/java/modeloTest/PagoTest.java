@@ -1,5 +1,9 @@
 package modeloTest;
 import static org.junit.Assert.*;
+
+import java.sql.Date;
+import java.util.ArrayList;
+
 import org.junit.Test;
 import modelo.*;
 
@@ -64,5 +68,17 @@ public class PagoTest {
 		String devuelve = "1 billetes de 10€ \n" + "1 monedas de 2€ \n" + "1 monedas de 1€ \n" +  "1 monedas de 0.5€ \n";
 		assertEquals(devuelve, pago.calcularMonedasBilletes(sobra));	
 	}
+	
+	@Test
+    public void testCalcularPrecio() {
+        Date fecha1 = new Date(2019, 8, 15);
+        Date fecha2 = new Date(2019, 8, 18);
+        Alojamiento aloh = new Alojamiento(1, "", "", "", 1, 1, 1, 1.2f, 1.2f, 1.2f, 1, 1, "");
+        ArrayList<Habitacion> habReservadas = null;
+       
+        assertEquals(1.2f + 2, pago.calcularPrecio(aloh, fecha1, fecha2, habReservadas), 0.00001);   
+    }
+
+
 
 }
