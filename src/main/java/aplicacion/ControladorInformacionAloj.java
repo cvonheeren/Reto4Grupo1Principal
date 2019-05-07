@@ -38,6 +38,25 @@ public class ControladorInformacionAloj implements Initializable {
 	
     @FXML
     private JFXButton atras, reservar;
+    
+    @FXML
+    private Label lblSaludo;
+
+    @FXML
+    private Hyperlink lblSesion;
+    
+    @FXML
+    void IniciarCerrar(ActionEvent event) {
+    	Principal.aplicacion.controladorInformacionAloj=this;
+    	if(Principal.modelo.cliente==null)
+		{
+			Principal.aplicacion.CargarSceneLogin();
+		}
+		else
+		{
+			Principal.iniciarPrograma();
+		}
+    }
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -136,5 +155,10 @@ public class ControladorInformacionAloj implements Initializable {
 		}
 		return str;
     }
+    
+	public void SesionIniciada() {
+		lblSaludo.setText("Hola, " + Principal.modelo.cliente.getDni());
+		lblSesion.setText("Cerrar Sesion");
+	}
 	
 }

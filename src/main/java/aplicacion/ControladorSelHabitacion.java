@@ -113,7 +113,10 @@ public class ControladorSelHabitacion implements Initializable {
     		cb.setLayoutX(675);
     		cb.setLayoutY(120);
     		cb.setOnAction((e) -> {
-    			guardarHabitacion(habitacion, cb.getValue());
+    			if(cb.getValue()>0)
+    				guardarHabitacion(habitacion, cb.getValue());
+    			else
+    				Principal.modelo.reserva.removeHabitacion(habitacion);
             });
     		
     		// añade los componentes al anchorpane

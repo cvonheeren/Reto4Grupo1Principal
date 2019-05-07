@@ -32,7 +32,7 @@ public class GenerarFactura {
 			writer.println("Nombre alojamiento: " + reserva.getAlojamiento().getNombre());
 			writer.println("Fecha de entrada: " + reserva.getFechaEntrada());
 			writer.println("Fecha de salida: " + reserva.getFechaSalida());
-			writer.println("Precio: " + reserva.getPrecio());
+			writer.println("Precio: " + reserva.getPrecio() + " €");
 			writer.println();
 			writer.println();
 			writer.println("=== DATOS DEL ALOJAMIENTO ===");

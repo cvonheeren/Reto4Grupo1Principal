@@ -35,6 +35,8 @@ public class Aplicacion {
 	public Stage stagePopupInfo;
 	public ControladorSelAlojamiento controladorSelAlojamiento;
 	public ControladorPago controladorPago;
+	public ControladorInformacionAloj controladorInformacionAloj;
+	public ControladorFactura controladorFactura;
 	
 	@FXML
     private Pane anchorPaneBase;
@@ -121,6 +123,7 @@ public class Aplicacion {
 			stagePopupInfo = new Stage(StageStyle.TRANSPARENT);
 			stagePopupInfo.setTitle("FXML Welcome");
 			stagePopupInfo.setScene(scene);
+			stagePopupInfo.setAlwaysOnTop(true);
 			stagePopupInfo.show();
 			centrarPopup(bounds);
 		}
@@ -162,6 +165,7 @@ public class Aplicacion {
             event.consume();
         }
     };
+	
 
 	
     

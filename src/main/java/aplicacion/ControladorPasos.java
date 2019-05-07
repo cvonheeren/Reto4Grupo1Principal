@@ -1,6 +1,8 @@
 package aplicacion;
 
 import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -41,7 +43,7 @@ public class ControladorPasos implements Initializable {
 	
 	
 	@FXML
-    private JFXButton btnLogin, btnSiguiente, btnAtras, btnInformacion, btnCancelar;
+    private JFXButton btnLogin, btnSiguiente, btnAtras, btnCancelar;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -108,8 +110,14 @@ public class ControladorPasos implements Initializable {
 			case "idTabPago":
 				if (Principal.modelo.pago.calcularDineroRestante() == 0) {
 					tabPane.getSelectionModel().select(idTabFin);
+					Date fechaCompra = Date.valueOf(LocalDate.now());
+					Principal.modelo.reserva.setFechaCompra(fechaCompra);
 					int codReserva = Principal.modelo.gestorBBDD.insertarReserva(Principal.modelo.reserva);
+					for (Habitacion h: Principal.modelo.reserva.getHabitacionesReservadas()) {
+						Principal.modelo.gestorBBDD.modificarBBDD.insertarReservaHabitaciones(codReserva, h.getCodHabitacion(), h.getCantidad());
+					}
 			    	Principal.modelo.reserva.setCodReserva(codReserva);
+			    	Principal.aplicacion.controladorFactura.ActualizarDatos();
 		    	} else {
 		    		JOptionPane.showMessageDialog(new JFrame(), "Aun no ha introducido todo el dinero", "Error", JOptionPane.ERROR_MESSAGE);
 		    	}
