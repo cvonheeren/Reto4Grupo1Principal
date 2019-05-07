@@ -19,7 +19,8 @@ import javafx.scene.layout.AnchorPane;
 
 public class ControladorPago implements Initializable {
 
-    @FXML
+	
+	@FXML
     private Label precio, introducido, restante;
 
     @FXML
@@ -30,13 +31,20 @@ public class ControladorPago implements Initializable {
     
     private float[] monedasBilletes = {500, 200, 100, 50, 20, 10, 5, 2, 1, 0.50f, 0.20f, 0.10f, 0.05f, 0.02f, 0.01f };
     public JFXButton[] botonesMonedasBilletes = new JFXButton[15];
+
+	
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+    	Principal.aplicacion.controladorPago=this;
+    	crearBotones();
+    }
+    
+    public void ActulizarTarifa()
+    {
     	precio.setText(Float.toString(Principal.modelo.pago.getPrecioTotal()) + " €");
     	introducido.setText("0 €");
     	restante.setText(Float.toString(Principal.modelo.pago.getPrecioTotal()) + " €");
-    	crearBotones();
     }
     
     public void crearBotones() {

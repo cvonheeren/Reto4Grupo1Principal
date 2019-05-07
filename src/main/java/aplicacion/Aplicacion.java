@@ -34,6 +34,7 @@ public class Aplicacion {
 	public ControladorPasos controladorPasos;
 	public Stage stagePopupInfo;
 	public ControladorSelAlojamiento controladorSelAlojamiento;
+	public ControladorPago controladorPago;
 	
 	@FXML
     private Pane anchorPaneBase;
@@ -161,6 +162,7 @@ public class Aplicacion {
             event.consume();
         }
     };
+
 	
     
     public void mostrarMensaje(AnchorPane anchorpane, String mensaje) {
