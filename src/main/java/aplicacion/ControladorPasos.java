@@ -114,6 +114,7 @@ public class ControladorPasos implements Initializable {
 					Principal.modelo.reserva.setFechaCompra(fechaCompra);
 					int codReserva = Principal.modelo.gestorBBDD.insertarReserva(Principal.modelo.reserva);
 			    	Principal.modelo.reserva.setCodReserva(codReserva);
+			    	Principal.aplicacion.controladorFactura.ActualizarDatos();
 		    	} else {
 		    		JOptionPane.showMessageDialog(new JFrame(), "Aun no ha introducido todo el dinero", "Error", JOptionPane.ERROR_MESSAGE);
 		    	}
