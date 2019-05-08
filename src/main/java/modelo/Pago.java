@@ -171,7 +171,7 @@ public class Pago {
         //ArrayList<Calendar> lista = setDiasSeleccionados(fecha1, fecha2);
         
         System.out.println(fechaEntrada);
-        System.out.println(lista.get(0));
+       /* System.out.println(lista.get(0));
         System.out.println(lista.get(1));
         System.out.println(lista.get(2));
         
@@ -182,7 +182,7 @@ public class Pago {
 				contadorRecargo = contadorRecargo + (tarifa * alojamiento.tarifaVerano);
 			if(gestorF.tipoDeFecha(lista.get(i)))
 				contadorRecargo = contadorRecargo + (tarifa * alojamiento.recargo);
-		}
+		}*/
 		
 		return (tarifaPDia * numNoches) + contadorRecargo;
 	}
