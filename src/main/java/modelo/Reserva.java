@@ -3,6 +3,8 @@ package modelo;
 import java.sql.Date;
 import java.util.ArrayList;
 
+import core.Principal;
+
 public class Reserva {
 
 	private int codReserva;
@@ -116,6 +118,11 @@ public class Reserva {
 
 	public void setCtdHabitaciones(int ctdHabitaciones) {
 		this.ctdHabitaciones = ctdHabitaciones;
+	}
+	
+	public float getPrecioTotal()
+	{
+		return alojamiento.getPrecioTotalPorDia() * GestorDeFechas.DiasDeDiferencia(GestorDeFechas.toCalendar(fechaEntrada), GestorDeFechas.toCalendar(fechaSalida));
 	}
 	
 }

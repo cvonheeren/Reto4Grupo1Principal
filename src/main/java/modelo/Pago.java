@@ -153,9 +153,13 @@ public class Pago {
 	 */
 	public float calcularPrecio(Alojamiento alojamiento, Date fechaEntrada, Date fechaSalida, ArrayList<Habitacion> habReservadas) {
 		// tarifa alojamiento x nº de noches x nº de habitaciones
-		float tarifa = alojamiento.getTarifaNormal();
+		float tarifaPDia = 0;
+		for(int i=0;i<habReservadas.size();i++)
+		{
+			tarifaPDia = tarifaPDia + (habReservadas.get(i).tarifaNormal * habReservadas.get(i).getCantidad());
+		}
+		
 		float numNoches = diferenciaDias(fechaEntrada, fechaSalida);
-		int numHabitaciones = 0;
 		float contadorRecargo = 0;
 		
 //		Calendar fecha1 =  new GregorianCalendar();
@@ -190,10 +194,7 @@ public class Pago {
 //				contadorRecargo = contadorRecargo + (tarifa * alojamiento.recargo);
 //		}
 		
-		for (Habitacion h: habReservadas) {
-			numHabitaciones += h.getCantidad();
-		}
-		return (tarifa * numNoches * numHabitaciones) + contadorRecargo;
+		return (tarifaPDia * numNoches) + contadorRecargo;
 	}
 	
 	/**

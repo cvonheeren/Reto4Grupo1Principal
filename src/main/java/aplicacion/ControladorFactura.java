@@ -104,7 +104,7 @@ public class ControladorFactura implements Initializable {
 		cod.setText(Integer.toString(Principal.modelo.reserva.getAlojamiento().getCodAlojamiento()));
 		tipo.setText("Hotel"); // CAMBIAR!!
 		nombre.setText(Principal.modelo.reserva.getAlojamiento().getNombre());
-		precio.setText(Principal.modelo.reserva.getAlojamiento().getTarifaNormal() + "€");
+		precio.setText(Principal.modelo.reserva.getPrecioTotal() + "€");
 		fechaEntrada.setText(Principal.modelo.reserva.getFechaEntrada().toLocalDate().toString());
 		fechaSalida.setText(Principal.modelo.reserva.getFechaSalida().toLocalDate().toString());
 		String str = "";

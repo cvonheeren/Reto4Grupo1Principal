@@ -1,5 +1,6 @@
 package modelo;
 
+import java.sql.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -65,6 +66,19 @@ public class GestorDeFechas {
         	return true;
         else
         	return false;
+    }
+    
+    public static Calendar toCalendar(Date date){ 
+		  Calendar cal = Calendar.getInstance();
+		  cal.setTime(date);
+		  return cal;
+		}
+    
+    public static int DiasDeDiferencia(Calendar fecha1, Calendar fecha2)
+    {
+    	
+    	return (int) ((fecha1.getTimeInMillis()-fecha2.getTimeInMillis())/86400000);
+    			
     }
 	
 }

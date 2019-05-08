@@ -10,8 +10,6 @@ public class Alojamiento {
 	protected String descripcion;
 	protected float longitud;
 	protected float latitud;
-	protected float tarifaNormal;
-	protected float tarifaVerano;
 	protected float recargo;
 	protected float desayuno;
 	protected float mediaPension;
@@ -35,7 +33,7 @@ public class Alojamiento {
 	 * @param pensionCompleta
 	 */
 	public Alojamiento(int codAlojamiento, String ubicacion, String nombre, String descripcion, float longitud,
-			float latitud, float tarifaNormal, float tarifaVerano, float recargo, float desayuno, float mediaPension,
+			float latitud, float recargo, float desayuno, float mediaPension,
 			float pensionCompleta, String imgurl) {
 		this.codAlojamiento = codAlojamiento;
 		this.ubicacion = ubicacion;
@@ -43,10 +41,6 @@ public class Alojamiento {
 		this.descripcion = descripcion;
 		this.longitud = longitud;
 		this.latitud = latitud;
-		this.tarifaNormal = tarifaNormal;
-		//hacer el select para cada alojamienro, de momento es general para todos un 20% mas
-		this.tarifaVerano = this.tarifaNormal * 1.2f;
-		this.recargo = this.tarifaNormal * 1.2f;
 		
 		this.desayuno = desayuno;
 		this.mediaPension = mediaPension;
@@ -106,21 +100,6 @@ public class Alojamiento {
 		this.latitud = latitud;
 	}
 
-	public float getTarifaNormal() {
-		return tarifaNormal;
-	}
-
-	public void setTarifaNormal(float tarifaNormal) {
-		this.tarifaNormal = tarifaNormal;
-	}
-
-	public float getTarifaVerano() {
-		return tarifaVerano;
-	}
-
-	public void setTarifaVerano(float tarifaVerano) {
-		this.tarifaVerano = tarifaVerano;
-	}
 
 	public float getRecargo() {
 		return recargo;
@@ -168,6 +147,28 @@ public class Alojamiento {
 
 	public void setHabitaciones(ArrayList<Habitacion> habitaciones) {
 		this.habitaciones = habitaciones;
+	}
+	
+	public float getPrecioTotalPorDia()
+	{
+		float precioTotal = 0;
+		for(int i=0;i<habitaciones.size();i++)
+		{
+			precioTotal=habitaciones.get(i).tarifaNormal;
+		}
+		return precioTotal;
+	}
+	
+	public float getPrecioHabBarata()
+	{
+		float menor=99999;
+		for(int i=0;i<habitaciones.size();i++)
+		{
+			float tarifaActual=habitaciones.get(i).getTarifaNormal();
+			if(habitaciones.get(i).getTarifaNormal()<menor)
+				menor=tarifaActual;
+		}
+		return menor;
 	}
 
 	@Override

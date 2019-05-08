@@ -12,7 +12,12 @@ import javafx.util.Callback;
 
 public class GestorValidaciones {
 
-	ControladorLoginRegistro gestor = Principal.aplicacion.controladorLoginRegistro;
+	public ControladorLoginRegistro gestor;
+	
+	public GestorValidaciones()
+	{
+		
+	}
 	
 	/**
 	 * 
