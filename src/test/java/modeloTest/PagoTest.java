@@ -2,7 +2,13 @@ package modeloTest;
 import static org.junit.Assert.*;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import org.junit.Test;
 import modelo.*;
@@ -78,7 +84,35 @@ public class PagoTest {
        
         assertEquals(1.2f+2, pago.calcularPrecio(aloh, fecha1, fecha2, habReservadas), 0.00001);   
     }
-
-
+	
+	
+	@Test
+    public void testSetDiasSelecc() {
+		LocalDate fecha1 = LocalDate.of(2019, 8, 15);
+		LocalDate fecha2 = LocalDate.of(2019, 8, 16);
+		LocalDate fecha3 = LocalDate.of(2019, 8, 17);
+        
+ 
+       
+        
+		LocalDate[] dias = new LocalDate[3];
+       
+        dias[1] = fecha1;
+        dias[2] = fecha2;
+        dias[3] = fecha3;
+        
+        SimpleDateFormat formmat1 = new SimpleDateFormat("dd-mm-yyyy");
+        
+        for (int i = 0; i < dias.length; i++) {
+			System.out.println(formmat1.format(dias[i]));
+        	
+		}
+       
+       
+        assertEquals(dias, pago.setDiasSeleccionados(fecha1, fecha2));   
+    }
+	
+	
+	
 
 }

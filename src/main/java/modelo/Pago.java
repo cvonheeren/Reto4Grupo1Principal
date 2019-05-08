@@ -1,6 +1,7 @@
 package modelo;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -158,37 +159,26 @@ public class Pago {
 		int numHabitaciones = 0;
 		float contadorRecargo = 0;
 		
-//		Calendar fecha1 =  new GregorianCalendar();
-//		fecha1 = toCalendar(fechaEntrada);
-//       //fecha1.setTime(fechaEntrada);
-//        Calendar fecha2 =  new GregorianCalendar();
-//        fecha2 = toCalendar(fechaSalida);
-//        //fecha2.setTime(fechaSalida);
-//        Calendar fechaAux =  new GregorianCalendar();
-//        fechaAux = toCalendar(fechaEntrada);
-//        
-//        ArrayList<Calendar> lista = new  ArrayList<Calendar>();
-//
-//        for (int i = 0; i < (fecha2.getTimeInMillis() - fecha1.getTimeInMillis())/86400000; i++) {
-//        	
-//        	//fechaAux.setTime(fechaEntrada);
-//        	fechaAux.add(Calendar.DAY_OF_YEAR, i);
-//        	lista.add(fechaAux);
-//		}
-//        
-//        GestorDeFechas gestorF = new GestorDeFechas();
-//        
-//        System.out.println(fechaEntrada);
-//        System.out.println(lista.get(0));
-//        System.out.println(lista.get(1));
-//        System.out.println(lista.get(2));
-//        
-//        for (int i = 0; i < lista.size(); i++) {
-//			if(gestorF.comprobarSiEsVerano(lista.get(i)))
-//				contadorRecargo = contadorRecargo + (tarifa * alojamiento.tarifaVerano);
-//			if(gestorF.tipoDeFecha(lista.get(i)))
-//				contadorRecargo = contadorRecargo + (tarifa * alojamiento.recargo);
-//		}
+		Calendar fecha1 =  new GregorianCalendar();
+		fecha1 = toCalendar(fechaEntrada);
+        Calendar fecha2 =  new GregorianCalendar();
+        fecha2 = toCalendar(fechaSalida);
+        
+        //ArrayList<Calendar> lista = setDiasSeleccionados(fecha1, fecha2);
+        
+        System.out.println(fechaEntrada);
+        System.out.println(lista.get(0));
+        System.out.println(lista.get(1));
+        System.out.println(lista.get(2));
+        
+        GestorDeFechas gestorF = new GestorDeFechas();
+        
+        for (int i = 0; i < lista.size(); i++) {
+			if(gestorF.comprobarSiEsVerano(lista.get(i)))
+				contadorRecargo = contadorRecargo + (tarifa * alojamiento.tarifaVerano);
+			if(gestorF.tipoDeFecha(lista.get(i)))
+				contadorRecargo = contadorRecargo + (tarifa * alojamiento.recargo);
+		}
 		
 		for (Habitacion h: habReservadas) {
 			numHabitaciones += h.getCantidad();
@@ -207,10 +197,33 @@ public class Pago {
 	    return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 	}
 
-	
-	public static Calendar toCalendar(Date date){ 
+	/**
+	 * 
+	 * @param date
+	 * @return
+	 */
+	public Calendar toCalendar(Date date){ 
 		  Calendar cal = Calendar.getInstance();
 		  cal.setTime(date);
 		  return cal;
+	}
+	
+	/**
+	 * 
+	 * @param fecha1
+	 * @param fecha2
+	 * @return
+	 */
+	public ArrayList<LocalDate> setDiasSeleccionados(LocalDate fecha1, LocalDate fecha2) {
+		ArrayList<LocalDate> dias = new ArrayList<LocalDate>();
+		LocalDate fechaAux;
+		fechaAux = fecha1;
+		
+		for (int i = 0; i < fecha2.getDayOfYear() - fecha1.getDayOfYear(); i++) {
+			fechaAux.plusDays(i);
+			dias.add(fechaAux);
 		}
+		
+		return dias;
+	}
 }
