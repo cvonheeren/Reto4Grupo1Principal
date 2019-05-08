@@ -83,7 +83,7 @@ public class Aplicacion {
 		if (FXML != null) {
 			Scene scene = new Scene(FXML);
 			scene.getStylesheets().add("reto4.css");
-			stage.setTitle("FXML Welcome");
+			stage.setTitle("BiDaiOn ALPHA");
 			stage.setScene(scene);
 			stage.show();
 		}
@@ -109,7 +109,7 @@ public class Aplicacion {
 			sceneLogin = new Scene(FXML);
 			sceneLogin.getStylesheets().add("reto4.css");
 			stageLogin = new Stage();
-			stageLogin.setTitle("FXML Welcome");
+			stageLogin.setTitle("Iniciar sesion");
 			stageLogin.setScene(sceneLogin);
 			stageLogin.show();
 		}
@@ -119,11 +119,12 @@ public class Aplicacion {
 	{
 		Parent FXML = loadFXML("PopupInfo.fxml");
 		if (FXML != null) {
+			try{stagePopupInfo.close();}catch(Exception e) {}
 			Scene scene = new Scene(FXML);
 			scene.setFill(Color.TRANSPARENT);
 			scene.getStylesheets().add("reto4.css");
 			stagePopupInfo = new Stage(StageStyle.TRANSPARENT);
-			stagePopupInfo.setTitle("FXML Welcome");
+			stagePopupInfo.setTitle("Informacion");
 			stagePopupInfo.setScene(scene);
 			stagePopupInfo.setAlwaysOnTop(true);
 			stagePopupInfo.show();
