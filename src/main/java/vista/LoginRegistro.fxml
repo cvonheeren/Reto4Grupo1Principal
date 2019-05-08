@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="paneLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="702.0" prefWidth="906.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorLogin">
+<AnchorPane fx:id="paneLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="702.0" prefWidth="906.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorLoginRegistro">
 	<children>
       <Rectangle fill="#1976d2" height="181.0" layoutX="-8.0" layoutY="528.0" smooth="false" stroke="#1976d2" strokeType="INSIDE" strokeWidth="0.0" width="921.0" />
 		<Label layoutX="582.0" layoutY="87.0" text="¿No estás registrado?">

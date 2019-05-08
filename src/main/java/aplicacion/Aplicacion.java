@@ -37,6 +37,7 @@ public class Aplicacion {
 	public ControladorPago controladorPago;
 	public ControladorInformacionAloj controladorInformacionAloj;
 	public ControladorFactura controladorFactura;
+	public ControladorLoginRegistro controladorLoginRegistro;
 	private Scene sceneLogin;
 	
 	@FXML
@@ -69,6 +70,10 @@ public class Aplicacion {
 		stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);
 	}
 	
+	/**
+	 * 
+	 * @param bounds
+	 */
 	public void centrarPopup(Bounds bounds) {
 		stagePopupInfo.setX(stage.getX()+700);
 		stagePopupInfo.setY(stage.getY()+525);
@@ -89,6 +94,10 @@ public class Aplicacion {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param FXMLLink
+	 */
 	public void verMapa(String FXMLLink) {
 		Parent FXML = loadFXML(FXMLLink);
 		if (FXML != null) {
@@ -101,6 +110,9 @@ public class Aplicacion {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void CargarSceneLogin()
 	{
 		Parent FXML = loadFXML("LoginRegistro.fxml");
@@ -115,6 +127,10 @@ public class Aplicacion {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param bounds
+	 */
 	public void CargarpopupInfo(Bounds bounds)
 	{
 		Parent FXML = loadFXML("PopupInfo.fxml");
@@ -170,7 +186,11 @@ public class Aplicacion {
 	
 
 	
-    
+    /**
+     * 
+     * @param anchorpane
+     * @param mensaje
+     */
     public void mostrarMensaje(AnchorPane anchorpane, String mensaje) {
 		Text nodo = new Text(mensaje);
 		snackbar = new JFXSnackbar(anchorpane);
@@ -178,6 +198,12 @@ public class Aplicacion {
 		snackbar.getStylesheets().setAll("reto4.css");
 	}
     
+    
+    /**
+     * 
+     * @param pregunta
+     * @return
+     */
     public boolean VentanaSiNo(String pregunta)
     {
     	Alert closeConfirmation = new Alert(
