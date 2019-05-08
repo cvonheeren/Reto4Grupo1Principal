@@ -21,6 +21,7 @@ import modelo.Casa;
 import modelo.Estancia;
 import modelo.Habitacion;
 import modelo.Hotel;
+import modelo.Reserva;
 
 public class ControladorInformacionAloj implements Initializable {
 	
@@ -61,7 +62,8 @@ public class ControladorInformacionAloj implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
-		Alojamiento alojamiento = Principal.modelo.reserva.getAlojamiento();
+		Reserva reserva = Principal.modelo.reserva;
+		Alojamiento alojamiento = reserva.getAlojamiento();
 		nombAloj.setText(alojamiento.getNombre());
 		descAloj.setText(alojamiento.getDescripcion());
 		img.setImage(new Image (alojamiento.getImgurl()));
@@ -71,7 +73,7 @@ public class ControladorInformacionAloj implements Initializable {
 		verMapa.setLayoutX(tamanoUbicacion);
 		
 		// precio
-		precio.setText(alojamiento.getTarifaNormal() + "€");
+		precio.setText(reserva.getPrecioTotal() + "€");
 		precio.setStyle("-fx-font: 20 arial;");
 //		precio.setFill(Paint.valueOf("#0ab21b"));
 		

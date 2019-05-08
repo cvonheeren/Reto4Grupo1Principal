@@ -332,7 +332,9 @@ public class ControladorSelAlojamiento implements Initializable {
 	    	}
     		
     		// precio
-    		Text precio = new Text(alojamiento.getTarifaNormal() + "€");
+	    	
+	    	
+    		Text precio = new Text(alojamiento.getPrecioHabBarata() + "€");
     		precio.setLayoutX(660);
     		precio.setLayoutY(40);
     		precio.setStyle("-fx-font: 20 arial;");

@@ -9,6 +9,12 @@ public class Habitacion {
 	private int ctaCamasMatrimonio;
 	private int ctaCamasInfantil;
 	private int cantidad;
+	protected float tarifaNormal;
+	protected float tarifaVerano;
+	protected float tarifaFestivo;
+	protected String descripcion;
+
+
 	
 	/**
 	 * Habitaciones de los hoteles
@@ -18,24 +24,45 @@ public class Habitacion {
 	 * @param numeroCamas Numero de camas
 	 * @param tipoCama Tipo de cama
 	 */
-	public Habitacion(int codHabitacion, String nombre, int ctaCamasSimples, int ctaCamasMatrimonio, int ctaCamasInfantil, float tamano, int cantidad) {
+	public Habitacion(int codHabitacion, String nombre, float tamano, int ctaCamasSimples, int ctaCamasMatrimonio,
+			int ctaCamasInfantil, int cantidad, float tarifaNormal, float tarifaVerano, float tarifaFestivo,
+			String descripcion) {
+		super();
 		this.codHabitacion = codHabitacion;
 		this.nombre = nombre;
+		this.tamano = tamano;
 		this.ctaCamasSimples = ctaCamasSimples;
 		this.ctaCamasMatrimonio = ctaCamasMatrimonio;
 		this.ctaCamasInfantil = ctaCamasInfantil;
-		this.tamano = tamano;
 		this.cantidad = cantidad;
+		this.tarifaNormal = tarifaNormal;
+		this.tarifaVerano = tarifaVerano;
+		this.tarifaFestivo = tarifaFestivo;
+		this.descripcion = descripcion;
 	}
 	
+
+
 	public Habitacion(int codHabitacion, int cantidad) {
 		this.codHabitacion = codHabitacion;
 		this.cantidad = cantidad;
 	}
 	
-	public Habitacion() {
-		
+
+	
+
+
+	public String getDescripcion() {
+		return descripcion;
 	}
+
+
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+
 
 	public int getCodHabitacion() {
 		return codHabitacion;
@@ -92,5 +119,30 @@ public class Habitacion {
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
+	
+	public float getTarifaNormal() {
+		return tarifaNormal;
+	}
+
+	public void setTarifaNormal(float tarifaNormal) {
+		this.tarifaNormal = tarifaNormal;
+	}
+
+	public float getTarifaVerano() {
+		return tarifaVerano;
+	}
+
+	public void setTarifaVerano(float tarifaVerano) {
+		this.tarifaVerano = tarifaVerano;
+	}
+
+	public float getTarifaFestivo() {
+		return tarifaFestivo;
+	}
+
+	public void setTarifaFestivo(float tarifaFestivo) {
+		this.tarifaFestivo = tarifaFestivo;
+	}
+
 	
 }
