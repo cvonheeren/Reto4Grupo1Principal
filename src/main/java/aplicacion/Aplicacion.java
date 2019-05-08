@@ -103,7 +103,7 @@ public class Aplicacion {
 
 	public void CargarSceneLogin()
 	{
-		Parent FXML = loadFXML("Login2.fxml");
+		Parent FXML = loadFXML("LoginRegistro.fxml");
 		if (FXML != null) {
 			try{stageLogin.close();}catch(Exception e) {}
 			sceneLogin = new Scene(FXML);
