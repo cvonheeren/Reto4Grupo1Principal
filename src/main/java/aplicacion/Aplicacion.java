@@ -37,6 +37,7 @@ public class Aplicacion {
 	public ControladorPago controladorPago;
 	public ControladorInformacionAloj controladorInformacionAloj;
 	public ControladorFactura controladorFactura;
+	private Scene sceneLogin;
 	
 	@FXML
     private Pane anchorPaneBase;
@@ -104,11 +105,12 @@ public class Aplicacion {
 	{
 		Parent FXML = loadFXML("Login2.fxml");
 		if (FXML != null) {
-			Scene scene = new Scene(FXML);
-			scene.getStylesheets().add("reto4.css");
+			try{stageLogin.close();}catch(Exception e) {}
+			sceneLogin = new Scene(FXML);
+			sceneLogin.getStylesheets().add("reto4.css");
 			stageLogin = new Stage();
 			stageLogin.setTitle("FXML Welcome");
-			stageLogin.setScene(scene);
+			stageLogin.setScene(sceneLogin);
 			stageLogin.show();
 		}
 	}
@@ -175,5 +177,24 @@ public class Aplicacion {
 		snackbar.enqueue(new SnackbarEvent(nodo));
 		snackbar.getStylesheets().setAll("reto4.css");
 	}
+    
+    public boolean VentanaSiNo(String pregunta)
+    {
+    	Alert closeConfirmation = new Alert(
+                Alert.AlertType.CONFIRMATION,
+                pregunta
+        );
+        Button exitButton = (Button) closeConfirmation.getDialogPane().lookupButton(
+                ButtonType.OK
+        );
+        exitButton.setText("Si");
+
+        Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
+        if (!ButtonType.OK.equals(closeResponse.get())) {
+            return false;
+        }
+        else
+        	return true;
+    }
 
 }

@@ -76,7 +76,11 @@ public class ControladorPasos implements Initializable {
 	
 	@FXML
     void cancelar(ActionEvent event) {
-    	Principal.aplicacion.CambiarScene("SeleccionAlojamiento.fxml");
+		if(Principal.aplicacion.VentanaSiNo("¿Desea cancelar la compra?"))
+		{
+			Principal.aplicacion.CambiarScene("SeleccionAlojamiento.fxml");
+		}
+    	
     }
 
     @FXML
@@ -174,5 +178,6 @@ public class ControladorPasos implements Initializable {
 		lblSesion.setText("Cerrar Sesion");
 			
 	}
+	
 
 }
