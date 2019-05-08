@@ -136,6 +136,11 @@ public class ControladorRegistro implements Initializable {
     	return true;
     }
 	
+    /**
+     * Valida que el dni este en el formato correcto
+     * @param nif
+     * @return
+     */
     public boolean validarNif(String nif) {
         boolean correcto = false;
         Pattern pattern = Pattern.compile("(\\d{1,8})([TRWAGMYFPDXBNJZSQVHLCKEtrwagmyfpdxbnjzsqvhlcke])");
@@ -158,6 +163,11 @@ public class ControladorRegistro implements Initializable {
         return correcto;
     }
     
+    /**
+     * Valida que la pass este en el formato correcto
+     * @param password
+     * @return
+     */
     public boolean validarPass(String password) {
 		 String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.])(?=\\S+$).{8,}";
 	     if(password.matches(pattern))

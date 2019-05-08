@@ -45,7 +45,7 @@
 				   </opaqueInsets>
 				</JFXTextField>
 				<JFXPasswordField fx:id="contrasenaReg" focusColor="#f57c00" layoutX="40.0" layoutY="200.0" prefHeight="40.0" prefWidth="300.0" promptText="CONTRASEÑA" unFocusColor="#1976d2" />
-				<JFXPasswordField fx:id="contrasenaRegRep" focusColor="#f57c00" layoutX="40.0" layoutY="260.0" prefHeight="40.0" prefWidth="300.0" promptText="REPITA CONTRASEÑA" unFocusColor="#1976d2" />
+				<JFXPasswordField fx:id="contrasenaRepReg" focusColor="#f57c00" layoutX="40.0" layoutY="260.0" prefHeight="40.0" prefWidth="300.0" promptText="REPITA CONTRASEÑA" unFocusColor="#1976d2" />
 				<JFXTextField fx:id="textFieldMailReg" focusColor="#f57c00" layoutX="40.0" layoutY="320.0" prefHeight="40.0" prefWidth="300.0" promptText="MAIL" unFocusColor="#1976d2">
 				   <opaqueInsets>
 				      <Insets />
