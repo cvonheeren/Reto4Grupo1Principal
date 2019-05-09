@@ -1,5 +1,8 @@
 package core;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import aplicacion.Aplicacion;
 import core.Principal;
 import javafx.application.Application;
@@ -33,8 +36,16 @@ public class Principal extends Application {
 	 * Carga el modelo y el controlador
 	 */
 	public static void iniciarPrograma() {
-		modelo = new Modelo();
-		aplicacion = new Aplicacion(stage);
+		try{
+			modelo = new Modelo();
+			aplicacion = new Aplicacion(stage);
+		}catch(Exception e1)
+		{
+			e1.printStackTrace();
+			JOptionPane.showMessageDialog(new JFrame(), e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			System.exit(0);
+		}
+		
 	}
 	
 }

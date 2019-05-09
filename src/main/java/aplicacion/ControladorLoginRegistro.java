@@ -69,7 +69,7 @@ public class ControladorLoginRegistro implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		Principal.aplicacion.controladorLoginRegistro=this;
 		JFXDepthManager.setDepth(paneReg, 2);
-		Principal.modelo.gestorValidaciones.limitarFecha();
+		Principal.modelo.gestorValidaciones.limitarFechaMenorEdad(fechaNacReg);
 	}
     
     @FXML
@@ -81,7 +81,7 @@ public class ControladorLoginRegistro implements Initializable {
 	void logear(ActionEvent event) {
 		
     	
-    	if (Principal.modelo.gestorValidaciones.validarDatosLogin()) {
+    	if (Principal.modelo.gestorValidaciones.validarDatosLogin(textFieldDNI, paneLogin, contrasena)) {
 			String dni = textFieldDNI.getText();
 			String pass = contrasena.getText();
 			if(Principal.modelo.gestorBBDD.comprobarCliente(dni, pass)) {
@@ -100,7 +100,7 @@ public class ControladorLoginRegistro implements Initializable {
     @FXML
     void registrarse(ActionEvent event) {
     	
-    	if (Principal.modelo.gestorValidaciones.validarDatosRegistro()) {
+    	if (Principal.modelo.gestorValidaciones.validarDatosRegistro(this)) {
     		int codCliente = Principal.modelo.gestorBBDD.insertarCliente(textFieldDNIReg.getText(), contrasenaReg.getText(), textFieldNombreReg.getText(), textFieldApellidoReg.getText(), Date.valueOf(fechaNacReg.getValue()), textFieldMailReg.getText());
     		if (codCliente != -1) {
     			Principal.modelo.cliente = new Cliente(textFieldDNIReg.getText(), contrasenaReg.getText());

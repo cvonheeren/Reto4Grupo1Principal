@@ -4,15 +4,19 @@ import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
+
 import aplicacion.ControladorLoginRegistro;
 import core.Principal;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
 public class GestorValidaciones {
 
-	public ControladorLoginRegistro gestor;
 	
 	public GestorValidaciones()
 	{
@@ -22,8 +26,8 @@ public class GestorValidaciones {
 	/**
 	 * 
 	 */
-	public void limitarFecha() {
-		gestor.fechaNacReg.setValue(LocalDate.now().minusYears(18));
+	public void limitarFechaMenorEdad(JFXDatePicker fecha) {
+		fecha.setValue(LocalDate.now().minusYears(18));
 		final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
 		     public DateCell call(final DatePicker datePicker) {
 		         return new DateCell() {
@@ -36,20 +40,20 @@ public class GestorValidaciones {
 		         };
 		     }
 		 };
-		 gestor.fechaNacReg.setDayCellFactory(dayCellFactory);
+		 fecha.setDayCellFactory(dayCellFactory);
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public boolean validarDatosLogin() {
-    	if (gestor.textFieldDNI.getText().isEmpty()) {
-    		Principal.aplicacion.mostrarMensaje(gestor.paneLogin, "Campo 'DNI' vacio.");
+	public boolean validarDatosLogin(JFXTextField textFieldDNI, AnchorPane paneLogin, JFXPasswordField contrasena) {
+    	if (textFieldDNI.getText().isEmpty()) {
+    		Principal.aplicacion.mostrarMensaje(paneLogin, "Campo 'DNI' vacio.");
     		return false;
     	}
-    	if (gestor.contrasena.getText().isEmpty()) {
-    		Principal.aplicacion.mostrarMensaje(gestor.paneLogin, "Campo 'Contraseña' vacio.");
+    	if (contrasena.getText().isEmpty()) {
+    		Principal.aplicacion.mostrarMensaje(paneLogin, "Campo 'Contraseña' vacio.");
     		return false;
     	}
     	return true;
@@ -59,7 +63,7 @@ public class GestorValidaciones {
 	 * 
 	 * @return
 	 */
-    public boolean validarDatosRegistro() {
+    public boolean validarDatosRegistro(ControladorLoginRegistro gestor) {
     	if (gestor.textFieldDNIReg.getText().isEmpty()) {
     		Principal.aplicacion.mostrarMensaje(gestor.paneLogin, "Campo 'DNI' vacio.");
     		return false;

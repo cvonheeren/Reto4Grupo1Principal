@@ -1,126 +1,110 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.web.WebView?>
 
-<AnchorPane fx:controller="aplicacion.ControladorFactura" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1150.0" style="-fx-background-color: #1976d2;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1150.0" style="-fx-background-color: #1976d2;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorFactura">
    <children>
       <Pane layoutY="136.0" prefHeight="764.0" prefWidth="1150.0" style="-fx-background-color: #fff;">
          <children>
-            <Separator layoutX="75.0" layoutY="101.0" prefHeight="2.0" prefWidth="1000.0" style="-fx-background-color: #f57c00;">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </Separator>
-            <Label layoutX="75.0" layoutY="65.0" text="DATOS DE LA RESERVA" textFill="#222222">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <Label layoutX="75.0" layoutY="285.0" text="Código alojamiento:">
+            <Label layoutX="75.0" layoutY="185.0" text="Alojamiento:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="cod" layoutX="250.0" layoutY="285.0">
+            <Label fx:id="nombre" layoutX="250.0" layoutY="185.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="75.0" layoutY="335.0" text="Tipo de alojamiento:">
+            <Label layoutX="75.0" layoutY="235.0" text="Habitaciones:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="tipo" layoutX="250.0" layoutY="335.0">
+            <Label fx:id="habitaciones" layoutX="250.0" layoutY="235.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="75.0" layoutY="385.0" text="Nombre alojamiento:">
+            <Label layoutX="75.0" layoutY="285.0" text="Fecha de entrada:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="75.0" layoutY="435.0" text="Fecha de entrada:">
+            <Label fx:id="fechaEntrada" layoutX="250.0" layoutY="285.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="nombre" layoutX="250.0" layoutY="385.0">
+            <Label layoutX="75.0" layoutY="335.0" text="Fecha de salida:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="fechaEntrada" layoutX="250.0" layoutY="435.0">
+            <Label fx:id="fechaSalida" layoutX="250.0" layoutY="335.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="75.0" layoutY="485.0" text="Fecha de salida:">
+            <Label layoutX="75.0" layoutY="385.0" text="Precio:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="fechaSalida" layoutX="250.0" layoutY="485.0">
+            <Label fx:id="precio" layoutX="250.0" layoutY="385.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="600.0" layoutY="285.0" text="Adultos:">
+            <Label layoutX="75.0" layoutY="435.0" text="Tipo de pension:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="600.0" layoutY="335.0" text="Niños:">
+            <Label fx:id="pension" layoutX="250.0" layoutY="435.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="600.0" layoutY="385.0" text="Habitaciones:">
+            <Label layoutX="75.0" layoutY="485.0" text="Servicios:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="600.0" layoutY="435.0" text="Precio:">
+            <Label fx:id="servicios" layoutX="250.0" layoutY="485.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="adultos" layoutX="775.0" layoutY="285.0">
+            <Label layoutX="75.0" layoutY="535.0" text="Ubicacion:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="ninos" layoutX="775.0" layoutY="335.0">
+            <Label fx:id="ubicacion" layoutX="250.0" layoutY="535.0">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="habitaciones" layoutX="775.0" layoutY="385.0">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label fx:id="precio" layoutX="775.0" layoutY="435.0">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <WebView fx:id="mapa" layoutX="721.0" layoutY="375.0" maxHeight="250.0" maxWidth="350.0" prefHeight="250.0" prefWidth="350.0" />
-            <Label layoutX="340.0" layoutY="124.0" prefHeight="84.0" prefWidth="471.0" text="Muchas gracias por su compra!" textFill="#1976d2">
+            <Label layoutX="340.0" layoutY="65.0" prefHeight="84.0" prefWidth="471.0" text="¡Muchas gracias por su compra!" textFill="#1976d2">
                <font>
                   <Font size="32.0" />
                </font>
             </Label>
-            <JFXButton fx:id="btnimprimir" layoutX="1006.0" layoutY="277.0" onMouseClicked="#Imprimir" prefHeight="42.0" prefWidth="45.0" style="-fx-background-color: #f57c00;" text="Imp" textFill="WHITE" />
+            <JFXButton fx:id="btnimprimir" layoutX="885.0" layoutY="646.0" onMouseClicked="#Imprimir" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #f57c00;" text="GUARDAR FACTURA" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
+            <ImageView fitHeight="251.0" fitWidth="429.0" layoutX="604.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
    </children>

@@ -7,8 +7,11 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 
+import Reto4Grupo1BBDD.ModificarBBDD;
 import core.Principal;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -25,6 +28,14 @@ public class ControladorPago implements Initializable {
 
     @FXML
     private JFXButton sigiuente, atras;
+    
+    @FXML
+    private JFXTextField textFieldCodPromo;
+
+    @FXML
+    void validarCodPromo(ActionEvent event) {
+    	Principal.modelo.gestorBBDD.modificarBBDD.ValidarCodPromo(Integer.parseInt(textFieldCodPromo.getText()), Principal.modelo.cliente.getDni());
+    }
     
     @FXML
     private AnchorPane contenedor;
