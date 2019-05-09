@@ -69,7 +69,7 @@ public class ControladorLoginRegistro implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		Principal.aplicacion.controladorLoginRegistro=this;
 		JFXDepthManager.setDepth(paneReg, 2);
-		Principal.modelo.gestorValidaciones.limitarFecha();
+		Principal.modelo.gestorValidaciones.limitarFechaMenorEdad(fechaNacReg);
 	}
     
     @FXML

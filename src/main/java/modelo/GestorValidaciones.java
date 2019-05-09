@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.jfoenix.controls.JFXDatePicker;
+
 import aplicacion.ControladorLoginRegistro;
 import core.Principal;
 import javafx.scene.control.DateCell;
@@ -22,8 +24,8 @@ public class GestorValidaciones {
 	/**
 	 * 
 	 */
-	public void limitarFecha() {
-		gestor.fechaNacReg.setValue(LocalDate.now().minusYears(18));
+	public void limitarFechaMenorEdad(JFXDatePicker fecha) {
+		fecha.setValue(LocalDate.now().minusYears(18));
 		final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
 		     public DateCell call(final DatePicker datePicker) {
 		         return new DateCell() {
@@ -36,7 +38,7 @@ public class GestorValidaciones {
 		         };
 		     }
 		 };
-		 gestor.fechaNacReg.setDayCellFactory(dayCellFactory);
+		 fecha.setDayCellFactory(dayCellFactory);
 	}
 	
 	/**
