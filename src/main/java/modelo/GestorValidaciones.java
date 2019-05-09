@@ -5,16 +5,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 
 import aplicacion.ControladorLoginRegistro;
 import core.Principal;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
 public class GestorValidaciones {
 
-	public ControladorLoginRegistro gestor;
 	
 	public GestorValidaciones()
 	{
@@ -45,13 +47,13 @@ public class GestorValidaciones {
 	 * 
 	 * @return
 	 */
-	public boolean validarDatosLogin() {
-    	if (gestor.textFieldDNI.getText().isEmpty()) {
-    		Principal.aplicacion.mostrarMensaje(gestor.paneLogin, "Campo 'DNI' vacio.");
+	public boolean validarDatosLogin(JFXTextField textFieldDNI, AnchorPane paneLogin, JFXPasswordField contrasena) {
+    	if (textFieldDNI.getText().isEmpty()) {
+    		Principal.aplicacion.mostrarMensaje(paneLogin, "Campo 'DNI' vacio.");
     		return false;
     	}
-    	if (gestor.contrasena.getText().isEmpty()) {
-    		Principal.aplicacion.mostrarMensaje(gestor.paneLogin, "Campo 'Contraseña' vacio.");
+    	if (contrasena.getText().isEmpty()) {
+    		Principal.aplicacion.mostrarMensaje(paneLogin, "Campo 'Contraseña' vacio.");
     		return false;
     	}
     	return true;
@@ -61,7 +63,7 @@ public class GestorValidaciones {
 	 * 
 	 * @return
 	 */
-    public boolean validarDatosRegistro() {
+    public boolean validarDatosRegistro(ControladorLoginRegistro gestor) {
     	if (gestor.textFieldDNIReg.getText().isEmpty()) {
     		Principal.aplicacion.mostrarMensaje(gestor.paneLogin, "Campo 'DNI' vacio.");
     		return false;
