@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Hyperlink?>
@@ -14,7 +13,7 @@
 <?import javafx.scene.text.Text?>
 
 <fx:root style="-fx-background-color: #fff; -fx-border-insets: 5px; -fx-background-insets: 5px; -fx-border-radius: 1; -fx-background-radius: 5;" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
-	<AnchorPane fx:id="card" maxWidth="750.0" prefWidth="750.0" minHeight="220.0">
+	<AnchorPane fx:id="card" maxWidth="750.0" minHeight="220.0" prefWidth="750.0">
 	   <children>
 	      <ImageView fx:id="imagen" fitHeight="190.0" fitWidth="210.0" layoutX="15.0" layoutY="15.0">
 	         <image>
@@ -33,24 +32,24 @@
 	      <FontAwesomeIconView fill="#555555" glyphName="MAP_MARKER" layoutX="235.0" layoutY="70.0" size="20" />
          <Hyperlink fx:id="mapa" layoutY="54.0" text="Ver Mapa" underline="true" />
          <Label fx:id="descripcion" layoutX="235.0" layoutY="75.0" prefHeight="50.0" prefWidth="500.0" text="Descripcion" wrapText="true" />
-         <Text fx:id="precio" fill="#0ab21b" layoutX="660.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Precio">
+         <Text fx:id="precio" fill="#0ab21b" layoutX="660.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Precio">
             <font>
-               <Font name="Arial" size="20.0" />
+               <Font name="Arial" size="26.0" />
             </font>
          </Text>
-         <Label layoutX="235.0" layoutY="130.0" text="Habitaciones:">
+         <Label fx:id="lblHabitaciones" layoutX="235.0" layoutY="130.0" text="Habitaciones disponibles:">
             <font>
                <Font name="System Bold" size="12.0" />
             </font>
          </Label>
          <Text fx:id="habitaciones" layoutX="235.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lista de habitaciones" />
-         <Label layoutX="440.0" layoutY="130.0" text="Estancias:">
+         <Label fx:id="lblEstancias" layoutX="235.0" layoutY="130.0" text="Estancias:">
             <font>
                <Font name="System Bold" size="12.0" />
             </font>
          </Label>
-         <Text fx:id="estancias" layoutX="440.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lista de estancias" />
-         <JFXButton fx:id="btnVer" layoutX="650.0" layoutY="140.0" onAction="#verAlojamiento" prefHeight="40.0" prefWidth="80.0" style="-fx-background-color: #f57c00;" text="Ver Más" textFill="WHITE" />
+         <Text fx:id="estancias" layoutX="235.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lista de estancias" />
+         <JFXButton fx:id="btnVer" layoutX="650.0" layoutY="165.0" onAction="#verAlojamiento" prefHeight="40.0" prefWidth="80.0" style="-fx-background-color: #f57c00;" text="Ver Más" textFill="WHITE" />
 	   </children>
 	   <cursor>
 	      <Cursor fx:constant="HAND" />

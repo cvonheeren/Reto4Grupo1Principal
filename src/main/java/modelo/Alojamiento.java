@@ -41,7 +41,6 @@ public class Alojamiento {
 		this.descripcion = descripcion;
 		this.longitud = longitud;
 		this.latitud = latitud;
-		
 		this.desayuno = desayuno;
 		this.mediaPension = mediaPension;
 		this.pensionCompleta = pensionCompleta;
@@ -100,7 +99,6 @@ public class Alojamiento {
 		this.latitud = latitud;
 	}
 
-
 	public float getRecargo() {
 		return recargo;
 	}
@@ -154,7 +152,7 @@ public class Alojamiento {
 		float precioTotal = 0;
 		for(int i=0;i<habitaciones.size();i++)
 		{
-			precioTotal=habitaciones.get(i).tarifaNormal;
+			precioTotal=habitaciones.get(i).getTarifaNormal();
 		}
 		return precioTotal;
 	}

@@ -48,7 +48,7 @@ public class Card extends AnchorPane implements Initializable {
     private Hyperlink mapa;
 
     @FXML
-    private Label descripcion;
+    private Label descripcion, lblHabitaciones, lblEstancias;
     
     @FXML
     private JFXButton btnVer;
@@ -165,12 +165,21 @@ public class Card extends AnchorPane implements Initializable {
 	}
 	
 	public void setHabitaciones(Alojamiento alojamiento, ArrayList<Habitacion> habitaciones) {
-		String str = mostrarHabitaciones(habitaciones);
-		this.habitaciones.setText(str);
+		if(alojamiento instanceof Hotel) {
+			String str = mostrarHabitaciones(habitaciones);
+			this.habitaciones.setText(str);
+		} else if(alojamiento instanceof Apartamento) {
+			this.card.getChildren().remove(this.lblHabitaciones);
+			this.card.getChildren().remove(this.habitaciones);
+		} else if(alojamiento instanceof Casa) {	
+			this.card.getChildren().remove(this.lblHabitaciones);
+			this.card.getChildren().remove(this.habitaciones);
+		}
 	}
 	
 	public void setEstancias(Alojamiento alojamiento) {
 		if(alojamiento instanceof Hotel) {
+			this.card.getChildren().remove(this.lblEstancias);
 			this.card.getChildren().remove(this.estancias);
 		} else if(alojamiento instanceof Apartamento) {
 			String str = mostrarEstancias(((Apartamento)alojamiento).getEstancias());
@@ -182,7 +191,7 @@ public class Card extends AnchorPane implements Initializable {
 	}
 	
 	public void setButton() {
-		this.btnVer.setLayoutY(card.getBoundsInLocal().getHeight()-70);
+//		this.btnVer.setLayoutY(card.getBoundsInLocal().getHeight()-20);
 	}
 	
 	/**
@@ -234,8 +243,14 @@ public class Card extends AnchorPane implements Initializable {
      */
     public String mostrarHabitaciones(ArrayList<Habitacion> habitaciones) {
     	String str = "";
-		for (Habitacion s : habitaciones) {
-			str += s.getNombre().toLowerCase() + " x " + s.getCantidad() + "\n";
+		for (Habitacion h : habitaciones) {
+			str += h.getCantidad() + " ";
+			str += h.getNombre().toLowerCase() + " - ";
+			str += h.getNumAdultos() + " Adultos";
+			if (h.getCtaCamasInfantil() > 0) {
+				str += ", " + h.getCtaCamasInfantil() + " Niños";
+			}
+			str += "\n";
 		}
 		return str;
     }
@@ -247,8 +262,13 @@ public class Card extends AnchorPane implements Initializable {
      */
     public String mostrarEstancias(ArrayList<Estancia> estancias) {
     	String str = "";
-		for (Estancia s : estancias) {
-			str += s.getNombre().toLowerCase() + " x "+ s.getCantidad() + "\n";
+    	int cont = 1;
+		for (Estancia e : estancias) {
+			str += e.getCantidad() + " x " + e.getNombre().toLowerCase();
+			if (cont < estancias.size()) {
+				str += ", ";
+			}
+			cont++;
 		}
 		return str;
     }

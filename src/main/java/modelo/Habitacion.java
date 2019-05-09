@@ -9,12 +9,10 @@ public class Habitacion {
 	private int ctaCamasMatrimonio;
 	private int ctaCamasInfantil;
 	private int cantidad;
-	protected float tarifaNormal;
-	protected float tarifaVerano;
-	protected float tarifaFestivo;
-	protected String descripcion;
-
-
+	private float tarifaNormal;
+	private float tarifaVerano;
+	private float tarifaFestivo;
+	private String descripcion;
 	
 	/**
 	 * Habitaciones de los hoteles
@@ -27,7 +25,6 @@ public class Habitacion {
 	public Habitacion(int codHabitacion, String nombre, float tamano, int ctaCamasSimples, int ctaCamasMatrimonio,
 			int ctaCamasInfantil, int cantidad, float tarifaNormal, float tarifaVerano, float tarifaFestivo,
 			String descripcion) {
-		super();
 		this.codHabitacion = codHabitacion;
 		this.nombre = nombre;
 		this.tamano = tamano;
@@ -41,28 +38,18 @@ public class Habitacion {
 		this.descripcion = descripcion;
 	}
 	
-
-
 	public Habitacion(int codHabitacion, int cantidad) {
 		this.codHabitacion = codHabitacion;
 		this.cantidad = cantidad;
 	}
-	
-
-	
-
 
 	public String getDescripcion() {
 		return descripcion;
 	}
 
-
-
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-
-
 
 	public int getCodHabitacion() {
 		return codHabitacion;
@@ -142,6 +129,15 @@ public class Habitacion {
 
 	public void setTarifaFestivo(float tarifaFestivo) {
 		this.tarifaFestivo = tarifaFestivo;
+	}
+	
+	public int getNumAdultos() {
+		int num = this.ctaCamasSimples*1 + this.ctaCamasMatrimonio*2 + this.ctaCamasInfantil;
+		return num;
+	}
+	
+	public int getNumHuespedes() {
+		return this.ctaCamasSimples + this.ctaCamasMatrimonio * 2 + this.ctaCamasInfantil;
 	}
 
 	
