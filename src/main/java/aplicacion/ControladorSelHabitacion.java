@@ -144,18 +144,16 @@ public class ControladorSelHabitacion implements Initializable {
     		anchorPane.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>(){
     			@Override
     			public void handle(Event event) {
-    				if(cb.getValue() < habitacion.getCantidad()) {
+//    				if(cb.getValue() < habitacion.getCantidad()) {
     					cb.getSelectionModel().selectNext();
     					guardarHabitacion(habitacion, cb.getValue());
-    				} else {
-    					Principal.aplicacion.mostrarMensaje(main, "No quedan más habitaciones");
-    				}
+//    				} else {
+//    					Principal.aplicacion.mostrarMensaje(main, "No quedan más habitaciones");
+//    				}
     			}
     		});
     		
     	}
-    	
-    	
     	
     }
     

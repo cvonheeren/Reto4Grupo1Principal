@@ -157,7 +157,7 @@ public class Pago {
 		float tarifaPDia = 0;
 		for(int i=0;i<habReservadas.size();i++)
 		{
-			tarifaPDia = tarifaPDia + (habReservadas.get(i).tarifaNormal * habReservadas.get(i).getCantidad());
+			tarifaPDia = tarifaPDia + (habReservadas.get(i).getTarifaNormal() * habReservadas.get(i).getCantidad());
 		}
 		
 		float numNoches = diferenciaDias(fechaEntrada, fechaSalida);

@@ -22,7 +22,7 @@
          <padding>
             <Insets bottom="10.0" right="10.0" top="10.0" />
          </padding></Label>
-      	<JFXButton fx:id="atras" layoutX="77.0" layoutY="800.0" onAction="#atras" onMouseClicked="#atras" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="ATRAS" textFill="WHITE">
+      	<JFXButton fx:id="atras" layoutX="75.0" layoutY="800.0" onAction="#atras" onMouseClicked="#atras" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="ATRAS" textFill="WHITE">
          	<font>
             	<Font size="16.0" />
          	</font>
@@ -30,7 +30,7 @@
 	            <Cursor fx:constant="HAND" />
 	         </cursor>
 		</JFXButton>
-	    <JFXButton fx:id="reservar" layoutX="907.0" layoutY="793.0" onAction="#reservar" onMouseClicked="#atras" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="RESERVAR" textFill="WHITE">
+	    <JFXButton fx:id="reservar" layoutX="915.0" layoutY="800.0" onAction="#reservar" onMouseClicked="#atras" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="RESERVAR" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
@@ -70,13 +70,16 @@
             <Insets bottom="10.0" right="10.0" top="10.0" />
          </padding>
       </Label>
-      <Label fx:id="precio" layoutX="979.0" layoutY="239.0" prefHeight="50.0" prefWidth="89.0" text="Label" />
+      <Label fx:id="precio" layoutX="990.0" layoutY="230.0" prefHeight="50.0" prefWidth="90.0" text="Label" textFill="#0ab21b">
+         <font>
+            <Font size="30.0" />
+         </font></Label>
       <Label fx:id="lblSaludo" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="801.0" layoutY="49.0" prefHeight="17.0" prefWidth="151.0" text="Hola, Anonimo" textAlignment="RIGHT" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Hyperlink fx:id="lblSesion" layoutX="952.0" layoutY="44.0" onAction="#IniciarCerrar" prefHeight="37.0" prefWidth="151.0" text="Identifiquese" textFill="#f57c00">
+      <Hyperlink fx:id="lblSesion" layoutX="952.0" layoutY="44.0" onAction="#iniciarCerrar" prefHeight="37.0" prefWidth="151.0" text="Identifiquese" textFill="#f57c00">
          <font>
             <Font size="18.0" />
          </font>

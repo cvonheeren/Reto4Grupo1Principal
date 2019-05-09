@@ -84,16 +84,16 @@ public class Card extends AnchorPane implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		setNombre(this.alojamiento.getNombre());
-		setImagen(this.alojamiento.getImgurl());
-		setUbicacion(this.alojamiento.getUbicacion());
+		this.nombre.setText(this.alojamiento.getNombre());
+		this.imagen.setImage(new Image(this.alojamiento.getImgurl()));
+		this.ubicacion.setText(this.alojamiento.getUbicacion());
+		this.descripcion.setText(this.alojamiento.getDescripcion());
+		this.precio.setText(this.alojamiento.getPrecioHabBarata() + "€");
 		setMapa(this.alojamiento);
-		setDescripcion(this.alojamiento.getDescripcion());
-		setPrecio(this.alojamiento.getPrecioHabBarata() + "€");
 		setIconoAloj(this.alojamiento);
 		setHabitaciones(this.alojamiento, this.ArrayHabitaciones);
 		setEstancias(this.alojamiento);
-		setListener();
+		this.card = añadirListenerSeleccion(this.card, this.alojamiento);
 	}
 	
 	/**
@@ -114,22 +114,9 @@ public class Card extends AnchorPane implements Initializable {
 		return card;
 	}
 	
-	public void setListener() {
-		this.card = añadirListenerSeleccion(this.card, this.alojamiento);
-	}
-
-	public void setImagen(String url) {
-		this.imagen.setImage(new Image(url));
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre.setText(nombre);
-	}
-	
-	public void setUbicacion(String ubicacion) {
-		this.ubicacion.setText(ubicacion); 
-	}
-	
+	/*
+	 * 
+	 */
 	public void setMapa(Alojamiento alojamiento) {
 		int tamanoUbicacion = (int) ((int) this.ubicacion.getBoundsInLocal().getMaxX()+this.ubicacion.getLayoutX() + 5);
 		mapa.setLayoutX(tamanoUbicacion);
@@ -139,14 +126,10 @@ public class Card extends AnchorPane implements Initializable {
         }); 
 	}
 	
-	public void setDescripcion(String desc) {
-		this.descripcion.setText(desc);
-	}
-	
-	public void setPrecio(String precio) {
-		this.precio.setText(precio);
-	}
-	
+	/**
+	 * 
+	 * @param alojamiento
+	 */
 	public void setIconoAloj(Alojamiento alojamiento) {
 		int coordX = (int) ((int) this.nombre.getBoundsInLocal().getMaxX()+this.nombre.getLayoutX()+10);
 		if(alojamiento instanceof Hotel) {
@@ -162,36 +145,6 @@ public class Card extends AnchorPane implements Initializable {
     		FontAwesomeIconView iconoCasa = crearIconoCasa(coordX);
 	    	card.getChildren().add(iconoCasa);
 		}
-	}
-	
-	public void setHabitaciones(Alojamiento alojamiento, ArrayList<Habitacion> habitaciones) {
-		if(alojamiento instanceof Hotel) {
-			String str = mostrarHabitaciones(habitaciones);
-			this.habitaciones.setText(str);
-		} else if(alojamiento instanceof Apartamento) {
-			this.card.getChildren().remove(this.lblHabitaciones);
-			this.card.getChildren().remove(this.habitaciones);
-		} else if(alojamiento instanceof Casa) {	
-			this.card.getChildren().remove(this.lblHabitaciones);
-			this.card.getChildren().remove(this.habitaciones);
-		}
-	}
-	
-	public void setEstancias(Alojamiento alojamiento) {
-		if(alojamiento instanceof Hotel) {
-			this.card.getChildren().remove(this.lblEstancias);
-			this.card.getChildren().remove(this.estancias);
-		} else if(alojamiento instanceof Apartamento) {
-			String str = mostrarEstancias(((Apartamento)alojamiento).getEstancias());
-			this.estancias.setText(str);
-		} else if(alojamiento instanceof Casa) {	
-			String str = mostrarEstancias(((Casa)alojamiento).getEstancias());
-			this.estancias.setText(str);
-		}
-	}
-	
-	public void setButton() {
-//		this.btnVer.setLayoutY(card.getBoundsInLocal().getHeight()-20);
 	}
 	
 	/**
@@ -234,6 +187,41 @@ public class Card extends AnchorPane implements Initializable {
     	iconoLlave.setSize("15");
     	iconoLlave.setFill(Paint.valueOf("#555555"));
     	return iconoLlave;
+	}
+	
+	/**
+	 * 
+	 * @param alojamiento
+	 * @param habitaciones
+	 */
+	public void setHabitaciones(Alojamiento alojamiento, ArrayList<Habitacion> habitaciones) {
+		if(alojamiento instanceof Hotel) {
+			String str = mostrarHabitaciones(habitaciones);
+			this.habitaciones.setText(str);
+		} else if(alojamiento instanceof Apartamento) {
+			this.card.getChildren().remove(this.lblHabitaciones);
+			this.card.getChildren().remove(this.habitaciones);
+		} else if(alojamiento instanceof Casa) {	
+			this.card.getChildren().remove(this.lblHabitaciones);
+			this.card.getChildren().remove(this.habitaciones);
+		}
+	}
+	
+	/**
+	 * 
+	 * @param alojamiento
+	 */
+	public void setEstancias(Alojamiento alojamiento) {
+		if(alojamiento instanceof Hotel) {
+			this.card.getChildren().remove(this.lblEstancias);
+			this.card.getChildren().remove(this.estancias);
+		} else if(alojamiento instanceof Apartamento) {
+			String str = mostrarEstancias(((Apartamento)alojamiento).getEstancias());
+			this.estancias.setText(str);
+		} else if(alojamiento instanceof Casa) {	
+			String str = mostrarEstancias(((Casa)alojamiento).getEstancias());
+			this.estancias.setText(str);
+		}
 	}
 	
     /**

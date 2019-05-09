@@ -46,40 +46,56 @@ public class ControladorInformacionAloj implements Initializable {
     @FXML
     private Hyperlink lblSesion;
     
-    @FXML
-    void IniciarCerrar(ActionEvent event) {
-    	Principal.aplicacion.controladorInformacionAloj=this;
-    	if(Principal.modelo.cliente==null)
-		{
-			Principal.aplicacion.CargarSceneLogin();
-		}
-		else
-		{
-			Principal.iniciarPrograma();
-		}
-    }
-
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		Reserva reserva = Principal.modelo.reserva;
+		
 		Alojamiento alojamiento = reserva.getAlojamiento();
 		nombAloj.setText(alojamiento.getNombre());
 		descAloj.setText(alojamiento.getDescripcion());
 		img.setImage(new Image (alojamiento.getImgurl()));
 		ubicacion.setText(alojamiento.getUbicacion());
+		precio.setText(alojamiento.getPrecioHabBarata() + "€");
 		
 		int tamanoUbicacion = (int) ((int) ubicacion.getBoundsInLocal().getMaxX()+600);
 		verMapa.setLayoutX(tamanoUbicacion);
 		
-		// precio
-		precio.setText(reserva.getPrecioTotal() + "€");
-		precio.setStyle("-fx-font: 20 arial;");
-//		precio.setFill(Paint.valueOf("#0ab21b"));
-		
+		setHabitaciones(alojamiento);
+	}
+    
+    @FXML
+    void iniciarCerrar(ActionEvent event) {
+    	Principal.aplicacion.controladorInformacionAloj=this;
+    	if(Principal.modelo.cliente == null) {
+			Principal.aplicacion.CargarSceneLogin();
+		} else {
+			Principal.iniciarPrograma();
+		}
+    }
+	
+	@FXML
+    void verMapa(ActionEvent event) {
+		Principal.aplicacion.verMapa("Mapa.fxml");
+    }
+	
+	@FXML
+	void atras(ActionEvent event) {
+		Principal.aplicacion.CambiarScene("SeleccionAlojamiento.fxml");
+	}
+	 
+	@FXML
+	void reservar(ActionEvent event) {
+		Principal.aplicacion.CambiarScene("Pasos.fxml");
+	}
+	
+	/**
+	 * 
+	 * @param alojamiento
+	 */
+	public void setHabitaciones(Alojamiento alojamiento) {
 		if(alojamiento instanceof Hotel) {
-    		
-    		// Muestra las habitaciones disponibles
+	    	
 			tituloHab.setText("Habitaciones disponibles:");
 			ArrayList<Habitacion> habitacionesAloj = alojamiento.getHabitaciones();
 			String str = mostrarHabitaciones(habitacionesAloj);
@@ -107,21 +123,6 @@ public class ControladorInformacionAloj implements Initializable {
 		}
 	}
 	
-	@FXML
-    void verMapa(ActionEvent event) {
-		Principal.aplicacion.verMapa("Mapa.fxml");
-    }
-	
-	@FXML
-	void atras(ActionEvent event) {
-		Principal.aplicacion.CambiarScene("SeleccionAlojamiento.fxml");
-	}
-	 
-	@FXML
-	void reservar(ActionEvent event) {
-		Principal.aplicacion.CambiarScene("Pasos.fxml");
-	}
-	
     /**
      * 
      * @param habitaciones
@@ -132,13 +133,13 @@ public class ControladorInformacionAloj implements Initializable {
 		for (Habitacion s : habitaciones) {
 			str += s.getNombre() + "\n";
 		    if (s.getCtaCamasSimples() > 0 ) {
-		    	str += "- Cama Individual x " + s.getCtaCamasSimples() + "\n";
+		    	str += "- " + s.getCtaCamasSimples() + "x  Cama Individual \n";
 		    }
 		    if (s.getCtaCamasMatrimonio() > 0 ) {
-		    	str += "- Cama Matrimonio x " + s.getCtaCamasMatrimonio() + "\n";
+		    	str += "- " + s.getCtaCamasMatrimonio() + "x Cama Matrimonio \n";
 		    }
 		    if (s.getCtaCamasInfantil() > 0 ) {
-		    	str += "- Cama Infantil x " + s.getCtaCamasInfantil() + "\n";
+		    	str += "- " + s.getCtaCamasInfantil() + "x Cama Infantil \n";
 		    }
 		    str += "\n";
 		}
