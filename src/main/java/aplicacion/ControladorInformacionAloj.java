@@ -58,7 +58,7 @@ public class ControladorInformacionAloj implements Initializable {
 		ubicacion.setText(alojamiento.getUbicacion());
 		precio.setText(alojamiento.getPrecioHabBarata() + "€");
 		
-		int tamanoUbicacion = (int) ((int) ubicacion.getBoundsInLocal().getMaxX()+600);
+		int tamanoUbicacion = (int) ((int) ubicacion.getBoundsInLocal().getMaxX() + ubicacion.getLayoutX() + 5);
 		verMapa.setLayoutX(tamanoUbicacion);
 		
 		setHabitaciones(alojamiento);
