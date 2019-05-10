@@ -21,6 +21,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import modelo.Habitacion;
 import modelo.Hotel;
 
@@ -40,6 +41,9 @@ public class ControladorPasos implements Initializable {
 	
     @FXML
     private FontAwesomeIconView iconInfo;
+    
+    @FXML
+    public AnchorPane anchorPaneBase;
 	
 	
 	@FXML
