@@ -35,14 +35,14 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXDatePicker fx:id="fechaSalida" defaultColor="#f57c00" layoutX="780.0" layoutY="120.0" prefHeight="50.0" prefWidth="133.0" showWeekNumbers="false" style="-fx-background-color: #fff; -fx-effect: innershadow( gaussian, rgba( 0, 0, 0, 0.5 ), 5, 0, 0, 0 );">
+            <JFXDatePicker fx:id="fechaSalida" defaultColor="#f57c00" layoutX="780.0" layoutY="120.0" prefHeight="50.0" prefWidth="133.0" promptText="Salida" showWeekNumbers="false" style="-fx-background-color: #fff; -fx-effect: innershadow( gaussian, rgba( 0, 0, 0, 0.5 ), 5, 0, 0, 0 );">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <padding>
                   <Insets left="10.0" />
                </padding></JFXDatePicker>
-            <JFXDatePicker fx:id="fechaEntrada" defaultColor="#f57c00" layoutX="634.0" layoutY="120.0" onAction="#seleccion" prefHeight="50.0" prefWidth="133.0" showWeekNumbers="false" style="-fx-background-color: #fff; -fx-effect: innershadow( gaussian, rgba( 0, 0, 0, 0.5 ), 5, 0, 0, 0 );">
+            <JFXDatePicker fx:id="fechaEntrada" defaultColor="#f57c00" layoutX="634.0" layoutY="120.0" onAction="#seleccion" prefHeight="50.0" prefWidth="133.0" promptText="Entrada" showWeekNumbers="false" style="-fx-background-color: #fff; -fx-effect: innershadow( gaussian, rgba( 0, 0, 0, 0.5 ), 5, 0, 0, 0 );">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

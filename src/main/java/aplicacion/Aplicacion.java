@@ -39,6 +39,7 @@ public class Aplicacion {
 	public ControladorFactura controladorFactura;
 	public ControladorLoginRegistro controladorLoginRegistro;
 	private Scene sceneLogin;
+	private Stage stageBases;
 	
 	@FXML
     private Pane anchorPaneBase;
@@ -184,6 +185,7 @@ public class Aplicacion {
             event.consume();
         }
     };
+
 	
 
 	
@@ -222,6 +224,19 @@ public class Aplicacion {
         }
         else
         	return true;
+    }
+    
+    public void VerBases()
+    {
+		Parent FXML = loadFXML("Bases.fxml");
+		if (FXML != null) {
+			try{stageBases.close();}catch(Exception e) {}
+			Scene scene = new Scene(FXML);
+			stageBases = new Stage();
+			stageBases.setTitle("Bases legales");
+			stageBases.setScene(scene);
+			stageBases.show();
+		}
     }
 
 }
