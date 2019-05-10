@@ -23,7 +23,6 @@ import javafx.scene.control.Tab;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import modelo.Habitacion;
-import modelo.Hotel;
 
 public class ControladorPasos implements Initializable {
 	
@@ -43,7 +42,7 @@ public class ControladorPasos implements Initializable {
     private FontAwesomeIconView iconInfo;
     
     @FXML
-    public AnchorPane anchorPaneBase;
+    public AnchorPane anchorPaneBase, botones;
 	
 	
 	@FXML
@@ -112,6 +111,7 @@ public class ControladorPasos implements Initializable {
 					}
 			    	Principal.modelo.reserva.setCodReserva(codReserva);
 			    	Principal.aplicacion.controladorFactura.ActualizarDatos();
+			    	botones.setDisable(false);
 		    	} else {
 		    		JOptionPane.showMessageDialog(new JFrame(), "Aun no ha introducido todo el dinero", "Error", JOptionPane.ERROR_MESSAGE);
 		    	}
