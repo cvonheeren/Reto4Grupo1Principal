@@ -153,78 +153,29 @@ public class Pago {
 	 * @return
 	 */
 	public float calcularPrecio(Alojamiento alojamiento, Date fechaEntrada, Date fechaSalida, ArrayList<Habitacion> habReservadas) {
-		// tarifa alojamiento x nº de noches x nº de habitaciones
 		float tarifaPDia = 0;
+		GestorDeFechas gestorF = new GestorDeFechas();
+		float numNoches = gestorF.diferenciaDias(fechaEntrada, fechaSalida);
+		float contadorRecargo = 0;
+		
+		// tarifa alojamiento x nº de noches x nº de habitaciones
 		for(int i=0;i<habReservadas.size();i++)
 		{
 			tarifaPDia = tarifaPDia + (habReservadas.get(i).getTarifaNormal() * habReservadas.get(i).getCantidad());
 		}
 		
-		float numNoches = diferenciaDias(fechaEntrada, fechaSalida);
-		float contadorRecargo = 0;
-		
-		Calendar fecha1 =  new GregorianCalendar();
-		fecha1 = toCalendar(fechaEntrada);
-        Calendar fecha2 =  new GregorianCalendar();
-        fecha2 = toCalendar(fechaSalida);
-        
-        //ArrayList<Calendar> lista = setDiasSeleccionados(fecha1, fecha2);
-        
-        System.out.println(fechaEntrada);
-       /* System.out.println(lista.get(0));
-        System.out.println(lista.get(1));
-        System.out.println(lista.get(2));
-        
-        GestorDeFechas gestorF = new GestorDeFechas();
-        
-        for (int i = 0; i < lista.size(); i++) {
+		// cogemos los dias del periodo para comprobar sus tarifas extras
+		LocalDate fecha1 = fechaEntrada.toLocalDate();
+		LocalDate fecha2 = fechaSalida.toLocalDate(); 
+	    ArrayList<LocalDate> lista = gestorF.setDiasSeleccionados(fecha1, fecha2);
+	    
+	    for (int i = 0; i < lista.size(); i++) {
 			if(gestorF.comprobarSiEsVerano(lista.get(i)))
-				contadorRecargo = contadorRecargo + (tarifa * alojamiento.tarifaVerano);
+				contadorRecargo = contadorRecargo + habReservadas.get(i).getTarifaVerano();
 			if(gestorF.tipoDeFecha(lista.get(i)))
-				contadorRecargo = contadorRecargo + (tarifa * alojamiento.recargo);
-		}*/
-		
-		return (tarifaPDia * numNoches) + contadorRecargo;
-	}
-	
-	/**
-	 * 
-	 * @param d1
-	 * @param d2
-	 * @return
-	 */
-	public float diferenciaDias(Date d1, Date d2) {
-	    long diff = d2.getTime() - d1.getTime();
-	    return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-	}
-
-	/**
-	 * 
-	 * @param date
-	 * @return
-	 */
-	public Calendar toCalendar(Date date){ 
-		  Calendar cal = Calendar.getInstance();
-		  cal.setTime(date);
-		  return cal;
-	}
-	
-	/**
-	 * 
-	 * @param fecha1
-	 * @param fecha2
-	 * @return
-	 */
-	public ArrayList<LocalDate> setDiasSeleccionados(LocalDate fecha1, LocalDate fecha2) {
-		ArrayList<LocalDate> dias = new ArrayList<LocalDate>();
-		LocalDate fechaAux;
-		fechaAux = fecha1;
-		
-		for (int i = 0; i < fecha2.getDayOfYear() - fecha1.getDayOfYear(); i++) {
-			fechaAux.plusDays(i);
-			dias.add(fechaAux);
+				contadorRecargo = contadorRecargo + habReservadas.get(i).getTarifaFestivo();
 		}
 		
-		return dias;
-	}
+		return (tarifaPDia * numNoches) + contadorRecargo;
+		}
 }

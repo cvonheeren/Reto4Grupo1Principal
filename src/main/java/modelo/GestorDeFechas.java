@@ -1,8 +1,9 @@
 package modelo;
 
 import java.sql.Date;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class GestorDeFechas {
 
@@ -11,40 +12,28 @@ public class GestorDeFechas {
 	 * @param fecha La fecha a comprobar
 	 * @return true si es festivo, false si no lo es
 	 */
-	public boolean tipoDeFecha(Calendar fecha) {
+	public boolean tipoDeFecha(LocalDate fecha) {
 		
 		//Los dias que son festivos
-		Calendar fecha1 = new GregorianCalendar();
-        fecha1.set(2019, 5, 15);
-		Calendar fecha2 = new GregorianCalendar();
-        fecha2.set(2019, 6, 10);
-		Calendar fecha3 = new GregorianCalendar();
-        fecha3.set(2019, 6, 20);
-		Calendar fecha4 = new GregorianCalendar();
-        fecha4.set(2019, 7, 25);
-		Calendar fecha5 = new GregorianCalendar();
-        fecha5.set(2019, 8, 11);
-		Calendar fecha6 = new GregorianCalendar();
-        fecha6.set(2019, 8, 15);
-		Calendar fecha7 = new GregorianCalendar();
-        fecha7.set(2019, 10, 12);
-		Calendar fecha8 = new GregorianCalendar();
-        fecha8.set(2019, 10, 27);
-		Calendar fecha9 = new GregorianCalendar();
-        fecha9.set(2019, 11, 1);
-		Calendar fecha10 = new GregorianCalendar();
-        fecha10.set(2019, 11, 9);
-		Calendar fecha11 = new GregorianCalendar();
-        fecha11.set(2019, 12, 6);
-		Calendar fecha12 = new GregorianCalendar();
-        fecha12.set(2019, 12, 8);
-		Calendar fecha13 = new GregorianCalendar();
-        fecha13.set(2019, 12, 25);
-        
-        Calendar[] fechasFestivo = {fecha1, fecha2, fecha3, fecha4, fecha5, fecha6, fecha7, fecha8, fecha9, fecha10, fecha11, fecha12, fecha13};
+		
+		LocalDate fecha1 = LocalDate.of(2019, 5, 15);
+		LocalDate fecha2 = LocalDate.of(2019, 6, 10);
+		LocalDate fecha3 = LocalDate.of(2019, 6, 20);
+		LocalDate fecha4 = LocalDate.of(2019, 7, 25);
+		LocalDate fecha5 = LocalDate.of(2019, 8, 11);
+		LocalDate fecha6 = LocalDate.of(2019, 8, 15);
+		LocalDate fecha7 = LocalDate.of(2019, 10, 12);
+		LocalDate fecha8 = LocalDate.of(2019, 10, 27);
+		LocalDate fecha9 = LocalDate.of(2019, 11, 1);
+		LocalDate fecha10 = LocalDate.of(2019, 11, 9);
+		LocalDate fecha11 = LocalDate.of(2019, 12, 6);
+		LocalDate fecha12 = LocalDate.of(2019, 12, 8);
+		LocalDate fecha13 = LocalDate.of(2019, 12, 25);
+		
+		LocalDate[] fechasFestivo = {fecha1, fecha2, fecha3, fecha4, fecha5, fecha6, fecha7, fecha8, fecha9, fecha10, fecha11, fecha12, fecha13};
 		
 		for (int i = 0; i < fechasFestivo.length; i++) {
-			if (fecha.compareTo(fechasFestivo[i]) == 0)
+			if (fecha.isEqual(fechasFestivo[i]))
 				return true;
 		}
 		
@@ -56,29 +45,43 @@ public class GestorDeFechas {
 	 * @param fecha La fecha a comprobar
 	 * @return True si esta en verano false si no lo esta
 	 */
-    public boolean comprobarSiEsVerano(Calendar fecha) {
-    	Calendar fecha1 = new GregorianCalendar();
-        fecha1.set(2019, 6, 30);
-        Calendar fecha2 = new GregorianCalendar();
-        fecha2.set(2019, 9, 1);
+    public boolean comprobarSiEsVerano(LocalDate fecha) {
+        LocalDate fecha1 = LocalDate.of(2019, 6, 30);
+        LocalDate fecha2 = LocalDate.of(2019, 9, 1);
     	
-        if (fecha.after(fecha1) && fecha.before(fecha2))
+        if (fecha.isAfter(fecha1) && fecha.isBefore(fecha2))
         	return true;
         else
         	return false;
     }
     
-    public static Calendar toCalendar(Date date){ 
-		  Calendar cal = Calendar.getInstance();
-		  cal.setTime(date);
-		  return cal;
+    /**
+	 * Crea un arraylist de LocalDate con todas las fecha qeu hay entre dos fechas introducidas incluyéndolas
+	 * @param fecha1
+	 * @param fecha2
+	 * @return
+	 */
+	public ArrayList<LocalDate> setDiasSeleccionados(LocalDate fecha1, LocalDate fecha2) {
+		ArrayList<LocalDate> dias = new ArrayList<LocalDate>();
+		LocalDate fechaAux;
+		
+		for (int i = 0; i < (fecha2.getDayOfYear() - fecha1.getDayOfYear())+1; i++) {
+			fechaAux = fecha1.plusDays(i);;
+			dias.add(fechaAux);
 		}
+		
+		return dias;
+	}
     
-    public static int DiasDeDiferencia(Calendar fecha1, Calendar fecha2)
-    {
-    	
-    	return (int) ((fecha1.getTimeInMillis()-fecha2.getTimeInMillis())/86400000);
-    			
-    }
+    /**
+	 * 
+	 * @param d1
+	 * @param d2
+	 * @return
+	 */
+	public float diferenciaDias(Date d1, Date d2) {
+	    long diff = d2.getTime() - d1.getTime();
+	    return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+	}
 	
 }

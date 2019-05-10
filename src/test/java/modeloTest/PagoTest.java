@@ -77,40 +77,22 @@ public class PagoTest {
 	
 	@Test
     public void testCalcularPrecio() {
-        Date fecha1 = new Date(2019, 8, 15);
-        Date fecha2 = new Date(2019, 8, 18);
-        Alojamiento aloh = new Alojamiento(1, "", "", "", 1, 1, 1, 1.2f, 1.2f, 1.2f, 1, 1, "");
-        ArrayList<Habitacion> habReservadas = null;
+        
+        LocalDate fecha11 = LocalDate.of(2019, 8, 15);
+        Date fecha1 = java.sql.Date.valueOf(fecha11);
+        LocalDate fecha22 = LocalDate.of(2019, 8, 18);
+        Date fecha2 = java.sql.Date.valueOf(fecha22);
+        Alojamiento aloh = new Alojamiento(1, "", "", "", 1, 1, 1, 1, 1, 1, "");
+        ArrayList<Habitacion> habReservadas = new ArrayList<Habitacion>();
+        habReservadas.add(new Habitacion(0, null, 0, 0, 0, 0, 0, 1, 1.2f, 1.2f, null));
        
-        assertEquals(1.2f+2, pago.calcularPrecio(aloh, fecha1, fecha2, habReservadas), 0.00001);   
+        System.out.println(pago.calcularPrecio(aloh, fecha1, fecha2, habReservadas));
+        assertEquals(1.2f+1.2f+1.2f+1.2f, pago.calcularPrecio(aloh, fecha1, fecha2, habReservadas), 0.00001);   
     }
+
 	
 	
-	@Test
-    public void testSetDiasSelecc() {
-		LocalDate fecha1 = LocalDate.of(2019, 8, 15);
-		LocalDate fecha2 = LocalDate.of(2019, 8, 16);
-		LocalDate fecha3 = LocalDate.of(2019, 8, 17);
-        
- 
-       
-        
-		LocalDate[] dias = new LocalDate[3];
-       
-        dias[1] = fecha1;
-        dias[2] = fecha2;
-        dias[3] = fecha3;
-        
-        SimpleDateFormat formmat1 = new SimpleDateFormat("dd-mm-yyyy");
-        
-        for (int i = 0; i < dias.length; i++) {
-			System.out.println(formmat1.format(dias[i]));
-        	
-		}
-       
-       
-        assertEquals(dias, pago.setDiasSeleccionados(fecha1, fecha2));   
-    }
+	
 	
 	
 	
