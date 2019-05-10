@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXRippler;
+import com.jfoenix.effects.JFXDepthManager;
 
 import core.Principal;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
@@ -54,8 +55,6 @@ public class Card extends AnchorPane implements Initializable {
     @FXML
     private JFXButton btnVer;
     
-    @FXML
-    private AnchorPane paneSuperior;
     
     private Alojamiento alojamiento;
     
@@ -89,6 +88,7 @@ public class Card extends AnchorPane implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		this.nombre.setText(this.alojamiento.getNombre());
 		this.imagen.setImage(new Image(this.alojamiento.getImgurl()));
+		JFXDepthManager.setDepth(imagen, 1);
 		this.ubicacion.setText(this.alojamiento.getUbicacion());
 		this.descripcion.setText(this.alojamiento.getDescripcion());
 		this.precio.setText(this.alojamiento.getPrecioHabBarata() + "€");
