@@ -55,8 +55,6 @@ public class Card extends AnchorPane implements Initializable {
     
     private Alojamiento alojamiento;
     
-    private ArrayList<Habitacion> ArrayHabitaciones;
-    
     private JFXDatePicker fechaEntrada, fechaSalida;
 
     @FXML
@@ -64,10 +62,9 @@ public class Card extends AnchorPane implements Initializable {
     	verInfo(this.alojamiento);
     }
     
-	public Card(Alojamiento alojamiento, ArrayList<Habitacion> habitaciones, JFXDatePicker fechaEntrada, JFXDatePicker fechaSalida) {
+	public Card(Alojamiento alojamiento, JFXDatePicker fechaEntrada, JFXDatePicker fechaSalida) {
 		
 		this.alojamiento = alojamiento;
-		this.ArrayHabitaciones = habitaciones;
 		this.fechaEntrada = fechaEntrada;
 		this.fechaSalida = fechaSalida;
 		
@@ -89,11 +86,11 @@ public class Card extends AnchorPane implements Initializable {
 		this.ubicacion.setText(this.alojamiento.getUbicacion());
 		this.descripcion.setText(this.alojamiento.getDescripcion());
 		this.precio.setText(this.alojamiento.getPrecioHabBarata() + "€");
-		setMapa(this.alojamiento);
-		setIconoAloj(this.alojamiento);
-		setHabitaciones(this.alojamiento, this.ArrayHabitaciones);
-		setEstancias(this.alojamiento);
-		this.card = añadirListenerSeleccion(this.card, this.alojamiento);
+		setMapa();
+		setIconoAloj();
+		setHabitaciones();
+		setEstancias();
+		this.card = añadirListenerSeleccion(this.card);
 	}
 	
 	/**
@@ -104,7 +101,7 @@ public class Card extends AnchorPane implements Initializable {
 	 * @param fechaSalida
 	 * @return
 	 */
-	public AnchorPane añadirListenerSeleccion(AnchorPane card, Alojamiento alojamiento) {
+	public AnchorPane añadirListenerSeleccion(AnchorPane card) {
 		card.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>(){
 			@Override
 			public void handle(Event event) {
@@ -117,8 +114,8 @@ public class Card extends AnchorPane implements Initializable {
 	/*
 	 * 
 	 */
-	public void setMapa(Alojamiento alojamiento) {
-		int tamanoUbicacion = (int) ((int) this.ubicacion.getBoundsInLocal().getMaxX()+this.ubicacion.getLayoutX() + 5);
+	public void setMapa() {
+		int tamanoUbicacion = (int) ((int) ubicacion.getBoundsInLocal().getMaxX() + ubicacion.getLayoutX() + 5);
 		mapa.setLayoutX(tamanoUbicacion);
 		mapa.setOnAction((e) -> {
 			Principal.modelo.reserva.setAlojamiento(alojamiento);
@@ -130,8 +127,8 @@ public class Card extends AnchorPane implements Initializable {
 	 * 
 	 * @param alojamiento
 	 */
-	public void setIconoAloj(Alojamiento alojamiento) {
-		int coordX = (int) ((int) this.nombre.getBoundsInLocal().getMaxX()+this.nombre.getLayoutX()+10);
+	public void setIconoAloj() {
+		int coordX = (int) ((int) nombre.getBoundsInLocal().getMaxX()+nombre.getLayoutX()+10);
 		if(alojamiento instanceof Hotel) {
     		for(int i = 0; i < ((Hotel) alojamiento).getEstrellas(); i++) {
     			FontAwesomeIconView iconoEstrella = crearIconoEstrella(coordX);
@@ -194,9 +191,9 @@ public class Card extends AnchorPane implements Initializable {
 	 * @param alojamiento
 	 * @param habitaciones
 	 */
-	public void setHabitaciones(Alojamiento alojamiento, ArrayList<Habitacion> habitaciones) {
+	public void setHabitaciones() {
 		if(alojamiento instanceof Hotel) {
-			String str = mostrarHabitaciones(habitaciones);
+			String str = mostrarHabitaciones(alojamiento.getHabitaciones());
 			this.habitaciones.setText(str);
 		} else if(alojamiento instanceof Apartamento) {
 			this.card.getChildren().remove(this.lblHabitaciones);
@@ -211,7 +208,7 @@ public class Card extends AnchorPane implements Initializable {
 	 * 
 	 * @param alojamiento
 	 */
-	public void setEstancias(Alojamiento alojamiento) {
+	public void setEstancias() {
 		if(alojamiento instanceof Hotel) {
 			this.card.getChildren().remove(this.lblEstancias);
 			this.card.getChildren().remove(this.estancias);

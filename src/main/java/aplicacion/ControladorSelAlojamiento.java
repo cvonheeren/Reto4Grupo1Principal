@@ -158,7 +158,7 @@ public class ControladorSelAlojamiento implements Initializable {
     }
 	
     /**
-     * Carga y muestra los alojamientos correspondientes a la 
+     * Carga y muestra los alojamientos correspondientes a la busqueda
      */
 	public void cargarAlojamientos() {
     
@@ -168,10 +168,9 @@ public class ControladorSelAlojamiento implements Initializable {
     	for(int i = 0; i<alojamientos.size(); i++) {
     		
     		Alojamiento alojamiento = alojamientos.get(i);
-    		ArrayList<Habitacion> habitaciones = buscarHabDisponibles(alojamiento);
-    		alojamiento.setHabitaciones(habitaciones);
+    		alojamiento.setHabitaciones(buscarHabDisponibles(alojamiento));
     		
-    		Card card = new Card(alojamiento, habitaciones, fechaEntrada, fechaSalida);
+    		Card card = new Card(alojamiento, fechaEntrada, fechaSalida);
     		
         	AnchorPane paneSuperior = new AnchorPane();
         	JFXRippler rippler = new JFXRippler(card);
