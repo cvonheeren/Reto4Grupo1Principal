@@ -112,6 +112,10 @@ public class GestorValidaciones {
     		Principal.aplicacion.mostrarMensaje(gestor.paneLogin, "Las contraseñas introducidas no son correctas.");
     		return false;
     	}
+    	if (!gestor.chkboxBases.isSelected()) {
+    		Principal.aplicacion.mostrarMensaje(gestor.paneLogin, "Para continuar debe aceptar las bases legales.");
+    		return false;
+    	}
     	return true;
     }
     

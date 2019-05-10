@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
@@ -14,14 +16,14 @@
 <AnchorPane fx:id="paneLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="702.0" prefWidth="906.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorLoginRegistro">
 	<children>
       <Rectangle fill="#1976d2" height="181.0" layoutX="-8.0" layoutY="528.0" smooth="false" stroke="#1976d2" strokeType="INSIDE" strokeWidth="0.0" width="921.0" />
-		<Label layoutX="582.0" layoutY="87.0" text="¿No estás registrado?">
+		<Label layoutX="582.0" layoutY="62.0" text="¿No estás registrado?">
 	 		<font>
 	    		<Font size="16.0" />
 	 		</font>
 		</Label>
-		<AnchorPane fx:id="paneReg" layoutX="459.0" layoutY="132.0" opacity="0.9" prefHeight="522.0" prefWidth="398.0" style="-fx-background-color: #dddddd;">
+		<AnchorPane fx:id="paneReg" layoutX="459.0" layoutY="103.0" opacity="0.9" prefHeight="554.0" prefWidth="398.0" style="-fx-background-color: #dddddd;">
 	       	<children>
-				<JFXButton fx:id="btnReg" layoutX="110.0" layoutY="448.0" onAction="#registrarse" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="REGISTRARSE" textFill="WHITE">
+				<JFXButton fx:id="btnReg" layoutX="110.0" layoutY="479.0" onAction="#registrarse" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="REGISTRARSE" textFill="WHITE">
 			 		<font>
 			    		<Font size="16.0" />
 			 		</font>
@@ -52,6 +54,8 @@
 				   </opaqueInsets>
 				</JFXTextField>
 				<JFXDatePicker fx:id="fechaNacReg" defaultColor="#1976d2" layoutX="40.0" layoutY="380.0" prefHeight="40.0" prefWidth="300.0" />
+            <JFXCheckBox fx:id="chkboxBases" layoutX="33.0" layoutY="443.0" text="He leido y acepto las" />
+            <Hyperlink layoutX="169.0" layoutY="441.0" onMouseClicked="#verBases" text="bases legales." />
 			</children>
 		</AnchorPane>
 		<AnchorPane layoutX="67.0" layoutY="87.0" prefHeight="222.0" prefWidth="316.0" style="-fx-background-color: #fff;">

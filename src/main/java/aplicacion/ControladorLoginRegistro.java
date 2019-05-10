@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -16,7 +17,7 @@ import core.Principal;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import modelo.Cliente;
@@ -65,6 +66,9 @@ public class ControladorLoginRegistro implements Initializable {
     @FXML
     public AnchorPane paneReg;
     
+    @FXML
+    public JFXCheckBox chkboxBases;
+    
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Principal.aplicacion.controladorLoginRegistro=this;
@@ -105,10 +109,17 @@ public class ControladorLoginRegistro implements Initializable {
     		if (codCliente != -1) {
     			Principal.modelo.cliente = new Cliente(textFieldDNIReg.getText(), contrasenaReg.getText());
     			Principal.modelo.reserva.setCliente(new Cliente(textFieldDNIReg.getText(), contrasenaReg.getText()));
-    			Principal.aplicacion.CambiarScene("Pasos.fxml");
+    			Principal.aplicacion.stageLogin.close();
+    			Principal.aplicacion.controladorSelAlojamiento.SesionIniciada();
     		} else {
     			Principal.aplicacion.mostrarMensaje(paneLogin, "No se ha podido efectuar el registro.");
     		}
     	}
+    }
+    
+    @FXML
+    void verBases(MouseEvent event) {
+    	System.out.println("bases");
+    	Principal.aplicacion.VerBases();
     }
 }
