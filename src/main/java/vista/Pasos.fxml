@@ -67,7 +67,7 @@
             <Font size="18.0" />
          </font>
       </Hyperlink>
-      <FontAwesomeIconView fx:id="iconInfo" fill="WHITE" glyphName="INFO" layoutX="872.0" layoutY="861.0" onMouseClicked="#mostrarInfo" size="40">
+      <FontAwesomeIconView fx:id="iconInfo" fill="WHITE" glyphName="SHOPPING_CART" layoutX="1027.0" layoutY="146.0" onMouseClicked="#mostrarInfo" size="40">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></FontAwesomeIconView>

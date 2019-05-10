@@ -77,7 +77,7 @@ public class Aplicacion {
 	 */
 	public void centrarPopup(Bounds bounds) {
 		stagePopupInfo.setX(stage.getX()+700);
-		stagePopupInfo.setY(stage.getY()+525);
+		stagePopupInfo.setY(stage.getY()+170);
 	}
 	
 	/**
@@ -183,6 +183,10 @@ public class Aplicacion {
         Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
         if (!ButtonType.OK.equals(closeResponse.get())) {
             event.consume();
+        }
+        else
+        {
+        	System.exit(0);
         }
     };
 

@@ -29,3 +29,11 @@
 .jfx-button {
   -fx-background-color: #f57c00;
 }
+
+.tarjeta {
+	-fx-background-color: #fff;
+	-fx-border-insets: 5px;
+	-fx-background-insets: 5px;
+	-fx-border-radius: 1;
+	-fx-background-radius: 5;
+}
