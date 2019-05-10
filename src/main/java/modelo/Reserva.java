@@ -120,9 +120,4 @@ public class Reserva {
 		this.ctdHabitaciones = ctdHabitaciones;
 	}
 	
-	public float getPrecioTotal()
-	{
-		return alojamiento.getPrecioTotalPorDia() * GestorDeFechas.DiasDeDiferencia(GestorDeFechas.toCalendar(fechaEntrada), GestorDeFechas.toCalendar(fechaSalida));
-	}
-	
 }

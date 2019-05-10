@@ -118,7 +118,7 @@ public class ControladorPasos implements Initializable {
 					Principal.modelo.reserva.setFechaCompra(fechaCompra);
 					int codReserva = Principal.modelo.gestorBBDD.insertarReserva(Principal.modelo.reserva);
 					for (Habitacion h: Principal.modelo.reserva.getHabitacionesReservadas()) {
-						Principal.modelo.gestorBBDD.modificarBBDD.insertarReservaHabitaciones(codReserva, h.getCodHabitacion(), h.getCantidad());
+						Principal.modelo.gestorBBDD.modificarBBDD.insertarReservaHabitaciones(codReserva, h.getCodEstancia(), h.getCantidad());
 					}
 			    	Principal.modelo.reserva.setCodReserva(codReserva);
 			    	Principal.aplicacion.controladorFactura.ActualizarDatos();

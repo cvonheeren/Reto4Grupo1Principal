@@ -1,14 +1,10 @@
 package modelo;
 
-public class Habitacion {
+public class Habitacion extends Estancia {
 
-	private int codHabitacion;
-	private String nombre;
-	private float tamano;
 	private int ctaCamasSimples;
 	private int ctaCamasMatrimonio;
 	private int ctaCamasInfantil;
-	private int cantidad;
 	private float tarifaNormal;
 	private float tarifaVerano;
 	private float tarifaFestivo;
@@ -23,15 +19,11 @@ public class Habitacion {
 	 * @param tipoCama Tipo de cama
 	 */
 	public Habitacion(int codHabitacion, String nombre, float tamano, int ctaCamasSimples, int ctaCamasMatrimonio,
-			int ctaCamasInfantil, int cantidad, float tarifaNormal, float tarifaVerano, float tarifaFestivo,
-			String descripcion) {
-		this.codHabitacion = codHabitacion;
-		this.nombre = nombre;
-		this.tamano = tamano;
+			int ctaCamasInfantil, int cantidad, float tarifaNormal, float tarifaVerano, float tarifaFestivo, String descripcion) {
+		super(codHabitacion, nombre, tamano, cantidad);
 		this.ctaCamasSimples = ctaCamasSimples;
 		this.ctaCamasMatrimonio = ctaCamasMatrimonio;
 		this.ctaCamasInfantil = ctaCamasInfantil;
-		this.cantidad = cantidad;
 		this.tarifaNormal = tarifaNormal;
 		this.tarifaVerano = tarifaVerano;
 		this.tarifaFestivo = tarifaFestivo;
@@ -39,8 +31,7 @@ public class Habitacion {
 	}
 	
 	public Habitacion(int codHabitacion, int cantidad) {
-		this.codHabitacion = codHabitacion;
-		this.cantidad = cantidad;
+		super(codHabitacion, cantidad);
 	}
 
 	public String getDescripcion() {
@@ -49,30 +40,6 @@ public class Habitacion {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
-	}
-
-	public int getCodHabitacion() {
-		return codHabitacion;
-	}
-
-	public void setCodHabitacion(int codHabitacion) {
-		this.codHabitacion = codHabitacion;
-	}
-	
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public float getTamano() {
-		return tamano;
-	}
-
-	public void setTamano(float tamano) {
-		this.tamano = tamano;
 	}
 
 	public int getCtaCamasSimples() {
@@ -97,14 +64,6 @@ public class Habitacion {
 
 	public void setCtaCamasInfantil(int ctaCamasInfantil) {
 		this.ctaCamasInfantil = ctaCamasInfantil;
-	}
-
-	public int getCantidad() {
-		return cantidad;
-	}
-
-	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
 	}
 	
 	public float getTarifaNormal() {

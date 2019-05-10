@@ -168,19 +168,26 @@ public class ControladorSelAlojamiento implements Initializable {
     	for(int i = 0; i<alojamientos.size(); i++) {
     		
     		Alojamiento alojamiento = alojamientos.get(i);
-    		alojamiento.setHabitaciones(buscarHabDisponibles(alojamiento));
+    		ArrayList<Habitacion> habitaciones = buscarHabDisponibles(alojamiento);
     		
-    		Card card = new Card(alojamiento, fechaEntrada, fechaSalida);
-    		
-        	AnchorPane paneSuperior = new AnchorPane();
-        	JFXRippler rippler = new JFXRippler(card);
-        	
-    		JFXDepthManager.setDepth(card, 1);
-    		paneSuperior.getChildren().addAll(card);
-        	paneSuperior.getChildren().add(rippler);
-        	rippler.setRipplerFill(Paint.valueOf("#AAAAAA"));  
-    		
-			grid.add(card, 0, i); 	
+    		if (habitaciones.size() > 0) {
+    			// guarda las habitaciones en el alojamiento
+        		alojamiento.setHabitaciones(buscarHabDisponibles(alojamiento));
+        		
+        		// crea la tarjeta con la informacion del alojamiento
+        		Card card = new Card(alojamiento, fechaEntrada, fechaSalida);
+        		
+        		// añade el efecto rippler a la tarjeta
+            	AnchorPane paneSuperior = new AnchorPane();
+            	JFXRippler rippler = new JFXRippler(card);
+        		JFXDepthManager.setDepth(card, 1);
+        		paneSuperior.getChildren().addAll(card);
+            	paneSuperior.getChildren().add(rippler);
+            	rippler.setRipplerFill(Paint.valueOf("#AAAAAA"));  
+        		
+            	// añade la tarjeta al grid
+    			grid.add(card, 0, i); 
+    		}	
 
     	}
 	}

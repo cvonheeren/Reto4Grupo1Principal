@@ -141,9 +141,9 @@ public class GestorBBDD {
 		ArrayList<Habitacion> habitaciones = new ArrayList<Habitacion>();
 		try {
 			while (result.next()) {
-				int codHabitacion = result.getInt("COD_HABITACION");
+				int codEstancia = result.getInt("COD_HABITACION");
 				int cantidad = result.getInt("CANTIDAD");
-				habitaciones.add(new Habitacion(codHabitacion, cantidad));
+				habitaciones.add(new Habitacion(codEstancia, cantidad));
 	        }
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -163,7 +163,7 @@ public class GestorBBDD {
 		ArrayList<Habitacion> habitacionesReservadas = cargarHabitacionesReservadas(codAlojamiento, fechaEntrada, fechaSalida);
 		for (int i = 0; i < habitaciones.size(); i++) {
 			for (int j = 0; j < habitacionesReservadas.size(); j++) {
-				if (habitaciones.get(i).getCodHabitacion() == habitacionesReservadas.get(j).getCodHabitacion()) {
+				if (habitaciones.get(i).getCodEstancia() == habitacionesReservadas.get(j).getCodEstancia()) {
 					habitaciones.get(i).setCantidad(habitaciones.get(i).getCantidad()-habitacionesReservadas.get(j).getCantidad());
 				}
 			}

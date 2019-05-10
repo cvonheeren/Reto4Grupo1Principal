@@ -11,23 +11,20 @@ import javax.swing.JFrame;
 
 import core.Principal;
 import com.jfoenix.controls.JFXButton;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.web.WebView;
 import modelo.Habitacion;
 
 public class ControladorFactura implements Initializable {
 
-    @FXML
-    private Label cod;
-
-    @FXML
-    private Label tipo;
-
-    @FXML
+   @FXML
     private Label nombre;
+
+    @FXML
+    private Label habitaciones;
 
     @FXML
     private Label fechaEntrada;
@@ -36,28 +33,22 @@ public class ControladorFactura implements Initializable {
     private Label fechaSalida;
 
     @FXML
-    private Label adultos;
-
-    @FXML
-    private Label ninos;
-
-    @FXML
-    private Label habitaciones;
-
-    @FXML
     private Label precio;
 
     @FXML
-    private JFXButton inicio;
+    private Label pension;
 
     @FXML
-    private WebView mapa;
-    
+    private Label servicios;
+
+    @FXML
+    private Label ubicacion;
+
     @FXML
     private JFXButton btnimprimir;
-    
+
     @FXML
-    void Imprimir(MouseEvent event) {
+    void imprimir(ActionEvent event) {
     	String pathReserva = preguntarGuadar();
 		
 		// creamos el archivo de texto
@@ -98,21 +89,17 @@ public class ControladorFactura implements Initializable {
 		return pathReserva;
 	}
 	
-	public void ActualizarDatos()
-	{
-		mapa.getEngine().loadContent("<iframe src=\"https://maps.google.com/maps?q=" + Principal.modelo.reserva.getAlojamiento().getLongitud() + "," + Principal.modelo.reserva.getAlojamiento().getLatitud() + "&hl=es;z=14&amp;output=embed\" width=\"350\" height=\"250\" frameborder=\"0\" style=\"border:0\"></iframe>", "text/html");
-		cod.setText(Integer.toString(Principal.modelo.reserva.getAlojamiento().getCodAlojamiento()));
-		tipo.setText("Hotel"); // CAMBIAR!!
+	public void ActualizarDatos() {
 		nombre.setText(Principal.modelo.reserva.getAlojamiento().getNombre());
-		precio.setText(Principal.modelo.reserva.getPrecioTotal() + "€");
 		fechaEntrada.setText(Principal.modelo.reserva.getFechaEntrada().toLocalDate().toString());
 		fechaSalida.setText(Principal.modelo.reserva.getFechaSalida().toLocalDate().toString());
+		precio.setText(Principal.modelo.reserva.getPrecio() + "€");
 		String str = "";
 		for (Habitacion h: Principal.modelo.reserva.getHabitacionesReservadas()) {
 		    str += h.getNombre() + " x " + h.getCantidad() + "\n";
 		}
 		habitaciones.setText(str);
-		precio.setText(Float.toString(Principal.modelo.pago.getPrecioTotal()));
+//		precio.setText(Float.toString(Principal.modelo.pago.getPrecioTotal()));
 	}
 
 	@Override

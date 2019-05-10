@@ -2,10 +2,10 @@ package modelo;
 
 public class Estancia {
 
-	private int codEstancia;
-	private String nombre;
-	private float tamano;
-	private int cantidad;
+	protected int codEstancia;
+	protected String nombre;
+	protected float tamano;
+	protected int cantidad;
 	
 	/**
 	 * Habitaciones de los hoteles
@@ -25,10 +25,6 @@ public class Estancia {
 	public Estancia(int codEstancia, int cantidad) {
 		this.codEstancia = codEstancia;
 		this.cantidad = cantidad;
-	}
-	
-	public Estancia() {
-		
 	}
 	
 	public int getCodEstancia() {

@@ -22,12 +22,12 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="75.0" layoutY="235.0" text="Habitaciones:">
+            <Label layoutX="75.0" layoutY="235.0" text="Ubicacion:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="habitaciones" layoutX="250.0" layoutY="235.0">
+            <Label fx:id="ubicacion" layoutX="250.0" layoutY="235.0">
                <font>
                   <Font size="16.0" />
                </font>
@@ -82,12 +82,12 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="75.0" layoutY="535.0" text="Ubicacion:">
+            <Label layoutX="75.0" layoutY="535.0" text="Habitaciones reservadas:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="ubicacion" layoutX="250.0" layoutY="535.0">
+            <Label fx:id="habitaciones" layoutX="75.0" layoutY="565.0">
                <font>
                   <Font size="16.0" />
                </font>
@@ -97,7 +97,7 @@
                   <Font size="32.0" />
                </font>
             </Label>
-            <JFXButton fx:id="btnimprimir" layoutX="885.0" layoutY="646.0" onMouseClicked="#Imprimir" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #f57c00;" text="GUARDAR FACTURA" textFill="WHITE">
+            <JFXButton fx:id="btnimprimir" layoutX="885.0" layoutY="646.0" onAction="#imprimir" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #f57c00;" text="GUARDAR FACTURA" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
