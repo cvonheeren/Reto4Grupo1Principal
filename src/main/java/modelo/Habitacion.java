@@ -11,12 +11,18 @@ public class Habitacion extends Estancia {
 	private String descripcion;
 	
 	/**
-	 * Habitaciones de los hoteles
+	 * 
 	 * @param codHabitacion Codigo unico para cada habitacion de todos los hoteles
 	 * @param numeroHabitacion el numero de la habitacion en ese hotel
 	 * @param tamano Los metros cuadrados de la habitacion
-	 * @param numeroCamas Numero de camas
-	 * @param tipoCama Tipo de cama
+	 * @param ctaCamasSimples
+	 * @param ctaCamasMatrimonio
+	 * @param ctaCamasInfantil
+	 * @param cantidad
+	 * @param tarifaNormal
+	 * @param tarifaVerano
+	 * @param tarifaFestivo
+	 * @param descripcion
 	 */
 	public Habitacion(int codHabitacion, String nombre, float tamano, int ctaCamasSimples, int ctaCamasMatrimonio,
 			int ctaCamasInfantil, int cantidad, float tarifaNormal, float tarifaVerano, float tarifaFestivo, String descripcion) {
