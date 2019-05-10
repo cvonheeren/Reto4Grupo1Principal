@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXRippler;
 
 import core.Principal;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
@@ -53,9 +54,14 @@ public class Card extends AnchorPane implements Initializable {
     @FXML
     private JFXButton btnVer;
     
+    @FXML
+    private AnchorPane paneSuperior;
+    
     private Alojamiento alojamiento;
     
     private JFXDatePicker fechaEntrada, fechaSalida;
+    
+    
 
     @FXML
     void verAlojamiento(ActionEvent event) {

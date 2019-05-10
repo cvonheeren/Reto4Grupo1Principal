@@ -19,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import modelo.Reserva;
 
 public class ControladorPago implements Initializable {
 
@@ -31,10 +32,39 @@ public class ControladorPago implements Initializable {
     
     @FXML
     private JFXTextField textFieldCodPromo;
+    
+    @FXML
+    private JFXButton btnValidarCodPromo;
+    
+    @FXML
+    private Label descuentoPorcentaje;
+
+    @FXML
+    private Label descuentoPrecio;
+    
+    @FXML
+    private Label precioTotal;
 
     @FXML
     void validarCodPromo(ActionEvent event) {
-    	Principal.modelo.gestorBBDD.modificarBBDD.ValidarCodPromo(Integer.parseInt(textFieldCodPromo.getText()), Principal.modelo.cliente.getDni());
+    	
+    	Reserva reserva = Principal.modelo.reserva;
+    	float descuento=Principal.modelo.gestorBBDD.modificarBBDD.ValidarCodPromo(textFieldCodPromo.getText(), Principal.modelo.cliente.getDni());
+    	int descuentoPorcentajeint = (int) (descuento*100);
+    	float precioDescueto=reserva.getPrecio()*descuento;
+    	if(descuento>0)
+    	{
+    		textFieldCodPromo.setDisable(true);
+    		textFieldCodPromo.setText("Codigo promocional valido");
+    		btnValidarCodPromo.setDisable(true);
+    		descuentoPorcentaje.setText("Descuento(" + Integer.toString(descuentoPorcentajeint) +"%)");
+    		descuentoPrecio.setText(Float.toString(precioDescueto) + "€");
+    		precioTotal.setText(reserva.getPrecio()-precioDescueto+"€");
+    	}
+    	else
+    	{
+    		Principal.aplicacion.mostrarMensaje(Principal.aplicacion.controladorPasos.anchorPaneBase, "Codigo promocional no valido");
+    	}
     }
     
     @FXML
