@@ -12,10 +12,9 @@ public class GestorDeFechas {
 	 * @param fecha La fecha a comprobar
 	 * @return true si es festivo, false si no lo es
 	 */
-	public boolean tipoDeFecha(LocalDate fecha) {
+	public boolean comprobarFestivo(LocalDate fecha) {
 		
 		//Los dias que son festivos
-		
 		LocalDate fecha1 = LocalDate.of(2019, 5, 15);
 		LocalDate fecha2 = LocalDate.of(2019, 6, 10);
 		LocalDate fecha3 = LocalDate.of(2019, 6, 20);
@@ -65,7 +64,7 @@ public class GestorDeFechas {
 		ArrayList<LocalDate> dias = new ArrayList<LocalDate>();
 		LocalDate fechaAux;
 		
-		for (int i = 0; i < (fecha2.getDayOfYear() - fecha1.getDayOfYear())+1; i++) {
+		for (int i = 1; i < (fecha2.getDayOfYear() - fecha1.getDayOfYear())+1; i++) {
 			fechaAux = fecha1.plusDays(i);;
 			dias.add(fechaAux);
 		}

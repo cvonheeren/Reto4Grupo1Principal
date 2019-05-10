@@ -3,9 +3,6 @@ package modelo;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -153,15 +150,25 @@ public class Pago {
 	 * @return
 	 */
 	public float calcularPrecio(Alojamiento alojamiento, Date fechaEntrada, Date fechaSalida, ArrayList<Habitacion> habReservadas) {
-		float tarifaPDia = 0;
 		GestorDeFechas gestorF = new GestorDeFechas();
-		float numNoches = gestorF.diferenciaDias(fechaEntrada, fechaSalida);
-		float contadorRecargo = 0;
+		float precioTotal = 0;
+		float tarifaDiaNormal = 0;
+		float tarifaDiaVerano = 0;
+		float tarifaDiaFestivo = 0;
 		
-		// tarifa alojamiento x nº de noches x nº de habitaciones
-		for(int i=0;i<habReservadas.size();i++)
-		{
-			tarifaPDia = tarifaPDia + (habReservadas.get(i).getTarifaNormal() * habReservadas.get(i).getCantidad());
+		// calcular tarifa por dia normal
+		for(int i=0;i<habReservadas.size();i++) {
+			tarifaDiaNormal += habReservadas.get(i).getTarifaNormal() * habReservadas.get(i).getCantidad();
+		}
+		
+		// calcular tarifa por dia verano
+		for(int i=0;i<habReservadas.size();i++) {
+			tarifaDiaVerano += habReservadas.get(i).getTarifaVerano() * habReservadas.get(i).getCantidad();
+		}
+		
+		// calcular tarifa por dia festivo
+		for(int i=0;i<habReservadas.size();i++) {
+			tarifaDiaFestivo += habReservadas.get(i).getTarifaFestivo() * habReservadas.get(i).getCantidad();
 		}
 		
 		// cogemos los dias del periodo para comprobar sus tarifas extras
@@ -170,12 +177,16 @@ public class Pago {
 	    ArrayList<LocalDate> lista = gestorF.setDiasSeleccionados(fecha1, fecha2);
 	    
 	    for (int i = 0; i < lista.size(); i++) {
-			if(gestorF.comprobarSiEsVerano(lista.get(i)))
-				contadorRecargo = contadorRecargo + habReservadas.get(i).getTarifaVerano();
-			if(gestorF.tipoDeFecha(lista.get(i)))
-				contadorRecargo = contadorRecargo + habReservadas.get(i).getTarifaFestivo();
+			if(gestorF.comprobarFestivo(lista.get(i))) {
+				precioTotal += tarifaDiaVerano;
+			} else if(gestorF.comprobarSiEsVerano(lista.get(i))) {
+				precioTotal += tarifaDiaFestivo;
+			} else {
+				precioTotal += tarifaDiaNormal;
+			}
 		}
-		
-		return (tarifaPDia * numNoches) + contadorRecargo;
-		}
+	    
+	    return precioTotal;
+	}
+
 }

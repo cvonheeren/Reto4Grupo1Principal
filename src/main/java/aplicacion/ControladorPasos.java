@@ -51,40 +51,26 @@ public class ControladorPasos implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		if(Principal.modelo.cliente!=null)
-		{
-			SesionIniciada();
-		}
-		
-		if(Principal.modelo.reserva.getAlojamiento() instanceof Hotel) {
-			tabPane.getSelectionModel().select(idTabHab);
-		} else {
-			tabPane.getSelectionModel().select(idTabServ);
-			tabPane.getTabs().remove(idTabHab);
+		if(Principal.modelo.cliente!=null) {
+			sesionIniciada();
 		}
 	}
 	
 	@FXML
     void IniciarCerrar(ActionEvent event) {
 		Principal.aplicacion.controladorPasos=this;
-		if(Principal.modelo.cliente==null)
-		{
+		if(Principal.modelo.cliente==null) {
 			Principal.aplicacion.CargarSceneLogin();
-		}
-		else
-		{
+		} else {
 			Principal.iniciarPrograma();
 		}
-		
     }
 	
 	@FXML
     void cancelar(ActionEvent event) {
-		if(Principal.aplicacion.VentanaSiNo("¿Desea cancelar la compra?"))
-		{
+		if(Principal.aplicacion.VentanaSiNo("¿Desea cancelar la compra?")) {
 			Principal.aplicacion.CambiarScene("SeleccionAlojamiento.fxml");
 		}
-    	
     }
 
     @FXML
@@ -145,8 +131,7 @@ public class ControladorPasos implements Initializable {
     }
     
     @FXML
-    void mostrarInfo(MouseEvent event)
-    {
+    void mostrarInfo(MouseEvent event) {
     	Principal.aplicacion.CargarpopupInfo(iconInfo.localToScreen(iconInfo.getBoundsInLocal()));
     }
     
@@ -171,16 +156,13 @@ public class ControladorPasos implements Initializable {
 		return sigTab;
 	}
     
-    public void SelecionarTab(Tab tab)
-    {
+    public void SelecionarTab(Tab tab) {
     	tabPane.getSelectionModel().select(tab);
     }
 
-	public void SesionIniciada() {
-
+	public void sesionIniciada() {
 		lblSaludo.setText("Hola, " + Principal.modelo.cliente.getDni());
 		lblSesion.setText("Cerrar Sesion");
-			
 	}
 	
 
