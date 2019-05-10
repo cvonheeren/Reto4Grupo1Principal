@@ -80,7 +80,7 @@ public class ControladorFactura implements Initializable {
 	public String preguntarGuadar() {
 		String filename = "";
 		if(Principal.modelo.reserva != null) {
-			filename = "Reserva-"+Principal.modelo.reserva.getCodReserva() + ".txt";
+			filename = "Reserva-" + Principal.modelo.reserva.getCodReserva() + ".txt";
 		}
 		FileDialog fDialog = new FileDialog(new JFrame(), "Save", FileDialog.SAVE);
 		fDialog.setFile(filename);
@@ -91,6 +91,7 @@ public class ControladorFactura implements Initializable {
 	
 	public void ActualizarDatos() {
 		nombre.setText(Principal.modelo.reserva.getAlojamiento().getNombre());
+		ubicacion.setText(Principal.modelo.reserva.getAlojamiento().getUbicacion());
 		fechaEntrada.setText(Principal.modelo.reserva.getFechaEntrada().toLocalDate().toString());
 		fechaSalida.setText(Principal.modelo.reserva.getFechaSalida().toLocalDate().toString());
 		precio.setText(Principal.modelo.reserva.getPrecio() + "€");
@@ -99,7 +100,6 @@ public class ControladorFactura implements Initializable {
 		    str += h.getNombre() + " x " + h.getCantidad() + "\n";
 		}
 		habitaciones.setText(str);
-//		precio.setText(Float.toString(Principal.modelo.pago.getPrecioTotal()));
 	}
 
 	@Override

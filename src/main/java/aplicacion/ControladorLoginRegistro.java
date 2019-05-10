@@ -83,15 +83,13 @@ public class ControladorLoginRegistro implements Initializable {
 
     @FXML
 	void logear(ActionEvent event) {
-		
-    	
     	if (Principal.modelo.gestorValidaciones.validarDatosLogin(textFieldDNI, paneLogin, contrasena)) {
 			String dni = textFieldDNI.getText();
 			String pass = contrasena.getText();
 			if(Principal.modelo.gestorBBDD.comprobarCliente(dni, pass)) {
 				Principal.modelo.cliente = new Cliente(dni, pass);
 				Principal.modelo.reserva.setCliente(new Cliente(dni, pass));
-				try {Principal.aplicacion.controladorPasos.SesionIniciada();}catch(Exception e) {}
+				try {Principal.aplicacion.controladorPasos.sesionIniciada();}catch(Exception e) {}
 				try {Principal.aplicacion.controladorSelAlojamiento.SesionIniciada();}catch(Exception e) {}
 				try {Principal.aplicacion.controladorInformacionAloj.SesionIniciada();}catch(Exception e) {}
 				Principal.aplicacion.stageLogin.close();
@@ -103,7 +101,6 @@ public class ControladorLoginRegistro implements Initializable {
 
     @FXML
     void registrarse(ActionEvent event) {
-    	
     	if (Principal.modelo.gestorValidaciones.validarDatosRegistro(this)) {
     		int codCliente = Principal.modelo.gestorBBDD.insertarCliente(textFieldDNIReg.getText(), contrasenaReg.getText(), textFieldNombreReg.getText(), textFieldApellidoReg.getText(), Date.valueOf(fechaNacReg.getValue()), textFieldMailReg.getText());
     		if (codCliente != -1) {

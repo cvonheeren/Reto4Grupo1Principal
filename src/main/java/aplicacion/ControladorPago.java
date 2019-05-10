@@ -47,29 +47,24 @@ public class ControladorPago implements Initializable {
 
     @FXML
     void validarCodPromo(ActionEvent event) {
-    	
     	Reserva reserva = Principal.modelo.reserva;
     	float descuento=Principal.modelo.gestorBBDD.modificarBBDD.ValidarCodPromo(textFieldCodPromo.getText(), Principal.modelo.cliente.getDni());
     	int descuentoPorcentajeint = (int) (descuento*100);
     	float precioDescueto=reserva.getPrecio()*descuento;
-    	if(descuento>0)
-    	{
+    	if(descuento > 0) {
     		textFieldCodPromo.setDisable(true);
     		textFieldCodPromo.setText("Codigo promocional valido");
     		btnValidarCodPromo.setDisable(true);
     		descuentoPorcentaje.setText("Descuento(" + Integer.toString(descuentoPorcentajeint) +"%)");
     		descuentoPrecio.setText(Float.toString(precioDescueto) + "€");
     		precioTotal.setText(reserva.getPrecio()-precioDescueto+"€");
-    	}
-    	else
-    	{
+    	} else {
     		Principal.aplicacion.mostrarMensaje(Principal.aplicacion.controladorPasos.anchorPaneBase, "Codigo promocional no valido");
     	}
     }
     
     @FXML
     private AnchorPane contenedor;
-    
     private float[] monedasBilletes = {500, 200, 100, 50, 20, 10, 5, 2, 1, 0.50f, 0.20f, 0.10f, 0.05f, 0.02f, 0.01f };
     public JFXButton[] botonesMonedasBilletes = new JFXButton[15];
 
@@ -81,8 +76,7 @@ public class ControladorPago implements Initializable {
     	crearBotones();
     }
     
-    public void ActulizarTarifa()
-    {
+    public void ActulizarTarifa() {
     	precio.setText(Float.toString(Principal.modelo.pago.getPrecioTotal()) + " €");
     	introducido.setText("0 €");
     	restante.setText(Float.toString(Principal.modelo.pago.getPrecioTotal()) + " €");
