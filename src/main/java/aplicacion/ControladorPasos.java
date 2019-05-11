@@ -30,7 +30,7 @@ public class ControladorPasos implements Initializable {
     public JFXTabPane tabPane;
 	
 	@FXML
-    public Tab idTabInfo, idTabHab, idTabServ, idTabPago, idTabFin;
+    public Tab idTabHab, idTabServ, idTabPago, idTabFin;
 	
 	@FXML
 	public Hyperlink lblSesion;
@@ -44,37 +44,41 @@ public class ControladorPasos implements Initializable {
     @FXML
     public AnchorPane anchorPaneBase, botones;
 	
-	
 	@FXML
     private JFXButton btnLogin, btnSiguiente, btnAtras, btnCancelar;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		if(Principal.modelo.cliente!=null) {
-			sesionIniciada();
-		}
+		comprobarSesionIniciada();
+		idTabPago.setDisable(true);
+		idTabFin.setDisable(true);
+		Principal.aplicacion.controladorPasos = this;
 	}
 	
 	@FXML
     void IniciarCerrar(ActionEvent event) {
-		Principal.aplicacion.controladorPasos=this;
-		if(Principal.modelo.cliente==null) {
-			Principal.aplicacion.CargarSceneLogin();
+		if(Principal.modelo.cliente == null) {
+			Principal.aplicacion.CambiarScene("LoginRegistro.fxml");
+			Principal.aplicacion.controladorLoginRegistro.setPantallaAnterior("Pasos.fxml");
+			Principal.aplicacion.controladorLoginRegistro.setTabActiva(tabPane.getSelectionModel().getSelectedIndex());
 		} else {
-			Principal.iniciarPrograma();
+			if (tabPane.getSelectionModel().getSelectedItem() == idTabPago ) {
+				JOptionPane.showMessageDialog(new JFrame(), "Es necesario estar identificado para realizar el pago. Si cierra sesion, se le devolvera a una pantalla anterior. ¿Desea cerrar sesion de todas formas?", "Error", JOptionPane.ERROR_MESSAGE);
+				tabPane.getSelectionModel().select(idTabHab);
+			} else if(tabPane.getSelectionModel().getSelectedItem() == idTabFin) {
+				JOptionPane.showMessageDialog(new JFrame(), "Es necesario estar identificado para ver la factura de su reserva. Si cierra sesion, se le devolvera a una pantalla anterior. ¿Desea cerrar sesion de todas formas?", "Error", JOptionPane.ERROR_MESSAGE);
+				Principal.iniciarPrograma();
+			}
+			Principal.modelo.cliente = null;
+			comprobarSesionIniciada();
 		}
     }
 	
 	@FXML
     void cancelar(ActionEvent event) {
-		if(Principal.aplicacion.VentanaSiNo("¿Desea cancelar la compra?")) {
+		if(Principal.aplicacion.ventanaSiNo("¿Desea cancelar la compra?")) {
 			Principal.aplicacion.CambiarScene("SeleccionAlojamiento.fxml");
 		}
-    }
-
-    @FXML
-    void informacion(ActionEvent event) {
-    	tabPane.getSelectionModel().select(idTabInfo);	
     }
 
     @FXML
@@ -82,39 +86,21 @@ public class ControladorPasos implements Initializable {
 		switch(tabPane.getSelectionModel().getSelectedItem().getId()) {	
 				
 			case "idTabHab":
-				if(comprobarHabitacionSeleccionada()) {
-					float precio = Principal.modelo.pago.calcularPrecio(Principal.modelo.reserva.getAlojamiento(), Principal.modelo.reserva.getFechaEntrada(), Principal.modelo.reserva.getFechaSalida(), Principal.modelo.reserva.getHabitacionesReservadas());
-					Principal.modelo.pago.setPrecioTotal(precio);
-					Principal.modelo.reserva.setPrecio(precio);
-					tabPane.getSelectionModel().select(idTabServ);
-				}
+				btnSiguienteHabitaciones();
 				break;
 				
-			case "idTabServ":
-				if(Principal.modelo.cliente != null) {
-					Principal.aplicacion.controladorPago.ActulizarTarifa();
-					tabPane.getSelectionModel().select(idTabPago);
-				} else {
-					Principal.aplicacion.controladorPasos=this;
-					Principal.aplicacion.CargarSceneLogin();
-				}
-				break;
+//			case "idTabServ":
+//				if(Principal.modelo.cliente != null) {
+//					Principal.aplicacion.controladorPago.ActulizarTarifa();
+//					tabPane.getSelectionModel().select(idTabPago);
+//				} else {
+//					Principal.aplicacion.controladorPasos=this;
+//					Principal.aplicacion.CargarSceneLogin();
+//				}
+//				break;
 				
 			case "idTabPago":
-				if (Principal.modelo.pago.calcularDineroRestante() == 0) {
-					tabPane.getSelectionModel().select(idTabFin);
-					Date fechaCompra = Date.valueOf(LocalDate.now());
-					Principal.modelo.reserva.setFechaCompra(fechaCompra);
-					int codReserva = Principal.modelo.gestorBBDD.insertarReserva(Principal.modelo.reserva);
-					for (Habitacion h: Principal.modelo.reserva.getHabitacionesReservadas()) {
-						Principal.modelo.gestorBBDD.modificarBBDD.insertarReservaHabitaciones(codReserva, h.getCodEstancia(), h.getCantidad());
-					}
-			    	Principal.modelo.reserva.setCodReserva(codReserva);
-			    	Principal.aplicacion.controladorFactura.ActualizarDatos();
-			    	botones.setDisable(false);
-		    	} else {
-		    		JOptionPane.showMessageDialog(new JFrame(), "Aun no ha introducido todo el dinero", "Error", JOptionPane.ERROR_MESSAGE);
-		    	}
+				btnSiguientePago();
 				break;
 				
 			case "idTabFin":
@@ -132,7 +118,55 @@ public class ControladorPasos implements Initializable {
     
     @FXML
     void mostrarInfo(MouseEvent event) {
-    	Principal.aplicacion.CargarpopupInfo(iconInfo.localToScreen(iconInfo.getBoundsInLocal()));
+    	Principal.aplicacion.cargarPopupInfo(iconInfo.localToScreen(iconInfo.getBoundsInLocal()));
+    }
+    
+    public void btnSiguienteHabitaciones() {
+    	if(comprobarHabitacionSeleccionada()) {
+			float precio = Principal.modelo.pago.calcularPrecio(Principal.modelo.reserva.getFechaEntrada(), Principal.modelo.reserva.getFechaSalida(), Principal.modelo.reserva.getHabitacionesReservadas());
+			Principal.modelo.pago.setPrecioTotal(precio);
+			Principal.modelo.reserva.setPrecio(precio);
+			if(Principal.modelo.cliente != null) {
+				Principal.aplicacion.controladorPago.ActulizarTarifa();
+				idTabPago.setDisable(false);
+				tabPane.getSelectionModel().select(idTabPago);
+			} else {
+				JOptionPane.showMessageDialog(new JFrame(), "Debe identificarse antes de proceder al pago", "Error", JOptionPane.ERROR_MESSAGE);
+				Principal.aplicacion.CambiarScene("LoginRegistro.fxml");
+				Principal.aplicacion.controladorLoginRegistro.setPantallaAnterior("Pasos.fxml");
+				Principal.aplicacion.controladorLoginRegistro.setTabActiva(tabPane.getSelectionModel().getSelectedIndex());
+				Principal.aplicacion.controladorLoginRegistro.setLoginForced(true);
+			}
+		}
+    }
+    
+    public void btnSiguientePago() {
+    	if (Principal.modelo.pago.calcularDineroRestante() == 0) {
+			
+			// guarda la fecha de la compra
+			Date fechaCompra = Date.valueOf(LocalDate.now());
+			Principal.modelo.reserva.setFechaCompra(fechaCompra);
+			
+			// inserta la reserva en la base de datos
+			int codReserva = Principal.modelo.gestorBBDD.insertarReserva(Principal.modelo.reserva);
+			for (Habitacion h: Principal.modelo.reserva.getHabitacionesReservadas()) {
+				Principal.modelo.gestorBBDD.modificarBBDD.insertarReservaHabitaciones(codReserva, h.getCodEstancia(), h.getCantidad());
+			}
+			
+			// guarda el codigo de la reserva
+	    	Principal.modelo.reserva.setCodReserva(codReserva);
+	    	
+	    	// actualiza y muestra la pantalla final
+	    	Principal.aplicacion.controladorFactura.ActualizarDatos();
+	    	anchorPaneBase.getChildren().remove(botones);
+	    	idTabFin.setDisable(false);
+	    	idTabHab.setDisable(true);
+	    	idTabPago.setDisable(true);
+	    	tabPane.getSelectionModel().select(idTabFin);
+	    	
+    	} else {
+    		JOptionPane.showMessageDialog(new JFrame(), "Aun no ha introducido todo el dinero", "Error", JOptionPane.ERROR_MESSAGE);
+    	}
     }
     
     public boolean comprobarHabitacionSeleccionada() {
@@ -156,14 +190,24 @@ public class ControladorPasos implements Initializable {
 		return sigTab;
 	}
     
-    public void SelecionarTab(Tab tab) {
-    	tabPane.getSelectionModel().select(tab);
+    public void selecionarTab(int index) {
+    	if (tabPane.getTabs().get(index).isDisable()) {
+    		tabPane.getTabs().get(index).setDisable(false);
+    	}
+    	tabPane.getSelectionModel().select(index);
     }
 
-	public void sesionIniciada() {
-		lblSaludo.setText("Hola, " + Principal.modelo.cliente.getDni());
-		lblSesion.setText("Cerrar Sesion");
+    /**
+     * 
+     */
+    public void comprobarSesionIniciada() {
+		if(Principal.modelo.cliente != null) {
+			lblSaludo.setText("Hola, " + Principal.modelo.cliente.getDni());
+			lblSesion.setText("Cerrar Sesion");
+		} else {
+			lblSaludo.setText("Hola, Anonimo");
+			lblSesion.setText("Identifiquese");
+		}
 	}
-	
 
 }

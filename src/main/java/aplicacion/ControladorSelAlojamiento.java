@@ -66,9 +66,6 @@ public class ControladorSelAlojamiento implements Initializable {
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	
-    	if(Principal.modelo.cliente!=null)
-    		SesionIniciada();
-    	
     	JFXDepthManager.setDepth(paneFiltros, 2);
     	JFXDepthManager.setDepth(paneBusqueda, 1);
 
@@ -84,6 +81,7 @@ public class ControladorSelAlojamiento implements Initializable {
 		busqueda.setFont(new Font("arial",16));
 		contenedor.getChildren().setAll(busqueda);
 		
+    	comprobarSesionIniciada();
 		cargarAutocompletar();
 	}
     
@@ -107,11 +105,13 @@ public class ControladorSelAlojamiento implements Initializable {
     
     @FXML
     void IniciarCerrar(ActionEvent event) {
-    	Principal.aplicacion.controladorSelAlojamiento=this;
+    	Principal.aplicacion.controladorSelAlojamiento = this;
     	if(Principal.modelo.cliente == null) {
-			Principal.aplicacion.CargarSceneLogin();
+    		Principal.aplicacion.CambiarScene("LoginRegistro.fxml");
+			Principal.aplicacion.controladorLoginRegistro.setPantallaAnterior("SeleccionAlojamiento.fxml");
 		} else {
-			Principal.iniciarPrograma();
+			Principal.modelo.cliente = null;
+			comprobarSesionIniciada();
 		}
     }
     
@@ -221,9 +221,14 @@ public class ControladorSelAlojamiento implements Initializable {
     /**
      * 
      */
-	public void SesionIniciada() {
-		lblSaludo.setText("Hola, " + Principal.modelo.cliente.getDni());
-		lblSesion.setText("Cerrar Sesion");
+    public void comprobarSesionIniciada() {
+		if(Principal.modelo.cliente != null) {
+			lblSaludo.setText("Hola, " + Principal.modelo.cliente.getDni());
+			lblSesion.setText("Cerrar Sesion");
+		} else {
+			lblSaludo.setText("Hola, Anonimo");
+			lblSesion.setText("Identifiquese");
+		}
 	}
 
 }

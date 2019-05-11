@@ -5,7 +5,6 @@ import java.sql.Date;
 
 import java.util.ResourceBundle;
 
-
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -69,16 +68,25 @@ public class ControladorLoginRegistro implements Initializable {
     @FXML
     public JFXCheckBox chkboxBases;
     
+    private String pantallaAnterior;
+	private int tabGuardada;
+	private boolean loginForced;
+    
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		Principal.aplicacion.controladorLoginRegistro=this;
+		tabGuardada = -1;
+		loginForced = false;
+		Principal.aplicacion.controladorLoginRegistro = this;
 		JFXDepthManager.setDepth(paneReg, 2);
 		Principal.modelo.gestorValidaciones.limitarFechaMenorEdad(fechaNacReg);
 	}
     
     @FXML
     void volver(ActionEvent event) {
-    	Principal.aplicacion.stageLogin.close();
+    	Principal.aplicacion.CambiarScene(pantallaAnterior);
+		if (tabGuardada != -1) {
+			Principal.aplicacion.controladorPasos.selecionarTab(tabGuardada);
+		}
     }
 
     @FXML
@@ -89,10 +97,13 @@ public class ControladorLoginRegistro implements Initializable {
 			if(Principal.modelo.gestorBBDD.comprobarCliente(dni, pass)) {
 				Principal.modelo.cliente = new Cliente(dni, pass);
 				Principal.modelo.reserva.setCliente(new Cliente(dni, pass));
-				try {Principal.aplicacion.controladorPasos.sesionIniciada();}catch(Exception e) {}
-				try {Principal.aplicacion.controladorSelAlojamiento.SesionIniciada();}catch(Exception e) {}
-				try {Principal.aplicacion.controladorInformacionAloj.SesionIniciada();}catch(Exception e) {}
-				Principal.aplicacion.stageLogin.close();
+				Principal.aplicacion.CambiarScene(pantallaAnterior);
+				if (tabGuardada != -1) {
+					if (loginForced) {
+						tabGuardada++;
+					}
+					Principal.aplicacion.controladorPasos.selecionarTab(tabGuardada);
+				}
 			} else {
 				Principal.aplicacion.mostrarMensaje(paneLogin, "DNI y/o contraseña incorrectos.");
 			}
@@ -106,8 +117,13 @@ public class ControladorLoginRegistro implements Initializable {
     		if (codCliente != -1) {
     			Principal.modelo.cliente = new Cliente(textFieldDNIReg.getText(), contrasenaReg.getText());
     			Principal.modelo.reserva.setCliente(new Cliente(textFieldDNIReg.getText(), contrasenaReg.getText()));
-    			Principal.aplicacion.stageLogin.close();
-    			Principal.aplicacion.controladorSelAlojamiento.SesionIniciada();
+    			Principal.aplicacion.CambiarScene(pantallaAnterior);
+    			if (tabGuardada != -1) {
+    				if (loginForced) {
+						tabGuardada++;
+					}
+    				Principal.aplicacion.controladorPasos.selecionarTab(tabGuardada);
+    			}
     		} else {
     			Principal.aplicacion.mostrarMensaje(paneLogin, "No se ha podido efectuar el registro.");
     		}
@@ -116,7 +132,19 @@ public class ControladorLoginRegistro implements Initializable {
     
     @FXML
     void verBases(MouseEvent event) {
-    	System.out.println("bases");
-    	Principal.aplicacion.VerBases();
+    	Principal.aplicacion.verBases();
     }
+    
+    public void setPantallaAnterior(String nombrePantalla) {
+    	this.pantallaAnterior = nombrePantalla;
+    }
+    
+	public void setTabActiva(int nombreTab) {
+		this.tabGuardada = nombreTab;
+	}
+	
+	public void setLoginForced(boolean forced) {
+		this.loginForced = forced;
+	}
+   
 }

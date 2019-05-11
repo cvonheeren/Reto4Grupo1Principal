@@ -38,8 +38,6 @@ public class Aplicacion {
 	public ControladorInformacionAloj controladorInformacionAloj;
 	public ControladorFactura controladorFactura;
 	public ControladorLoginRegistro controladorLoginRegistro;
-	private Scene sceneLogin;
-	private Stage stageBases;
 	
 	@FXML
     private Pane anchorPaneBase;
@@ -110,30 +108,24 @@ public class Aplicacion {
 			stage.show();
 		}
 	}
-
-	/**
-	 * 
-	 */
-	public void CargarSceneLogin()
-	{
-		Parent FXML = loadFXML("LoginRegistro.fxml");
+	
+    public void verBases() {
+		Parent FXML = loadFXML("Bases.fxml");
 		if (FXML != null) {
-			try{stageLogin.close();}catch(Exception e) {}
-			sceneLogin = new Scene(FXML);
-			sceneLogin.getStylesheets().add("reto4.css");
-			stageLogin = new Stage();
-			stageLogin.setTitle("Iniciar sesion");
-			stageLogin.setScene(sceneLogin);
-			stageLogin.show();
+			Stage stageBases = new Stage();
+			Scene scene = new Scene(FXML);
+			try{stageBases.close();}catch(Exception e) {}
+			stageBases.setTitle("Bases legales");
+			stageBases.setScene(scene);
+			stageBases.show();
 		}
-	}
+    }
 	
 	/**
 	 * 
 	 * @param bounds
 	 */
-	public void CargarpopupInfo(Bounds bounds)
-	{
+	public void cargarPopupInfo(Bounds bounds) {
 		Parent FXML = loadFXML("PopupInfo.fxml");
 		if (FXML != null) {
 			try{stagePopupInfo.close();}catch(Exception e) {}
@@ -211,7 +203,7 @@ public class Aplicacion {
      * @param pregunta
      * @return
      */
-    public boolean VentanaSiNo(String pregunta)
+    public boolean ventanaSiNo(String pregunta)
     {
     	Alert closeConfirmation = new Alert(
                 Alert.AlertType.CONFIRMATION,
@@ -228,19 +220,6 @@ public class Aplicacion {
         }
         else
         	return true;
-    }
-    
-    public void VerBases()
-    {
-		Parent FXML = loadFXML("Bases.fxml");
-		if (FXML != null) {
-			try{stageBases.close();}catch(Exception e) {}
-			Scene scene = new Scene(FXML);
-			stageBases = new Stage();
-			stageBases.setTitle("Bases legales");
-			stageBases.setScene(scene);
-			stageBases.show();
-		}
     }
 
 }

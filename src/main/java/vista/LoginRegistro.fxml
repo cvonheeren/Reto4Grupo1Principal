@@ -13,15 +13,15 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="paneLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="702.0" prefWidth="906.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorLoginRegistro">
+<AnchorPane fx:id="paneLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1150.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorLoginRegistro">
 	<children>
-      <Rectangle fill="#1976d2" height="181.0" layoutX="-8.0" layoutY="528.0" smooth="false" stroke="#1976d2" strokeType="INSIDE" strokeWidth="0.0" width="921.0" />
-		<Label layoutX="582.0" layoutY="62.0" text="¿No estás registrado?">
+      <Rectangle fill="#1976d2" height="180.0" layoutY="720.0" smooth="false" stroke="#1976d2" strokeType="INSIDE" strokeWidth="0.0" width="1150.0" />
+		<Label layoutX="650.0" layoutY="165.0" text="¿No estás registrado? Registrate ahora">
 	 		<font>
-	    		<Font size="16.0" />
+	    		<Font name="System Bold" size="18.0" />
 	 		</font>
 		</Label>
-		<AnchorPane fx:id="paneReg" layoutX="459.0" layoutY="103.0" opacity="0.9" prefHeight="554.0" prefWidth="398.0" style="-fx-background-color: #dddddd;">
+		<AnchorPane fx:id="paneReg" layoutX="618.0" layoutY="220.0" prefHeight="554.0" prefWidth="400.0" style="-fx-background-color: #dddddd;">
 	       	<children>
 				<JFXButton fx:id="btnReg" layoutX="110.0" layoutY="479.0" onAction="#registrarse" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="REGISTRARSE" textFill="WHITE">
 			 		<font>
@@ -58,7 +58,7 @@
             <Hyperlink layoutX="169.0" layoutY="441.0" onMouseClicked="#verBases" text="bases legales." />
 			</children>
 		</AnchorPane>
-		<AnchorPane layoutX="67.0" layoutY="87.0" prefHeight="222.0" prefWidth="316.0" style="-fx-background-color: #fff;">
+		<AnchorPane layoutX="152.0" layoutY="220.0" prefHeight="222.0" prefWidth="316.0" style="-fx-background-color: #fff;">
 	       	<children>
       				<JFXTextField fx:id="textFieldDNI" focusColor="#f57c00" layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="300.0" promptText="DNI" text="12345678A" unFocusColor="#1976d2">
       				   <opaqueInsets>
@@ -76,7 +76,7 @@
 				</JFXButton>
       		</children>
 		</AnchorPane>
-      <JFXButton fx:id="btnVolver" layoutX="145.0" layoutY="575.0" onAction="#volver" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="VOLVER" textFill="WHITE">
+      <JFXButton fx:id="btnVolver" layoutX="58.0" layoutY="793.0" onAction="#volver" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00;" text="VOLVER" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
@@ -84,5 +84,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
+      <Label layoutX="245.0" layoutY="165.0" text="Iniciar Sesion">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
 	</children>
 </AnchorPane>

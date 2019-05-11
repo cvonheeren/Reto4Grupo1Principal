@@ -21,7 +21,6 @@ import modelo.Casa;
 import modelo.Estancia;
 import modelo.Habitacion;
 import modelo.Hotel;
-import modelo.Reserva;
 
 public class ControladorInformacionAloj implements Initializable {
 	
@@ -49,18 +48,18 @@ public class ControladorInformacionAloj implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
-		Reserva reserva = Principal.modelo.reserva;
+		Alojamiento alojamiento = Principal.modelo.reserva.getAlojamiento();
 		
-		Alojamiento alojamiento = reserva.getAlojamiento();
 		nombAloj.setText(alojamiento.getNombre());
 		descAloj.setText(alojamiento.getDescripcion());
-		img.setImage(new Image (alojamiento.getImgurl()));
 		ubicacion.setText(alojamiento.getUbicacion());
 		precio.setText(alojamiento.getPrecioHabBarata() + "€");
+		img.setImage(new Image(alojamiento.getImgurl()));
 		
 		int tamanoUbicacion = (int) ((int) ubicacion.getBoundsInLocal().getMaxX() + ubicacion.getLayoutX() + 5);
 		verMapa.setLayoutX(tamanoUbicacion);
 		
+		comprobarSesionIniciada();
 		setHabitaciones(alojamiento);
 	}
     
@@ -68,9 +67,11 @@ public class ControladorInformacionAloj implements Initializable {
     void iniciarCerrar(ActionEvent event) {
     	Principal.aplicacion.controladorInformacionAloj=this;
     	if(Principal.modelo.cliente == null) {
-			Principal.aplicacion.CargarSceneLogin();
+    		Principal.aplicacion.CambiarScene("LoginRegistro.fxml");
+			Principal.aplicacion.controladorLoginRegistro.setPantallaAnterior("PaneInfo.fxml");
 		} else {
-			Principal.iniciarPrograma();
+			Principal.modelo.cliente = null;
+			comprobarSesionIniciada();
 		}
     }
 	
@@ -159,9 +160,17 @@ public class ControladorInformacionAloj implements Initializable {
 		return str;
     }
     
-	public void SesionIniciada() {
-		lblSaludo.setText("Hola, " + Principal.modelo.cliente.getDni());
-		lblSesion.setText("Cerrar Sesion");
+    /**
+     * 
+     */
+    public void comprobarSesionIniciada() {
+		if(Principal.modelo.cliente != null) {
+			lblSaludo.setText("Hola, " + Principal.modelo.cliente.getDni());
+			lblSesion.setText("Cerrar Sesion");
+		} else {
+			lblSaludo.setText("Hola, Anonimo");
+			lblSesion.setText("Identifiquese");
+		}
 	}
 	
 }
