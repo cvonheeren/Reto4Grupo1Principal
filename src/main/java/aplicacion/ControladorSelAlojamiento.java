@@ -87,6 +87,7 @@ public class ControladorSelAlojamiento implements Initializable {
     void seleccion(ActionEvent event) {
     	fechaSalida = deshabilitarFechas(fechaSalida, fechaEntrada.getValue().plusDays(1));
 		fechaSalida.setValue(fechaEntrada.getValue().plusDays(1));
+		fechaSalida.show();
     }
     
     @FXML
@@ -112,6 +113,7 @@ public class ControladorSelAlojamiento implements Initializable {
 			comprobarSesionIniciada();
 		}
     }
+    
     
     /**
      * 
@@ -149,7 +151,7 @@ public class ControladorSelAlojamiento implements Initializable {
      */
     public void ejecutarBusqueda() {
     	if (textCiudad.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(new JFrame(), "Debe introducir un destino", "Error",JOptionPane.ERROR_MESSAGE);
+			Principal.aplicacion.mostrarMensaje(contenedor, "Debe introducir algun valor en el campo de busqueda");
 			return;
 		}
     	contenedor.getChildren().remove(busqueda);

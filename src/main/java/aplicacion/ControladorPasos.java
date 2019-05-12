@@ -110,6 +110,7 @@ public class ControladorPasos implements Initializable {
     	Principal.aplicacion.cargarPopupInfo(iconInfo.localToScreen(iconInfo.getBoundsInLocal()));
     }
     
+    
     public void btnSiguienteHabitaciones() {
     	if(comprobarHabitacionSeleccionada()) {
 			float precio = Principal.modelo.pago.calcularPrecio(Principal.modelo.reserva.getFechaEntrada(), Principal.modelo.reserva.getFechaSalida(), Principal.modelo.reserva.getHabitacionesReservadas());
@@ -119,7 +120,6 @@ public class ControladorPasos implements Initializable {
 				idTabPago.setDisable(false);
 				tabPane.getSelectionModel().select(idTabPago);
 			} else {
-				JOptionPane.showMessageDialog(new JFrame(), "Debe identificarse antes de proceder al pago", "Error", JOptionPane.ERROR_MESSAGE);
 				Principal.aplicacion.CambiarScene("LoginRegistro.fxml");
 				Principal.aplicacion.controladorLoginRegistro.setPantallaAnterior("Pasos.fxml");
 				Principal.aplicacion.controladorLoginRegistro.setTabActiva(tabPane.getSelectionModel().getSelectedIndex());

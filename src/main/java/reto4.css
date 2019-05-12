@@ -37,3 +37,8 @@
 	-fx-border-radius: 1;
 	-fx-background-radius: 5;
 }
+
+.fondoImg {
+	-fx-background-image: url('././Fondo2.png');
+	-fx-background-size: 100% 300%;
+}
