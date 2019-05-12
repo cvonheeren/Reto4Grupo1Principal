@@ -149,7 +149,7 @@ public class Pago {
 	 * @param habReservadas
 	 * @return
 	 */
-	public float calcularPrecio(Alojamiento alojamiento, Date fechaEntrada, Date fechaSalida, ArrayList<Habitacion> habReservadas) {
+	public float calcularPrecio(Date fechaEntrada, Date fechaSalida, ArrayList<Habitacion> habReservadas) {
 		GestorDeFechas gestorF = new GestorDeFechas();
 		float precioTotal = 0;
 		float tarifaDiaNormal = 0;

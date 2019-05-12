@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
-import Reto4Grupo1BBDD.ModificarBBDD;
 import core.Principal;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -23,7 +22,6 @@ import modelo.Reserva;
 
 public class ControladorPago implements Initializable {
 
-	
 	@FXML
     private Label precio, introducido, restante;
 
@@ -44,39 +42,39 @@ public class ControladorPago implements Initializable {
     
     @FXML
     private Label precioTotal;
-
+    
+    @FXML
+    private AnchorPane contenedor;
+    
+    private float[] monedasBilletes = { 500, 200, 100, 50, 20, 10, 5, 2, 1, 0.50f, 0.20f, 0.10f, 0.05f, 0.02f, 0.01f };
+    public JFXButton[] botonesMonedasBilletes = new JFXButton[15];	
+    
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+    	Principal.aplicacion.controladorPago=this;
+    	actulizarTarifa();
+    	crearBotones();
+    }
+    
     @FXML
     void validarCodPromo(ActionEvent event) {
     	Reserva reserva = Principal.modelo.reserva;
-    	float descuento=Principal.modelo.gestorBBDD.modificarBBDD.ValidarCodPromo(textFieldCodPromo.getText(), Principal.modelo.cliente.getDni());
-    	int descuentoPorcentajeint = (int) (descuento*100);
-    	float precioDescueto=reserva.getPrecio()*descuento;
+    	float descuento = Principal.modelo.gestorBBDD.modificarBBDD.ValidarCodPromo(textFieldCodPromo.getText(), Principal.modelo.cliente.getDni());
+    	int descuentoPorcentajeint = (int)(descuento*100);
+    	float precioDescuento = reserva.getPrecio()*descuento;
     	if(descuento > 0) {
     		textFieldCodPromo.setDisable(true);
     		textFieldCodPromo.setText("Codigo promocional valido");
     		btnValidarCodPromo.setDisable(true);
-    		descuentoPorcentaje.setText("Descuento(" + Integer.toString(descuentoPorcentajeint) +"%)");
-    		descuentoPrecio.setText(Float.toString(precioDescueto) + "€");
-    		precioTotal.setText(reserva.getPrecio()-precioDescueto+"€");
+    		descuentoPorcentaje.setText("Descuento(" + Integer.toString(descuentoPorcentajeint) + "%)");
+    		descuentoPrecio.setText(Float.toString(precioDescuento) + "€");
+    		precioTotal.setText(reserva.getPrecio() - precioDescuento + "€");
     	} else {
     		Principal.aplicacion.mostrarMensaje(Principal.aplicacion.controladorPasos.anchorPaneBase, "Codigo promocional no valido");
     	}
     }
     
-    @FXML
-    private AnchorPane contenedor;
-    private float[] monedasBilletes = {500, 200, 100, 50, 20, 10, 5, 2, 1, 0.50f, 0.20f, 0.10f, 0.05f, 0.02f, 0.01f };
-    public JFXButton[] botonesMonedasBilletes = new JFXButton[15];
-
-	
-    
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-    	Principal.aplicacion.controladorPago=this;
-    	crearBotones();
-    }
-    
-    public void ActulizarTarifa() {
+    public void actulizarTarifa() {
     	precio.setText(Float.toString(Principal.modelo.pago.getPrecioTotal()) + " €");
     	introducido.setText("0 €");
     	restante.setText(Float.toString(Principal.modelo.pago.getPrecioTotal()) + " €");

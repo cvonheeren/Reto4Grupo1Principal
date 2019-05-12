@@ -90,14 +90,7 @@ public class ControladorPasos implements Initializable {
 				break;
 				
 //			case "idTabServ":
-//				if(Principal.modelo.cliente != null) {
-//					Principal.aplicacion.controladorPago.ActulizarTarifa();
-//					tabPane.getSelectionModel().select(idTabPago);
-//				} else {
-//					Principal.aplicacion.controladorPasos=this;
-//					Principal.aplicacion.CargarSceneLogin();
-//				}
-//				break;
+//				btnSiguienteServicios();
 				
 			case "idTabPago":
 				btnSiguientePago();
@@ -127,7 +120,6 @@ public class ControladorPasos implements Initializable {
 			Principal.modelo.pago.setPrecioTotal(precio);
 			Principal.modelo.reserva.setPrecio(precio);
 			if(Principal.modelo.cliente != null) {
-				Principal.aplicacion.controladorPago.ActulizarTarifa();
 				idTabPago.setDisable(false);
 				tabPane.getSelectionModel().select(idTabPago);
 			} else {
@@ -157,7 +149,6 @@ public class ControladorPasos implements Initializable {
 	    	Principal.modelo.reserva.setCodReserva(codReserva);
 	    	
 	    	// actualiza y muestra la pantalla final
-	    	Principal.aplicacion.controladorFactura.ActualizarDatos();
 	    	anchorPaneBase.getChildren().remove(botones);
 	    	idTabFin.setDisable(false);
 	    	idTabHab.setDisable(true);
