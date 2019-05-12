@@ -53,7 +53,7 @@
 				      <Insets />
 				   </opaqueInsets>
 				</JFXTextField>
-				<JFXDatePicker fx:id="fechaNacReg" defaultColor="#1976d2" layoutX="40.0" layoutY="380.0" prefHeight="40.0" prefWidth="300.0" />
+				<JFXDatePicker fx:id="fechaNacReg" defaultColor="#1976d2" layoutX="40.0" layoutY="380.0" prefHeight="40.0" prefWidth="300.0" promptText="FECHA DE NACIMIENTO" />
             <JFXCheckBox fx:id="chkboxBases" layoutX="33.0" layoutY="443.0" text="He leido y acepto las" />
             <Hyperlink layoutX="169.0" layoutY="441.0" onMouseClicked="#verBases" text="bases legales." />
 			</children>

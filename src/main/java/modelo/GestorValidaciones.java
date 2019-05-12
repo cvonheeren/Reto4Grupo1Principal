@@ -27,7 +27,6 @@ public class GestorValidaciones {
 	 * 
 	 */
 	public void limitarFechaMenorEdad(JFXDatePicker fecha) {
-		fecha.setValue(LocalDate.now().minusYears(18));
 		final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
 		     public DateCell call(final DatePicker datePicker) {
 		         return new DateCell() {
