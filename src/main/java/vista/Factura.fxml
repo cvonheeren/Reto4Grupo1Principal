@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1150.0" style="-fx-background-color: #1976d2;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorFactura">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="767.0" prefWidth="1150.0" style="-fx-background-color: #1976d2;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorFactura">
    <children>
-      <Pane layoutY="136.0" prefHeight="764.0" prefWidth="1150.0" style="-fx-background-color: #fff;">
+      <Pane prefHeight="767.0" prefWidth="1150.0" style="-fx-background-color: #fff;">
          <children>
             <Label layoutX="75.0" layoutY="185.0" text="Alojamiento:">
                <font>
@@ -29,7 +32,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Text fx:id="ubicacion" layoutX="247.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+            <Text fx:id="ubicacion" layoutX="247.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0">
                <font>
                   <Font size="16.0" />
                </font>
@@ -69,49 +72,40 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="75.0" layoutY="435.0" text="Tipo de pension:">
+            <Label layoutX="75.0" layoutY="436.0" text="Habitaciones reservadas:">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="pension" layoutX="250.0" layoutY="435.0">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="75.0" layoutY="485.0" text="Servicios:">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label fx:id="servicios" layoutX="250.0" layoutY="485.0">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label layoutX="75.0" layoutY="535.0" text="Habitaciones reservadas:">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label fx:id="habitaciones" layoutX="75.0" layoutY="565.0">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
+            <ScrollPane layoutX="75.0" layoutY="470.0" prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: transparent; -fx-border-color: gray;">
+               <content>
+                   <FlowPane fx:id="habitaciones" prefHeight="180.0" prefWidth="385.0">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding></FlowPane>
+               </content>
+            </ScrollPane>
             <Label layoutX="340.0" layoutY="65.0" prefHeight="84.0" prefWidth="471.0" text="¡Muchas gracias por su compra!" textFill="#1976d2">
                <font>
                   <Font size="32.0" />
                </font>
             </Label>
-            <JFXButton fx:id="btnimprimir" layoutX="885.0" layoutY="646.0" onAction="#imprimir" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #f57c00;" text="GUARDAR FACTURA" textFill="WHITE">
+            <JFXButton fx:id="inicio" layoutX="895.0" layoutY="645.0" onAction="#iniciar" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #f57c00;" text="NUEVA RESERVA" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></JFXButton>
-            <ImageView fx:id="imagen" fitHeight="251.0" fitWidth="429.0" layoutX="604.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imagen" fitHeight="267.0" fitWidth="433.0" layoutX="642.0" layoutY="185.0" pickOnBounds="true" preserveRatio="true" />
+            <JFXButton fx:id="btnimprimir" layoutX="700.0" layoutY="645.0" onAction="#imprimir" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #f57c00;" text="GUARDAR FACTURA" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
          </children>
       </Pane>
    </children>

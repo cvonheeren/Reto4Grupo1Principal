@@ -19,6 +19,8 @@ import com.jfoenix.effects.JFXDepthManager;
 
 import core.Principal;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DateCell;
@@ -38,7 +40,7 @@ import javafx.scene.text.Text;
 import javafx.util.Callback;
 import modelo.Alojamiento;
 import modelo.Habitacion;
-import vista.Card;
+import vista.CardAlojamiento;
 
 public class ControladorSelAlojamiento implements Initializable {
 	
@@ -154,6 +156,10 @@ public class ControladorSelAlojamiento implements Initializable {
 			JOptionPane.showMessageDialog(new JFrame(), "Debe introducir un destino", "Error",JOptionPane.ERROR_MESSAGE);
 			return;
 		}
+		Date fechaEntradaDate = Date.valueOf(this.fechaEntrada.getValue());
+		Date fechaSalidaDate = Date.valueOf(this.fechaSalida.getValue());
+		Principal.modelo.reserva.setFechaEntrada(fechaEntradaDate);
+		Principal.modelo.reserva.setFechaSalida(fechaSalidaDate);
     	cargarAlojamientos();
     }
 	
@@ -175,7 +181,16 @@ public class ControladorSelAlojamiento implements Initializable {
         		alojamiento.setHabitaciones(buscarHabDisponibles(alojamiento));
         		
         		// crea la tarjeta con la informacion del alojamiento
-        		Card card = new Card(alojamiento, fechaEntrada, fechaSalida);
+        		CardAlojamiento card = new CardAlojamiento(alojamiento);
+        		
+        		// añade listener a la tarjeta
+        		card.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>(){
+        			@Override
+        			public void handle(Event event) {
+        				Principal.modelo.reserva.setAlojamiento(alojamiento);
+        				Principal.aplicacion.CambiarScene("PaneInfo.fxml");
+        			}
+        		});
         		
         		// añade el efecto rippler a la tarjeta
             	AnchorPane paneSuperior = new AnchorPane();

@@ -15,11 +15,7 @@ public class ControladorBases implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
-		texto.setText(Principal.modelo.LeerTexto(System.getProperty("user.dir") + "\\BasesLegales.txt"));
-		
+		texto.setText(Principal.modelo.gestorArchivos.leerBases(System.getProperty("user.dir") + "\\BasesLegales.txt"));
 	}
-    
-    
 
 }

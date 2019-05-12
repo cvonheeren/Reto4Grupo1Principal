@@ -2,21 +2,16 @@ package vista;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXRippler;
 import com.jfoenix.effects.JFXDepthManager;
 
 import core.Principal;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,7 +19,6 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
@@ -35,7 +29,7 @@ import modelo.Estancia;
 import modelo.Habitacion;
 import modelo.Hotel;
 
-public class Card extends AnchorPane implements Initializable {
+public class CardAlojamiento extends AnchorPane implements Initializable {
 	
 	@FXML
     private AnchorPane card;
@@ -55,23 +49,11 @@ public class Card extends AnchorPane implements Initializable {
     @FXML
     private JFXButton btnVer;
     
-    
     private Alojamiento alojamiento;
     
-    private JFXDatePicker fechaEntrada, fechaSalida;
-    
-    
-
-    @FXML
-    void verAlojamiento(ActionEvent event) {
-    	verInfo(this.alojamiento);
-    }
-    
-	public Card(Alojamiento alojamiento, JFXDatePicker fechaEntrada, JFXDatePicker fechaSalida) {
+	public CardAlojamiento(Alojamiento alojamiento) {
 		
 		this.alojamiento = alojamiento;
-		this.fechaEntrada = fechaEntrada;
-		this.fechaSalida = fechaSalida;
 		
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vista/Alojamiento.fxml"));
 	    fxmlLoader.setRoot(this);
@@ -96,26 +78,13 @@ public class Card extends AnchorPane implements Initializable {
 		setIconoAloj();
 		setHabitaciones();
 		setEstancias();
-		this.card = añadirListenerSeleccion(this.card);
 	}
 	
-	/**
-	 * 
-	 * @param card
-	 * @param alojamiento
-	 * @param fechaEntrada
-	 * @param fechaSalida
-	 * @return
-	 */
-	public AnchorPane añadirListenerSeleccion(AnchorPane card) {
-		card.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>(){
-			@Override
-			public void handle(Event event) {
-				verInfo(alojamiento);
-			}
-		});
-		return card;
-	}
+    @FXML
+    void verAlojamiento(ActionEvent event) {
+    	Principal.modelo.reserva.setAlojamiento(this.alojamiento);
+		Principal.aplicacion.CambiarScene("PaneInfo.fxml");
+    }
 	
 	/*
 	 * 
@@ -263,18 +232,5 @@ public class Card extends AnchorPane implements Initializable {
 		}
 		return str;
     }
-    
-    /**
-     * 
-     * @param alojamiento
-     */
-	public void verInfo(Alojamiento alojamiento) {
-		Date fechaEntradaDate = Date.valueOf(this.fechaEntrada.getValue());
-		Date fechaSalidaDate = Date.valueOf(this.fechaSalida.getValue());
-		Principal.modelo.reserva.setAlojamiento(alojamiento);
-		Principal.modelo.reserva.setFechaEntrada(fechaEntradaDate);
-		Principal.modelo.reserva.setFechaSalida(fechaSalidaDate);
-		Principal.aplicacion.CambiarScene("PaneInfo.fxml");
-	}
 	
 }

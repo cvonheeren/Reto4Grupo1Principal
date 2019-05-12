@@ -9,10 +9,12 @@ import com.jfoenix.effects.JFXDepthManager;
 import core.Principal;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.text.Text;
 import modelo.Habitacion;
 
 public class ControladorPopupInfo implements Initializable {
@@ -21,17 +23,16 @@ public class ControladorPopupInfo implements Initializable {
     private AnchorPane paneBase;
 
     @FXML
-    private Label lblNombre;
-
-    @FXML
-    private Label lblUbicacion;
+    private Label lblNombre, lblPrecioTotal, lblFechas;
     
     @FXML
-    private Label lblPrecioTotal;
+    private Text lblUbicacion;
+    
+    @FXML
+    private Hyperlink mapa;
     
     @FXML
     private FlowPane flowPane;
-
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -39,21 +40,16 @@ public class ControladorPopupInfo implements Initializable {
 		lblNombre.setText(Principal.modelo.reserva.getAlojamiento().getNombre());
 		lblUbicacion.setText(Principal.modelo.reserva.getAlojamiento().getUbicacion());
 		lblPrecioTotal.setText("Total: " + Principal.modelo.reserva.getPrecio() + "€");
-		ArrayList<Habitacion> habitacionesReservadas=Principal.modelo.reserva.getHabitacionesReservadas();
-		for(int i=0;i<habitacionesReservadas.size();i++)
-			{
-				Habitacion habitacion=habitacionesReservadas.get(i);
-				Label textoHabitacion=new Label(habitacion.getNombre());
-				textoHabitacion.setMinWidth(370);
-				textoHabitacion.setStyle("-fx-font-weight: bold");
-				flowPane.getChildren().add(textoHabitacion);
-				
-				
-				Label textoCantHab = new Label("                 x" + habitacion.getCantidad());
-				textoCantHab.setMinWidth(370);
-				flowPane.getChildren().add(textoCantHab);
-			}
-		
+		mapa.setLayoutX( (int) (lblUbicacion.getBoundsInLocal().getMaxX() + lblUbicacion.getLayoutX() + 7));
+		lblFechas.setText("Del " + Principal.modelo.reserva.getFechaEntrada() + " al " + Principal.modelo.reserva.getFechaSalida());
+		ArrayList<Habitacion> habitacionesReservadas = Principal.modelo.reserva.getHabitacionesReservadas();
+		for(int i=0;i<habitacionesReservadas.size();i++) {
+			Habitacion habitacion = habitacionesReservadas.get(i);
+			Label textoHabitacion = new Label(habitacion.getNombre() + " x " + habitacion.getCantidad());
+			textoHabitacion.setMinWidth(370);
+			textoHabitacion.setStyle("-fx-font-weight: bold");
+			flowPane.getChildren().add(textoHabitacion);
+		}
 	}
 	
     @FXML
