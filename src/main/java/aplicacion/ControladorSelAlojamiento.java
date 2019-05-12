@@ -35,7 +35,6 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 import modelo.Alojamiento;
@@ -65,6 +64,9 @@ public class ControladorSelAlojamiento implements Initializable {
     @FXML
     private Hyperlink lblSesion;
     
+    @FXML
+    private Text busqueda;
+    
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	
@@ -76,12 +78,6 @@ public class ControladorSelAlojamiento implements Initializable {
 		
 		fechaEntrada = deshabilitarFechas(fechaEntrada, LocalDate.now());
 		fechaSalida = deshabilitarFechas(fechaSalida, LocalDate.now().plusDays(1));
-		
-		Text busqueda = new Text("No ha realizado ninguna busqueda aun.");
-		busqueda.setLayoutX(245);
-		busqueda.setLayoutY(70);
-		busqueda.setFont(new Font("arial",16));
-		contenedor.getChildren().setAll(busqueda);
 		
     	comprobarSesionIniciada();
 		cargarAutocompletar();
@@ -156,6 +152,7 @@ public class ControladorSelAlojamiento implements Initializable {
 			JOptionPane.showMessageDialog(new JFrame(), "Debe introducir un destino", "Error",JOptionPane.ERROR_MESSAGE);
 			return;
 		}
+    	contenedor.getChildren().remove(busqueda);
 		Date fechaEntradaDate = Date.valueOf(this.fechaEntrada.getValue());
 		Date fechaSalidaDate = Date.valueOf(this.fechaSalida.getValue());
 		Principal.modelo.reserva.setFechaEntrada(fechaEntradaDate);
@@ -201,7 +198,7 @@ public class ControladorSelAlojamiento implements Initializable {
             	rippler.setRipplerFill(Paint.valueOf("#AAAAAA"));  
         		
             	// añade la tarjeta al grid
-    			grid.add(card, 0, i); 
+    			grid.add(paneSuperior, 0, i); 
     		}	
 
     	}

@@ -90,12 +90,11 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 	 * 
 	 */
 	public void setMapa() {
-		int tamanoUbicacion = (int) ((int) ubicacion.getBoundsInLocal().getMaxX() + ubicacion.getLayoutX() + 5);
-		mapa.setLayoutX(tamanoUbicacion);
+		mapa.setLayoutX((int) ubicacion.getBoundsInLocal().getMaxX() + ubicacion.getLayoutX() + 5);
 		mapa.setOnAction((e) -> {
 			Principal.modelo.reserva.setAlojamiento(alojamiento);
 			Principal.aplicacion.verMapa("Mapa.fxml");
-        }); 
+        });
 	}
 	
 	/**
@@ -188,10 +187,10 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 			this.card.getChildren().remove(this.lblEstancias);
 			this.card.getChildren().remove(this.estancias);
 		} else if(alojamiento instanceof Apartamento) {
-			String str = mostrarEstancias(((Apartamento)alojamiento).getEstancias());
+			String str = mostrarEstancias(((Apartamento)alojamiento).getEstancias(), alojamiento.getHabitaciones());
 			this.estancias.setText(str);
 		} else if(alojamiento instanceof Casa) {	
-			String str = mostrarEstancias(((Casa)alojamiento).getEstancias());
+			String str = mostrarEstancias(((Casa)alojamiento).getEstancias(), alojamiento.getHabitaciones());
 			this.estancias.setText(str);
 		}
 	}
@@ -220,8 +219,8 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
      * @param estancias
      * @return
      */
-    public String mostrarEstancias(ArrayList<Estancia> estancias) {
-    	String str = "";
+    public String mostrarEstancias(ArrayList<Estancia> estancias, ArrayList<Habitacion> habitaciones) {
+    	String str = numHabitaciones(habitaciones) + " x Dormitorios, ";
     	int cont = 1;
 		for (Estancia e : estancias) {
 			str += e.getCantidad() + " x " + e.getNombre().toLowerCase();
@@ -231,6 +230,18 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 			cont++;
 		}
 		return str;
+    }
+    /**
+     * 
+     * @param habitaciones
+     * @return
+     */
+    public int numHabitaciones(ArrayList<Habitacion> habitaciones) {
+    	int suma = 0;
+		for (Habitacion h : habitaciones) {
+			suma += h.getCantidad();
+		}
+		return suma;
     }
 	
 }

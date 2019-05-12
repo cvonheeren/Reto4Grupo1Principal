@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="900.0" prefWidth="1150.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorSelAlojamiento">
    <children>
@@ -72,7 +73,14 @@
       </Pane>
       <ScrollPane hbarPolicy="NEVER" layoutX="372.0" layoutY="248.0" prefHeight="650.0" prefWidth="775.0" style="-fx-background-color: #eeeeee;">
          <content>
-            <AnchorPane fx:id="contenedor" prefHeight="644.0" prefWidth="770.0" style="-fx-background-color: #eeeeee;" />
+            <AnchorPane fx:id="contenedor" prefHeight="644.0" prefWidth="770.0" style="-fx-background-color: #eeeeee;">
+               <children>
+                  <Text fx:id="busqueda" layoutX="245.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No ha realizado ninguna busqueda aun.">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+               </children></AnchorPane>
          </content>
       </ScrollPane>
    </children>

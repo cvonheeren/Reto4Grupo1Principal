@@ -1,6 +1,8 @@
 package aplicacion;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -31,7 +33,7 @@ public class ControladorInformacionAloj implements Initializable {
 	private Text nombAloj, ubicacion;
 	
 	@FXML
-	private Label descAloj, habitaciones, tituloHab, estancias, precio;
+	private Label descAloj, habitaciones, tituloHab, estancias;
     
     @FXML
     private Hyperlink verMapa;
@@ -53,7 +55,6 @@ public class ControladorInformacionAloj implements Initializable {
 		nombAloj.setText(alojamiento.getNombre());
 		descAloj.setText(alojamiento.getDescripcion());
 		ubicacion.setText(alojamiento.getUbicacion());
-		precio.setText(alojamiento.getPrecioHabBarata() + "€");
 		img.setImage(new Image(alojamiento.getImgurl()));
 		
 		int tamanoUbicacion = (int) ((int) ubicacion.getBoundsInLocal().getMaxX() + ubicacion.getLayoutX() + 5);
@@ -132,7 +133,7 @@ public class ControladorInformacionAloj implements Initializable {
     public String mostrarHabitaciones(ArrayList<Habitacion> habitaciones) {
     	String str = "";
 		for (Habitacion s : habitaciones) {
-			str += s.getNombre() + "\n";
+			str += s.getNombre() + "\t\t\t" + s.getTarifaNormal() + "€ \n";
 		    if (s.getCtaCamasSimples() > 0 ) {
 		    	str += "- " + s.getCtaCamasSimples() + "x  Cama Individual \n";
 		    }
@@ -172,5 +173,16 @@ public class ControladorInformacionAloj implements Initializable {
 			lblSesion.setText("Identifiquese");
 		}
 	}
+    
+//    public float getPrecio(Habitacion habitacion) {
+//    	LocalDate fecha = Principal.modelo.reserva.getFechaEntrada().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//    	if(Principal.modelo.gestorFechas.comprobarFestivo(fecha)) {
+//    		return habitacion.getTarifaFestivo();
+//    	} else if (Principal.modelo.gestorFechas.comprobarSiEsVerano(fecha)){
+//    		return habitacion.getTarifaVerano();
+//    	} else {
+//    		return habitacion.getTarifaNormal();
+//    	}
+//    }
 	
 }

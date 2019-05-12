@@ -95,10 +95,6 @@ public class ControladorPasos implements Initializable {
 			case "idTabPago":
 				btnSiguientePago();
 				break;
-				
-			case "idTabFin":
-				Principal.iniciarPrograma();
-				break;
 		}
     }
 

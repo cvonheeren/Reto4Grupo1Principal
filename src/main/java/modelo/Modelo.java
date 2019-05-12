@@ -10,6 +10,7 @@ public class Modelo {
 	public GestorBBDD gestorBBDD = null;
 	public GestorArchivos gestorArchivos = null;
 	public GestorValidaciones gestorValidaciones = null;
+	public GestorDeFechas gestorFechas = new GestorDeFechas();
 	
 	/**
 	 * Constructor
@@ -20,6 +21,7 @@ public class Modelo {
 		this.gestorArchivos = new GestorArchivos();
 		this.reserva = new Reserva();
 		this.gestorValidaciones = new GestorValidaciones();
+		this.gestorFechas = new GestorDeFechas();
 	}		
 	
 }

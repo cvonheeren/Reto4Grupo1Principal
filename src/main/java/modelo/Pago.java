@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import core.Principal;
+
 
 /**
  * Realiza los calculos del pago del programa
@@ -150,7 +152,6 @@ public class Pago {
 	 * @return
 	 */
 	public float calcularPrecio(Date fechaEntrada, Date fechaSalida, ArrayList<Habitacion> habReservadas) {
-		GestorDeFechas gestorF = new GestorDeFechas();
 		float precioTotal = 0;
 		float tarifaDiaNormal = 0;
 		float tarifaDiaVerano = 0;
@@ -174,12 +175,12 @@ public class Pago {
 		// cogemos los dias del periodo para comprobar sus tarifas extras
 		LocalDate fecha1 = fechaEntrada.toLocalDate();
 		LocalDate fecha2 = fechaSalida.toLocalDate(); 
-	    ArrayList<LocalDate> lista = gestorF.setDiasSeleccionados(fecha1, fecha2);
+	    ArrayList<LocalDate> lista = Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1, fecha2);
 	    
 	    for (int i = 0; i < lista.size(); i++) {
-			if(gestorF.comprobarFestivo(lista.get(i))) {
+			if(Principal.modelo.gestorFechas.comprobarFestivo(lista.get(i))) {
 				precioTotal += tarifaDiaVerano;
-			} else if(gestorF.comprobarSiEsVerano(lista.get(i))) {
+			} else if(Principal.modelo.gestorFechas.comprobarSiEsVerano(lista.get(i))) {
 				precioTotal += tarifaDiaFestivo;
 			} else {
 				precioTotal += tarifaDiaNormal;

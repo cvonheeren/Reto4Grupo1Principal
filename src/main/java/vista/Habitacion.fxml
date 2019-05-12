@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<fx:root style="-fx-background-color: #fff; -fx-border-insets: 5px; -fx-background-insets: 5px; -fx-border-radius: 1; -fx-background-radius: 5;" type="javafx.scene.layout.AnchorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+	<AnchorPane fx:id="card" maxWidth="750.0" minHeight="200.0" prefWidth="600.0">
+	   <children>
+	      <Text fx:id="tipo" fill="#0077cc" layoutX="20.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TIPO DE HABITACION">
+	         <font>
+	            <Font name="Arial" size="18.0" />
+	         </font>
+	      </Text>
+         <Label fx:id="descripcion" layoutX="20.0" layoutY="50.0" prefHeight="50.0" prefWidth="450.0" text="Descripcion" wrapText="true" />
+         <Text fx:id="precio" fill="#0ab21b" layoutX="500.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Precio">
+            <font>
+               <Font name="Arial" size="26.0" />
+            </font>
+         </Text>
+         <Text fx:id="camas" layoutX="20.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lista de habitaciones" />
+         <Label layoutX="20.0" layoutY="110.0" text="Camas:">
+            <font>
+               <Font name="System Bold" size="12.0" />
+            </font>
+         </Label>
+         <Label layoutX="500.0" layoutY="119.0" text="Cantidad:" />
+         <ChoiceBox fx:id="cantidad" layoutX="500.0" layoutY="149.0" prefWidth="75.0" />
+	   </children>
+	   <cursor>
+	      <Cursor fx:constant="HAND" />
+	   </cursor>
+	</AnchorPane>
+</fx:root>

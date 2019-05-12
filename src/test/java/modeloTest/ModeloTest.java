@@ -6,7 +6,7 @@ import org.junit.Test;
 
 
 import modelo.Cliente;
-import modelo.GenerarFactura;
+import modelo.GestorArchivos;
 import modelo.GestorBBDD;
 import modelo.Habitacion;
 
@@ -51,7 +51,7 @@ public class ModeloTest {
 	@Test
 	public void testgenerarFactura() {
 		assertNotEquals(null, miModelo.generarFactura);
-		assertEquals(GenerarFactura.class, miModelo.generarFactura.getClass());
+		assertEquals(GestorArchivos.class, miModelo.generarFactura.getClass());
 	}
 	
 }
