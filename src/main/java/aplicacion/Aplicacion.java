@@ -1,6 +1,7 @@
 package aplicacion;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import com.jfoenix.controls.JFXSnackbar;
@@ -25,6 +26,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import modelo.Alojamiento;
 
 public class Aplicacion {
 
@@ -39,6 +41,8 @@ public class Aplicacion {
 	public ControladorFactura controladorFactura;
 	public ControladorLoginRegistro controladorLoginRegistro;
 	public Stage stageDialogo;
+	public ArrayList<Alojamiento> busquedaAlojamientos;
+	public String textoBusqueda;
 	public String textoTemporal;
 	
 	@FXML
