@@ -14,7 +14,7 @@ import modelo.Reserva;
 
 public class ReservaTest {
 
-	Reserva reserva = new Reserva(1, 1, 1, null, null, null, 400.34f);
+	Reserva reserva = new Reserva(1, null, null, null, 400.34f);
 	Reserva reserva2 = new Reserva();
 	ArrayList<Habitacion> habitacionesReservadas = new ArrayList<Habitacion>();
 	Alojamiento alojTest = new Alojamiento();
@@ -22,13 +22,12 @@ public class ReservaTest {
 	@Test
 	public void testConstructor1() {
 		assertEquals(1, reserva.getCodReserva());
-		assertEquals(1, reserva.getCodCliente());
-		assertEquals(1, reserva.getCodAlojamiento());
 		assertEquals(null, reserva.getFechaCompra());
 		assertEquals(null, reserva.getFechaEntrada());
 		assertEquals(null, reserva.getFechaSalida());
 		assertEquals(400.34f, reserva.getPrecio(), 0.000001);
 		assertEquals(habitacionesReservadas, reserva.getHabitacionesReservadas());
+		assertEquals(0, reserva.getCtdHabitaciones());
 	}
 	
 	@Test
@@ -41,18 +40,6 @@ public class ReservaTest {
 	public void testReserva() {
 		reserva.setCodReserva(1);
 		assertEquals(1, reserva.getCodReserva());
-	}
-	
-	@Test
-	public void testCliente() {
-		reserva.setCodCliente(1);
-		assertEquals(1, reserva.getCodCliente());
-	}
-	
-	@Test
-	public void testAlojamiento() {
-		reserva.setCodAlojamiento(1);
-		assertEquals(1, reserva.getCodAlojamiento());
 	}
 	
 	@Test
@@ -89,5 +76,11 @@ public class ReservaTest {
 	public void testAloj() {
 		reserva.setAlojamiento(alojTest);;
 		assertEquals(alojTest, reserva.getAlojamiento());
+	}
+	
+	@Test
+	public void testContador() {
+		reserva.setCtdHabitaciones(0);;
+		assertEquals(0, reserva.getCtdHabitaciones());
 	}
 }

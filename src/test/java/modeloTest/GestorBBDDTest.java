@@ -11,7 +11,7 @@ import org.junit.Test;
 import modelo.Alojamiento;
 import modelo.GestorBBDD;
 import modelo.Habitacion;
-import modelo.Reserva;
+
 
 public class GestorBBDDTest {
 
@@ -34,8 +34,9 @@ public class GestorBBDDTest {
 
 	@Test
 	public void testCargarListaAlojamientos1() {
+		String[] tipos = {"C", "H"};
 		ArrayList<Alojamiento> test = new ArrayList<Alojamiento>();
-		ArrayList<Alojamiento> test2 = gestorTest.cargarAlojamientos("Bilbao");
+		ArrayList<Alojamiento> test2 = gestorTest.cargarAlojamientos("Bilbao", 1, 4, tipos);
 		
 		assertEquals(test2.getClass(), test.getClass());
 	}

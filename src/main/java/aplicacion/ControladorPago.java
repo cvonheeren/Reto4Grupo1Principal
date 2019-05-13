@@ -59,7 +59,7 @@ public class ControladorPago implements Initializable {
     @FXML
     void validarCodPromo(ActionEvent event) {
     	Reserva reserva = Principal.modelo.reserva;
-    	float descuento = Principal.modelo.gestorBBDD.modificarBBDD.ValidarCodPromo(textFieldCodPromo.getText(), Principal.modelo.cliente.getDni());
+    	float descuento = Principal.modelo.gestorBBDD.modificarBBDD.ValidarCodPromo(textFieldCodPromo.getText(), Principal.modelo.cliente.getUser());
     	int descuentoPorcentajeint = (int)(descuento*100);
     	float precioDescuento = reserva.getPrecio()*descuento;
     	if(descuento > 0) {
