@@ -11,7 +11,7 @@
 }
 
 .jfx-snackbar-content {
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: #212121;
     -fx-padding: 20px;
 }
 
@@ -41,4 +41,10 @@
 .fondoImg {
 	-fx-background-image: url('././Fondo2.png');
 	-fx-background-size: 100% 300%;
+}
+
+.botonInverso
+{
+	-fx-background-color: #FFFFFF;
+	-fx-text-fill: #f57c00;
 }

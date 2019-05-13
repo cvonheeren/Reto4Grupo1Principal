@@ -38,6 +38,8 @@ public class Aplicacion {
 	public ControladorInformacionAloj controladorInformacionAloj;
 	public ControladorFactura controladorFactura;
 	public ControladorLoginRegistro controladorLoginRegistro;
+	public Stage stageDialogo;
+	public String textoTemporal;
 	
 	@FXML
     private Pane anchorPaneBase;
@@ -192,10 +194,32 @@ public class Aplicacion {
      */
     public void mostrarMensaje(AnchorPane anchorpane, String mensaje) {
 		Text nodo = new Text(mensaje);
+		nodo.setFill(Color.WHITE);
 		snackbar = new JFXSnackbar(anchorpane);
 		snackbar.enqueue(new SnackbarEvent(nodo));
 		snackbar.getStylesheets().setAll("reto4.css");
+		//AbrirDialogo("PRUEBA");
 	}
+    
+    
+    public void AbrirDialogo(String texto)
+    {
+    	textoTemporal=texto;
+    	Parent FXML = loadFXML("Dialogo.fxml");
+		if (FXML != null) {
+			try{stageDialogo.close();}catch(Exception e) {}
+			Scene scene = new Scene(FXML);
+			scene.setFill(Color.TRANSPARENT);
+			scene.getStylesheets().add("reto4.css");
+			stageDialogo = new Stage(StageStyle.TRANSPARENT);
+			stageDialogo.setTitle("Informacion");
+			stageDialogo.setScene(scene);
+			stageDialogo.setAlwaysOnTop(true);
+			stageDialogo.show();
+			stageDialogo.setX(stage.getX()+8);
+			stageDialogo.setY(stage.getY()+31);
+		}
+    }
     
     
     /**
