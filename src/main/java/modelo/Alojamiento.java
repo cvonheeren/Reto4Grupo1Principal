@@ -10,7 +10,6 @@ public class Alojamiento {
 	protected String descripcion;
 	protected float longitud;
 	protected float latitud;
-	protected float recargo;
 	protected float desayuno;
 	protected float mediaPension;
 	protected float pensionCompleta;
@@ -99,13 +98,6 @@ public class Alojamiento {
 		this.latitud = latitud;
 	}
 
-	public float getRecargo() {
-		return recargo;
-	}
-
-	public void setRecargo(float recargo) {
-		this.recargo = recargo;
-	}
 
 	public float getDesayuno() {
 		return desayuno;
