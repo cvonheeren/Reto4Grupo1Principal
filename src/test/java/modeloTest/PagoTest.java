@@ -82,12 +82,12 @@ public class PagoTest {
         Date fecha1 = java.sql.Date.valueOf(fecha11);
         LocalDate fecha22 = LocalDate.of(2019, 8, 18);
         Date fecha2 = java.sql.Date.valueOf(fecha22);
-        Alojamiento aloh = new Alojamiento(1, "", "", "", 1, 1, 1, 1, 1, 1, "");
         ArrayList<Habitacion> habReservadas = new ArrayList<Habitacion>();
-        habReservadas.add(new Habitacion(0, null, 0, 0, 0, 0, 0, 1, 1.2f, 1.2f, null));
+        Habitacion habitacion = new Habitacion(0, null, 0, 0, 0, 0, 0, 1, 1.2f, 1.2f, null);
+        habReservadas.add(0, habitacion);
        
-        System.out.println(pago.calcularPrecio(aloh, fecha1, fecha2, habReservadas));
-        assertEquals(1.2f+1.2f+1.2f+1.2f, pago.calcularPrecio(aloh, fecha1, fecha2, habReservadas), 0.00001);   
+        System.out.println(pago.calcularPrecio(fecha1, fecha2, habReservadas));
+        assertEquals(1.2f+1.2f+1.2f, pago.calcularPrecio(fecha1, fecha2, habReservadas), 0.00001);   
     }
 
 	

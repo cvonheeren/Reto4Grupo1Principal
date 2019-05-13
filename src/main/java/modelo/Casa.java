@@ -25,8 +25,8 @@ public class Casa extends Alojamiento {
 	 * @param area
 	 */
 	public Casa(int codAlojamiento, String ubicacion, String nombre, String descripcion, float longitud, float latitud,
-			float tarifaNormal, float tarifaVerano, float recargo, float desayuno, String imgurl, ArrayList<Estancia> estancias) {
-		super(codAlojamiento, ubicacion, nombre, descripcion, longitud, latitud, tarifaNormal, tarifaVerano, recargo,
+			float tarifaNormal, float tarifaVerano, float desayuno, String imgurl, ArrayList<Estancia> estancias) {
+		super(codAlojamiento, ubicacion, nombre, descripcion, longitud, latitud, tarifaNormal, tarifaVerano,
 				desayuno, imgurl);
 //		this.banios = numBanios();
 //		this.area = calcularArea();

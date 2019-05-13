@@ -19,8 +19,8 @@ public class GestorDeFechasTest {
 		LocalDate fecha1 = LocalDate.of(2019, 5, 15);
 		LocalDate fecha2 = LocalDate.of(2019, 6, 15);
 		
-		assertTrue(gestor.tipoDeFecha(fecha1));
-		assertFalse(gestor.tipoDeFecha(fecha2));
+		assertTrue(gestor.comprobarFestivo(fecha1));
+		assertFalse(gestor.comprobarFestivo(fecha2));
 	}
 	
 	@Test
@@ -40,9 +40,9 @@ public class GestorDeFechasTest {
         
 		ArrayList<LocalDate> dias = new ArrayList<LocalDate>();
        
-        dias.add(0, fecha1);
-        dias.add(1, fecha2);
-        dias.add(2, fecha3);
+        
+        dias.add(0, fecha2);
+        dias.add(1, fecha3);
        
         assertEquals(dias, gestor.setDiasSeleccionados(fecha1, fecha3));
     }

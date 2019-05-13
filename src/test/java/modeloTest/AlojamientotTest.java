@@ -11,7 +11,7 @@ import modelo.Habitacion;
 
 public class AlojamientotTest {
 	
-	private Alojamiento alojamiento = new Alojamiento(1, "Bilbao", "Hotel Bilbao", "cremas", 20, 20, 1, 3, 4, 5, "www.kakota");
+	private Alojamiento alojamiento = new Alojamiento(1, "Bilbao", "Hotel Bilbao", "cremas", 20, 20, 3, 4, 5, "www.kakota");
 	private Alojamiento alojamiento2 = new Alojamiento();
 	protected ArrayList<Habitacion> habitaciones = new ArrayList<Habitacion>();
 	
@@ -27,6 +27,7 @@ public class AlojamientotTest {
 		assertEquals(4, alojamiento.getMediaPension(), 0.0001);
 		assertEquals(5, alojamiento.getPensionCompleta(), 0.0001);
 		assertEquals("www.kakota", alojamiento.getImgurl());
+		assertEquals(null, alojamiento2.getImgurl());
 	}
 
 	@Test
