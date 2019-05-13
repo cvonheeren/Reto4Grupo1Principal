@@ -44,6 +44,7 @@ public class Aplicacion {
 	public ArrayList<Alojamiento> busquedaAlojamientos;
 	public String textoBusqueda;
 	public String textoTemporal;
+	public Stage stageCargando;
 	
 	@FXML
     private Pane anchorPaneBase;
@@ -55,7 +56,6 @@ public class Aplicacion {
 	public Aplicacion(Stage stage) {
 		
 		this.stage = stage;
-		
 		// Codigo para cambiar de escena
 		CambiarScene("SeleccionAlojamiento.fxml");
 		
@@ -146,7 +146,7 @@ public class Aplicacion {
 			centrarPopup(bounds);
 		}
 	}
-	
+		
 	/**
 	 * Carga un archivo FXML
 	 * @param FXMLLink

@@ -14,7 +14,7 @@ public class CasaTest {
 	Estancia estancia = new Estancia(1, "", 8, 2);
 	ArrayList<Estancia> estancias = new ArrayList<Estancia>();
 	
-	Casa casa = new Casa(1, "Bilbao", "Hotel Bilbao", "cremas", 20, 20, 1, 3, 4, 5, "www.kakota", estancias);
+	Casa casa = new Casa(1, "Bilbao", "Hotel Bilbao", "cremas", 20, 20, 3, 4, 5, "www.kakota", estancias);
 	
 	@Test
 	public void testConstructor1() {

@@ -38,9 +38,9 @@ public class GestorBBDD {
 	 * @param ciudad Nombre de la ciudad por la que se quiere restringir la busqueda
 	 * @return ArrayList<Alojamiento> Lista de alojamientos
 	 */
-	public ArrayList<Alojamiento> cargarAlojamientos(String ciudad) {
+	public ArrayList<Alojamiento> cargarAlojamientos(String ciudad, int estrellasMin, int estrellasMax, String[] tipoAlojSel) {
 		ArrayList<Alojamiento> listaAlojamientos = new ArrayList<Alojamiento>();
-		ResultSet result = modificarBBDD.cargarAlojamientos(ciudad);
+		ResultSet result = modificarBBDD.cargarAlojamientos(ciudad, estrellasMin, estrellasMax, tipoAlojSel);
 		try {
 			while (result.next()) {
 				int codAlojamiento = result.getInt("COD_ALOJAMIENTO");
@@ -58,22 +58,22 @@ public class GestorBBDD {
 				if(tipoAloj.equals("H"))
 				{
 					int estrellas = result.getInt("ESTRELLAS");
-					listaAlojamientos.add(new Hotel(codAlojamiento, ubicacion, nombre, desc, longitud, latitud, recargo, desayuno, mediaPension, pensionCompleta, estrellas, imgurl));
+					listaAlojamientos.add(new Hotel(codAlojamiento, ubicacion, nombre, desc, longitud, latitud, desayuno, mediaPension, pensionCompleta, imgurl, estrellas));
 				}
 				else if(tipoAloj.equals("A"))
 				{
 					int piso = result.getInt("ALTURA");
 					ArrayList<Estancia> estancias = cargarEstancias(codAlojamiento);
-					listaAlojamientos.add(new Apartamento(codAlojamiento, ubicacion, nombre, desc, longitud, latitud, recargo, desayuno, mediaPension, pensionCompleta, imgurl, piso, estancias));
+					listaAlojamientos.add(new Apartamento(codAlojamiento, ubicacion, nombre, desc, longitud, latitud, desayuno, mediaPension, pensionCompleta, imgurl, piso, estancias));
 				}
 				else if(tipoAloj.equals("C"))
 				{
 					ArrayList<Estancia> estancias = cargarEstancias(codAlojamiento);
-					listaAlojamientos.add(new Casa(codAlojamiento, ubicacion, nombre, desc, longitud, latitud, recargo, desayuno, mediaPension, pensionCompleta, imgurl, estancias));
+					listaAlojamientos.add(new Casa(codAlojamiento, ubicacion, nombre, desc, longitud, latitud, desayuno, mediaPension, pensionCompleta, imgurl, estancias));
 				}
 				else
 				{
-					listaAlojamientos.add(new Alojamiento(codAlojamiento, ubicacion, nombre, desc, longitud, latitud, recargo, desayuno, mediaPension, pensionCompleta, imgurl));
+					listaAlojamientos.add(new Alojamiento(codAlojamiento, ubicacion, nombre, desc, longitud, latitud, desayuno, mediaPension, pensionCompleta, imgurl));
 				}
 	        }
 		} catch (SQLException e) {

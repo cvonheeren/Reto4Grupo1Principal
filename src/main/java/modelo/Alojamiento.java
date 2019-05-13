@@ -26,13 +26,12 @@ public class Alojamiento {
 	 * @param latitud
 	 * @param tarifaNormal
 	 * @param tarifaVerano
-	 * @param recargo
 	 * @param desayuno
 	 * @param mediaPension
 	 * @param pensionCompleta
 	 */
 	public Alojamiento(int codAlojamiento, String ubicacion, String nombre, String descripcion, float longitud,
-			float latitud, float recargo, float desayuno, float mediaPension,
+			float latitud, float desayuno, float mediaPension,
 			float pensionCompleta, String imgurl) {
 		this.codAlojamiento = codAlojamiento;
 		this.ubicacion = ubicacion;

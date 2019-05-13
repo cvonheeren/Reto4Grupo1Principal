@@ -3,6 +3,7 @@ package modeloTest;
 import static org.junit.Assert.*;
 
 import java.sql.Date;
+
 import java.util.ArrayList;
 
 import org.junit.Test;
@@ -10,6 +11,7 @@ import org.junit.Test;
 import modelo.Alojamiento;
 import modelo.GestorBBDD;
 import modelo.Habitacion;
+import modelo.Reserva;
 
 public class GestorBBDDTest {
 
@@ -27,7 +29,7 @@ public class GestorBBDDTest {
 		
 		ArrayList<String> test = gestorTest.cargarNombresDestinos();
 		
-		assertEquals(aloj, test);
+		assertEquals(aloj.getClass(), test.getClass());
 	}
 
 	@Test
@@ -40,7 +42,8 @@ public class GestorBBDDTest {
 	
 	@Test
 	public void testCargarListaAlojamientos2() {
-		String[] alojT = {"Catalonia sagrada familia", "royal ramblas", "barcelona princess", "ercilla hotel", "gran hotel domine bilbao", "exe plaza", "ayre gran hotel colon", "totem madrid", "soho bahia malaga", "hotel guadalmedina"};
+		String[] alojT = {"Catalonia sagrada familia", "royal ramblas", "barcelona princess", "ercilla hotel", "gran hotel domine bilbao", "exe plaza", "ayre gran hotel colon", "totem madrid", "soho bahia malaga", "hotel guadalmedina",
+				"la casita de pe beach", "casa urondo barri", "windrose 6", "casa mirador de gibralfaro", "bcn rambla catalunya apartments", "two sisters apartments", "bilbao apartamentos atxuri", "room and kitchen bilbao", "slow suites chueca", "aparthotel tribunal", "apartamentos pinar malaga centro", "apartamentos malaga flat"};
 		ArrayList<String> alojTest = new ArrayList<String>();
 		for (int i = 0; i < alojT.length; i++) {
 			alojTest.add(i, alojT[i].toUpperCase());
@@ -80,20 +83,22 @@ public class GestorBBDDTest {
 	
 	@Test
 	public void testComprobarCliente() {
-		String dni1 = "79066869E";
+		String user = "PRUEBA";
 		String pass1 = "1234";
-		String dni2 = "1";
+		String user2 = "1";
 		
-		assertTrue(gestorTest.comprobarCliente(dni1, pass1));
-		assertFalse(gestorTest.comprobarCliente(dni2, pass1));
+		assertTrue(gestorTest.comprobarCliente(user, pass1));
+		assertFalse(gestorTest.comprobarCliente(user2, pass1));
 	}
 	
 	@Test
 	public void testComprobarDni() {
-		String dni1 = "79066869E";
+		String dni1 = "71758055X";
 		String dni2 = "1";
 		
 		assertTrue(gestorTest.comprobarDni(dni1));
 		assertFalse(gestorTest.comprobarDni(dni2));
 	}
+	
+	
 }

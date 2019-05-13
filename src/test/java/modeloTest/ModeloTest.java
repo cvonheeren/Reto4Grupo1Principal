@@ -8,7 +8,9 @@ import org.junit.Test;
 import modelo.Cliente;
 import modelo.GestorArchivos;
 import modelo.GestorBBDD;
-import modelo.Habitacion;
+import modelo.GestorDeFechas;
+import modelo.GestorValidaciones;
+
 
 import modelo.Modelo;
 import modelo.Pago;
@@ -37,9 +39,9 @@ public class ModeloTest {
 	}
 	
 	@Test
-	public void testHabitacion() {
-		assertEquals(null, miModelo.habitacion);
-		assertNotEquals(Habitacion.class, miModelo.habitacion.getClass());
+	public void testGestArchvs() {
+		assertNotEquals(null, miModelo.gestorArchivos);
+		assertEquals(GestorArchivos.class, miModelo.gestorArchivos.getClass());
 	}
 	
 	@Test
@@ -49,9 +51,15 @@ public class ModeloTest {
 	}
 	
 	@Test
-	public void testgenerarFactura() {
-		assertNotEquals(null, miModelo.generarFactura);
-		assertEquals(GestorArchivos.class, miModelo.generarFactura.getClass());
+	public void testgestVali() {
+		assertNotEquals(null, miModelo.gestorValidaciones);
+		assertEquals(GestorValidaciones.class, miModelo.gestorValidaciones.getClass());
+	}
+	
+	@Test
+	public void testgestFechas() {
+		assertNotEquals(null, miModelo.gestorFechas);
+		assertEquals(GestorDeFechas.class, miModelo.gestorFechas.getClass());
 	}
 	
 }
