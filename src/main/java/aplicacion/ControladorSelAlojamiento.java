@@ -6,9 +6,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
 import org.controlsfx.control.textfield.TextFields;
 
 import com.jfoenix.controls.JFXButton;

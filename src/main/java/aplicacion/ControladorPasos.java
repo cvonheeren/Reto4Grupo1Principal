@@ -113,7 +113,7 @@ public class ControladorPasos implements Initializable {
     
     public void btnSiguienteHabitaciones() {
     	if(comprobarHabitacionSeleccionada()) {
-			float precio = Principal.modelo.pago.calcularPrecio(Principal.modelo.reserva.getFechaEntrada(), Principal.modelo.reserva.getFechaSalida(), Principal.modelo.reserva.getHabitacionesReservadas());
+			float precio = Principal.modelo.pago.getPrecioTotal(Principal.modelo.reserva.getHabitacionesReservadas());
 			Principal.modelo.pago.setPrecioTotal(precio);
 			Principal.modelo.reserva.setPrecio(precio);
 			if(Principal.modelo.cliente != null) {

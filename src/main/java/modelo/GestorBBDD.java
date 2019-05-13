@@ -117,7 +117,7 @@ public class GestorBBDD {
 				int ctaCamasInfantil = result.getInt("CTD_CAMAS_INFANTIL");
 				float tamano = result.getFloat("TAMANO");
 				int cantidad = result.getInt("CANTIDAD");
-				float tarifaNormal = result.getFloat("TARIFA_VERANO");
+				float tarifaNormal = result.getFloat("TARIFA_NORMAL");
 				float tarifaVerano = result.getFloat("TARIFA_VERANO");
 				float tarifaFestivo = result.getFloat("TARIFA_FESTIVO");
 				String descripcion = result.getString("DESCRIPCION");
