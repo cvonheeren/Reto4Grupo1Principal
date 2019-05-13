@@ -41,6 +41,9 @@ import vista.CardAlojamiento;
 
 public class ControladorSelAlojamiento implements Initializable {
 	
+    @FXML
+    private AnchorPane paneBase;
+	
 	@FXML
     private AnchorPane contenedor;
 
@@ -79,6 +82,12 @@ public class ControladorSelAlojamiento implements Initializable {
 		
     	comprobarSesionIniciada();
 		cargarAutocompletar();
+		
+		try{textCiudad.setText(Principal.aplicacion.textoBusqueda);
+		if(Principal.aplicacion.textoBusqueda!="")
+			cargarAlojamientos();
+		}
+		catch(Exception e) {}
 	}
     
     @FXML
@@ -149,7 +158,7 @@ public class ControladorSelAlojamiento implements Initializable {
      */
     public void ejecutarBusqueda() {
     	if (textCiudad.getText().isEmpty()) {
-			Principal.aplicacion.mostrarMensaje(contenedor, "Debe introducir algun valor en el campo de busqueda");
+			Principal.aplicacion.mostrarMensaje(paneBase, "Debe introducir algun valor en el campo de busqueda");
 			return;
 		}
     	contenedor.getChildren().remove(busqueda);
@@ -166,6 +175,8 @@ public class ControladorSelAlojamiento implements Initializable {
 	public void cargarAlojamientos() {
     
 		ArrayList<Alojamiento> alojamientos = Principal.modelo.gestorBBDD.cargarAlojamientos(textCiudad.getText());
+		Principal.aplicacion.busquedaAlojamientos=alojamientos;
+		Principal.aplicacion.textoBusqueda=textCiudad.getText();
     	GridPane grid = crearGrid();
         
     	for(int i = 0; i<alojamientos.size(); i++) {
