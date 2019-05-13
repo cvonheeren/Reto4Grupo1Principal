@@ -6,8 +6,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 import org.controlsfx.control.textfield.TextFields;
 
@@ -237,7 +235,7 @@ public class ControladorSelAlojamiento implements Initializable {
      */
     public void comprobarSesionIniciada() {
 		if(Principal.modelo.cliente != null) {
-			lblSaludo.setText("Hola, " + Principal.modelo.cliente.getDni());
+			lblSaludo.setText("Hola, " + Principal.modelo.cliente.getUser());
 			lblSesion.setText("Cerrar Sesion");
 		} else {
 			lblSaludo.setText("Hola, Anonimo");

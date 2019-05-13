@@ -27,6 +27,9 @@ public class ControladorLoginRegistro implements Initializable {
     public AnchorPane paneLogin;
 
     @FXML
+    public JFXTextField textFieldUserName;
+    
+    @FXML
     public JFXTextField textFieldDNIReg;
 
     @FXML
@@ -92,11 +95,11 @@ public class ControladorLoginRegistro implements Initializable {
     @FXML
 	void logear(ActionEvent event) {
     	if (Principal.modelo.gestorValidaciones.validarDatosLogin(textFieldDNI, paneLogin, contrasena)) {
-			String dni = textFieldDNI.getText();
+			String user = textFieldDNI.getText();
 			String pass = contrasena.getText();
-			if(Principal.modelo.gestorBBDD.comprobarCliente(dni, pass)) {
-				Principal.modelo.cliente = new Cliente(dni, pass);
-				Principal.modelo.reserva.setCliente(new Cliente(dni, pass));
+			if(Principal.modelo.gestorBBDD.comprobarCliente(user, pass)) {
+				Principal.modelo.cliente = new Cliente(user, pass);
+				Principal.modelo.reserva.setCliente(new Cliente(user, pass));
 				Principal.aplicacion.CambiarScene(pantallaAnterior);
 				if (tabGuardada != -1) {
 					if (loginForced) {
@@ -105,7 +108,7 @@ public class ControladorLoginRegistro implements Initializable {
 					Principal.aplicacion.controladorPasos.selecionarTab(tabGuardada);
 				}
 			} else {
-				Principal.aplicacion.mostrarMensaje(paneLogin, "DNI y/o contraseña incorrectos.");
+				Principal.aplicacion.mostrarMensaje(paneLogin, "Usuario y/o contraseña incorrectos.");
 			}
     	}
 	}
@@ -113,10 +116,10 @@ public class ControladorLoginRegistro implements Initializable {
     @FXML
     void registrarse(ActionEvent event) {
     	if (Principal.modelo.gestorValidaciones.validarDatosRegistro(this)) {
-    		int codCliente = Principal.modelo.gestorBBDD.insertarCliente(textFieldDNIReg.getText(), contrasenaReg.getText(), textFieldNombreReg.getText(), textFieldApellidoReg.getText(), Date.valueOf(fechaNacReg.getValue()), textFieldMailReg.getText());
+    		int codCliente = Principal.modelo.gestorBBDD.insertarCliente(textFieldUserName.getText(), textFieldDNIReg.getText(), contrasenaReg.getText(), textFieldNombreReg.getText(), textFieldApellidoReg.getText(), Date.valueOf(fechaNacReg.getValue()), textFieldMailReg.getText());
     		if (codCliente != -1) {
-    			Principal.modelo.cliente = new Cliente(textFieldDNIReg.getText(), contrasenaReg.getText());
-    			Principal.modelo.reserva.setCliente(new Cliente(textFieldDNIReg.getText(), contrasenaReg.getText()));
+    			Principal.modelo.cliente = new Cliente(textFieldUserName.getText(), contrasenaReg.getText());
+    			Principal.modelo.reserva.setCliente(new Cliente(textFieldUserName.getText(), contrasenaReg.getText()));
     			Principal.aplicacion.CambiarScene(pantallaAnterior);
     			if (tabGuardada != -1) {
     				if (loginForced) {
