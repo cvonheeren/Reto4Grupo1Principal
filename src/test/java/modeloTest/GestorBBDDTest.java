@@ -25,7 +25,7 @@ public class GestorBBDDTest {
 			//System.out.println(aloj.get(i));
 		}
 		
-		ArrayList<String> test = gestorTest.cargarListaDestinos();
+		ArrayList<String> test = gestorTest.cargarNombresDestinos();
 		
 		assertEquals(aloj, test);
 	}
@@ -33,7 +33,7 @@ public class GestorBBDDTest {
 	@Test
 	public void testCargarListaAlojamientos1() {
 		ArrayList<Alojamiento> test = new ArrayList<Alojamiento>();
-		ArrayList<Alojamiento> test2 = gestorTest.cargarListaAlojamientos("Bilbao");
+		ArrayList<Alojamiento> test2 = gestorTest.cargarAlojamientos("Bilbao");
 		
 		assertEquals(test2.getClass(), test.getClass());
 	}
@@ -46,7 +46,7 @@ public class GestorBBDDTest {
 			alojTest.add(i, alojT[i].toUpperCase());
 		}
 		
-		ArrayList<String> test2 = gestorTest.cargarListaAlojamientos();
+		ArrayList<String> test2 = gestorTest.cargarNombresAlojamientos();
 		
 		assertEquals(test2, alojTest);
 	}
@@ -54,7 +54,7 @@ public class GestorBBDDTest {
 	@Test
 	public void testCargarListaHabitaciones() {
 		ArrayList<Habitacion> test = new ArrayList<Habitacion>();
-		ArrayList<Habitacion> test2 = gestorTest.cargarListaHabitaciones(1);
+		ArrayList<Habitacion> test2 = gestorTest.cargarHabitaciones(1);
 		
 		assertEquals(test2.getClass(), test.getClass());
 	}

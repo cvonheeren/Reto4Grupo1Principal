@@ -5,6 +5,7 @@ import java.sql.Date;
 public class Cliente {
 	
 	private int codCliente;
+	private String user;
 	private String dni;
 	private String contrasenia;
 	private String nombre;
@@ -12,8 +13,9 @@ public class Cliente {
 	private Date fechaNac;
 	private String email;
 	
-	public Cliente(int codCliente, String dni, String contrasenia, String nombre, String apellidos, Date fechaNac, String email) {
+	public Cliente(int codCliente, String user, String dni, String contrasenia, String nombre, String apellidos, Date fechaNac, String email) {
 		this.codCliente = codCliente;
+		this.user = user;
 		this.dni = dni;
 		this.contrasenia = contrasenia;
 		this.nombre = nombre;
@@ -22,8 +24,8 @@ public class Cliente {
 		this.email = email;
 	}
 
-	public Cliente(String dni, String contrasenia) {
-		this.dni = dni;
+	public Cliente(String user, String contrasenia) {
+		this.user = user;
 		this.contrasenia = contrasenia;
 	}
 	
@@ -81,6 +83,14 @@ public class Cliente {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
 	}
 	
 }

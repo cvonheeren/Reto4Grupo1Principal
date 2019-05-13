@@ -23,6 +23,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import modelo.Alojamiento;
 import modelo.Apartamento;
 import modelo.Casa;
@@ -36,7 +38,7 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
     private AnchorPane card;
 
     @FXML
-    private ImageView imagen;
+    private WebView imagen;
 
     @FXML
     private Text nombre, ubicacion, precio, habitaciones, estancias;
@@ -73,7 +75,8 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 		Date fecha1 = Principal.modelo.reserva.getFechaEntrada();
 		Date fecha2 = Principal.modelo.reserva.getFechaSalida();
 		this.nombre.setText(this.alojamiento.getNombre());
-		this.imagen.setImage(new Image(this.alojamiento.getImgurl()));
+		WebEngine webEngine = imagen.getEngine();
+		webEngine.loadContent("<html><body style=\"padding:0px; margin:0px;\"><img src=" + alojamiento.getImgurl() + " width=190px height=190px></img></body></html>");
 		JFXDepthManager.setDepth(imagen, 1);
 		this.ubicacion.setText(this.alojamiento.getUbicacion());
 		this.descripcion.setText(this.alojamiento.getDescripcion());

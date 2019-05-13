@@ -37,12 +37,13 @@ public class ControladorPopupInfo implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		JFXDepthManager.setDepth(paneBase, 1);
+		ArrayList<Habitacion> habitacionesReservadas = Principal.modelo.reserva.getHabitacionesReservadas();
 		lblNombre.setText(Principal.modelo.reserva.getAlojamiento().getNombre());
 		lblUbicacion.setText(Principal.modelo.reserva.getAlojamiento().getUbicacion());
-		lblPrecioTotal.setText("Total: " + Principal.modelo.reserva.getPrecio() + "€");
+		lblPrecioTotal.setText("Total: " + Principal.modelo.pago.getPrecioTotal(habitacionesReservadas) + "€");
 		mapa.setLayoutX((int)(lblUbicacion.getBoundsInLocal().getMaxX() + lblUbicacion.getLayoutX() + 7));
 		lblFechas.setText("Del " + Principal.modelo.reserva.getFechaEntrada() + " al " + Principal.modelo.reserva.getFechaSalida());
-		ArrayList<Habitacion> habitacionesReservadas = Principal.modelo.reserva.getHabitacionesReservadas();
+		
 		for(int i=0;i<habitacionesReservadas.size();i++) {
 			Habitacion habitacion = habitacionesReservadas.get(i);
 			Label textoHabitacion = new Label(habitacion.getNombre() + " x " + habitacion.getCantidad());

@@ -26,7 +26,7 @@ public class GestorValidaciones {
 	/**
 	 * 
 	 */
-	public void limitarFechaMenorEdad(JFXDatePicker fecha) {
+	public void limitarFechaMenorEdad(JFXDatePicker fechaNacReg) {
 		final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
 		     public DateCell call(final DatePicker datePicker) {
 		         return new DateCell() {
@@ -39,7 +39,7 @@ public class GestorValidaciones {
 		         };
 		     }
 		 };
-		 fecha.setDayCellFactory(dayCellFactory);
+		 fechaNacReg.setDayCellFactory(dayCellFactory);
 	}
 	
 	/**
@@ -63,6 +63,14 @@ public class GestorValidaciones {
 	 * @return
 	 */
     public boolean validarDatosRegistro(ControladorLoginRegistro gestor) {
+    	if (gestor.textFieldUserName.getText().isEmpty()) {
+    		Principal.aplicacion.mostrarMensaje(gestor.paneLogin, "Campo 'Nombre de usuario' vacio.");
+    		return false;
+    	}
+    	if (gestor.textFieldUserName.getText().length() < 8) {
+    		Principal.aplicacion.mostrarMensaje(gestor.paneLogin, "Campo 'Nombre de usuario' debe tener al menos 8 caracteres.");
+    		return false;
+    	}
     	if (gestor.textFieldDNIReg.getText().isEmpty()) {
     		Principal.aplicacion.mostrarMensaje(gestor.paneLogin, "Campo 'DNI' vacio.");
     		return false;

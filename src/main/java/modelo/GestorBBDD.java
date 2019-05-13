@@ -203,8 +203,8 @@ public class GestorBBDD {
 	 * @param password Contrasena que queremos comprobar
 	 * @return 
 	 */
-	public boolean comprobarCliente(String dni, String password) {
-		ResultSet result = modificarBBDD.comprobarCliente(dni, password);	
+	public boolean comprobarCliente(String user, String password) {
+		ResultSet result = modificarBBDD.comprobarCliente(user, password);	
 		try {
 			if (result.next())
 				return true;
@@ -259,9 +259,9 @@ public class GestorBBDD {
 	 * @param mail
 	 * @return Devuelve el codigo de la reserva que se genera en sql
 	 */
-	public int insertarCliente(String dni, String password, String nombre, String apellido, Date fechaNac, String mail) {
+	public int insertarCliente(String user, String dni, String password, String nombre, String apellido, Date fechaNac, String mail) {
 		int codReserva = -1;
-		ResultSet result = modificarBBDD.insertarCliente(dni, password, nombre, apellido, fechaNac, mail);
+		ResultSet result = modificarBBDD.insertarCliente(user, dni, password, nombre, apellido, fechaNac, mail);
 
 		try {
 			result.next();

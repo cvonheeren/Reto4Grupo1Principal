@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1150.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorDialogo">
+   <children>
+      <Rectangle height="900.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1150.0" />
+      <AnchorPane fx:id="paneBase" layoutX="305.0" layoutY="329.0" prefHeight="242.0" prefWidth="540.0" style="-fx-background-color: white;" styleClass="tarjeta" stylesheets="@../reto4.css">
+         <children>
+            <JFXButton layoutX="436.0" layoutY="187.0" onAction="#aceptar" prefHeight="35.0" prefWidth="74.0" styleClass="botonInverso" text="Aceptar">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+            <Label fx:id="texto" alignment="TOP_LEFT" layoutX="42.0" layoutY="48.0" prefHeight="92.0" prefWidth="456.0" text="Label">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <JFXButton layoutX="345.0" layoutY="187.0" onAction="#cancelar" prefHeight="35.0" prefWidth="83.0" styleClass="botonInverso" stylesheets="@../reto4.css" text="Cancelar">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
