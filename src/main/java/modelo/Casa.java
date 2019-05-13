@@ -57,29 +57,29 @@ public class Casa extends Alojamiento {
 		this.estancias = estancias;
 	}
 	
-//	private int numBanios() {
-//		int suma = 0;
-//		for (Estancia e: this.estancias) {
-//			if ( e.getNombre() == "BANIO") {
-//				suma++;
-//			}
-//		}
-//		return suma;
-//	}
-//	
-//	private float calcularArea() {
-//		float suma = 0;
-//		if (this.estancias != null) {
-//			for (Estancia e: this.estancias) {
-//				suma += e.getTamano();
-//			}
-//		}
-//		if (this.habitaciones != null) {
-//			for (Habitacion h: this.habitaciones) {
-//				suma += h.getTamano();
-//			}
-//		}
-//		return suma;
-//	}
+	private int numBanios() {
+		int suma = 0;
+		for (Estancia e: this.estancias) {
+			if ( e.getNombre() == "BANIO") {
+				suma++;
+			}
+		}
+		return suma;
+	}
+	
+	private float calcularArea() {
+		float suma = 0;
+		if (this.estancias != null) {
+			for (Estancia e: this.estancias) {
+				suma += e.getTamano();
+			}
+		}
+		if (this.habitaciones != null) {
+			for (Habitacion h: this.habitaciones) {
+				suma += h.getTamano();
+			}
+		}
+		return suma;
+	}
 	
 }

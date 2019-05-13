@@ -18,8 +18,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
@@ -52,6 +50,9 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
     @FXML
     private JFXButton btnVer;
     
+    @FXML
+    private Label tamano;
+    
     private Alojamiento alojamiento;
     
 	public CardAlojamiento(Alojamiento alojamiento) {
@@ -81,6 +82,7 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 		this.ubicacion.setText(this.alojamiento.getUbicacion());
 		this.descripcion.setText(this.alojamiento.getDescripcion());
 		this.precio.setText(precio + "€ \n" + Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1.toLocalDate(), fecha2.toLocalDate()).size() + " noches");
+//		this.tamano.setText(Float.toString(((Casa) alojamiento).getArea()));
 		setMapa();
 		setIconoAloj();
 		setHabitaciones();

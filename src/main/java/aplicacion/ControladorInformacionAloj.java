@@ -15,6 +15,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import modelo.Alojamiento;
 import modelo.Apartamento;
@@ -25,14 +26,17 @@ import modelo.Hotel;
 
 public class ControladorInformacionAloj implements Initializable {
 	
+    @FXML
+    private AnchorPane paneInfoAloj;
+	
 	@FXML
 	private ImageView img;
 	
 	@FXML
-	private Text nombAloj, ubicacion;
+	private Text nombAloj, ubicacion, estancias;
 	
 	@FXML
-	private Label descAloj, habitaciones, tituloHab, estancias;
+	private Label descAloj, habitaciones, tituloHab, lblEstancias, lblTamano;
     
     @FXML
     private Hyperlink verMapa;
@@ -45,6 +49,9 @@ public class ControladorInformacionAloj implements Initializable {
 
     @FXML
     private Hyperlink lblSesion;
+    
+    @FXML
+    private Label tamano;
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -95,32 +102,31 @@ public class ControladorInformacionAloj implements Initializable {
 	 * @param alojamiento
 	 */
 	public void setHabitaciones(Alojamiento alojamiento) {
+		
+		tituloHab.setText("Habitaciones disponibles:");
+		ArrayList<Habitacion> habitacionesAloj = alojamiento.getHabitaciones();
+		String str = mostrarHabitaciones(habitacionesAloj);
+		habitaciones.setText(str);
+		
 		if(alojamiento instanceof Hotel) {
 	    	
-			tituloHab.setText("Habitaciones disponibles:");
-			ArrayList<Habitacion> habitacionesAloj = alojamiento.getHabitaciones();
-			String str = mostrarHabitaciones(habitacionesAloj);
-			habitaciones.setText(str);
+			paneInfoAloj.getChildren().remove(this.lblEstancias);
+			paneInfoAloj.getChildren().remove(this.estancias);
+			paneInfoAloj.getChildren().remove(this.lblTamano);
+			paneInfoAloj.getChildren().remove(this.tamano);
 			
 		} else if(alojamiento instanceof Apartamento) {
-			tituloHab.setText("Estancias:");
 			ArrayList<Estancia> estanciasAloj = ((Apartamento) alojamiento).getEstancias();
 			String str1 = mostrarEstancias(estanciasAloj);
 			estancias.setText(str1);
-			
-			ArrayList<Habitacion> habitacionesAloj = alojamiento.getHabitaciones();
-			String str2 = mostrarHabitaciones(habitacionesAloj);
-			habitaciones.setText(str2);
+			paneInfoAloj.getChildren().remove(this.lblTamano);
+			paneInfoAloj.getChildren().remove(this.tamano);
 			
 		} else if(alojamiento instanceof Casa) {
-			tituloHab.setText("Estancias:");
 			ArrayList<Estancia> estanciasAloj = ((Casa) alojamiento).getEstancias();
 			String str1 = mostrarEstancias(estanciasAloj);
 			estancias.setText(str1);
-			
-			ArrayList<Habitacion> habitacionesAloj = alojamiento.getHabitaciones();
-			String str2 = mostrarHabitaciones(habitacionesAloj);
-			habitaciones.setText(str2);
+			tamano.setText(Float.toString(((Casa) alojamiento).getArea()));
 		}
 	}
 	
@@ -135,7 +141,7 @@ public class ControladorInformacionAloj implements Initializable {
 			float precio = Principal.modelo.pago.getPrecioTotalHabitacion(s);
 			Date fecha1 = Principal.modelo.reserva.getFechaEntrada();
 			Date fecha2 = Principal.modelo.reserva.getFechaSalida();
-			str += s.getNombre() + "\t\t\t" + Principal.modelo.pago.getPrecioDiaHabitacion(s) + "€/dia" + "\t\t\t" + precio + "€ para " + Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1.toLocalDate(), fecha2.toLocalDate()).size() + " noches\n";
+			str += s.getNombre() + "\t\t" + Principal.modelo.pago.getPrecioDiaHabitacion(s) + "€/dia" + "\t\t" + precio + "€ para " + Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1.toLocalDate(), fecha2.toLocalDate()).size() + " noches\n";
 		    if (s.getCtaCamasSimples() > 0 ) {
 		    	str += "\t- " + s.getCtaCamasSimples() + "x  Cama Individual \n";
 		    }
@@ -157,8 +163,13 @@ public class ControladorInformacionAloj implements Initializable {
      */
     public String mostrarEstancias(ArrayList<Estancia> estancias) {
     	String str = "";
-		for (Estancia s : estancias) {
-			str += s.getNombre() + " x "+ s.getCantidad() + "\n";
+    	int cont = 1;
+		for (Estancia e : estancias) {
+			str += e.getCantidad() + " x " + e.getNombre().toLowerCase();
+			if (cont < estancias.size()) {
+				str += ", ";
+			}
+			cont++;
 		}
 		return str;
     }
