@@ -10,12 +10,16 @@ import org.controlsfx.control.RangeSlider;
 import org.controlsfx.control.textfield.TextFields;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXRippler;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.effects.JFXDepthManager;
 
 import core.Principal;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -71,6 +75,15 @@ public class ControladorSelAlojamiento implements Initializable {
     @FXML
     private Text busqueda;
     
+    @FXML
+    private JFXCheckBox chkBoxHotel;
+
+    @FXML
+    private JFXCheckBox chkBoxApartamento;
+
+    @FXML
+    private JFXCheckBox chkBoxCasa;
+    
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	
@@ -83,6 +96,10 @@ public class ControladorSelAlojamiento implements Initializable {
 		fechaEntrada = deshabilitarFechas(fechaEntrada, LocalDate.now());
 		fechaSalida = deshabilitarFechas(fechaSalida, LocalDate.now().plusDays(1));
 		
+		RellenarFiltros();
+		
+		
+		
     	comprobarSesionIniciada();
 		cargarAutocompletar();
 		
@@ -94,9 +111,22 @@ public class ControladorSelAlojamiento implements Initializable {
 	}
    
 
-    @FXML
-    void filtroEstrellas(MouseEvent event) {
-    	
+    private void RellenarFiltros() {
+    	filtroEstrellas.setLowValue(1f);
+		filtroEstrellas.setHighValue(5f);
+		
+		
+	}
+
+
+	@FXML
+    void filtrarME(MouseEvent event) {
+    	ejecutarBusqueda();
+    }
+	
+	@FXML
+    void filtrarAE(ActionEvent event) {
+    	ejecutarBusqueda();
     }
     
     @FXML
@@ -175,15 +205,14 @@ public class ControladorSelAlojamiento implements Initializable {
 		Date fechaSalidaDate = Date.valueOf(this.fechaSalida.getValue());
 		Principal.modelo.reserva.setFechaEntrada(fechaEntradaDate);
 		Principal.modelo.reserva.setFechaSalida(fechaSalidaDate);
-    	cargarAlojamientos();
+		cargarAlojamientos();
     }
 	
     /**
      * Carga y muestra los alojamientos correspondientes a la busqueda
      */
 	public void cargarAlojamientos() {
-    
-		ArrayList<Alojamiento> alojamientos = Principal.modelo.gestorBBDD.cargarAlojamientos(textCiudad.getText());
+		ArrayList<Alojamiento> alojamientos = Principal.modelo.gestorBBDD.cargarAlojamientos(textCiudad.getText(), (int) filtroEstrellas.getLowValue(), (int) filtroEstrellas.getHighValue(), TiposAlojamientoSeleccionados());
 		Principal.aplicacion.busquedaAlojamientos=alojamientos;
 		Principal.aplicacion.textoBusqueda=textCiudad.getText();
     	GridPane grid = crearGrid();
@@ -222,6 +251,18 @@ public class ControladorSelAlojamiento implements Initializable {
     		}	
 
     	}
+	}
+	
+	private String[] TiposAlojamientoSeleccionados()
+	{
+		String[] tiposAloj = new String[3];
+		if(chkBoxHotel.isSelected())
+			tiposAloj[0]="H";
+		if(chkBoxApartamento.isSelected())
+			tiposAloj[1]="A";
+		if(chkBoxCasa.isSelected())
+			tiposAloj[2]="C";
+		return tiposAloj;
 	}
 	
 	/**
