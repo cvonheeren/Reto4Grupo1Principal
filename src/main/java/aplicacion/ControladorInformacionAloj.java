@@ -1,8 +1,7 @@
 package aplicacion;
 
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.ZoneId;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -133,15 +132,18 @@ public class ControladorInformacionAloj implements Initializable {
     public String mostrarHabitaciones(ArrayList<Habitacion> habitaciones) {
     	String str = "";
 		for (Habitacion s : habitaciones) {
-			str += s.getNombre() + "\t\t\t" + s.getTarifaNormal() + "€ \n";
+			float precio = Principal.modelo.pago.getPrecioTotalHabitacion(s);
+			Date fecha1 = Principal.modelo.reserva.getFechaEntrada();
+			Date fecha2 = Principal.modelo.reserva.getFechaSalida();
+			str += s.getNombre() + "\t\t\t" + Principal.modelo.pago.getPrecioDiaHabitacion(s) + "€/dia" + "\t\t\t" + precio + "€ para " + Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1.toLocalDate(), fecha2.toLocalDate()).size() + " noches\n";
 		    if (s.getCtaCamasSimples() > 0 ) {
-		    	str += "- " + s.getCtaCamasSimples() + "x  Cama Individual \n";
+		    	str += "\t- " + s.getCtaCamasSimples() + "x  Cama Individual \n";
 		    }
 		    if (s.getCtaCamasMatrimonio() > 0 ) {
-		    	str += "- " + s.getCtaCamasMatrimonio() + "x Cama Matrimonio \n";
+		    	str += "\t- " + s.getCtaCamasMatrimonio() + "x Cama Matrimonio \n";
 		    }
 		    if (s.getCtaCamasInfantil() > 0 ) {
-		    	str += "- " + s.getCtaCamasInfantil() + "x Cama Infantil \n";
+		    	str += "\t- " + s.getCtaCamasInfantil() + "x Cama Infantil \n";
 		    }
 		    str += "\n";
 		}
@@ -173,16 +175,5 @@ public class ControladorInformacionAloj implements Initializable {
 			lblSesion.setText("Identifiquese");
 		}
 	}
-    
-//    public float getPrecio(Habitacion habitacion) {
-//    	LocalDate fecha = Principal.modelo.reserva.getFechaEntrada().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-//    	if(Principal.modelo.gestorFechas.comprobarFestivo(fecha)) {
-//    		return habitacion.getTarifaFestivo();
-//    	} else if (Principal.modelo.gestorFechas.comprobarSiEsVerano(fecha)){
-//    		return habitacion.getTarifaVerano();
-//    	} else {
-//    		return habitacion.getTarifaNormal();
-//    	}
-//    }
 	
 }

@@ -138,28 +138,6 @@ public class Alojamiento {
 	public void setHabitaciones(ArrayList<Habitacion> habitaciones) {
 		this.habitaciones = habitaciones;
 	}
-	
-	public float getPrecioTotalPorDia()
-	{
-		float precioTotal = 0;
-		for(int i=0;i<habitaciones.size();i++)
-		{
-			precioTotal=habitaciones.get(i).getTarifaNormal();
-		}
-		return precioTotal;
-	}
-	
-	public float getPrecioHabBarata()
-	{
-		float menor=99999;
-		for(int i=0;i<habitaciones.size();i++)
-		{
-			float tarifaActual=habitaciones.get(i).getTarifaNormal();
-			if(habitaciones.get(i).getTarifaNormal()<menor)
-				menor=tarifaActual;
-		}
-		return menor;
-	}
 
 	@Override
 	public String toString() {

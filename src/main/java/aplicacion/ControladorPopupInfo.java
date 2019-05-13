@@ -40,7 +40,7 @@ public class ControladorPopupInfo implements Initializable {
 		ArrayList<Habitacion> habitacionesReservadas = Principal.modelo.reserva.getHabitacionesReservadas();
 		lblNombre.setText(Principal.modelo.reserva.getAlojamiento().getNombre());
 		lblUbicacion.setText(Principal.modelo.reserva.getAlojamiento().getUbicacion());
-		lblPrecioTotal.setText("Total: " + Principal.modelo.pago.calcularPrecio(Principal.modelo.reserva.getFechaEntrada(), Principal.modelo.reserva.getFechaSalida(), habitacionesReservadas) + "€");
+		lblPrecioTotal.setText("Total: " + Principal.modelo.pago.getPrecioTotal(habitacionesReservadas) + "€");
 		mapa.setLayoutX((int)(lblUbicacion.getBoundsInLocal().getMaxX() + lblUbicacion.getLayoutX() + 7));
 		lblFechas.setText("Del " + Principal.modelo.reserva.getFechaEntrada() + " al " + Principal.modelo.reserva.getFechaSalida());
 		
