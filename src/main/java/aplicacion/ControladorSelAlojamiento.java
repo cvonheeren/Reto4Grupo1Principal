@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-
+import org.controlsfx.control.RangeSlider;
 import org.controlsfx.control.textfield.TextFields;
 
 import com.jfoenix.controls.JFXButton;
@@ -43,6 +43,9 @@ public class ControladorSelAlojamiento implements Initializable {
 	
     @FXML
     private AnchorPane paneBase;
+    
+    @FXML
+    private RangeSlider filtroEstrellas;
 	
 	@FXML
     private AnchorPane contenedor;
@@ -89,6 +92,12 @@ public class ControladorSelAlojamiento implements Initializable {
 		}
 		catch(Exception e) {}
 	}
+   
+
+    @FXML
+    void filtroEstrellas(MouseEvent event) {
+    	
+    }
     
     @FXML
     void seleccion(ActionEvent event) {
