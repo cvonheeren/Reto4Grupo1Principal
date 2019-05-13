@@ -56,14 +56,6 @@
             <Font size="14.0" />
          </font>
       </Text>
-      <Label fx:id="estancias" alignment="TOP_LEFT" layoutX="818.0" layoutY="494.0" prefHeight="169.0" prefWidth="250.0">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <padding>
-            <Insets bottom="10.0" right="10.0" top="10.0" />
-         </padding>
-      </Label>
       <Label fx:id="lblSaludo" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="801.0" layoutY="49.0" prefHeight="17.0" prefWidth="151.0" text="Hola, Anonimo" textAlignment="RIGHT" textFill="WHITE">
          <font>
             <Font size="18.0" />
@@ -79,7 +71,10 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="196.0" prefWidth="501.0">
                <children>
                   <Label fx:id="habitaciones" prefWidth="500.0" text="Label" />
-               </children></AnchorPane>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding></AnchorPane>
         </content>
       </ScrollPane>
    </children>

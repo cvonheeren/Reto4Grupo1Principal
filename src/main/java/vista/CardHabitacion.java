@@ -2,6 +2,7 @@ package vista;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -57,9 +58,13 @@ public class CardHabitacion extends AnchorPane implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		float precio = Principal.modelo.pago.getPrecioTotalHabitacion(habitacion);
+		Date fecha1 = Principal.modelo.reserva.getFechaEntrada();
+		Date fecha2 = Principal.modelo.reserva.getFechaSalida();
+		
 		this.tipo.setText(this.habitacion.getNombre());
 		this.descripcion.setText(this.habitacion.getDescripcion());
-		this.precio.setText(this.habitacion.getTarifaNormal() + "€");
+		this.precio.setText(precio + "€ \n" + Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1.toLocalDate(), fecha2.toLocalDate()).size() + " noches");
 		this.camas.setText(textoCamas());
 		
 		// ChoiceBox - Cantidad de habitaciones

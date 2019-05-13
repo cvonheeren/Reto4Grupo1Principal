@@ -1,6 +1,5 @@
 package modelo;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -145,13 +144,11 @@ public class Pago {
 	
 	/**
 	 * 
-	 * @param alojamiento
-	 * @param fechaEntrada
-	 * @param fechaSalida
 	 * @param habReservadas
 	 * @return
 	 */
-	public float calcularPrecio(Date fechaEntrada, Date fechaSalida, ArrayList<Habitacion> habReservadas) {
+	public float getPrecioTotal(ArrayList<Habitacion> habReservadas) {
+		
 		float precioTotal = 0;
 		float tarifaDiaNormal = 0;
 		float tarifaDiaVerano = 0;
@@ -173,8 +170,8 @@ public class Pago {
 		}
 		
 		// cogemos los dias del periodo para comprobar sus tarifas extras
-		LocalDate fecha1 = fechaEntrada.toLocalDate();
-		LocalDate fecha2 = fechaSalida.toLocalDate(); 
+		LocalDate fecha1 = Principal.modelo.reserva.getFechaEntrada().toLocalDate();
+		LocalDate fecha2 = Principal.modelo.reserva.getFechaSalida().toLocalDate(); 
 	    ArrayList<LocalDate> lista = Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1, fecha2);
 	    
 	    for (int i = 0; i < lista.size(); i++) {
@@ -188,6 +185,56 @@ public class Pago {
 		}
 	    
 	    return precioTotal;
+	}
+	
+	/**
+	 * 
+	 * @param habReservadas
+	 * @return
+	 */
+	public float getPrecioTotalHabitacion(Habitacion habitacion) {
+		float precioTotal = 0;
+		
+		// cogemos los dias del periodo para comprobar sus tarifas extras
+		LocalDate fecha1 = Principal.modelo.reserva.getFechaEntrada().toLocalDate();
+		LocalDate fecha2 = Principal.modelo.reserva.getFechaSalida().toLocalDate(); 
+	    ArrayList<LocalDate> lista = Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1, fecha2);
+	    
+	    for (int i = 0; i < lista.size(); i++) {
+			if(Principal.modelo.gestorFechas.comprobarFestivo(lista.get(i))) {
+				precioTotal += habitacion.getTarifaFestivo();
+			} else if(Principal.modelo.gestorFechas.comprobarSiEsVerano(lista.get(i))) {
+				precioTotal += habitacion.getTarifaVerano();
+			} else {
+				precioTotal += habitacion.getTarifaNormal();
+			}
+		}
+	    
+	    return precioTotal;
+	}
+	
+    public float getPrecioDiaHabitacion(Habitacion habitacion) {
+    	LocalDate fecha = Principal.modelo.reserva.getFechaEntrada().toLocalDate();
+    	if(Principal.modelo.gestorFechas.comprobarFestivo(fecha)) {
+    		return habitacion.getTarifaFestivo();
+    	} else if (Principal.modelo.gestorFechas.comprobarSiEsVerano(fecha)){
+    		return habitacion.getTarifaVerano();
+    	} else {
+    		return habitacion.getTarifaNormal();
+    	}
+    }
+    
+	public Habitacion getHabBarata(ArrayList<Habitacion> habitaciones){
+		float menor = 99999;
+		Habitacion habBarataHabitacion = null;
+		for(int i = 0; i < habitaciones.size(); i++) {
+			float tarifaActual = habitaciones.get(i).getTarifaNormal();
+			if(habitaciones.get(i).getTarifaNormal() < menor) {
+				menor = tarifaActual;
+				habBarataHabitacion = habitaciones.get(i);
+			}
+		}
+		return habBarataHabitacion;
 	}
 
 }

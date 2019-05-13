@@ -38,9 +38,9 @@ public class GestorBBDD {
 	 * @param ciudad Nombre de la ciudad por la que se quiere restringir la busqueda
 	 * @return ArrayList<Alojamiento> Lista de alojamientos
 	 */
-	public ArrayList<Alojamiento> cargarAlojamientos(String ciudad) {
+	public ArrayList<Alojamiento> cargarAlojamientos(String ciudad, int estrellasMin, int estrellasMax, String[] tipoAlojSel) {
 		ArrayList<Alojamiento> listaAlojamientos = new ArrayList<Alojamiento>();
-		ResultSet result = modificarBBDD.cargarAlojamientos(ciudad);
+		ResultSet result = modificarBBDD.cargarAlojamientos(ciudad, estrellasMin, estrellasMax, tipoAlojSel);
 		try {
 			while (result.next()) {
 				int codAlojamiento = result.getInt("COD_ALOJAMIENTO");
@@ -117,7 +117,7 @@ public class GestorBBDD {
 				int ctaCamasInfantil = result.getInt("CTD_CAMAS_INFANTIL");
 				float tamano = result.getFloat("TAMANO");
 				int cantidad = result.getInt("CANTIDAD");
-				float tarifaNormal = result.getFloat("TARIFA_VERANO");
+				float tarifaNormal = result.getFloat("TARIFA_NORMAL");
 				float tarifaVerano = result.getFloat("TARIFA_VERANO");
 				float tarifaFestivo = result.getFloat("TARIFA_FESTIVO");
 				String descripcion = result.getString("DESCRIPCION");

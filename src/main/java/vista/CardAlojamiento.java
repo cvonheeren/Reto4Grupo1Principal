@@ -2,6 +2,7 @@ package vista;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -70,13 +71,16 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		float precio = Principal.modelo.pago.getPrecioTotalHabitacion(Principal.modelo.pago.getHabBarata(alojamiento.getHabitaciones()));
+		Date fecha1 = Principal.modelo.reserva.getFechaEntrada();
+		Date fecha2 = Principal.modelo.reserva.getFechaSalida();
 		this.nombre.setText(this.alojamiento.getNombre());
 		WebEngine webEngine = imagen.getEngine();
 		webEngine.loadContent("<html><body style=\"padding:0px; margin:0px;\"><img src=" + alojamiento.getImgurl() + " width=190px height=190px></img></body></html>");
 		JFXDepthManager.setDepth(imagen, 1);
 		this.ubicacion.setText(this.alojamiento.getUbicacion());
 		this.descripcion.setText(this.alojamiento.getDescripcion());
-		this.precio.setText(this.alojamiento.getPrecioHabBarata() + "€");
+		this.precio.setText(precio + "€ \n" + Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1.toLocalDate(), fecha2.toLocalDate()).size() + " noches");
 		setMapa();
 		setIconoAloj();
 		setHabitaciones();
