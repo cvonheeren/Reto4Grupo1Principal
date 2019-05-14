@@ -211,6 +211,11 @@ public class Pago {
 	    return precioTotal;
 	}
 	
+	/**
+	 * 
+	 * @param habitacion
+	 * @return
+	 */
     public float getPrecioDiaHabitacion(Habitacion habitacion) {
     	LocalDate fecha = Principal.modelo.reserva.getFechaEntrada().toLocalDate();
     	if(Principal.modelo.gestorFechas.comprobarFestivo(fecha)) {
@@ -222,6 +227,11 @@ public class Pago {
     	}
     }
     
+    /**
+     * 
+     * @param habitaciones
+     * @return
+     */
 	public Habitacion getHabBarata(ArrayList<Habitacion> habitaciones){
 		float menor = 99999;
 		Habitacion habBarataHabitacion = null;
