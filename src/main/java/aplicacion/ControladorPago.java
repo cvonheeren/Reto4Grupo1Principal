@@ -21,7 +21,7 @@ import javafx.scene.layout.AnchorPane;
 import modelo.Reserva;
 
 public class ControladorPago implements Initializable {
-
+	
 	@FXML
     private Label precio, introducido, restante;
 
@@ -61,6 +61,7 @@ public class ControladorPago implements Initializable {
     void validarCodPromo(ActionEvent event) {
     	Reserva reserva = Principal.modelo.reserva;
     	float descuento = Principal.modelo.gestorBBDD.modificarBBDD.ValidarCodPromo(textFieldCodPromo.getText(), Principal.modelo.cliente.getUser());
+    	Principal.modelo.pago.setDescuento(descuento);
     	int descuentoPorcentajeint = (int)(descuento*100);
     	float precioDescuento = reserva.getPrecio()*descuento;
     	if(descuento > 0) {

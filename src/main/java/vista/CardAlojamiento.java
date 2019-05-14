@@ -91,6 +91,7 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 	
     @FXML
     void verAlojamiento(ActionEvent event) {
+    	Principal.modelo.reserva.setHabitacionesReservadas(null);
     	Principal.modelo.reserva.setAlojamiento(this.alojamiento);
 		Principal.aplicacion.CambiarScene("PaneInfo.fxml");
     }

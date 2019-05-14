@@ -14,6 +14,7 @@ public class Pago {
 	private float dineroIntroducido;
 	private ArrayList<Float> monedasIntroducidas;
 	private float dineroRestante;
+	private float descuento = 0;
 	
 	public Pago() {
 		this.dineroIntroducido = 0;
@@ -145,7 +146,7 @@ public class Pago {
 	 * @param habReservadas
 	 * @return
 	 */
-	public float getPrecioTotal(ArrayList<Habitacion> habReservadas) {
+	public float getPrecioTotal(ArrayList<Habitacion> habReservadas, float descuento) {
 		
 		float precioTotal = 0;
 		float tarifaDiaNormal = 0;
@@ -181,8 +182,8 @@ public class Pago {
 				precioTotal += tarifaDiaNormal;
 			}
 		}
-	    
-	    return precioTotal;
+
+	    return precioTotal - descuento;
 	}
 	
 	/**
@@ -243,6 +244,14 @@ public class Pago {
 			}
 		}
 		return habBarataHabitacion;
+	}
+
+	public float getDescuento() {
+		return descuento;
+	}
+
+	public void setDescuento(float descuento) {
+		this.descuento = descuento;
 	}
 
 }
