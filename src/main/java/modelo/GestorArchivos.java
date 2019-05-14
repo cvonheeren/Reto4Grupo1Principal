@@ -20,6 +20,8 @@ public class GestorArchivos {
 	 */
 	public void crearTxtReserva(String path, Reserva reserva) {
 		
+		Modelo modelo = Principal.modelo;
+		
 		FileWriter fichero = null;	
 		PrintWriter writer = null;
 		
@@ -56,11 +58,11 @@ public class GestorArchivos {
 			writer.println();
 			writer.println("=== DATOS DEL CLIENTE ===");
 			writer.println();
-			writer.println("Nombre: " + reserva.getCliente().getNombre());
-			writer.println("Apellidos: " + reserva.getCliente().getApellidos());
-			writer.println("DNI: " + reserva.getCliente().getDni());
-			writer.println("Fecha de nacimiento: " + reserva.getCliente().getFechaNac());
-			writer.println("Email: " + reserva.getCliente().getEmail());
+			writer.println("Nombre: " + modelo.cliente.getNombre());
+			writer.println("Apellidos: " + modelo.cliente.getApellidos());
+			writer.println("DNI: " + modelo.cliente.getDni());
+			writer.println("Fecha de nacimiento: " + modelo.cliente.getFechaNac());
+			writer.println("Email: " + modelo.cliente.getEmail());
 			writer.println();
 			writer.println();
 			writer.println("Gracias por reservar con nosotros.");

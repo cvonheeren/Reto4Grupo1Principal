@@ -189,7 +189,7 @@ public class ControladorPasos implements Initializable {
      */
     public void comprobarSesionIniciada() {
 		if(Principal.modelo.cliente != null) {
-			lblSaludo.setText("Hola, " + Principal.modelo.cliente.getDni());
+			lblSaludo.setText("Hola, " + Principal.modelo.cliente.getUser());
 			lblSesion.setText("Cerrar Sesion");
 		} else {
 			lblSaludo.setText("Hola, Anonimo");

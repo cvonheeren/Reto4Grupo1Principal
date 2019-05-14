@@ -13,7 +13,6 @@ public class Reserva {
 	private Date fechaSalida;
 	private float precio;
 	private Alojamiento alojamiento = null;
-	private Cliente cliente = null;
 	private ArrayList<Habitacion> habitacionesReservadas = null;
 	private int ctdHabitaciones;
 	
@@ -84,14 +83,6 @@ public class Reserva {
 
 	public void setAlojamiento(Alojamiento alojamiento) {
 		this.alojamiento = alojamiento;
-	}
-	
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
 	}
 
 	public ArrayList<Habitacion> getHabitacionesReservadas() {
