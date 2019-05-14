@@ -58,11 +58,7 @@ public class GestorArchivos {
 			writer.println();
 			writer.println("=== DATOS DEL CLIENTE ===");
 			writer.println();
-			writer.println("Nombre: " + modelo.cliente.getNombre());
-			writer.println("Apellidos: " + modelo.cliente.getApellidos());
-			writer.println("DNI: " + modelo.cliente.getDni());
-			writer.println("Fecha de nacimiento: " + modelo.cliente.getFechaNac());
-			writer.println("Email: " + modelo.cliente.getEmail());
+			writer.println("Nombre de usuario: " + modelo.cliente.getUser());
 			writer.println();
 			writer.println();
 			writer.println("Gracias por reservar con nosotros.");

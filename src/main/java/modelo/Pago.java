@@ -11,24 +11,22 @@ import core.Principal;
  */
 public class Pago {
 	
-	private float precioTotal;
 	private float dineroIntroducido;
 	private ArrayList<Float> monedasIntroducidas;
 	private float dineroRestante;
 	
 	public Pago() {
-		this.precioTotal = 0;
 		this.dineroIntroducido = 0;
 		this.dineroRestante = 0;
 		this.monedasIntroducidas = new ArrayList<Float>();
 	}
 
 	public float getPrecioTotal() {
-		return precioTotal;
+		return Principal.modelo.reserva.getPrecio();
 	}
 
 	public void setPrecioTotal(float precioTotal) {
-		this.precioTotal = precioTotal;
+		Principal.modelo.reserva.setPrecio(precioTotal);
 	}
 
 	public float getDineroIntroducido() {
@@ -76,7 +74,7 @@ public class Pago {
 	 * @return Retorna el dinero que falta por introducir
 	 */
 	public float calcularDineroRestante() {
-		dineroRestante = precioTotal - dineroIntroducido;
+		dineroRestante = getPrecioTotal() - dineroIntroducido;
 		dineroRestante = redondear(dineroRestante, 2);
 		if (dineroRestante < 0) {
 			dineroRestante = 0;
@@ -89,7 +87,7 @@ public class Pago {
 	 * @return cantidad de dinero sobrante
 	 */
 	public float calcularDineroSobrante() {	
-		return dineroIntroducido - precioTotal;
+		return dineroIntroducido - getPrecioTotal();
 	}
 	
 	/**
@@ -97,7 +95,7 @@ public class Pago {
 	 * @return true en caso de que falte dinero por introducir, false en caso contrario
 	 */
 	public boolean comprobarFaltaDinero() {
-		return (dineroIntroducido < precioTotal) ? true : false ;
+		return (dineroIntroducido < getPrecioTotal()) ? true : false ;
 	}
 	
 	/**	

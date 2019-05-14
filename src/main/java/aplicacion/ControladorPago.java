@@ -52,6 +52,7 @@ public class ControladorPago implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     	Principal.aplicacion.controladorPago=this;
+    	precio.setText(Float.toString(Principal.modelo.pago.getPrecioTotal()) + " €");
     	actulizarTarifa();
     	crearBotones();
     }
@@ -69,16 +70,16 @@ public class ControladorPago implements Initializable {
     		descuentoPorcentaje.setText("Descuento(" + Integer.toString(descuentoPorcentajeint) + "%)");
     		descuentoPrecio.setText(Float.toString(precioDescuento) + "€");
     		precioTotal.setText(reserva.getPrecio() - precioDescuento + "€");
-    		Principal.modelo.reserva.setPrecio(precioDescuento);
-    		Principal.modelo.pago.sumarDinero(precioDescuento);
-    		restante.setText(Principal.modelo.pago.calcularDineroRestante() + "€");
+    		reserva.setPrecio(reserva.getPrecio() - precioDescuento);
+    		Principal.modelo.pago.setDineroRestante(reserva.getPrecio());
+    		Principal.modelo.pago.setPrecioTotal(reserva.getPrecio());
+    		actulizarTarifa();
     	} else {
     		Principal.aplicacion.mostrarMensaje(Principal.aplicacion.controladorPasos.anchorPaneBase, "Codigo promocional no valido");
     	}
     }
     
     public void actulizarTarifa() {
-    	precio.setText(Float.toString(Principal.modelo.pago.getPrecioTotal()) + " €");
     	introducido.setText("0 €");
     	restante.setText(Float.toString(Principal.modelo.pago.getPrecioTotal()) + " €");
     }
