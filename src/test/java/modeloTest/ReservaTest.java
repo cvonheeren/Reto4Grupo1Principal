@@ -26,13 +26,13 @@ public class ReservaTest {
 		assertEquals(null, reserva.getFechaEntrada());
 		assertEquals(null, reserva.getFechaSalida());
 		assertEquals(400.34f, reserva.getPrecio(), 0.000001);
-		assertEquals(habitacionesReservadas, reserva.getHabitacionesReservadas());
+		assertEquals(habitacionesReservadas, reserva.getHabitacionesSeleccionadas());
 		assertEquals(0, reserva.getCtdHabitaciones());
 	}
 	
 	@Test
 	public void testConstructor2() {
-		assertEquals(habitacionesReservadas, reserva2.getHabitacionesReservadas());
+		assertEquals(habitacionesReservadas, reserva2.getHabitacionesSeleccionadas());
 	}
 
 	
@@ -68,8 +68,8 @@ public class ReservaTest {
 	
 	@Test
 	public void testAlojLista() {
-		reserva.setHabitacionesReservadas(habitacionesReservadas);
-		assertEquals(habitacionesReservadas, reserva.getHabitacionesReservadas());
+		reserva.setHabitacionesSeleccionadas(habitacionesReservadas);
+		assertEquals(habitacionesReservadas, reserva.getHabitacionesSeleccionadas());
 	}
 	
 	@Test

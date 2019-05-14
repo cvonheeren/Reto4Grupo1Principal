@@ -9,26 +9,47 @@ import core.Principal;
 /**
  * Realiza los calculos del pago del programa
  */
-public class Pago {
+public class GestorDinero {
 	
 	private float dineroIntroducido;
 	private ArrayList<Float> monedasIntroducidas;
 	private float dineroRestante;
 	private float descuento = 0;
+	private float precio;
 	
-	public Pago() {
+	public GestorDinero() {
 		this.dineroIntroducido = 0;
 		this.dineroRestante = 0;
 		this.monedasIntroducidas = new ArrayList<Float>();
 	}
+	
+	
 
-	public float getPrecioTotal() {
-		return Principal.modelo.reserva.getPrecio();
+	public float getPrecio() {
+		return precio;
 	}
 
-	public void setPrecioTotal(float precioTotal) {
-		Principal.modelo.reserva.setPrecio(precioTotal);
+
+	public float getDescuento() {
+		return descuento;
 	}
+
+	public void setDescuento(float descuento) {
+		this.descuento = descuento;
+	}
+	
+	public float getPrecioConDescuento()
+	{
+		return precio-descuento;
+	}
+	
+	
+
+	public void setPrecio(float precio) {
+		this.precio = precio;
+	}
+
+
 
 	public float getDineroIntroducido() {
 		return dineroIntroducido;
@@ -75,7 +96,7 @@ public class Pago {
 	 * @return Retorna el dinero que falta por introducir
 	 */
 	public float calcularDineroRestante() {
-		dineroRestante = getPrecioTotal() - dineroIntroducido;
+		dineroRestante = precio - dineroIntroducido;
 		dineroRestante = redondear(dineroRestante, 2);
 		if (dineroRestante < 0) {
 			dineroRestante = 0;
@@ -88,7 +109,7 @@ public class Pago {
 	 * @return cantidad de dinero sobrante
 	 */
 	public float calcularDineroSobrante() {	
-		return dineroIntroducido - getPrecioTotal();
+		return dineroIntroducido - precio;
 	}
 	
 	/**
@@ -96,7 +117,7 @@ public class Pago {
 	 * @return true en caso de que falte dinero por introducir, false en caso contrario
 	 */
 	public boolean comprobarFaltaDinero() {
-		return (dineroIntroducido < getPrecioTotal()) ? true : false ;
+		return (dineroIntroducido < precio) ? true : false ;
 	}
 	
 	/**	
@@ -141,12 +162,13 @@ public class Pago {
 		return num;
 	}
 	
+	
 	/**
 	 * 
 	 * @param habReservadas
 	 * @return
 	 */
-	public float getPrecioTotal(ArrayList<Habitacion> habReservadas, float descuento) {
+	public float CalcularPrecioConDescuentos(ArrayList<Habitacion> habReservadas) {
 		
 		float precioTotal = 0;
 		float tarifaDiaNormal = 0;
@@ -246,12 +268,6 @@ public class Pago {
 		return habBarataHabitacion;
 	}
 
-	public float getDescuento() {
-		return descuento;
-	}
-
-	public void setDescuento(float descuento) {
-		this.descuento = descuento;
-	}
+	
 
 }

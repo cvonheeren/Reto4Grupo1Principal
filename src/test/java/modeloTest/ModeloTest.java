@@ -13,7 +13,7 @@ import modelo.GestorValidaciones;
 
 
 import modelo.Modelo;
-import modelo.Pago;
+import modelo.GestorDinero;
 import modelo.Reserva;
 
 public class ModeloTest {
@@ -22,8 +22,8 @@ public class ModeloTest {
 	
 	@Test
 	public void testpago() {
-		assertNotEquals(null, miModelo.pago);
-		assertEquals(Pago.class, miModelo.pago.getClass());
+		assertNotEquals(null, miModelo.gestorDinero);
+		assertEquals(GestorDinero.class, miModelo.gestorDinero.getClass());
 	}
 	
 	@Test

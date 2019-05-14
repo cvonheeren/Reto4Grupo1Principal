@@ -10,9 +10,8 @@ public class Reserva {
 	private Date fechaCompra;
 	private Date fechaEntrada;
 	private Date fechaSalida;
-	private float precio;
 	private Alojamiento alojamiento = null;
-	private ArrayList<Habitacion> habitacionesReservadas = null;
+	private ArrayList<Habitacion> habitacionesSeleccionadas = null;
 	private int ctdHabitaciones;
 	
 	/**
@@ -21,18 +20,29 @@ public class Reserva {
 	 * @param fecha Fecha en la cual se realiza
 	 * @param precio Precio
 	 */
-	public Reserva(int codReserva, Date fechaCompra, Date fechaEntrada, Date fechaSalida, float precio) {
+	public Reserva(int codReserva, Date fechaCompra, Date fechaEntrada, Date fechaSalida) {
 		this.codReserva = codReserva;
 		this.fechaCompra = fechaEntrada;
 		this.fechaEntrada = fechaEntrada;
 		this.fechaSalida = fechaEntrada;
-		this.precio = precio;
-		this.habitacionesReservadas = new ArrayList<Habitacion>();
+		this.habitacionesSeleccionadas = new ArrayList<Habitacion>();
+		this.ctdHabitaciones = 0;
+	}
+	
+	public void ActualizarHabitaciones(ArrayList<Habitacion> habitacionesSelecionadas, int cantidad)
+	{
+		this.habitacionesSeleccionadas = habitacionesSelecionadas;
+		this.ctdHabitaciones = cantidad;
+	}
+	
+	public void VaciarSeleccionHabitaciones()
+	{
+		this.habitacionesSeleccionadas = new ArrayList<Habitacion>();
 		this.ctdHabitaciones = 0;
 	}
 	
 	public Reserva() {
-		this.habitacionesReservadas = new ArrayList<Habitacion>();
+		this.habitacionesSeleccionadas = new ArrayList<Habitacion>();
 		this.ctdHabitaciones = 0;
 	}
 
@@ -68,13 +78,6 @@ public class Reserva {
 		this.fechaSalida = fechaSalida;
 	}
 
-	public float getPrecio() {
-		return precio;
-	}
-
-	public void setPrecio(float precio) {
-		this.precio = precio;
-	}
 
 	public Alojamiento getAlojamiento() {
 		return alojamiento;
@@ -84,21 +87,21 @@ public class Reserva {
 		this.alojamiento = alojamiento;
 	}
 
-	public ArrayList<Habitacion> getHabitacionesReservadas() {
-		return habitacionesReservadas;
+	public ArrayList<Habitacion> getHabitacionesSeleccionadas() {
+		return habitacionesSeleccionadas;
 	}
 
-	public void setHabitacionesReservadas(ArrayList<Habitacion> habitacionesReservadas) {
-		this.habitacionesReservadas = habitacionesReservadas;
+	public void setHabitacionesSeleccionadas(ArrayList<Habitacion> habitacionesReservadas) {
+		this.habitacionesSeleccionadas = habitacionesReservadas;
 	}
 	
 	public void addHabitacion(Habitacion habitacion) {
-		this.habitacionesReservadas.add(habitacion);
+		this.habitacionesSeleccionadas.add(habitacion);
 		this.ctdHabitaciones++;
 	}
 	
 	public void removeHabitacion(Habitacion habitacion) {
-		this.habitacionesReservadas.remove(habitacion);
+		this.habitacionesSeleccionadas.remove(habitacion);
 		this.ctdHabitaciones--;
 	}
 
@@ -109,5 +112,6 @@ public class Reserva {
 	public void setCtdHabitaciones(int ctdHabitaciones) {
 		this.ctdHabitaciones = ctdHabitaciones;
 	}
+
 	
 }

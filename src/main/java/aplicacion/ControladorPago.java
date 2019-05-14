@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import modelo.Modelo;
 import modelo.Reserva;
 
 public class ControladorPago implements Initializable {
@@ -46,43 +47,41 @@ public class ControladorPago implements Initializable {
     @FXML
     private AnchorPane contenedor;
     
+	private Modelo modelo() {return Principal.modelo;}
+	private Aplicacion aplicacion() {return Principal.aplicacion;}
+    
     private float[] monedasBilletes = { 500, 200, 100, 50, 20, 10, 5, 2, 1, 0.50f, 0.20f, 0.10f, 0.05f, 0.02f, 0.01f };
     public JFXButton[] botonesMonedasBilletes = new JFXButton[15];	
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    	Principal.aplicacion.controladorPago=this;
-    	precio.setText(Float.toString(Principal.modelo.pago.getPrecioTotal()) + " €");
+    	aplicacion().controladorPago=this;
+    	precio.setText(Float.toString(modelo().gestorDinero.getPrecioConDescuento()) + " €");
     	actulizarTarifa();
     	crearBotones();
     }
     
     @FXML
     void validarCodPromo(ActionEvent event) {
-    	Reserva reserva = Principal.modelo.reserva;
-    	float descuento = Principal.modelo.gestorBBDD.modificarBBDD.ValidarCodPromo(textFieldCodPromo.getText(), Principal.modelo.cliente.getUser());
-    	Principal.modelo.pago.setDescuento(descuento);
+    	float descuento = modelo().gestorBBDD.modificarBBDD.ValidarCodPromo(textFieldCodPromo.getText(), modelo().cliente.getUser());
+    	modelo().gestorDinero.setDescuento((modelo().gestorDinero.getPrecio() * descuento )* 100);
     	int descuentoPorcentajeint = (int)(descuento*100);
-    	float precioDescuento = reserva.getPrecio()*descuento;
     	if(descuento > 0) {
     		textFieldCodPromo.setDisable(true);
     		textFieldCodPromo.setText("Codigo promocional valido");
     		btnValidarCodPromo.setDisable(true);
     		descuentoPorcentaje.setText("Descuento(" + Integer.toString(descuentoPorcentajeint) + "%)");
-    		descuentoPrecio.setText(Float.toString(precioDescuento) + "€");
-    		precioTotal.setText(reserva.getPrecio() - precioDescuento + "€");
-    		reserva.setPrecio(reserva.getPrecio() - precioDescuento);
-    		Principal.modelo.pago.setDineroRestante(reserva.getPrecio());
-    		Principal.modelo.pago.setPrecioTotal(reserva.getPrecio());
+    		descuentoPrecio.setText(descuento + "€");
+    		precioTotal.setText(modelo().gestorDinero.getPrecioConDescuento() + "€");
     		actulizarTarifa();
     	} else {
-    		Principal.aplicacion.mostrarMensaje(Principal.aplicacion.controladorPasos.anchorPaneBase, "Codigo promocional no valido");
+    		aplicacion().mostrarMensaje(aplicacion().controladorPasos.anchorPaneBase, "Codigo promocional no valido");
     	}
     }
     
     public void actulizarTarifa() {
     	introducido.setText("0 €");
-    	restante.setText(Float.toString(Principal.modelo.pago.getPrecioTotal()) + " €");
+    	restante.setText(Float.toString(modelo().gestorDinero.getPrecioConDescuento()) + " €");
     }
     
     public void crearBotones() {
@@ -129,11 +128,11 @@ public class ControladorPago implements Initializable {
 	 * @param importe Valor a sumar
 	 */
 	public void sumarDinero(float importe) {
-		if (Principal.modelo.pago.calcularDineroRestante() == 0) {
-			Principal.aplicacion.mostrarMensaje(contenedor, "Ya ha introducido todo el dinero");
+		if (modelo().gestorDinero.calcularDineroRestante() == 0) {
+			aplicacion().mostrarMensaje(contenedor, "Ya ha introducido todo el dinero");
 		} else {
-			String dineroIntroducido = Float.toString(Principal.modelo.pago.sumarDinero(importe));
-			String dineroRestante =  Float.toString(Principal.modelo.pago.calcularDineroRestante());
+			String dineroIntroducido = Float.toString(modelo().gestorDinero.sumarDinero(importe));
+			String dineroRestante =  Float.toString(modelo().gestorDinero.calcularDineroRestante());
 			introducido.setText(dineroIntroducido + " €");
 			restante.setText(dineroRestante + " €");
 		}
@@ -144,10 +143,10 @@ public class ControladorPago implements Initializable {
 	 * y habilita y deshabilita los botones del panel segun es necesario
 	 */
 	public void comprobarTodoIntroducido() {
-		if (Principal.modelo.pago.calcularDineroRestante() == 0) {
-    		Principal.aplicacion.CambiarScene("Factura.fxml");	
+		if (modelo().gestorDinero.calcularDineroRestante() == 0) {
+    		aplicacion().CambiarScene("Factura.fxml");	
     	} else {
-    		Principal.aplicacion.mostrarMensaje(Principal.aplicacion.controladorPasos.anchorPaneBase, "Aun no ha introducido todo el dinero");
+    		aplicacion().mostrarMensaje(aplicacion().controladorPasos.anchorPaneBase, "Aun no ha introducido todo el dinero");
     	}
 	}
 

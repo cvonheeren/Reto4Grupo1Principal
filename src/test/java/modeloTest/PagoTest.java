@@ -13,7 +13,7 @@ public class PagoTest {
 	float dinero = 20;
 	float precio = 200;
 
-	Pago pago = new Pago();
+	GestorDinero pago = new GestorDinero();
 	
 	@Test
 	public void testConstructor() {

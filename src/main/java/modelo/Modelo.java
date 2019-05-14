@@ -6,7 +6,7 @@ public class Modelo {
 //	public Habitacion habitacion = null;
 	public Cliente cliente = null;
 	public Reserva reserva = null;
-	public Pago pago = null;
+	public GestorDinero gestorDinero = null;
 	public GestorBBDD gestorBBDD = null;
 	public GestorArchivos gestorArchivos = null;
 	public GestorValidaciones gestorValidaciones = null;
@@ -16,7 +16,7 @@ public class Modelo {
 	 * Constructor
 	 */
 	public Modelo() {
-		this.pago = new Pago();
+		this.gestorDinero = new GestorDinero();
 		this.gestorBBDD = new GestorBBDD();
 		this.gestorArchivos = new GestorArchivos();
 		this.reserva = new Reserva();

@@ -99,7 +99,6 @@ public class ControladorLoginRegistro implements Initializable {
 			String pass = contrasena.getText();
 			if(Principal.modelo.gestorBBDD.comprobarCliente(user, pass)) {
 				Principal.modelo.cliente = new Cliente(user, pass);
-				//Principal.modelo.reserva.setCliente(new Cliente(user, pass));
 				Principal.aplicacion.CambiarScene(pantallaAnterior);
 				if (tabGuardada != -1) {
 					if (loginForced) {

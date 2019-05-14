@@ -18,15 +18,13 @@ public class GestorArchivos {
 	 * @param path Ruta donde crear el archivo
 	 * @param reserva Objeto reserva del que se quiere imprimir los datos
 	 */
-	public void crearTxtReserva(String path, Reserva reserva) {
-		
-		Modelo modelo = Principal.modelo;
+	public void crearTxtReserva(String path, Cliente cliente, Reserva reserva, GestorDinero gestorDinero) {
 		
 		FileWriter fichero = null;	
 		PrintWriter writer = null;
 		
 		String habitaciones = "";
-		for (Habitacion h: reserva.getHabitacionesReservadas()) {
+		for (Habitacion h: reserva.getHabitacionesSeleccionadas()) {
 			habitaciones += "	- " + h.getNombre() + " x " + h.getCantidad() + "\n";
 		}
 		
@@ -45,7 +43,13 @@ public class GestorArchivos {
 			writer.println("Nombre alojamiento: " + reserva.getAlojamiento().getNombre());
 			writer.println("Fecha de entrada: " + reserva.getFechaEntrada());
 			writer.println("Fecha de salida: " + reserva.getFechaSalida());
-			writer.println("Precio: " + reserva.getPrecio() + " €");
+			writer.println("Precio: " + gestorDinero.getPrecio() + " €");
+			if(gestorDinero.getDescuento()>0)
+			{
+				writer.println("Descuento: " + gestorDinero.getDescuento() + " €");
+			}
+			writer.println();
+			writer.println("TOTAL: " + gestorDinero.getPrecioConDescuento() + " €");
 			writer.println();
 			writer.println();
 			writer.println("=== DATOS DEL ALOJAMIENTO ===");
@@ -58,7 +62,7 @@ public class GestorArchivos {
 			writer.println();
 			writer.println("=== DATOS DEL CLIENTE ===");
 			writer.println();
-			writer.println("Nombre de usuario: " + modelo.cliente.getUser());
+			writer.println("Nombre de usuario: " + cliente.getUser());
 			writer.println();
 			writer.println();
 			writer.println("Gracias por reservar con nosotros.");

@@ -2,10 +2,12 @@ package modelo;
 
 import java.sql.Date;
 
+import core.Principal;
+
 public class Cliente {
 	
 	private int codCliente;
-	private String user;
+	private String username;
 	private String dni;
 	private String contrasenia;
 	private String nombre;
@@ -13,9 +15,9 @@ public class Cliente {
 	private Date fechaNac;
 	private String email;
 	
-	public Cliente(int codCliente, String user, String dni, String contrasenia, String nombre, String apellidos, Date fechaNac, String email) {
+	public Cliente(int codCliente, String username, String dni, String contrasenia, String nombre, String apellidos, Date fechaNac, String email) {
 		this.codCliente = codCliente;
-		this.user = user;
+		this.username = username;
 		this.dni = dni;
 		this.contrasenia = contrasenia;
 		this.nombre = nombre;
@@ -24,9 +26,12 @@ public class Cliente {
 		this.email = email;
 	}
 
-	public Cliente(String user, String contrasenia) {
-		this.user = user;
+	private Modelo modelo() {return Principal.modelo;}
+	
+	public Cliente(String username, String contrasenia) {
+		this.username = username;
 		this.contrasenia = contrasenia;
+		this.codCliente = modelo().gestorBBDD.obtenerCodCliente(username);
 	}
 	
 	public int getCodCliente() {
@@ -86,11 +91,11 @@ public class Cliente {
 	}
 
 	public String getUser() {
-		return user;
+		return username;
 	}
 
 	public void setUser(String user) {
-		this.user = user;
+		this.username = user;
 	}
 	
 }

@@ -236,9 +236,9 @@ public class GestorBBDD {
 	 * @param reserva Reserva que se quiere insertar
 	 * @return Devuelve el codigo de la reserva que se genera en sql
 	 */
-	public int insertarReserva(Reserva reserva) {
+	public int insertarReserva(Cliente cliente, Reserva reserva, GestorDinero gestorDinero) {
 		int codReserva = -1;
-		ResultSet result = modificarBBDD.insertarReserva(reserva.getAlojamiento().getCodAlojamiento(), reserva.getPrecio(), reserva.getFechaCompra(), reserva.getFechaEntrada(), reserva.getFechaSalida());
+		ResultSet result = modificarBBDD.insertarReserva(reserva.getAlojamiento().getCodAlojamiento(), gestorDinero.getPrecio(), reserva.getFechaCompra(), reserva.getFechaEntrada(), reserva.getFechaSalida(), cliente.getCodCliente());
 
 		try {
 			result.next();
@@ -270,6 +270,19 @@ public class GestorBBDD {
 			e.printStackTrace();
 		}
 		return codReserva;
+	}
+
+	public int obtenerCodCliente(String username) {
+		int codCliente = -1;
+		ResultSet result = modificarBBDD.obtenerCodCliente(username);
+
+		try {
+			result.next();
+			codCliente = result.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return codCliente;
 	}
 	
 }

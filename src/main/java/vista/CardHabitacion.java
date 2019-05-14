@@ -45,6 +45,8 @@ public class CardHabitacion extends AnchorPane implements Initializable {
 		
 		this.habitacion = habitacion;
 		
+		Principal.modelo.reserva.VaciarSeleccionHabitaciones();
+		
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vista/Habitacion.fxml"));
 	    fxmlLoader.setRoot(this);
 	    fxmlLoader.setController(this);
@@ -58,7 +60,7 @@ public class CardHabitacion extends AnchorPane implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		float precio = Principal.modelo.pago.getPrecioTotalHabitacion(habitacion);
+		float precio = Principal.modelo.gestorDinero.getPrecioTotalHabitacion(habitacion);
 		Date fecha1 = Principal.modelo.reserva.getFechaEntrada();
 		Date fecha2 = Principal.modelo.reserva.getFechaSalida();
 		
@@ -113,10 +115,10 @@ public class CardHabitacion extends AnchorPane implements Initializable {
      * @param cantidad
      */
     public void guardarHabitacion(Habitacion habitacion, int cantidad) {
-		ArrayList<Habitacion> habitacionesReservadas = Principal.modelo.reserva.getHabitacionesReservadas();
+		ArrayList<Habitacion> habitacionesReservadas = Principal.modelo.reserva.getHabitacionesSeleccionadas();
 		if (habitacionesReservadas.size() == 0) {
 			Principal.modelo.reserva.addHabitacion(habitacion);
-			Principal.modelo.reserva.getHabitacionesReservadas().get(habitacionesReservadas.size()-1).setCantidad(cantidad);
+			Principal.modelo.reserva.getHabitacionesSeleccionadas().get(habitacionesReservadas.size()-1).setCantidad(cantidad);
 			return;
 		}
 		for (int i = 0;i < habitacionesReservadas.size(); i++) {
@@ -126,7 +128,7 @@ public class CardHabitacion extends AnchorPane implements Initializable {
 			}
 		}
 		Principal.modelo.reserva.addHabitacion(habitacion);
-		Principal.modelo.reserva.getHabitacionesReservadas().get(habitacionesReservadas.size()-1).setCantidad(cantidad);
+		Principal.modelo.reserva.getHabitacionesSeleccionadas().get(habitacionesReservadas.size()-1).setCantidad(cantidad);
 	}
 	
 }

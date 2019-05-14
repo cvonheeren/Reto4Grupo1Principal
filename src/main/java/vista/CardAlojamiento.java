@@ -72,7 +72,7 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		float precio = Principal.modelo.pago.getPrecioTotalHabitacion(Principal.modelo.pago.getHabBarata(alojamiento.getHabitaciones()));
+		float precio = Principal.modelo.gestorDinero.getPrecioTotalHabitacion(Principal.modelo.gestorDinero.getHabBarata(alojamiento.getHabitaciones()));
 		Date fecha1 = Principal.modelo.reserva.getFechaEntrada();
 		Date fecha2 = Principal.modelo.reserva.getFechaSalida();
 		this.nombre.setText(this.alojamiento.getNombre());
@@ -91,7 +91,7 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 	
     @FXML
     void verAlojamiento(ActionEvent event) {
-    	Principal.modelo.reserva.setHabitacionesReservadas(null);
+    	Principal.modelo.reserva.setHabitacionesSeleccionadas(null);
     	Principal.modelo.reserva.setAlojamiento(this.alojamiento);
 		Principal.aplicacion.CambiarScene("PaneInfo.fxml");
     }

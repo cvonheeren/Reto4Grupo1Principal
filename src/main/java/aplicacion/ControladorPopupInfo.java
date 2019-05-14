@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
 import modelo.Habitacion;
+import modelo.Modelo;
 
 public class ControladorPopupInfo implements Initializable {
 	
@@ -33,16 +34,19 @@ public class ControladorPopupInfo implements Initializable {
     
     @FXML
     private FlowPane flowPane;
+    
+	private Modelo modelo() {return Principal.modelo;}
+	private Aplicacion aplicacion() {return Principal.aplicacion;}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		JFXDepthManager.setDepth(paneBase, 1);
-		ArrayList<Habitacion> habitacionesReservadas = Principal.modelo.reserva.getHabitacionesReservadas();
-		lblNombre.setText(Principal.modelo.reserva.getAlojamiento().getNombre());
-		lblUbicacion.setText(Principal.modelo.reserva.getAlojamiento().getUbicacion());
-		lblPrecioTotal.setText("Total: " + Principal.modelo.pago.getPrecioTotal(habitacionesReservadas, Principal.modelo.pago.getDescuento()) + "€");
+		ArrayList<Habitacion> habitacionesReservadas = modelo().reserva.getHabitacionesSeleccionadas();
+		lblNombre.setText(modelo().reserva.getAlojamiento().getNombre());
+		lblUbicacion.setText(modelo().reserva.getAlojamiento().getUbicacion());
+		lblPrecioTotal.setText("Total: " + modelo().gestorDinero.getPrecioConDescuento() + "€");
 		mapa.setLayoutX((int)(lblUbicacion.getBoundsInLocal().getMaxX() + lblUbicacion.getLayoutX() + 7));
-		lblFechas.setText("Del " + Principal.modelo.reserva.getFechaEntrada() + " al " + Principal.modelo.reserva.getFechaSalida());
+		lblFechas.setText("Del " + modelo().reserva.getFechaEntrada() + " al " + modelo().reserva.getFechaSalida());
 		
 		for(int i=0;i<habitacionesReservadas.size();i++) {
 			Habitacion habitacion = habitacionesReservadas.get(i);
@@ -55,12 +59,12 @@ public class ControladorPopupInfo implements Initializable {
 	
     @FXML
     void cerrar(MouseEvent event) {
-    	Principal.aplicacion.stagePopupInfo.close();
+    	aplicacion().stagePopupInfo.close();
     }
     
     @FXML
     void verMapa(MouseEvent event) {
-    	Principal.aplicacion.verMapa("Mapa.fxml");
+    	aplicacion().verMapa("Mapa.fxml");
     }
 
 }

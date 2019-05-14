@@ -15,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
+import modelo.Modelo;
 import modelo.Habitacion;
 
 public class ControladorFactura implements Initializable {
@@ -40,6 +41,9 @@ public class ControladorFactura implements Initializable {
     @FXML
     private JFXButton inicio;
     
+	private Modelo modelo() {return Principal.modelo;}
+	private Aplicacion aplicacion() {return Principal.aplicacion;}
+    
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Principal.aplicacion.controladorFactura = this;
@@ -53,9 +57,9 @@ public class ControladorFactura implements Initializable {
 
     @FXML
     void imprimir(ActionEvent event) {
-    	String pathReserva = Principal.modelo.gestorArchivos.preguntarGuadar();
+    	String pathReserva = modelo().gestorArchivos.preguntarGuadar();
     	if (pathReserva != null) {
-    		Principal.modelo.gestorArchivos.crearTxtReserva(pathReserva, Principal.modelo.reserva);
+    		modelo().gestorArchivos.crearTxtReserva(pathReserva, modelo().cliente, modelo().reserva, modelo().gestorDinero);
     	}
     }
     
@@ -65,13 +69,13 @@ public class ControladorFactura implements Initializable {
     }
 	
 	public void actualizarDatos() {
-		nombre.setText(Principal.modelo.reserva.getAlojamiento().getNombre());
-		ubicacion.setText(Principal.modelo.reserva.getAlojamiento().getUbicacion());
-		fechaEntrada.setText(Principal.modelo.reserva.getFechaEntrada().toLocalDate().toString());
-		fechaSalida.setText(Principal.modelo.reserva.getFechaSalida().toLocalDate().toString());
-		precio.setText(Principal.modelo.reserva.getPrecio() + "€");
-		imagen.setImage(new Image (Principal.modelo.reserva.getAlojamiento().getImgurl()));
-		for (Habitacion h: Principal.modelo.reserva.getHabitacionesReservadas()) {
+		nombre.setText(modelo().reserva.getAlojamiento().getNombre());
+		ubicacion.setText(modelo().reserva.getAlojamiento().getUbicacion());
+		fechaEntrada.setText(modelo().reserva.getFechaEntrada().toLocalDate().toString());
+		fechaSalida.setText(modelo().reserva.getFechaSalida().toLocalDate().toString());
+		precio.setText(modelo().gestorDinero.getPrecioConDescuento() + "€");
+		imagen.setImage(new Image (modelo().reserva.getAlojamiento().getImgurl()));
+		for (Habitacion h: modelo().reserva.getHabitacionesSeleccionadas()) {
 			Label textoHabitacion = new Label(h.getNombre() + " x " + h.getCantidad());
 			textoHabitacion.setMinWidth(370);
 			habitaciones.getChildren().add(textoHabitacion);

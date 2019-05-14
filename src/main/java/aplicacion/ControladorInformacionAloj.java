@@ -23,6 +23,7 @@ import modelo.Casa;
 import modelo.Estancia;
 import modelo.Habitacion;
 import modelo.Hotel;
+import modelo.Modelo;
 
 public class ControladorInformacionAloj implements Initializable {
 	
@@ -94,8 +95,10 @@ public class ControladorInformacionAloj implements Initializable {
 	 
 	@FXML
 	void reservar(ActionEvent event) {
+		new ControladorPasos();
 		Principal.aplicacion.CambiarScene("Pasos.fxml");
 	}
+	
 	
 	/**
 	 * 
@@ -138,10 +141,10 @@ public class ControladorInformacionAloj implements Initializable {
     public String mostrarHabitaciones(ArrayList<Habitacion> habitaciones) {
     	String str = "";
 		for (Habitacion s : habitaciones) {
-			float precio = Principal.modelo.pago.getPrecioTotalHabitacion(s);
+			float precio = Principal.modelo.gestorDinero.getPrecioTotalHabitacion(s);
 			Date fecha1 = Principal.modelo.reserva.getFechaEntrada();
 			Date fecha2 = Principal.modelo.reserva.getFechaSalida();
-			str += s.getNombre() + "\t\t" + Principal.modelo.pago.getPrecioDiaHabitacion(s) + "€/dia" + "\t\t" + precio + "€ para " + Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1.toLocalDate(), fecha2.toLocalDate()).size() + " noches\n";
+			str += s.getNombre() + "\t\t" + Principal.modelo.gestorDinero.getPrecioDiaHabitacion(s) + "€/dia" + "\t\t" + precio + "€ para " + Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1.toLocalDate(), fecha2.toLocalDate()).size() + " noches\n";
 		    if (s.getCtaCamasSimples() > 0 ) {
 		    	str += "\t- " + s.getCtaCamasSimples() + "x  Cama Individual \n";
 		    }
