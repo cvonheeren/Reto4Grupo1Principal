@@ -69,6 +69,9 @@ public class ControladorPago implements Initializable {
     		descuentoPorcentaje.setText("Descuento(" + Integer.toString(descuentoPorcentajeint) + "%)");
     		descuentoPrecio.setText(Float.toString(precioDescuento) + "€");
     		precioTotal.setText(reserva.getPrecio() - precioDescuento + "€");
+    		Principal.modelo.reserva.setPrecio(precioDescuento);
+    		Principal.modelo.pago.sumarDinero(precioDescuento);
+    		restante.setText(Principal.modelo.pago.calcularDineroRestante() + "€");
     	} else {
     		Principal.aplicacion.mostrarMensaje(Principal.aplicacion.controladorPasos.anchorPaneBase, "Codigo promocional no valido");
     	}
@@ -110,6 +113,8 @@ public class ControladorPago implements Initializable {
 		btn.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>(){
 			@Override
 			public void handle(Event event) {
+				textFieldCodPromo.setDisable(true);
+				btnValidarCodPromo.setDisable(true);
 				float importe = Float.parseFloat(num);
 				sumarDinero(importe);
 			}
@@ -123,7 +128,7 @@ public class ControladorPago implements Initializable {
 	 */
 	public void sumarDinero(float importe) {
 		if (Principal.modelo.pago.calcularDineroRestante() == 0) {
-			JOptionPane.showMessageDialog(new JFrame(), "Ya ha introducido todo el dinero", "Error", JOptionPane.ERROR_MESSAGE);
+			Principal.aplicacion.mostrarMensaje(contenedor, "Ya ha introducido todo el dinero");
 		} else {
 			String dineroIntroducido = Float.toString(Principal.modelo.pago.sumarDinero(importe));
 			String dineroRestante =  Float.toString(Principal.modelo.pago.calcularDineroRestante());
@@ -140,7 +145,7 @@ public class ControladorPago implements Initializable {
 		if (Principal.modelo.pago.calcularDineroRestante() == 0) {
     		Principal.aplicacion.CambiarScene("Factura.fxml");	
     	} else {
-    		JOptionPane.showMessageDialog(new JFrame(), "Aun no ha introducido todo el dinero", "Error", JOptionPane.ERROR_MESSAGE);
+    		Principal.aplicacion.mostrarMensaje(Principal.aplicacion.controladorPasos.anchorPaneBase, "Aun no ha introducido todo el dinero");
     	}
 	}
 
