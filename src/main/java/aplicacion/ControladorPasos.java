@@ -152,7 +152,7 @@ public class ControladorPasos implements Initializable {
 	    	tabPane.getSelectionModel().select(idTabFin);
 	    	
     	} else {
-    		JOptionPane.showMessageDialog(new JFrame(), "Aun no ha introducido todo el dinero", "Error", JOptionPane.ERROR_MESSAGE);
+    		Principal.aplicacion.mostrarMensaje(Principal.aplicacion.controladorPasos.anchorPaneBase, "Aun no ha introducido todo el dinero");
     	}
     }
     

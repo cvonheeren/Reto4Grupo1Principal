@@ -42,7 +42,7 @@ public class Aplicacion {
 	public ControladorLoginRegistro controladorLoginRegistro;
 	public Stage stageDialogo;
 	public ArrayList<Alojamiento> busquedaAlojamientos;
-	public String textoBusqueda;
+	public String textoBusqueda = "";
 	public String textoTemporal;
 	public Stage stageCargando;
 	

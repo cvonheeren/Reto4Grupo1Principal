@@ -196,7 +196,7 @@ public class ControladorSelAlojamiento implements Initializable {
      * 
      */
     public void ejecutarBusqueda() {
-    	if (textCiudad.getText().isEmpty()) {
+    	if (textCiudad.getText().equals("")) {
 			Principal.aplicacion.mostrarMensaje(paneBase, "Debe introducir algun valor en el campo de busqueda");
 			return;
 		}
@@ -214,7 +214,7 @@ public class ControladorSelAlojamiento implements Initializable {
 	public void cargarAlojamientos() {
 		ArrayList<Alojamiento> alojamientos = Principal.modelo.gestorBBDD.cargarAlojamientos(textCiudad.getText(), (int) filtroEstrellas.getLowValue(), (int) filtroEstrellas.getHighValue(), TiposAlojamientoSeleccionados());
 		Principal.aplicacion.busquedaAlojamientos=alojamientos;
-		Principal.aplicacion.textoBusqueda=textCiudad.getText();
+		Principal.aplicacion.textoBusqueda=textCiudad.getText().concat("");
     	GridPane grid = crearGrid();
         
     	for(int i = 0; i<alojamientos.size(); i++) {
