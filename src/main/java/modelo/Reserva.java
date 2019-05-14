@@ -3,7 +3,6 @@ package modelo;
 import java.sql.Date;
 import java.util.ArrayList;
 
-import core.Principal;
 
 public class Reserva {
 
