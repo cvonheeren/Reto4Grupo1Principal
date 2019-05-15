@@ -84,7 +84,7 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 		this.descripcion.setText(this.alojamiento.getDescripcion());
 		this.precio.setText(precio + "€ \n" + Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1.toLocalDate(), fecha2.toLocalDate()).size() + " noches");
 		if (alojamiento instanceof Casa) {
-			this.tamano.setText(Float.toString(((Casa) alojamiento).calcularArea()) + "m<sup>2</sup>");
+			this.tamano.setText(Float.toString(((Casa) alojamiento).calcularArea()) + " m²");
 		}
 		setMapa();
 		setIconoAloj();

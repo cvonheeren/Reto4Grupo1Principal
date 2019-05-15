@@ -107,16 +107,16 @@ public class ControladorInformacionAloj implements Initializable {
 			paneInfoAloj.getChildren().remove(this.tamano);		
 		} else if(alojamiento instanceof Apartamento) {
 			ArrayList<Estancia> estanciasAloj = ((Apartamento) alojamiento).getEstancias();
-			String str1 = mostrarEstancias(estanciasAloj);
+			String str1 = mostrarEstancias(estanciasAloj, alojamiento.getHabitaciones());
 			estancias.setText(str1);
 			paneInfoAloj.getChildren().remove(this.lblTamano);
 			paneInfoAloj.getChildren().remove(this.tamano);
 			
 		} else if(alojamiento instanceof Casa) {
 			ArrayList<Estancia> estanciasAloj = ((Casa) alojamiento).getEstancias();
-			String str1 = mostrarEstancias(estanciasAloj);
+			String str1 = mostrarEstancias(estanciasAloj, alojamiento.getHabitaciones());
 			estancias.setText(str1);
-			tamano.setText(Float.toString(((Casa) alojamiento).calcularArea()) + "m<sup>2</sup>");
+			tamano.setText(Float.toString(((Casa) alojamiento).calcularArea()) + " m²");
 		}
 	}
 	
@@ -128,13 +128,11 @@ public class ControladorInformacionAloj implements Initializable {
     public String mostrarHabitaciones(ArrayList<Habitacion> habitaciones) {
     	String str = "";
 		LocalDate fecha1 = Principal.modelo.reserva.getFechaEntrada().toLocalDate();
-		LocalDate fecha2 = Principal.modelo.reserva.getFechaSalida().toLocalDate();
-		int numDias = Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1, fecha2).size();
 		for (Habitacion s : habitaciones) {
 			// carga el precio total de la estancia para la habitacion
 			float precio = Principal.modelo.gestorDinero.getPrecioTotalHabitacion(s);
 			// muestra el precio de la habitacion por noche y por estancia
-			str += s.getNombre() + "\t\t" + Principal.modelo.gestorDinero.getPrecioDiaHabitacion(s, fecha1) + "€/noche" + "\t\t" + precio + "€ para " + numDias + " noches\n";
+			str += s.getNombre() + "\t\t" + precio + "€/Estancia (" + Principal.modelo.gestorDinero.getPrecioDiaHabitacion(s, fecha1) + "€/noche)\n";
 		    if (s.getCtaCamasSimples() > 0 ) {
 		    	str += "\t- " + s.getCtaCamasSimples() + "x  Cama Individual \n";
 		    }
@@ -154,8 +152,8 @@ public class ControladorInformacionAloj implements Initializable {
      * @param habitaciones
      * @return
      */
-    public String mostrarEstancias(ArrayList<Estancia> estancias) {
-    	String str = "";
+    public String mostrarEstancias(ArrayList<Estancia> estancias, ArrayList<Habitacion> habitaciones) {
+    	String str = numHabitaciones(habitaciones) + " x Dormitorios, ";
     	int cont = 1;
 		for (Estancia e : estancias) {
 			str += e.getCantidad() + " x " + e.getNombre().toLowerCase();
@@ -165,6 +163,19 @@ public class ControladorInformacionAloj implements Initializable {
 			cont++;
 		}
 		return str;
+    }
+    
+    /**
+     * Calcula el numero de habitaciones dormitorio de un alojamiento
+     * @param habitaciones
+     * @return
+     */
+    public int numHabitaciones(ArrayList<Habitacion> habitaciones) {
+    	int suma = 0;
+		for (Habitacion h : habitaciones) {
+			suma += h.getCantidad();
+		}
+		return suma;
     }
     
     /**
