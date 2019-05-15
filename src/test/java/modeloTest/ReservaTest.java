@@ -14,7 +14,7 @@ import modelo.Reserva;
 
 public class ReservaTest {
 
-	Reserva reserva = new Reserva(1, null, null, null, 400.34f);
+	Reserva reserva = new Reserva(1, null, null, null);
 	Reserva reserva2 = new Reserva();
 	ArrayList<Habitacion> habitacionesReservadas = new ArrayList<Habitacion>();
 	Alojamiento alojTest = new Alojamiento();
@@ -25,7 +25,6 @@ public class ReservaTest {
 		assertEquals(null, reserva.getFechaCompra());
 		assertEquals(null, reserva.getFechaEntrada());
 		assertEquals(null, reserva.getFechaSalida());
-		assertEquals(400.34f, reserva.getPrecio(), 0.000001);
 		assertEquals(habitacionesReservadas, reserva.getHabitacionesSeleccionadas());
 		assertEquals(0, reserva.getCtdHabitaciones());
 	}
@@ -58,12 +57,6 @@ public class ReservaTest {
 	public void testFecha3() {
 		reserva.setFechaSalida(null);
 		assertEquals(null, reserva.getFechaSalida());
-	}
-	
-	@Test
-	public void testPrecio() {
-		reserva.setPrecio(400.34f);
-		assertEquals(400.34f, reserva.getPrecio(), 0.000001);
 	}
 	
 	@Test

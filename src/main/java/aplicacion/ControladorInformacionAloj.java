@@ -90,7 +90,7 @@ public class ControladorInformacionAloj implements Initializable {
 	}	
 	
 	/**
-	 * 
+	 * Carga las habitaciones del alojamiento seleccionado
 	 * @param alojamiento
 	 */
 	public void setHabitaciones(Alojamiento alojamiento) {
@@ -121,7 +121,7 @@ public class ControladorInformacionAloj implements Initializable {
 	}
 	
     /**
-     * 
+     * Muestra las habitaciones reservadas en un string
      * @param habitaciones
      * @return
      */
@@ -148,8 +148,8 @@ public class ControladorInformacionAloj implements Initializable {
     }
     
     /**
-     * 
-     * @param habitaciones
+     * Muestra las estancias reservadas en un string
+     * @param estancias
      * @return
      */
     public String mostrarEstancias(ArrayList<Estancia> estancias, ArrayList<Habitacion> habitaciones) {
@@ -179,7 +179,7 @@ public class ControladorInformacionAloj implements Initializable {
     }
     
     /**
-     * 
+     * Comprueba si la sesión está iniciada
      */
     public void comprobarSesionIniciada() {
 		if(Principal.modelo.cliente != null) {

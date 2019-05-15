@@ -11,32 +11,23 @@ import modelo.Estancia;
 
 public class CasaTest {
 
-	Estancia estancia = new Estancia(1, "", 8, 2);
-	ArrayList<Estancia> estancias = new ArrayList<Estancia>();
 	
-	Casa casa = new Casa(1, "Bilbao", "Hotel Bilbao", "cremas", 20, 20, 3, 4, 5, "www.kakota", estancias);
+	ArrayList<Estancia> estanciasLista = new ArrayList<Estancia>();
+	Estancia estancia = new Estancia(1, "", 8, 2);
+	
+	Casa casa = new Casa(1, "Bilbao", "Hotel Bilbao", "cremas", 20, 20, 3, 4, 5, "www.kakota", estanciasLista);
 	
 	@Test
 	public void testConstructor1() {
-		assertEquals(estancias.getClass(), casa.getEstancias().getClass());
+		assertEquals(estanciasLista.getClass(), casa.getEstancias().getClass());
 	}
 
 	@Test
 	public void testEstancias() {
-		estancias = new ArrayList<Estancia>();
-		casa.setEstancias(estancias);
-		assertEquals(estancias, casa.getEstancias());
+		estanciasLista = new ArrayList<Estancia>();
+		casa.setEstancias(estanciasLista);
+		assertEquals(estanciasLista, casa.getEstancias());
 	}
 	
-	@Test
-	public void testBanios() {
-		casa.setBanios(1);
-		assertEquals(1, casa.getBanios());
-	}
 	
-	@Test
-	public void testArea() {
-		casa.setArea(1);
-		assertEquals(1, casa.getArea(), 0.00001);
-	}
 }

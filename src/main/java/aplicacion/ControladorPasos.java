@@ -81,8 +81,6 @@ public class ControladorPasos implements Initializable {
 		}
     }
 	
-
-	
 	@FXML
     void cancelar(ActionEvent event) {
 		if(aplicacion().ventanaSiNo("¿Desea cancelar la compra?")) {
@@ -122,10 +120,13 @@ public class ControladorPasos implements Initializable {
     	aplicacion().cargarPopupInfo(iconInfo.localToScreen(iconInfo.getBoundsInLocal()));
     }
        
-    
+    /**
+     * Controla los eventos que se dan al darle al botón de siguiente
+     * si has iniciado sesión o no lo has hecho
+     */
     public void btnSiguienteHabitaciones() {
     	if(comprobarHabitacionSeleccionada()) {
-			float precio = modelo().gestorDinero.CalcularPrecioConDescuentos(modelo().reserva.getHabitacionesSeleccionadas());
+			float precio = modelo().gestorDinero.calcularPrecioConDescuentos(modelo().reserva.getHabitacionesSeleccionadas());
 			modelo().gestorDinero.setPrecio(precio);
 			if(modelo().cliente != null) {
 				idTabPago.setDisable(false);
@@ -141,6 +142,10 @@ public class ControladorPasos implements Initializable {
 		}
     }
     
+    /**
+     * Controla los eventos que se dan cuando has terminado de pagar en
+     * este caso insertar la reserva en las BBDD etc.
+     */
     public void btnSiguientePago() {
     	if (modelo().gestorDinero.calcularDineroRestante() == 0) {
 			
@@ -170,6 +175,10 @@ public class ControladorPasos implements Initializable {
     	}
     }
     
+    /**
+     * Controla que se ha seleccionado al menos una habitación
+     * @return
+     */
     public boolean comprobarHabitacionSeleccionada() {
 		boolean sigTab = true;
 		ArrayList<Habitacion> habitacionesReservadas = modelo().reserva.getHabitacionesSeleccionadas();
@@ -191,6 +200,10 @@ public class ControladorPasos implements Initializable {
 		return sigTab;
 	}
     
+    /**
+     * 
+     * @param index
+     */
     public void selecionarTab(int index) {
     	if (tabPane.getTabs().get(index).isDisable()) {
     		tabPane.getTabs().get(index).setDisable(false);
@@ -199,7 +212,7 @@ public class ControladorPasos implements Initializable {
     }
 
     /**
-     * 
+     * Comprueba si la sesión está iniciada
      */
     public void comprobarSesionIniciada() {
 		if(modelo().cliente != null) {

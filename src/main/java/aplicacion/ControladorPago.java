@@ -60,10 +60,10 @@ public class ControladorPago implements Initializable {
     @FXML
     void validarCodPromo(ActionEvent event) {
     	float descuentoPorcenajeFloat = modelo().gestorBBDD.modificarBBDD.ValidarCodPromo(textFieldCodPromo.getText(), modelo().cliente.getUser());
-    	float descuento = modelo().gestorDinero.getPrecio() * descuentoPorcenajeFloat;
-    	modelo().gestorDinero.setDescuento(descuento);
-    	int descuentoPorcentajeint = (int)(descuentoPorcenajeFloat*100);
     	if(descuentoPorcenajeFloat > 0) {
+    		float descuento = modelo().gestorDinero.getPrecio() * descuentoPorcenajeFloat;
+        	modelo().gestorDinero.setDescuento(descuento);
+        	int descuentoPorcentajeint = (int)(descuentoPorcenajeFloat*100);
     		textFieldCodPromo.setDisable(true);
     		textFieldCodPromo.setText("Codigo promocional valido");
     		btnValidarCodPromo.setDisable(true);
@@ -76,11 +76,17 @@ public class ControladorPago implements Initializable {
     	}
     }
     
+    /**
+     * Actualiza el precio
+     */
     public void actulizarTarifa() {
     	introducido.setText("0 €");
     	restante.setText(Float.toString(modelo().gestorDinero.getPrecioConDescuento()) + " €");
     }
     
+    /**
+     * Crea los botones de la interfaz de las monedas y billetes disponibles
+     */
     public void crearBotones() {
     	AnchorPane anchorPane = new AnchorPane();
     	int x = 400;
@@ -107,6 +113,12 @@ public class ControladorPago implements Initializable {
     	contenedor.getChildren().setAll(anchorPane);
     }
     
+    /**
+     * 
+     * @param btn
+     * @param num
+     * @return
+     */
     public JFXButton añadirListenerSeleccion(JFXButton btn, String num) {
 		btn.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>(){
 			@Override
@@ -126,7 +138,7 @@ public class ControladorPago implements Initializable {
 	 */
 	public void sumarDinero(float importe) {
 		if (modelo().gestorDinero.calcularDineroRestante() == 0) {
-			aplicacion().mostrarMensaje(contenedor, "Ya ha introducido todo el dinero");
+			aplicacion().mostrarMensaje(aplicacion().controladorPasos.anchorPaneBase, "Ya ha introducido todo el dinero");
 		} else {
 			String dineroIntroducido = Float.toString(modelo().gestorDinero.sumarDinero(importe));
 			String dineroRestante =  Float.toString(modelo().gestorDinero.calcularDineroRestante());
@@ -143,7 +155,7 @@ public class ControladorPago implements Initializable {
 		if (modelo().gestorDinero.calcularDineroRestante() == 0) {
     		aplicacion().CambiarScene("Factura.fxml");	
     	} else {
-    		aplicacion().mostrarMensaje(aplicacion().controladorPasos.anchorPaneBase, "Aun no ha introducido todo el dinero");
+    		aplicacion().mostrarMensaje(aplicacion().controladorPasos.anchorPaneBase, "Aún no ha introducido todo el dinero");
     	}
 	}
 
