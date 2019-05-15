@@ -90,7 +90,7 @@ public class ControladorInformacionAloj implements Initializable {
 	}	
 	
 	/**
-	 * Carga las habitaciones del alojamiento seleccionado
+	 * Carga las habitaciones del alojamiento seleccionado y otra info del alojamiento
 	 * @param alojamiento
 	 */
 	public void setHabitaciones(Alojamiento alojamiento) {
@@ -109,9 +109,8 @@ public class ControladorInformacionAloj implements Initializable {
 			ArrayList<Estancia> estanciasAloj = ((Apartamento) alojamiento).getEstancias();
 			String str1 = mostrarEstancias(estanciasAloj, alojamiento.getHabitaciones());
 			estancias.setText(str1);
-			paneInfoAloj.getChildren().remove(this.lblTamano);
-			paneInfoAloj.getChildren().remove(this.tamano);
-			
+			lblTamano.setText("Altura");
+			tamano.setText(("Piso " + ((Apartamento) alojamiento).getPiso() ));
 		} else if(alojamiento instanceof Casa) {
 			ArrayList<Estancia> estanciasAloj = ((Casa) alojamiento).getEstancias();
 			String str1 = mostrarEstancias(estanciasAloj, alojamiento.getHabitaciones());
