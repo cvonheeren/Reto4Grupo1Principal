@@ -22,8 +22,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import modelo.GestorDinero;
 import modelo.Habitacion;
 import modelo.Modelo;
+import modelo.Reserva;
 
 public class ControladorPasos implements Initializable {
 	
@@ -84,6 +86,9 @@ public class ControladorPasos implements Initializable {
 	@FXML
     void cancelar(ActionEvent event) {
 		if(aplicacion().ventanaSiNo("¿Desea cancelar la compra?")) {
+			Principal.aplicacion.textoBusqueda = "";
+			Principal.modelo.reserva = new Reserva();
+			Principal.modelo.gestorDinero = new GestorDinero();
 			aplicacion().CambiarScene("SeleccionAlojamiento.fxml");
 		}
     }
@@ -166,24 +171,22 @@ public class ControladorPasos implements Initializable {
     
     public boolean comprobarHabitacionSeleccionada() {
 		boolean sigTab = true;
-//		if (Principal.modelo.reserva.getHabitacionesSeleccionadas() != null && Principal.modelo.reserva.getHabitacionesSeleccionadas().size() > 0) {
-			ArrayList<Habitacion> habitacionesReservadas = modelo().reserva.getHabitacionesSeleccionadas();
-			if (habitacionesReservadas.size() == 0) {
-				sigTab = false;
-				JOptionPane.showMessageDialog(new JFrame(), "Debe seleccionar al menos una habitación", "Error", JOptionPane.ERROR_MESSAGE);
-			} else {
-				boolean select = false;
-				for (int i = 0; i < habitacionesReservadas.size(); i++) {
-					if (habitacionesReservadas.get(i).getCantidad() > 0) {
-						select = true;
-					}
-				}
-				if (!select) {
-					sigTab = false;
-					JOptionPane.showMessageDialog(new JFrame(), "Debe seleccionar al menos una habitación", "Error", JOptionPane.ERROR_MESSAGE);
+		ArrayList<Habitacion> habitacionesReservadas = modelo().reserva.getHabitacionesSeleccionadas();
+		if (habitacionesReservadas.size() == 0) {
+			sigTab = false;
+			JOptionPane.showMessageDialog(new JFrame(), "Debe seleccionar al menos una habitación", "Error", JOptionPane.ERROR_MESSAGE);
+		} else {
+			boolean select = false;
+			for (int i = 0; i < habitacionesReservadas.size(); i++) {
+				if (habitacionesReservadas.get(i).getCantidad() > 0) {
+					select = true;
 				}
 			}
-//		}
+			if (!select) {
+				sigTab = false;
+				JOptionPane.showMessageDialog(new JFrame(), "Debe seleccionar al menos una habitación", "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
 		return sigTab;
 	}
     

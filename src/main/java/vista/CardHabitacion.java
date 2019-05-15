@@ -45,8 +45,6 @@ public class CardHabitacion extends AnchorPane implements Initializable {
 		
 		this.habitacion = habitacion;
 		
-//		Principal.modelo.reserva.VaciarSeleccionHabitaciones();
-		
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vista/Habitacion.fxml"));
 	    fxmlLoader.setRoot(this);
 	    fxmlLoader.setController(this);
@@ -126,20 +124,18 @@ public class CardHabitacion extends AnchorPane implements Initializable {
      * @param cantidad
      */
     public void guardarHabitacion(Habitacion habitacion, int cantidad) {
-//    	if (Principal.modelo.reserva.getHabitacionesSeleccionadas() != null && Principal.modelo.reserva.getHabitacionesSeleccionadas().size() > 0) {
-			ArrayList<Habitacion> habitacionesReservadas = Principal.modelo.reserva.getHabitacionesSeleccionadas();
-			if (habitacionesReservadas.size() == 0) {
-				Principal.modelo.reserva.addHabitacion(habitacion);
-				Principal.modelo.reserva.getHabitacionesSeleccionadas().get(habitacionesReservadas.size()-1).setCantidad(cantidad);
+		ArrayList<Habitacion> habitacionesReservadas = Principal.modelo.reserva.getHabitacionesSeleccionadas();
+		if (habitacionesReservadas.size() == 0) {
+			Principal.modelo.reserva.addHabitacion(habitacion);
+			Principal.modelo.reserva.getHabitacionesSeleccionadas().get(habitacionesReservadas.size()-1).setCantidad(cantidad);
+			return;
+		}
+		for (int i = 0;i < habitacionesReservadas.size(); i++) {
+			if (habitacionesReservadas.get(i).getNombre().equals(habitacion.getNombre())) {
+				habitacionesReservadas.get(i).setCantidad(cantidad);
 				return;
 			}
-			for (int i = 0;i < habitacionesReservadas.size(); i++) {
-				if (habitacionesReservadas.get(i).getNombre().equals(habitacion.getNombre())) {
-					habitacionesReservadas.get(i).setCantidad(cantidad);
-					return;
-				}
-			}
-//    	}
+		}
 		Principal.modelo.reserva.addHabitacion(habitacion);
 		Principal.modelo.reserva.getHabitacionesSeleccionadas().get(Principal.modelo.reserva.getHabitacionesSeleccionadas().size()-1).setCantidad(cantidad);
 	}
