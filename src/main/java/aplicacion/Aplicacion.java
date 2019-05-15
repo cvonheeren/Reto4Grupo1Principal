@@ -76,7 +76,7 @@ public class Aplicacion {
 	}
 	
 	/**
-	 * 
+	 * Cetra el popup de info
 	 * @param bounds
 	 */
 	public void centrarPopup(Bounds bounds) {
@@ -100,7 +100,7 @@ public class Aplicacion {
 	}
 	
 	/**
-	 * 
+	 * Muestra el mapa
 	 * @param FXMLLink
 	 */
 	public void verMapa(String FXMLLink) {
@@ -115,6 +115,9 @@ public class Aplicacion {
 		}
 	}
 	
+	/**
+	 * 
+	 */
     public void verBases() {
 		Parent FXML = loadFXML("Bases.fxml");
 		if (FXML != null) {
@@ -128,7 +131,7 @@ public class Aplicacion {
     }
 	
 	/**
-	 * 
+	 * Carga la info del popup de información
 	 * @param bounds
 	 */
 	public void cargarPopupInfo(Bounds bounds) {
@@ -188,9 +191,6 @@ public class Aplicacion {
         }
     };
 
-   
-
-	
     /**
      * 
      * @param anchorpane
@@ -205,7 +205,10 @@ public class Aplicacion {
 		//AbrirDialogo("PRUEBA");
 	}
     
-    
+    /**
+     * 
+     * @param texto
+     */
     public void AbrirDialogo(String texto)
     {
     	textoTemporal=texto;
@@ -224,7 +227,6 @@ public class Aplicacion {
 			stageDialogo.setY(stage.getY()+31);
 		}
     }
-    
     
     /**
      * 

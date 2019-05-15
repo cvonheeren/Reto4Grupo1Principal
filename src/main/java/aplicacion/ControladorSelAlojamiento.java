@@ -154,7 +154,7 @@ public class ControladorSelAlojamiento implements Initializable {
     }
     
     /**
-     * 
+     * Autocompleta lo que se escribe según lo que hay en las BBDD
      */
     public void cargarAutocompletar() {
     	ArrayList<String> autocompletar = Principal.modelo.gestorBBDD.cargarNombresDestinos();
@@ -164,9 +164,9 @@ public class ControladorSelAlojamiento implements Initializable {
     
     /**
      * Deshabilitar dias anteriores a la fecha que se pasa por parametro
-     * @param datePicker
-     * @param fecha
-     * @return
+     * @param datePicker El objeto propio de FXML para calendarios
+     * @param fecha La fecha de hoy
+     * @return Un DatePicker con las restricciones que queremos
      */
     public JFXDatePicker deshabilitarFechas(JFXDatePicker datePicker, LocalDate fecha) {
     	final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
@@ -185,7 +185,7 @@ public class ControladorSelAlojamiento implements Initializable {
     }
     
     /**
-     * 
+     * Hace la busqueda de los alojamientos según lo que se introduzca
      */
     public void ejecutarBusqueda() {
     	if (textCiudad.getText().equals("")) {
@@ -245,6 +245,10 @@ public class ControladorSelAlojamiento implements Initializable {
     	}
 	}
 	
+	/**
+	 * Devuelve los tipos de alojamientos que hay en una búsqueda
+	 * @return
+	 */
 	private String[] TiposAlojamientoSeleccionados() {
 		String[] tiposAloj = new String[3];
 		if(chkBoxHotel.isSelected())
@@ -271,7 +275,7 @@ public class ControladorSelAlojamiento implements Initializable {
     }
     
     /**
-     * 
+     * Devuelve un arraylist de la habitaciones disponibles en un alojamiento
      * @param alojamiento
      * @return
      */
@@ -283,7 +287,7 @@ public class ControladorSelAlojamiento implements Initializable {
     }
     
     /**
-     * 
+     * Comprueba si la sesión está iniciada
      */
     public void comprobarSesionIniciada() {
 		if(Principal.modelo.cliente != null) {

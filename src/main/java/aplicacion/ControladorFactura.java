@@ -67,6 +67,9 @@ public class ControladorFactura implements Initializable {
     	Principal.iniciarPrograma();
     }
 	
+    /**
+     * Actualiza los datos que se muestran en la factura
+     */
 	public void actualizarDatos() {
 		nombre.setText(modelo().reserva.getAlojamiento().getNombre());
 		ubicacion.setText(modelo().reserva.getAlojamiento().getUbicacion());

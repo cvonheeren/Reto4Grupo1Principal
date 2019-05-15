@@ -75,11 +75,17 @@ public class ControladorPago implements Initializable {
     	}
     }
     
+    /**
+     * Actualiza el precio
+     */
     public void actulizarTarifa() {
     	introducido.setText("0 €");
     	restante.setText(Float.toString(modelo().gestorDinero.getPrecioConDescuento()) + " €");
     }
     
+    /**
+     * Crea los botones de la interfaz de las monedas y billetes disponibles
+     */
     public void crearBotones() {
     	AnchorPane anchorPane = new AnchorPane();
     	int x = 400;
@@ -106,6 +112,12 @@ public class ControladorPago implements Initializable {
     	contenedor.getChildren().setAll(anchorPane);
     }
     
+    /**
+     * 
+     * @param btn
+     * @param num
+     * @return
+     */
     public JFXButton añadirListenerSeleccion(JFXButton btn, String num) {
 		btn.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>(){
 			@Override
@@ -142,7 +154,7 @@ public class ControladorPago implements Initializable {
 		if (modelo().gestorDinero.calcularDineroRestante() == 0) {
     		aplicacion().CambiarScene("Factura.fxml");	
     	} else {
-    		aplicacion().mostrarMensaje(aplicacion().controladorPasos.anchorPaneBase, "Aun no ha introducido todo el dinero");
+    		aplicacion().mostrarMensaje(aplicacion().controladorPasos.anchorPaneBase, "Aún no ha introducido todo el dinero");
     	}
 	}
 
