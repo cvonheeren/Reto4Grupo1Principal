@@ -29,19 +29,17 @@ public class Reserva {
 		this.ctdHabitaciones = 0;
 	}
 	
-	public void ActualizarHabitaciones(ArrayList<Habitacion> habitacionesSelecionadas, int cantidad)
-	{
-		this.habitacionesSeleccionadas = habitacionesSelecionadas;
-		this.ctdHabitaciones = cantidad;
-	}
-	
-	public void VaciarSeleccionHabitaciones()
-	{
+	public Reserva() {
 		this.habitacionesSeleccionadas = new ArrayList<Habitacion>();
 		this.ctdHabitaciones = 0;
 	}
 	
-	public Reserva() {
+	public void ActualizarHabitaciones(ArrayList<Habitacion> habitacionesSelecionadas, int cantidad) {
+		this.habitacionesSeleccionadas = habitacionesSelecionadas;
+		this.ctdHabitaciones = cantidad;
+	}
+	
+	public void VaciarSeleccionHabitaciones() {
 		this.habitacionesSeleccionadas = new ArrayList<Habitacion>();
 		this.ctdHabitaciones = 0;
 	}
@@ -78,7 +76,6 @@ public class Reserva {
 		this.fechaSalida = fechaSalida;
 	}
 
-
 	public Alojamiento getAlojamiento() {
 		return alojamiento;
 	}
@@ -112,6 +109,5 @@ public class Reserva {
 	public void setCtdHabitaciones(int ctdHabitaciones) {
 		this.ctdHabitaciones = ctdHabitaciones;
 	}
-
 	
 }

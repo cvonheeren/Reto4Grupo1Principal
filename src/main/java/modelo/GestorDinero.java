@@ -23,12 +23,9 @@ public class GestorDinero {
 		this.monedasIntroducidas = new ArrayList<Float>();
 	}
 	
-	
-
 	public float getPrecio() {
 		return precio;
 	}
-
 
 	public float getDescuento() {
 		return descuento;
@@ -38,18 +35,13 @@ public class GestorDinero {
 		this.descuento = descuento;
 	}
 	
-	public float getPrecioConDescuento()
-	{
+	public float getPrecioConDescuento(){
 		return precio-descuento;
 	}
-	
-	
 
 	public void setPrecio(float precio) {
 		this.precio = precio;
 	}
-
-
 
 	public float getDineroIntroducido() {
 		return dineroIntroducido;
@@ -209,7 +201,7 @@ public class GestorDinero {
 	}
 	
 	/**
-	 * 
+	 * calcula el precio total de la estancia para una habitacion
 	 * @param habReservadas
 	 * @return
 	 */
@@ -235,12 +227,11 @@ public class GestorDinero {
 	}
 	
 	/**
-	 * 
+	 * Carga la tarifa de habitacion para un dia concreto
 	 * @param habitacion
 	 * @return
 	 */
-    public float getPrecioDiaHabitacion(Habitacion habitacion) {
-    	LocalDate fecha = Principal.modelo.reserva.getFechaEntrada().toLocalDate();
+    public float getPrecioDiaHabitacion(Habitacion habitacion, LocalDate fecha) {
     	if(Principal.modelo.gestorFechas.comprobarFestivo(fecha)) {
     		return habitacion.getTarifaFestivo();
     	} else if (Principal.modelo.gestorFechas.comprobarSiEsVerano(fecha)){
@@ -251,7 +242,7 @@ public class GestorDinero {
     }
     
     /**
-     * 
+     * Busca la habitacion mas barata de un alojamiento
      * @param habitaciones
      * @return
      */
@@ -267,7 +258,5 @@ public class GestorDinero {
 		}
 		return habBarataHabitacion;
 	}
-
-	
 
 }

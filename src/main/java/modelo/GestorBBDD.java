@@ -49,7 +49,6 @@ public class GestorBBDD {
 				String desc = result.getString("DESCRIPCION");
 				float longitud = result.getFloat("LONGITUD");
 				float latitud = result.getFloat("LATITUD");
-				float recargo = result.getFloat("REGARGO");
 				float desayuno = result.getFloat("DESAYUNO");
 				float mediaPension = result.getFloat("MEDIA_PENSION");
 				float pensionCompleta = result.getFloat("PENSION_COMPLETA");

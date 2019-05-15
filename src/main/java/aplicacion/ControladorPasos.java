@@ -121,10 +121,12 @@ public class ControladorPasos implements Initializable {
     public void btnSiguienteHabitaciones() {
     	if(comprobarHabitacionSeleccionada()) {
 			float precio = modelo().gestorDinero.CalcularPrecioConDescuentos(modelo().reserva.getHabitacionesSeleccionadas());
+			System.out.println(precio);
 			modelo().gestorDinero.setPrecio(precio);
 			if(modelo().cliente != null) {
 				idTabPago.setDisable(false);
 				tabPane.getSelectionModel().select(idTabPago);
+				Principal.aplicacion.controladorPago.initialize(null, null);
 			} else {
 				aplicacion().CambiarScene("LoginRegistro.fxml");
 				aplicacion().controladorLoginRegistro.setPantallaAnterior("Pasos.fxml");

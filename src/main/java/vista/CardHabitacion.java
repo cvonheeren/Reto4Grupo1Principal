@@ -45,7 +45,7 @@ public class CardHabitacion extends AnchorPane implements Initializable {
 		
 		this.habitacion = habitacion;
 		
-		Principal.modelo.reserva.VaciarSeleccionHabitaciones();
+//		Principal.modelo.reserva.VaciarSeleccionHabitaciones();
 		
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vista/Habitacion.fxml"));
 	    fxmlLoader.setRoot(this);
@@ -76,6 +76,13 @@ public class CardHabitacion extends AnchorPane implements Initializable {
 		}
 		cantidad.getItems().addAll(numHab);
 		cantidad.getSelectionModel().selectFirst();
+		if (Principal.modelo.reserva != null && Principal.modelo.reserva.getHabitacionesSeleccionadas() != null && Principal.modelo.reserva.getHabitacionesSeleccionadas().size() > 0) {
+			for ( Habitacion h: Principal.modelo.reserva.getHabitacionesSeleccionadas()) {
+				if (h.getNombre().equals(habitacion.getNombre())) {
+					cantidad.setValue(h.getCantidad());
+				}
+			}
+		}
 		cantidad.setOnAction((e) -> {
 			if(cantidad.getValue()>0)
 				guardarHabitacion(habitacion, cantidad.getValue());

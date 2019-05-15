@@ -72,6 +72,7 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		// carga el precio total de la estancia para la habitacion mas barata
 		float precio = Principal.modelo.gestorDinero.getPrecioTotalHabitacion(Principal.modelo.gestorDinero.getHabBarata(alojamiento.getHabitaciones()));
 		Date fecha1 = Principal.modelo.reserva.getFechaEntrada();
 		Date fecha2 = Principal.modelo.reserva.getFechaSalida();
@@ -82,7 +83,9 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 		this.ubicacion.setText(this.alojamiento.getUbicacion());
 		this.descripcion.setText(this.alojamiento.getDescripcion());
 		this.precio.setText(precio + "€ \n" + Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1.toLocalDate(), fecha2.toLocalDate()).size() + " noches");
-//		this.tamano.setText(Float.toString(((Casa) alojamiento).getArea()));
+		if (alojamiento instanceof Casa) {
+			this.tamano.setText(Float.toString(((Casa) alojamiento).calcularArea()) + "m<sup>2</sup>");
+		}
 		setMapa();
 		setIconoAloj();
 		setHabitaciones();
@@ -241,8 +244,9 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 		}
 		return str;
     }
+    
     /**
-     * 
+     * Calcula el numero de habitaciones dormitorio de un alojamiento
      * @param habitaciones
      * @return
      */

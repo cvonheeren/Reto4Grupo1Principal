@@ -42,7 +42,6 @@ public class ControladorFactura implements Initializable {
     private JFXButton inicio;
     
 	private Modelo modelo() {return Principal.modelo;}
-	private Aplicacion aplicacion() {return Principal.aplicacion;}
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

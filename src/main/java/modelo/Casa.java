@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 public class Casa extends Alojamiento {
 
-	private int banios;
-	private float area;
 	private ArrayList<Estancia> estancias = new ArrayList<Estancia>();
 	
 	/**
@@ -21,32 +19,11 @@ public class Casa extends Alojamiento {
 	 * @param recargo
 	 * @param desayuno
 	 * @param imgurl
-	 * @param banios
-	 * @param area
 	 */
 	public Casa(int codAlojamiento, String ubicacion, String nombre, String descripcion, float longitud, float latitud,
 			float tarifaNormal, float tarifaVerano, float desayuno, String imgurl, ArrayList<Estancia> estancias) {
-		super(codAlojamiento, ubicacion, nombre, descripcion, longitud, latitud, tarifaNormal, tarifaVerano,
-				desayuno, imgurl);
-//		this.banios = numBanios();
-//		this.area = calcularArea();
+		super(codAlojamiento, ubicacion, nombre, descripcion, longitud, latitud, tarifaNormal, tarifaVerano, desayuno, imgurl);
 		this.estancias = estancias;
-	}
-
-	public int getBanios() {
-		return banios;
-	}
-
-	public void setBanios(int banios) {
-		this.banios = banios;
-	}
-
-	public float getArea() {
-		return area;
-	}
-
-	public void setArea(float area) {
-		this.area = area;
 	}
 
 	public ArrayList<Estancia> getEstancias() {
@@ -57,7 +34,7 @@ public class Casa extends Alojamiento {
 		this.estancias = estancias;
 	}
 	
-	private int numBanios() {
+	public int numBanios() {
 		int suma = 0;
 		for (Estancia e: this.estancias) {
 			if ( e.getNombre() == "BANIO") {
@@ -67,7 +44,7 @@ public class Casa extends Alojamiento {
 		return suma;
 	}
 	
-	private float calcularArea() {
+	public float calcularArea() {
 		float suma = 0;
 		if (this.estancias != null) {
 			for (Estancia e: this.estancias) {

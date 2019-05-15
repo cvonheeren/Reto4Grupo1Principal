@@ -1,7 +1,7 @@
 package aplicacion;
 
 import java.net.URL;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -23,7 +23,6 @@ import modelo.Casa;
 import modelo.Estancia;
 import modelo.Habitacion;
 import modelo.Hotel;
-import modelo.Modelo;
 
 public class ControladorInformacionAloj implements Initializable {
 	
@@ -37,22 +36,13 @@ public class ControladorInformacionAloj implements Initializable {
 	private Text nombAloj, ubicacion, estancias;
 	
 	@FXML
-	private Label descAloj, habitaciones, tituloHab, lblEstancias, lblTamano;
+	private Label descAloj, habitaciones, tituloHab, lblEstancias, lblTamano, lblSaludo, tamano;
     
     @FXML
-    private Hyperlink verMapa;
+    private Hyperlink verMapa, lblSesion;
 	
     @FXML
     private JFXButton atras, reservar;
-    
-    @FXML
-    private Label lblSaludo;
-
-    @FXML
-    private Hyperlink lblSesion;
-    
-    @FXML
-    private Label tamano;
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -97,8 +87,7 @@ public class ControladorInformacionAloj implements Initializable {
 	void reservar(ActionEvent event) {
 		new ControladorPasos();
 		Principal.aplicacion.CambiarScene("Pasos.fxml");
-	}
-	
+	}	
 	
 	/**
 	 * 
@@ -111,13 +100,11 @@ public class ControladorInformacionAloj implements Initializable {
 		String str = mostrarHabitaciones(habitacionesAloj);
 		habitaciones.setText(str);
 		
-		if(alojamiento instanceof Hotel) {
-	    	
+		if(alojamiento instanceof Hotel) {   	
 			paneInfoAloj.getChildren().remove(this.lblEstancias);
 			paneInfoAloj.getChildren().remove(this.estancias);
 			paneInfoAloj.getChildren().remove(this.lblTamano);
-			paneInfoAloj.getChildren().remove(this.tamano);
-			
+			paneInfoAloj.getChildren().remove(this.tamano);		
 		} else if(alojamiento instanceof Apartamento) {
 			ArrayList<Estancia> estanciasAloj = ((Apartamento) alojamiento).getEstancias();
 			String str1 = mostrarEstancias(estanciasAloj);
@@ -129,7 +116,7 @@ public class ControladorInformacionAloj implements Initializable {
 			ArrayList<Estancia> estanciasAloj = ((Casa) alojamiento).getEstancias();
 			String str1 = mostrarEstancias(estanciasAloj);
 			estancias.setText(str1);
-			tamano.setText(Float.toString(((Casa) alojamiento).getArea()));
+			tamano.setText(Float.toString(((Casa) alojamiento).calcularArea()) + "m<sup>2</sup>");
 		}
 	}
 	
@@ -140,11 +127,14 @@ public class ControladorInformacionAloj implements Initializable {
      */
     public String mostrarHabitaciones(ArrayList<Habitacion> habitaciones) {
     	String str = "";
+		LocalDate fecha1 = Principal.modelo.reserva.getFechaEntrada().toLocalDate();
+		LocalDate fecha2 = Principal.modelo.reserva.getFechaSalida().toLocalDate();
+		int numDias = Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1, fecha2).size();
 		for (Habitacion s : habitaciones) {
+			// carga el precio total de la estancia para la habitacion
 			float precio = Principal.modelo.gestorDinero.getPrecioTotalHabitacion(s);
-			Date fecha1 = Principal.modelo.reserva.getFechaEntrada();
-			Date fecha2 = Principal.modelo.reserva.getFechaSalida();
-			str += s.getNombre() + "\t\t" + Principal.modelo.gestorDinero.getPrecioDiaHabitacion(s) + "€/dia" + "\t\t" + precio + "€ para " + Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1.toLocalDate(), fecha2.toLocalDate()).size() + " noches\n";
+			// muestra el precio de la habitacion por noche y por estancia
+			str += s.getNombre() + "\t\t" + Principal.modelo.gestorDinero.getPrecioDiaHabitacion(s, fecha1) + "€/noche" + "\t\t" + precio + "€ para " + numDias + " noches\n";
 		    if (s.getCtaCamasSimples() > 0 ) {
 		    	str += "\t- " + s.getCtaCamasSimples() + "x  Cama Individual \n";
 		    }

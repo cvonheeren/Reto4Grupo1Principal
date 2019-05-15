@@ -39,8 +39,7 @@ public class Principal extends Application {
 		try{
 			modelo = new Modelo();
 			aplicacion = new Aplicacion(stage);
-		}catch(Exception e1)
-		{
+		} catch(Exception e1) {
 			e1.printStackTrace();
 			JOptionPane.showMessageDialog(new JFrame(), e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			System.exit(0);

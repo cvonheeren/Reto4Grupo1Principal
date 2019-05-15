@@ -76,13 +76,7 @@ public class ControladorSelAlojamiento implements Initializable {
     private Text busqueda;
     
     @FXML
-    private JFXCheckBox chkBoxHotel;
-
-    @FXML
-    private JFXCheckBox chkBoxApartamento;
-
-    @FXML
-    private JFXCheckBox chkBoxCasa;
+    private JFXCheckBox chkBoxHotel, chkBoxApartamento, chkBoxCasa;
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -98,26 +92,25 @@ public class ControladorSelAlojamiento implements Initializable {
 		
 		RellenarFiltros();
 		
-		
-		
     	comprobarSesionIniciada();
 		cargarAutocompletar();
 		
-		try{textCiudad.setText(Principal.aplicacion.textoBusqueda);
-		if(Principal.aplicacion.textoBusqueda!="")
-			cargarAlojamientos();
+		try {
+			if (Principal.aplicacion.textoBusqueda != "") {
+				textCiudad.setText(Principal.aplicacion.textoBusqueda);
+				fechaEntrada.setValue(Principal.modelo.reserva.getFechaEntrada().toLocalDate());
+				fechaSalida.setValue(Principal.modelo.reserva.getFechaSalida().toLocalDate());
+				cargarAlojamientos();
+			}
+		} catch(Exception e) {
+			
 		}
-		catch(Exception e) {}
 	}
    
-
     private void RellenarFiltros() {
     	filtroEstrellas.setLowValue(1f);
 		filtroEstrellas.setHighValue(5f);
-		
-		
 	}
-
 
 	@FXML
     void filtrarME(MouseEvent event) {
@@ -159,7 +152,6 @@ public class ControladorSelAlojamiento implements Initializable {
 			comprobarSesionIniciada();
 		}
     }
-    
     
     /**
      * 
@@ -213,8 +205,8 @@ public class ControladorSelAlojamiento implements Initializable {
      */
 	public void cargarAlojamientos() {
 		ArrayList<Alojamiento> alojamientos = Principal.modelo.gestorBBDD.cargarAlojamientos(textCiudad.getText(), (int) filtroEstrellas.getLowValue(), (int) filtroEstrellas.getHighValue(), TiposAlojamientoSeleccionados());
-		Principal.aplicacion.busquedaAlojamientos=alojamientos;
-		Principal.aplicacion.textoBusqueda=textCiudad.getText().concat("");
+		Principal.aplicacion.busquedaAlojamientos = alojamientos;
+		Principal.aplicacion.textoBusqueda = textCiudad.getText().concat("");
     	GridPane grid = crearGrid();
         
     	for(int i = 0; i<alojamientos.size(); i++) {
@@ -253,8 +245,7 @@ public class ControladorSelAlojamiento implements Initializable {
     	}
 	}
 	
-	private String[] TiposAlojamientoSeleccionados()
-	{
+	private String[] TiposAlojamientoSeleccionados() {
 		String[] tiposAloj = new String[3];
 		if(chkBoxHotel.isSelected())
 			tiposAloj[0]="H";
