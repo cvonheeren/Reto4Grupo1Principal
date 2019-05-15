@@ -4,13 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-
-import modelo.Cliente;
 import modelo.GestorArchivos;
 import modelo.GestorBBDD;
 import modelo.GestorDeFechas;
 import modelo.GestorValidaciones;
-
 
 import modelo.Modelo;
 import modelo.GestorDinero;
@@ -29,7 +26,6 @@ public class ModeloTest {
 	@Test
 	public void testcliente() {
 		assertEquals(null, miModelo.cliente);
-		assertNotEquals(Cliente.class, miModelo.cliente.getClass());
 	}
 	
 	@Test
