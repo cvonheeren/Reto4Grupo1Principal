@@ -1,4 +1,4 @@
-url: 192.168.0.16
+url: 192.168.101.12
 database: bidaiong1
 user: hr
 password: hr

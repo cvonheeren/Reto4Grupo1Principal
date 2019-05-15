@@ -84,10 +84,14 @@ public class CardHabitacion extends AnchorPane implements Initializable {
 			}
 		}
 		cantidad.setOnAction((e) -> {
-			if(cantidad.getValue()>0)
+			if(cantidad.getValue()>0) {
 				guardarHabitacion(habitacion, cantidad.getValue());
-			else
+				float precioTotal = Principal.modelo.gestorDinero.CalcularPrecioConDescuentos(Principal.modelo.reserva.getHabitacionesSeleccionadas());
+				Principal.modelo.gestorDinero.setPrecio(precioTotal);
+			} else {
 				Principal.modelo.reserva.removeHabitacion(habitacion);
+			}
+			
         });
 		card.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>(){
 			@Override
@@ -122,20 +126,22 @@ public class CardHabitacion extends AnchorPane implements Initializable {
      * @param cantidad
      */
     public void guardarHabitacion(Habitacion habitacion, int cantidad) {
-		ArrayList<Habitacion> habitacionesReservadas = Principal.modelo.reserva.getHabitacionesSeleccionadas();
-		if (habitacionesReservadas.size() == 0) {
-			Principal.modelo.reserva.addHabitacion(habitacion);
-			Principal.modelo.reserva.getHabitacionesSeleccionadas().get(habitacionesReservadas.size()-1).setCantidad(cantidad);
-			return;
-		}
-		for (int i = 0;i < habitacionesReservadas.size(); i++) {
-			if (habitacionesReservadas.get(i).getNombre().equals(habitacion.getNombre())) {
-				habitacionesReservadas.get(i).setCantidad(cantidad);
+//    	if (Principal.modelo.reserva.getHabitacionesSeleccionadas() != null && Principal.modelo.reserva.getHabitacionesSeleccionadas().size() > 0) {
+			ArrayList<Habitacion> habitacionesReservadas = Principal.modelo.reserva.getHabitacionesSeleccionadas();
+			if (habitacionesReservadas.size() == 0) {
+				Principal.modelo.reserva.addHabitacion(habitacion);
+				Principal.modelo.reserva.getHabitacionesSeleccionadas().get(habitacionesReservadas.size()-1).setCantidad(cantidad);
 				return;
 			}
-		}
+			for (int i = 0;i < habitacionesReservadas.size(); i++) {
+				if (habitacionesReservadas.get(i).getNombre().equals(habitacion.getNombre())) {
+					habitacionesReservadas.get(i).setCantidad(cantidad);
+					return;
+				}
+			}
+//    	}
 		Principal.modelo.reserva.addHabitacion(habitacion);
-		Principal.modelo.reserva.getHabitacionesSeleccionadas().get(habitacionesReservadas.size()-1).setCantidad(cantidad);
+		Principal.modelo.reserva.getHabitacionesSeleccionadas().get(Principal.modelo.reserva.getHabitacionesSeleccionadas().size()-1).setCantidad(cantidad);
 	}
 	
 }

@@ -74,11 +74,13 @@ public class ControladorFactura implements Initializable {
 		fechaSalida.setText(modelo().reserva.getFechaSalida().toLocalDate().toString());
 		precio.setText(modelo().gestorDinero.getPrecioConDescuento() + "€");
 		imagen.setImage(new Image (modelo().reserva.getAlojamiento().getImgurl()));
-		for (Habitacion h: modelo().reserva.getHabitacionesSeleccionadas()) {
-			Label textoHabitacion = new Label(h.getNombre() + " x " + h.getCantidad());
-			textoHabitacion.setMinWidth(370);
-			habitaciones.getChildren().add(textoHabitacion);
-		}
+//		if (Principal.modelo.reserva.getHabitacionesSeleccionadas() != null && Principal.modelo.reserva.getHabitacionesSeleccionadas().size() > 0) {
+			for (Habitacion h: modelo().reserva.getHabitacionesSeleccionadas()) {
+				Label textoHabitacion = new Label(h.getNombre() + " x " + h.getCantidad());
+				textoHabitacion.setMinWidth(370);
+				habitaciones.getChildren().add(textoHabitacion);
+			}
+//		}
 		int tamanoUbicacion = (int) ((int) ubicacion.getBoundsInLocal().getMaxX() + ubicacion.getLayoutX() + 5);
 		mapa.setLayoutX(tamanoUbicacion);
 	}

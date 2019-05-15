@@ -3,9 +3,6 @@ package aplicacion;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
@@ -19,7 +16,6 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import modelo.Modelo;
-import modelo.Reserva;
 
 public class ControladorPago implements Initializable {
 	
