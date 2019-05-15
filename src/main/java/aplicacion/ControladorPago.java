@@ -126,7 +126,7 @@ public class ControladorPago implements Initializable {
 	 */
 	public void sumarDinero(float importe) {
 		if (modelo().gestorDinero.calcularDineroRestante() == 0) {
-			aplicacion().mostrarMensaje(contenedor, "Ya ha introducido todo el dinero");
+			aplicacion().mostrarMensaje(aplicacion().controladorPasos.anchorPaneBase, "Ya ha introducido todo el dinero");
 		} else {
 			String dineroIntroducido = Float.toString(modelo().gestorDinero.sumarDinero(importe));
 			String dineroRestante =  Float.toString(modelo().gestorDinero.calcularDineroRestante());
