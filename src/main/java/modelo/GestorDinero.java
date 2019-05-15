@@ -160,7 +160,7 @@ public class GestorDinero {
 	 * @param habReservadas
 	 * @return
 	 */
-	public float CalcularPrecioConDescuentos(ArrayList<Habitacion> habReservadas) {
+	public float calcularPrecioConDescuentos(ArrayList<Habitacion> habReservadas) {
 		
 		float precioTotal = 0;
 		float tarifaDiaNormal = 0;

@@ -16,6 +16,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
 import modelo.Modelo;
+import modelo.Reserva;
+import modelo.GestorDinero;
 import modelo.Habitacion;
 
 public class ControladorFactura implements Initializable {
@@ -64,9 +66,15 @@ public class ControladorFactura implements Initializable {
     
     @FXML
     void iniciar(ActionEvent event) {
-    	Principal.iniciarPrograma();
+    	Principal.aplicacion.textoBusqueda = "";
+		Principal.modelo.reserva = new Reserva();
+		Principal.modelo.gestorDinero = new GestorDinero();
+		Principal.aplicacion.CambiarScene("SeleccionAlojamiento.fxml");
     }
 	
+    /**
+     * Actualiza los datos que se muestran en la factura
+     */
 	public void actualizarDatos() {
 		nombre.setText(modelo().reserva.getAlojamiento().getNombre());
 		ubicacion.setText(modelo().reserva.getAlojamiento().getUbicacion());
@@ -74,13 +82,11 @@ public class ControladorFactura implements Initializable {
 		fechaSalida.setText(modelo().reserva.getFechaSalida().toLocalDate().toString());
 		precio.setText(modelo().gestorDinero.getPrecioConDescuento() + "€");
 		imagen.setImage(new Image (modelo().reserva.getAlojamiento().getImgurl()));
-//		if (Principal.modelo.reserva.getHabitacionesSeleccionadas() != null && Principal.modelo.reserva.getHabitacionesSeleccionadas().size() > 0) {
-			for (Habitacion h: modelo().reserva.getHabitacionesSeleccionadas()) {
-				Label textoHabitacion = new Label(h.getNombre() + " x " + h.getCantidad());
-				textoHabitacion.setMinWidth(370);
-				habitaciones.getChildren().add(textoHabitacion);
-			}
-//		}
+		for (Habitacion h: modelo().reserva.getHabitacionesSeleccionadas()) {
+			Label textoHabitacion = new Label(h.getNombre() + " x " + h.getCantidad());
+			textoHabitacion.setMinWidth(370);
+			habitaciones.getChildren().add(textoHabitacion);
+		}
 		int tamanoUbicacion = (int) ((int) ubicacion.getBoundsInLocal().getMaxX() + ubicacion.getLayoutX() + 5);
 		mapa.setLayoutX(tamanoUbicacion);
 	}
