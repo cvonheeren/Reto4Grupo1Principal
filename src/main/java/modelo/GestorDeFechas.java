@@ -1,9 +1,7 @@
 package modelo;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 public class GestorDeFechas {
 
@@ -60,22 +58,11 @@ public class GestorDeFechas {
 		LocalDate fechaAux;
 		
 		for (int i = 1; i < (fecha2.getDayOfYear() - fecha1.getDayOfYear())+1; i++) {
-			fechaAux = fecha1.plusDays(i);;
+			fechaAux = fecha1.plusDays(i);
 			dias.add(fechaAux);
 		}
 		
 		return dias;
-	}
-    
-    /**
-	 * 
-	 * @param d1
-	 * @param d2
-	 * @return
-	 */
-	public float diferenciaDias(Date d1, Date d2) {
-	    long diff = d2.getTime() - d1.getTime();
-	    return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 	}
 	
 }
