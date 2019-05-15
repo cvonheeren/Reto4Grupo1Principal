@@ -2,13 +2,16 @@ package modeloTest;
 
 import static org.junit.Assert.*;
 
+import java.sql.Date;
+
 import org.junit.Test;
 
 import modelo.Cliente;
 
 public class ClienteTest {
-
-	Cliente cliente = new Cliente("424234", "njdsvdjv");
+	
+	Date fecha = new Date(0);
+	Cliente cliente = new Cliente(2, "user45", "424234", "njdsvdjv", "nombre", "inventado", fecha, "aaa@gmail.com");
 	
 	@Test
 	public void testConstructor() {

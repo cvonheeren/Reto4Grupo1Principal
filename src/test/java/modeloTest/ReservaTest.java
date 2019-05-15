@@ -67,13 +67,30 @@ public class ReservaTest {
 	
 	@Test
 	public void testAloj() {
-		reserva.setAlojamiento(alojTest);;
+		reserva.setAlojamiento(alojTest);
 		assertEquals(alojTest, reserva.getAlojamiento());
 	}
 	
 	@Test
 	public void testContador() {
-		reserva.setCtdHabitaciones(0);;
+		reserva.setCtdHabitaciones(0);
+		assertEquals(0, reserva.getCtdHabitaciones());
+	}
+	
+	@Test
+	public void testAddHabitacion() {
+		Habitacion habitacion = new Habitacion(0, null, 0, 0, 0, 0, 0, 0, 0, 0, null);
+		reserva.setCtdHabitaciones(0);
+		reserva.addHabitacion(habitacion);
+		assertEquals(1, reserva.getCtdHabitaciones());
+	}
+	
+	@Test
+	public void testRemoveHabitacion() {
+		Habitacion habitacion = new Habitacion(0, null, 0, 0, 0, 0, 0, 0, 0, 0, null);
+		reserva.setCtdHabitaciones(0);
+		reserva.addHabitacion(habitacion);
+		reserva.removeHabitacion(habitacion);
 		assertEquals(0, reserva.getCtdHabitaciones());
 	}
 }
