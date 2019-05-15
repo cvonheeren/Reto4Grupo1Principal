@@ -48,7 +48,7 @@ public class ControladorFactura implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Principal.aplicacion.controladorFactura = this;
-		actualizarDatos();
+		//actualizarDatos();
 	}
     
 	@FXML

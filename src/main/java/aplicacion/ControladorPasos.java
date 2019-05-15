@@ -162,6 +162,7 @@ public class ControladorPasos implements Initializable {
 	    	idTabFin.setDisable(false);
 	    	idTabHab.setDisable(true);
 	    	idTabPago.setDisable(true);
+	    	aplicacion().controladorFactura.actualizarDatos();
 	    	tabPane.getSelectionModel().select(idTabFin);
 	    	
     	} else {
