@@ -3,7 +3,6 @@ package modelo;
 import java.sql.Date;
 import java.util.ArrayList;
 
-
 public class Reserva {
 
 	private int codReserva;
@@ -30,16 +29,6 @@ public class Reserva {
 	}
 	
 	public Reserva() {
-		this.habitacionesSeleccionadas = new ArrayList<Habitacion>();
-		this.ctdHabitaciones = 0;
-	}
-	
-	public void ActualizarHabitaciones(ArrayList<Habitacion> habitacionesSelecionadas, int cantidad) {
-		this.habitacionesSeleccionadas = habitacionesSelecionadas;
-		this.ctdHabitaciones = cantidad;
-	}
-	
-	public void VaciarSeleccionHabitaciones() {
 		this.habitacionesSeleccionadas = new ArrayList<Habitacion>();
 		this.ctdHabitaciones = 0;
 	}

@@ -59,14 +59,15 @@ public class ControladorPago implements Initializable {
     
     @FXML
     void validarCodPromo(ActionEvent event) {
-    	float descuento = modelo().gestorBBDD.modificarBBDD.ValidarCodPromo(textFieldCodPromo.getText(), modelo().cliente.getUser());
-    	modelo().gestorDinero.setDescuento((modelo().gestorDinero.getPrecio() * descuento )* 100);
-    	int descuentoPorcentajeint = (int)(descuento*100);
-    	if(descuento > 0) {
+    	float descuentoPorcenajeFloat = modelo().gestorBBDD.modificarBBDD.ValidarCodPromo(textFieldCodPromo.getText(), modelo().cliente.getUser());
+    	float descuento = modelo().gestorDinero.getPrecio() * descuentoPorcenajeFloat;
+    	modelo().gestorDinero.setDescuento(descuento);
+    	int descuentoPorcentajeint = (int)(descuentoPorcenajeFloat*100);
+    	if(descuentoPorcenajeFloat > 0) {
     		textFieldCodPromo.setDisable(true);
     		textFieldCodPromo.setText("Codigo promocional valido");
     		btnValidarCodPromo.setDisable(true);
-    		descuentoPorcentaje.setText("Descuento(" + Integer.toString(descuentoPorcentajeint) + "%)");
+    		descuentoPorcentaje.setText("Descuento(" + descuentoPorcentajeint + "%)");
     		descuentoPrecio.setText(descuento + "€");
     		precioTotal.setText(modelo().gestorDinero.getPrecioConDescuento() + "€");
     		actulizarTarifa();
