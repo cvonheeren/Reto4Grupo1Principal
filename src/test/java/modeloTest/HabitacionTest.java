@@ -12,9 +12,9 @@ public class HabitacionTest {
 	
 	@Test
 	public void testConstructor() {
-		assertEquals(1, habitacion.getCtaCamasSimples());
-		assertEquals(2, habitacion.getCtaCamasMatrimonio());
-		assertEquals(3, habitacion.getCtaCamasInfantil());
+		assertEquals(3, habitacion.getCtaCamasSimples());
+		assertEquals(1, habitacion.getCtaCamasMatrimonio());
+		assertEquals(2, habitacion.getCtaCamasInfantil());
 		assertEquals(4f, habitacion.getTarifaNormal(), 0.000001);
 		assertEquals(2f, habitacion.getTarifaVerano(), 0.000001);
 		assertEquals(1f, habitacion.getTarifaFestivo(), 0.000001);
