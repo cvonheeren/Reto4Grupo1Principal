@@ -40,7 +40,7 @@ public class GestorBBDD {
 	 */
 	public ArrayList<Alojamiento> cargarAlojamientos(String ciudad, int estrellasMin, int estrellasMax, String[] tipoAlojSel) {
 		ArrayList<Alojamiento> listaAlojamientos = new ArrayList<Alojamiento>();
-		ResultSet result = modificarBBDD.cargarAlojamientos(ciudad, estrellasMin, estrellasMax, tipoAlojSel);
+		ResultSet result = modificarBBDD.cargarAlojamientos(ciudad, estrellasMin, estrellasMax, tipoAlojSel, 'P', false);
 		try {
 			while (result.next()) {
 				int codAlojamiento = result.getInt("COD_ALOJAMIENTO");
