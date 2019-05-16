@@ -4,6 +4,7 @@
 ***************************************************************************/
 
 DROP VIEW IF EXISTS VISTAPOPULARIDAD;
+DROP VIEW IF EXISTS VISTAPOPULARIDAD;
 DROP TABLE IF EXISTS SERVICIOS;
 DROP TABLE IF EXISTS RESERVA_HABITACION;
 DROP TABLE IF EXISTS ALOJAMIENTO_ESTANCIA;
@@ -142,6 +143,9 @@ CREATE TABLE SERVICIOS
 
 CREATE VIEW VISTAPOPULARIDAD AS
 	SELECT alojamientos.COD_ALOJAMIENTO, alojamientos.NOMBRE "NOMBREALOJ", ubicaciones.COD_UBICACION, ubicaciones.NOMBRE "NOMBREUBI", count(reservas.COD_RESERVA) "N_RESERVAS" FROM alojamientos LEFT JOIN reservas on (alojamientos.COD_ALOJAMIENTO = reservas.COD_ALOJAMIENTO), ubicaciones where alojamientos.COD_UBICACION = ubicaciones.COD_UBICACION GROUP by alojamientos.COD_ALOJAMIENTO;
+
+CREATE VIEW VISTAPRECIOHAB AS
+	SELECT habitaciones.COD_HABITACION, alojamiento_habitacion.COD_ALOJAMIENTO, habitaciones.TARIFA_NORMAL, habitaciones.TARIFA_VERANO, habitaciones.TARIFA_FESTIVO  FROM habitaciones, alojamiento_habitacion WHERE habitaciones.COD_HABITACION=alojamiento_habitacion.COD_HABITACION GROUP BY alojamiento_habitacion.COD_ALOJAMIENTO;
 
 /**************************************************************************
 * INSERTA LOS DATOS
