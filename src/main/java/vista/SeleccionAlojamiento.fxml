@@ -45,7 +45,7 @@
             </GridPane>
          </children>
       </Pane>
-      <ScrollPane hbarPolicy="NEVER" layoutX="372.0" layoutY="240.0" prefHeight="658.0" prefWidth="775.0" style="-fx-background-color: #eeeeee;">
+      <ScrollPane fx:id="scrolpane" hbarPolicy="NEVER" layoutX="372.0" layoutY="240.0" prefHeight="658.0" prefWidth="775.0" style="-fx-background-color: #eeeeee;">
          <content>
             <AnchorPane fx:id="contenedor" prefHeight="656.0" prefWidth="770.0" style="-fx-background-color: #eeeeee;">
                <children>
@@ -57,7 +57,7 @@
                </children></AnchorPane>
          </content>
       </ScrollPane>
-      <Pane id="filtroBusquedas" fx:id="paneOpciones" layoutX="460.0" layoutY="175.0" prefHeight="77.0" prefWidth="599.0" styleClass="fondoBlanco" stylesheets="@../reto4.css">
+      <Pane id="filtroBusquedas" fx:id="paneOpciones" layoutX="460.0" layoutY="230.0" onMouseEntered="#mostrarPaneOpciones" onMouseExited="#ocultarPaneOpciones" prefHeight="77.0" prefWidth="599.0" styleClass="fondoBlanco" stylesheets="@../reto4.css">
          <children>
             <Label layoutX="292.0" layoutY="50.0" text="..." textFill="#616161">
                <font>
