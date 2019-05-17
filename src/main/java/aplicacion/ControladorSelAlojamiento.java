@@ -16,6 +16,7 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXRippler;
+import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.effects.JFXDepthManager;
 
@@ -88,6 +89,9 @@ public class ControladorSelAlojamiento implements Initializable {
     
     @FXML
     private JFXCheckBox chkBoxHotel, chkBoxApartamento, chkBoxCasa;
+   
+    @FXML
+    private JFXSlider sliderCantidad;
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -138,6 +142,9 @@ public class ControladorSelAlojamiento implements Initializable {
     	comboBoxOrdenBusqueda.getItems().add(lblPrecioBajo);
     	comboBoxOrdenBusqueda.getItems().add(lblPrecioAlto);
     	comboBoxOrdenBusqueda.getSelectionModel().select(0);
+    	
+    	
+    	
 	}
 
 	@FXML
@@ -258,7 +265,7 @@ public class ControladorSelAlojamiento implements Initializable {
 		
 		if(alojamientos.isEmpty())
 		{
-			alojamientos = Principal.modelo.gestorBBDD.RealizarBusquedaAlojamientos(textCiudad.getText(), (int) filtroEstrellas.getLowValue(), (int) filtroEstrellas.getHighValue(), TiposAlojamientoSeleccionados(), tipoOrden, ordenAscendente, 5);
+			alojamientos = Principal.modelo.gestorBBDD.RealizarBusquedaAlojamientos(textCiudad.getText(), (int) filtroEstrellas.getLowValue(), (int) filtroEstrellas.getHighValue(), TiposAlojamientoSeleccionados(), tipoOrden, ordenAscendente, (int) sliderCantidad.getValue());
 		}
 		Principal.aplicacion.busquedaAlojamientos = alojamientos;
 		Principal.aplicacion.textoBusqueda = textCiudad.getText().concat("");
@@ -299,7 +306,7 @@ public class ControladorSelAlojamiento implements Initializable {
     	btnMostrarMas.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>(){
 			@Override
 			public void handle(Event event) {
-				Principal.modelo.gestorBBDD.MostrarMasAlojamientos(5);
+				Principal.modelo.gestorBBDD.MostrarMasAlojamientos((int) sliderCantidad.getValue());
 				cargarAlojamientos();
 			}
 		});

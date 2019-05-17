@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXSlider?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
@@ -56,19 +57,25 @@
                </children></AnchorPane>
          </content>
       </ScrollPane>
-      <Pane id="filtroBusquedas" fx:id="paneOpciones" layoutX="460.0" layoutY="190.0" prefHeight="71.0" prefWidth="599.0" styleClass="fondoBlanco" stylesheets="@../reto4.css">
+      <Pane id="filtroBusquedas" fx:id="paneOpciones" layoutX="460.0" layoutY="175.0" prefHeight="77.0" prefWidth="599.0" styleClass="fondoBlanco" stylesheets="@../reto4.css">
          <children>
-            <Label layoutX="292.0" layoutY="40.0" text="..." textFill="#616161">
+            <Label layoutX="292.0" layoutY="50.0" text="..." textFill="#616161">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <JFXComboBox fx:id="comboBoxOrdenBusqueda" layoutX="131.0" layoutY="17.0" onAction="#filtrarAE" prefHeight="37.0" prefWidth="160.0" />
-            <Label layoutX="20.0" layoutY="22.0" text="Ordenar por:">
+            <JFXComboBox fx:id="comboBoxOrdenBusqueda" layoutX="131.0" layoutY="25.0" onAction="#filtrarAE" prefHeight="37.0" prefWidth="160.0" />
+            <Label layoutX="20.0" layoutY="30.0" text="Ordenar por:">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
+            <Label layoutX="331.0" layoutY="25.0" text="Mostrar:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <JFXSlider fx:id="sliderCantidad" blockIncrement="5.0" layoutX="414.0" layoutY="34.0" majorTickUnit="5.0" max="20.0" min="5.0" minorTickCount="0" onMouseReleased="#filtrarME" showTickLabels="true" snapToTicks="true" value="5.0" />
          </children>
       </Pane>
       <Pane fx:id="paneBusqueda" prefHeight="240.0" prefWidth="1150.0" styleClass="fondoImg" stylesheets="@../reto4.css">
