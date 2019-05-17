@@ -1,5 +1,6 @@
 package aplicacion;
 
+import java.awt.Font;
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -21,6 +22,8 @@ import com.jfoenix.effects.JFXDepthManager;
 import core.Principal;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import de.jensd.fx.glyphs.materialicons.MaterialIcon;
+import de.jensd.fx.glyphs.materialicons.MaterialIconView;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -30,6 +33,7 @@ import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -117,6 +121,7 @@ public class ControladorSelAlojamiento implements Initializable {
 		}
 	}
     
+    private ArrayList<Alojamiento> alojamientos = new ArrayList<Alojamiento>();
    
     private void RellenarFiltros() {
     	filtroEstrellas.setLowValue(1f);
@@ -132,11 +137,13 @@ public class ControladorSelAlojamiento implements Initializable {
     	comboBoxOrdenBusqueda.getItems().add(lblPopulares);
     	comboBoxOrdenBusqueda.getItems().add(lblPrecioBajo);
     	comboBoxOrdenBusqueda.getItems().add(lblPrecioAlto);
+    	comboBoxOrdenBusqueda.getSelectionModel().select(0);
 	}
 
 	@FXML
     void filtrarME(MouseEvent event) {
-    	ejecutarBusqueda();
+		Principal.modelo.gestorBBDD.BorrarUltimaBusqueda();
+		ejecutarBusqueda();
     }
 	
 	@FXML
@@ -146,7 +153,8 @@ public class ControladorSelAlojamiento implements Initializable {
 	
 	@FXML
     void filtrarAE(ActionEvent event) {
-    	ejecutarBusqueda();
+		Principal.modelo.gestorBBDD.BorrarUltimaBusqueda();
+		ejecutarBusqueda();
     }
     
     @FXML
@@ -159,12 +167,14 @@ public class ControladorSelAlojamiento implements Initializable {
     @FXML
     void AutoBuscar(KeyEvent event) {
     	if(event.getCode() == KeyCode.ENTER) {
+    		Principal.modelo.gestorBBDD.BorrarUltimaBusqueda();
     		ejecutarBusqueda();
     	}
     }
 
     @FXML
     void BtnBuscarPulsado(MouseEvent event) {
+    	Principal.modelo.gestorBBDD.BorrarUltimaBusqueda();
     	ejecutarBusqueda();
     }
     
@@ -179,6 +189,8 @@ public class ControladorSelAlojamiento implements Initializable {
 			comprobarSesionIniciada();
 		}
     }
+    
+
     
     /**
      * Autocompleta lo que se escribe según lo que hay en las BBDD
@@ -219,6 +231,7 @@ public class ControladorSelAlojamiento implements Initializable {
 			Principal.aplicacion.mostrarMensaje(paneBase, "Debe introducir algun valor en el campo de busqueda");
 			return;
 		}
+    	alojamientos = new ArrayList<Alojamiento>();
     	contenedor.getChildren().remove(busqueda);
 		Date fechaEntradaDate = Date.valueOf(this.fechaEntrada.getValue());
 		Date fechaSalidaDate = Date.valueOf(this.fechaSalida.getValue());
@@ -233,7 +246,6 @@ public class ControladorSelAlojamiento implements Initializable {
 	public void cargarAlojamientos() {
 		char tipoOrden = 0;
 		boolean ordenAscendente = false;
-		
 		switch(comboBoxOrdenBusqueda.getSelectionModel().getSelectedIndex())
 		{
 		case 0: tipoOrden='P'; ordenAscendente=false;
@@ -241,14 +253,18 @@ public class ControladorSelAlojamiento implements Initializable {
 		case 1: tipoOrden='D'; ordenAscendente=true;
 		break;
 		case 2: tipoOrden='D'; ordenAscendente=false;
+		break;
 		}
 		
-		ArrayList<Alojamiento> alojamientos = Principal.modelo.gestorBBDD.cargarAlojamientos(textCiudad.getText(), (int) filtroEstrellas.getLowValue(), (int) filtroEstrellas.getHighValue(), TiposAlojamientoSeleccionados(), tipoOrden, ordenAscendente);
+		if(alojamientos.isEmpty())
+		{
+			alojamientos = Principal.modelo.gestorBBDD.RealizarBusquedaAlojamientos(textCiudad.getText(), (int) filtroEstrellas.getLowValue(), (int) filtroEstrellas.getHighValue(), TiposAlojamientoSeleccionados(), tipoOrden, ordenAscendente, 5);
+		}
 		Principal.aplicacion.busquedaAlojamientos = alojamientos;
 		Principal.aplicacion.textoBusqueda = textCiudad.getText().concat("");
     	GridPane grid = crearGrid();
-        
-    	for(int i = 0; i<alojamientos.size(); i++) {
+        int i = 0;
+    	for(i = 0; i<alojamientos.size(); i++) {
     		
     		Alojamiento alojamiento = alojamientos.get(i);
     		ArrayList<Habitacion> habitaciones = buscarHabDisponibles(alojamiento);
@@ -269,19 +285,29 @@ public class ControladorSelAlojamiento implements Initializable {
         			}
         		});
         		
-        		// añade el efecto rippler a la tarjeta
-            	AnchorPane paneSuperior = new AnchorPane();
-            	JFXRippler rippler = new JFXRippler(card);
         		JFXDepthManager.setDepth(card, 1);
-        		paneSuperior.getChildren().addAll(card);
-            	paneSuperior.getChildren().add(rippler);
-            	rippler.setRipplerFill(Paint.valueOf("#AAAAAA"));  
         		
             	// añade la tarjeta al grid
-    			grid.add(paneSuperior, 0, i); 
+    			grid.add(card, 0, i); 
     		}	
 
     	}
+    	
+    	Pane paneMostrarMas = new Pane();
+    	Hyperlink btnMostrarMas = new Hyperlink("Mostrar mas...");
+    	btnMostrarMas.setFont(new javafx.scene.text.Font("System", 30));
+    	btnMostrarMas.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>(){
+			@Override
+			public void handle(Event event) {
+				Principal.modelo.gestorBBDD.MostrarMasAlojamientos(5);
+				cargarAlojamientos();
+			}
+		});
+    	btnMostrarMas.setLayoutX(320);
+    	paneMostrarMas.getChildren().add(btnMostrarMas);
+    	
+    	grid.add(paneMostrarMas, 0, i);
+    	
 	}
 	
 	/**

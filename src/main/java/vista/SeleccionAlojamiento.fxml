@@ -20,7 +20,7 @@
 <?import javafx.scene.text.Text?>
 <?import org.controlsfx.control.RangeSlider?>
 
-<AnchorPane fx:id="paneBase" prefHeight="900.0" prefWidth="1150.0" style="bord: #eeeeee;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorSelAlojamiento">
+<AnchorPane fx:id="paneBase" prefHeight="900.0" prefWidth="1150.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorSelAlojamiento">
    <children>
       <Pane fx:id="paneFiltros" layoutY="240.0" prefHeight="658.0" prefWidth="338.0" styleClass="fondoBlanco" stylesheets="@../reto4.css">
          <children>
@@ -46,7 +46,7 @@
       </Pane>
       <ScrollPane hbarPolicy="NEVER" layoutX="372.0" layoutY="240.0" prefHeight="658.0" prefWidth="775.0" style="-fx-background-color: #eeeeee;">
          <content>
-            <AnchorPane fx:id="contenedor" prefHeight="644.0" prefWidth="770.0" style="-fx-background-color: #eeeeee;">
+            <AnchorPane fx:id="contenedor" prefHeight="656.0" prefWidth="770.0" style="-fx-background-color: #eeeeee;">
                <children>
                   <Text fx:id="busqueda" layoutX="245.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No ha realizado ninguna busqueda aun.">
                      <font>

@@ -10,7 +10,9 @@ import Reto4Grupo1BBDD.ModificarBBDD;
 public class GestorBBDD {
 	
 	public ModificarBBDD modificarBBDD = null;
-
+	private ResultSet ultimaBusqueda;
+	private ArrayList<Alojamiento> listaAlojamientos = new ArrayList<Alojamiento>();
+	
 	public GestorBBDD() {
 		modificarBBDD = new ModificarBBDD();
 	}
@@ -33,16 +35,39 @@ public class GestorBBDD {
 		return destinos;
 	}
 	
+	private ResultSet ObtenerResultSetAlojamientos(String ciudad, int estrellasMin, int estrellasMax, String[] tipoAlojSel, char tipoOrden, boolean ordenAscendente)
+	{
+		
+		return modificarBBDD.cargarAlojamientos(ciudad, estrellasMin, estrellasMax, tipoAlojSel, tipoOrden, ordenAscendente);
+	}
+	
+	public ArrayList<Alojamiento> RealizarBusquedaAlojamientos(String ciudad, int estrellasMin, int estrellasMax, String[] tipoAlojSel, char tipoOrden, boolean ordenAscendente, int cantidad)
+	{
+		ultimaBusqueda = ObtenerResultSetAlojamientos(ciudad, estrellasMin, estrellasMax, tipoAlojSel, tipoOrden, ordenAscendente);
+		return ObtenerListaAlojamientos(ultimaBusqueda, cantidad);
+	}
+	
+	public void BorrarUltimaBusqueda()
+	{
+		ultimaBusqueda = null;
+		listaAlojamientos = new ArrayList<Alojamiento>();
+	}
+	
+	public ArrayList<Alojamiento> MostrarMasAlojamientos(int cantidad)
+	{
+		return ObtenerListaAlojamientos(ultimaBusqueda, cantidad);
+	}
+	
 	/**
 	 * Obtiene los alojamientos ubicados en la ciudad especificada
 	 * @param ciudad Nombre de la ciudad por la que se quiere restringir la busqueda
 	 * @return ArrayList<Alojamiento> Lista de alojamientos
 	 */
-	public ArrayList<Alojamiento> cargarAlojamientos(String ciudad, int estrellasMin, int estrellasMax, String[] tipoAlojSel, char tipoOrden, boolean ordenAscendente) {
-		ArrayList<Alojamiento> listaAlojamientos = new ArrayList<Alojamiento>();
-		ResultSet result = modificarBBDD.cargarAlojamientos(ciudad, estrellasMin, estrellasMax, tipoAlojSel, tipoOrden, ordenAscendente);
+	private ArrayList<Alojamiento> ObtenerListaAlojamientos(ResultSet result, int cantidad) {
+		int contador = 0;
 		try {
-			while (result.next()) {
+			while (result.next() && contador<cantidad) {
+				
 				int codAlojamiento = result.getInt("COD_ALOJAMIENTO");
 				String ubicacion = result.getString("UBICACIONES.NOMBRE");
 				String nombre = result.getString("ALOJAMIENTOS.NOMBRE");
@@ -74,6 +99,7 @@ public class GestorBBDD {
 				{
 					listaAlojamientos.add(new Alojamiento(codAlojamiento, ubicacion, nombre, desc, longitud, latitud, desayuno, mediaPension, pensionCompleta, imgurl));
 				}
+				contador++;
 	        }
 		} catch (SQLException e) {
 			e.printStackTrace();
