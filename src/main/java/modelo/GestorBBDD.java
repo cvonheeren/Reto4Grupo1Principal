@@ -38,9 +38,9 @@ public class GestorBBDD {
 	 * @param ciudad Nombre de la ciudad por la que se quiere restringir la busqueda
 	 * @return ArrayList<Alojamiento> Lista de alojamientos
 	 */
-	public ArrayList<Alojamiento> cargarAlojamientos(String ciudad, int estrellasMin, int estrellasMax, String[] tipoAlojSel) {
+	public ArrayList<Alojamiento> cargarAlojamientos(String ciudad, int estrellasMin, int estrellasMax, String[] tipoAlojSel, char tipoOrden, boolean ordenAscendente) {
 		ArrayList<Alojamiento> listaAlojamientos = new ArrayList<Alojamiento>();
-		ResultSet result = modificarBBDD.cargarAlojamientos(ciudad, estrellasMin, estrellasMax, tipoAlojSel, 'P', false);
+		ResultSet result = modificarBBDD.cargarAlojamientos(ciudad, estrellasMin, estrellasMax, tipoAlojSel, tipoOrden, ordenAscendente);
 		try {
 			while (result.next()) {
 				int codAlojamiento = result.getInt("COD_ALOJAMIENTO");

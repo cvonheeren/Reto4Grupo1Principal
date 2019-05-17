@@ -48,3 +48,21 @@
 	-fx-background-color: #FFFFFF;
 	-fx-text-fill: #f57c00;
 }
+
+.fondoBlanco
+{
+	-fx-background-color: #FFFFFF;
+}
+
+#filtroBusquedas
+{
+	-fx-background-color: #FFFFFF;
+	-fx-border-insets: 5px;
+	-fx-border-radius: 1;
+	-fx-background-radius: 5;
+}
+
+#filtroBusquedas:hover
+{
+	-fx-translate-y: 40px;
+}

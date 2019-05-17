@@ -12,14 +12,15 @@ import org.controlsfx.control.textfield.TextFields;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
-
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXRippler;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.effects.JFXDepthManager;
 
 import core.Principal;
-
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -67,6 +68,9 @@ public class ControladorSelAlojamiento implements Initializable {
     private JFXButton btnBuscar;
     
     @FXML
+    private Pane paneOpciones;
+    
+    @FXML
     private Label lblSaludo;
 
     @FXML
@@ -76,6 +80,9 @@ public class ControladorSelAlojamiento implements Initializable {
     private Text busqueda;
     
     @FXML
+    private JFXComboBox<Label> comboBoxOrdenBusqueda;
+    
+    @FXML
     private JFXCheckBox chkBoxHotel, chkBoxApartamento, chkBoxCasa;
     
     @Override
@@ -83,6 +90,9 @@ public class ControladorSelAlojamiento implements Initializable {
     	
     	JFXDepthManager.setDepth(paneFiltros, 2);
     	JFXDepthManager.setDepth(paneBusqueda, 1);
+    	JFXDepthManager.setDepth(paneOpciones, 2);
+    	
+    	
 
 		fechaEntrada.setValue(LocalDate.now());
 		fechaSalida.setValue(LocalDate.now().plusDays(1));
@@ -106,16 +116,33 @@ public class ControladorSelAlojamiento implements Initializable {
 			
 		}
 	}
+    
    
     private void RellenarFiltros() {
     	filtroEstrellas.setLowValue(1f);
 		filtroEstrellas.setHighValue(5f);
+		
+		Label lblPopulares = new Label("Mas populares");
+    	lblPopulares.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.STAR));
+    	Label lblPrecioBajo = new Label("Precio mas bajo");
+    	lblPrecioBajo.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.MONEY));
+    	Label lblPrecioAlto = new Label("Precio mas alto");
+    	lblPrecioAlto.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.DIAMOND));
+    	
+    	comboBoxOrdenBusqueda.getItems().add(lblPopulares);
+    	comboBoxOrdenBusqueda.getItems().add(lblPrecioBajo);
+    	comboBoxOrdenBusqueda.getItems().add(lblPrecioAlto);
 	}
 
 	@FXML
     void filtrarME(MouseEvent event) {
     	ejecutarBusqueda();
     }
+	
+	@FXML
+	void OrdenarBusqueda(ActionEvent event) {
+		
+	}
 	
 	@FXML
     void filtrarAE(ActionEvent event) {
@@ -204,7 +231,19 @@ public class ControladorSelAlojamiento implements Initializable {
      * Carga y muestra los alojamientos correspondientes a la busqueda
      */
 	public void cargarAlojamientos() {
-		ArrayList<Alojamiento> alojamientos = Principal.modelo.gestorBBDD.cargarAlojamientos(textCiudad.getText(), (int) filtroEstrellas.getLowValue(), (int) filtroEstrellas.getHighValue(), TiposAlojamientoSeleccionados());
+		char tipoOrden = 0;
+		boolean ordenAscendente = false;
+		
+		switch(comboBoxOrdenBusqueda.getSelectionModel().getSelectedIndex())
+		{
+		case 0: tipoOrden='P'; ordenAscendente=false;
+		break;
+		case 1: tipoOrden='D'; ordenAscendente=true;
+		break;
+		case 2: tipoOrden='D'; ordenAscendente=false;
+		}
+		
+		ArrayList<Alojamiento> alojamientos = Principal.modelo.gestorBBDD.cargarAlojamientos(textCiudad.getText(), (int) filtroEstrellas.getLowValue(), (int) filtroEstrellas.getHighValue(), TiposAlojamientoSeleccionados(), tipoOrden, ordenAscendente);
 		Principal.aplicacion.busquedaAlojamientos = alojamientos;
 		Principal.aplicacion.textoBusqueda = textCiudad.getText().concat("");
     	GridPane grid = crearGrid();

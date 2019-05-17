@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
@@ -19,9 +20,9 @@
 <?import javafx.scene.text.Text?>
 <?import org.controlsfx.control.RangeSlider?>
 
-<AnchorPane fx:id="paneBase" prefHeight="900.0" prefWidth="1150.0" style="-fx-background-color: #eeeeee;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorSelAlojamiento">
+<AnchorPane fx:id="paneBase" prefHeight="900.0" prefWidth="1150.0" style="bord: #eeeeee;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorSelAlojamiento">
    <children>
-      <Pane fx:id="paneFiltros" layoutY="240.0" prefHeight="658.0" prefWidth="338.0" style="-fx-background-color: white;">
+      <Pane fx:id="paneFiltros" layoutY="240.0" prefHeight="658.0" prefWidth="338.0" styleClass="fondoBlanco" stylesheets="@../reto4.css">
          <children>
             <Label layoutX="28.0" layoutY="34.0" prefHeight="28.0" prefWidth="133.0" text="Estrellas" />
             <RangeSlider fx:id="filtroEstrellas" blockIncrement="0.0" highValue="5.0" layoutX="50.0" layoutY="72.0" lowValue="1.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" onMouseReleased="#filtrarME" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
@@ -43,6 +44,33 @@
             </GridPane>
          </children>
       </Pane>
+      <ScrollPane hbarPolicy="NEVER" layoutX="372.0" layoutY="240.0" prefHeight="658.0" prefWidth="775.0" style="-fx-background-color: #eeeeee;">
+         <content>
+            <AnchorPane fx:id="contenedor" prefHeight="644.0" prefWidth="770.0" style="-fx-background-color: #eeeeee;">
+               <children>
+                  <Text fx:id="busqueda" layoutX="245.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No ha realizado ninguna busqueda aun.">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+               </children></AnchorPane>
+         </content>
+      </ScrollPane>
+      <Pane id="filtroBusquedas" fx:id="paneOpciones" layoutX="460.0" layoutY="190.0" prefHeight="71.0" prefWidth="599.0" styleClass="fondoBlanco" stylesheets="@../reto4.css">
+         <children>
+            <Label layoutX="292.0" layoutY="40.0" text="..." textFill="#616161">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <JFXComboBox fx:id="comboBoxOrdenBusqueda" layoutX="131.0" layoutY="17.0" onAction="#filtrarAE" prefHeight="37.0" prefWidth="160.0" />
+            <Label layoutX="20.0" layoutY="22.0" text="Ordenar por:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
       <Pane fx:id="paneBusqueda" prefHeight="240.0" prefWidth="1150.0" styleClass="fondoImg" stylesheets="@../reto4.css">
          <children>
             <JFXButton fx:id="btnBuscar" layoutX="925.0" layoutY="120.0" onMouseClicked="#BtnBuscarPulsado" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #f57c00; -fx-effect: innershadow( gaussian, rgba( 0, 0, 0, 0.5 ), 5, 0, 0, 0 );" text="BUSCAR" textFill="WHITE">
@@ -59,14 +87,16 @@
                </cursor>
                <padding>
                   <Insets left="10.0" />
-               </padding></JFXDatePicker>
+               </padding>
+            </JFXDatePicker>
             <JFXDatePicker fx:id="fechaEntrada" defaultColor="#f57c00" layoutX="634.0" layoutY="120.0" onAction="#seleccion" prefHeight="50.0" prefWidth="133.0" promptText="Entrada" showWeekNumbers="false" style="-fx-background-color: #fff; -fx-effect: innershadow( gaussian, rgba( 0, 0, 0, 0.5 ), 5, 0, 0, 0 );">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <padding>
                   <Insets left="10.0" />
-               </padding></JFXDatePicker>
+               </padding>
+            </JFXDatePicker>
             <JFXTextField fx:id="textCiudad" focusColor="#f57c00" layoutX="40.0" layoutY="120.0" onKeyPressed="#AutoBuscar" prefHeight="50.0" prefWidth="582.0" promptText="Ciudades, Hoteles, Apartamentos, Casas..." style="-fx-background-color: #fff; -fx-effect: innershadow( gaussian, rgba( 0, 0, 0, 0.5 ), 5, 0, 0, 0 );" unFocusColor="#1976d2">
                <font>
                   <Font size="18.0" />
@@ -86,19 +116,12 @@
                   <Font size="18.0" />
                </font>
             </Hyperlink>
+            <Label layoutX="645.0" layoutY="205.0" text="Opciones de busqueda" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
-      <ScrollPane hbarPolicy="NEVER" layoutX="372.0" layoutY="248.0" prefHeight="650.0" prefWidth="775.0" style="-fx-background-color: #eeeeee;">
-         <content>
-            <AnchorPane fx:id="contenedor" prefHeight="644.0" prefWidth="770.0" style="-fx-background-color: #eeeeee;">
-               <children>
-                  <Text fx:id="busqueda" layoutX="245.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No ha realizado ninguna busqueda aun.">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Text>
-               </children></AnchorPane>
-         </content>
-      </ScrollPane>
    </children>
 </AnchorPane>
