@@ -20,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
@@ -39,7 +40,7 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
     private AnchorPane card;
 	
 	@FXML
-    private Pane servicios;
+    private FlowPane servicios;
 
     @FXML
     private WebView imagen;
@@ -101,16 +102,6 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 		setEstancias();
 	}
 	
-	public void verServicios(Alojamiento alojamiento) {
-		alojamiento.setServicios(Principal.modelo.gestorBBDD.obtenerServicios(alojamiento.getCodAlojamiento()));
-		ArrayList<Servicio> aux = alojamiento.getServicios();
-		for (Servicio unservicio : aux) {
-			Label lblPopulares = new Label("");
-			String auxS = unservicio.getIcon();
-			lblPopulares.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.valueOf(auxS)));
-		}
-	}
-	
     @FXML
     void verAlojamiento(ActionEvent event) {
     	Principal.modelo.reserva.setAlojamiento(this.alojamiento);
@@ -126,6 +117,23 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 			Principal.modelo.reserva.setAlojamiento(alojamiento);
 			Principal.aplicacion.verMapa("Mapa.fxml");
         });
+	}
+	
+	/**
+	 * muestra los iconos de los servicios
+	 * @param alojamiento
+	 */
+	public void verServicios(Alojamiento alojamiento) {
+		alojamiento.setServicios(Principal.modelo.gestorBBDD.obtenerServicios(alojamiento.getCodAlojamiento()));
+		ArrayList<Servicio> aux = alojamiento.getServicios();
+		
+		for (Servicio unservicio : aux) {
+			String auxS = unservicio.getIcon();
+			Label lblServicios = new Label("");
+			lblServicios.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.valueOf(auxS)));
+			servicios.getChildren().add(lblServicios);
+		}
+		
 	}
 	
 	/**
