@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.effects.JFXDepthManager;
 
+
 import core.Principal;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
@@ -19,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebEngine;
@@ -29,11 +31,15 @@ import modelo.Casa;
 import modelo.Estancia;
 import modelo.Habitacion;
 import modelo.Hotel;
+import modelo.Servicio;
 
 public class CardAlojamiento extends AnchorPane implements Initializable {
 	
 	@FXML
     private AnchorPane card;
+	
+	@FXML
+    private Pane servicios;
 
     @FXML
     private WebView imagen;
@@ -88,10 +94,21 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 		} else if(alojamiento instanceof Apartamento) {
 			this.tamano.setText(("Piso " + ((Apartamento) alojamiento).getPiso() ));
 		}
+		verServicios(this.alojamiento);
 		setMapa();
 		setIconoAloj();
 		setHabitaciones();
 		setEstancias();
+	}
+	
+	public void verServicios(Alojamiento alojamiento) {
+		alojamiento.setServicios(Principal.modelo.gestorBBDD.obtenerServicios(alojamiento.getCodAlojamiento()));
+		ArrayList<Servicio> aux = alojamiento.getServicios();
+		for (Servicio unservicio : aux) {
+			Label lblPopulares = new Label("");
+			String auxS = unservicio.getIcon();
+			lblPopulares.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.valueOf(auxS)));
+		}
 	}
 	
     @FXML

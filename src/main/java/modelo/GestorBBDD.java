@@ -271,6 +271,11 @@ public class GestorBBDD {
 		return codReserva;
 	}
 
+	/**
+	 * Obtiene el codigo del cliente segun su nombre de usuario
+	 * @param username
+	 * @return
+	 */
 	public int obtenerCodCliente(String username) {
 		int codCliente = -1;
 		ResultSet result = modificarBBDD.obtenerCodCliente(username);
@@ -282,6 +287,29 @@ public class GestorBBDD {
 			e.printStackTrace();
 		}
 		return codCliente;
+	}
+	
+	/**
+	 * Devuelve la lista de los servicios de un alojamiento por su codigo
+	 * @param codAlojamiento
+	 * @return
+	 */
+	public ArrayList<Servicio> obtenerServicios(int codAlojamiento) {
+		ArrayList<Servicio> servicios = new ArrayList<Servicio>();
+		ResultSet result = modificarBBDD.obtenerServicios(codAlojamiento);
+		
+		try {
+			while (result.next()) {
+				int codServicio = result.getInt("COD_SERVICIO");
+				String nombre = result.getString("NOMBRE");
+				float precio = result.getFloat("PRECIO");
+				String icon = result.getString("FONTAWESOMEICON");
+				servicios.add(new Servicio(codServicio, nombre, precio, icon));
+	        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return servicios;
 	}
 	
 }
