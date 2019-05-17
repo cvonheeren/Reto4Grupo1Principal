@@ -27,8 +27,10 @@
 }
 
 .jfx-button {
-  -fx-background-color: #f57c00;
+  	-fx-background-color: #f57c00;
+  	-fx-text-fill: #ffffff;
 }
+
 
 .tarjeta {
 	-fx-background-color: #fff;
@@ -64,5 +66,5 @@
 
 #filtroBusquedas:hover
 {
-	-fx-translate-y: 40px;
+	-fx-translate-y: 55px;
 }
