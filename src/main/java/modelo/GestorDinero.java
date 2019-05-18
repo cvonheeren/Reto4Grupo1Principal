@@ -236,16 +236,13 @@ public class GestorDinero {
      * @return
      */
 	public Habitacion getHabBarata(ArrayList<Habitacion> habitaciones){
-		float menor = habitaciones.get(0).getTarifaNormal();
-		Habitacion habBarataHabitacion = null;
+		int pos = 0;
 		for(int i = 0; i < habitaciones.size(); i++) {
-			float tarifaActual = habitaciones.get(i).getTarifaNormal();
-			if(habitaciones.get(i).getTarifaNormal() < menor) {
-				menor = tarifaActual;
-				habBarataHabitacion = habitaciones.get(i);
+			if(habitaciones.get(i).getTarifaNormal() < habitaciones.get(pos).getTarifaNormal()) {
+				pos = i;
 			}
 		}
-		return habBarataHabitacion;
+		return habitaciones.get(pos);
 	}
 
 }

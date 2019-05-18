@@ -89,12 +89,13 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		LocalDate fecha1 = Principal.modelo.reserva.getFechaEntrada().toLocalDate();
 		LocalDate fecha2 = Principal.modelo.reserva.getFechaSalida().toLocalDate();
-		float precio = Principal.modelo.gestorDinero.getPrecioTotalHabitacion(Principal.modelo.gestorDinero.getHabBarata(alojamiento.getHabitaciones()), fecha1, fecha2);
+		Habitacion habitacion = Principal.modelo.gestorDinero.getHabBarata(alojamiento.getHabitaciones());
+		float precio = Principal.modelo.gestorDinero.getPrecioTotalHabitacion(habitacion, fecha1, fecha2);
 		
 		this.nombre.setText(this.alojamiento.getNombre());
 		this.ubicacion.setText(this.alojamiento.getUbicacion());
 		this.descripcion.setText(this.alojamiento.getDescripcion());
-		this.precio.setText(precio + "€ \n" + Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1, fecha2).size() + " noches");	
+		this.precio.setText(precio + "â‚¬ \n" + Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1, fecha2).size() + " noches");	
 		this.imagen.getEngine().loadContent("<html><body style=\"padding:0px; margin:0px;\"><img src=" + alojamiento.getImgurl() + " width=190px height=190px></img></body></html>");
 		JFXDepthManager.setDepth(imagen, 1);
 
@@ -125,7 +126,7 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
     
     public void setDatos() {
     	if (alojamiento instanceof Casa) {
-			this.tamano.setText(Float.toString(((Casa) alojamiento).calcularArea()) + " m²");
+			this.tamano.setText(Float.toString(((Casa) alojamiento).calcularArea()) + " mÂ²");
 		} else if(alojamiento instanceof Apartamento) {
 			this.tamano.setText(("Piso " + ((Apartamento) alojamiento).getPiso() ));
 		}
@@ -269,7 +270,7 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 			str += h.getNombre().toLowerCase() + " - ";
 			str += h.getNumAdultos() + " Adultos";
 			if (h.getCtaCamasInfantil() > 0) {
-				str += ", " + h.getCtaCamasInfantil() + " Niños";
+				str += ", " + h.getCtaCamasInfantil() + " NiÃ±os";
 			}
 			str += "\n";
 		}
