@@ -9,10 +9,10 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.effects.JFXDepthManager;
 
-
 import core.Principal;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,18 +24,21 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
+import javafx.util.Duration;
 import modelo.Alojamiento;
 import modelo.Apartamento;
 import modelo.Casa;
 import modelo.Estancia;
 import modelo.Habitacion;
 import modelo.Hotel;
-import modelo.Servicio;
 
 public class CardAlojamiento extends AnchorPane implements Initializable {
 	
 	@FXML
     private AnchorPane card;
+	
+	@FXML
+    private AnchorPane paneBase;
 	
 	@FXML
     private FlowPane servicios;
@@ -60,9 +63,13 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
     
     private Alojamiento alojamiento;
     
-	public CardAlojamiento(Alojamiento alojamiento) {
+    private float tAnimacion;
+    
+	public CardAlojamiento(Alojamiento alojamiento, float tAnimacion, boolean animacionActivada) {
 		
 		this.alojamiento = alojamiento;
+		
+		this.tAnimacion = tAnimacion;
 		
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vista/Alojamiento.fxml"));
 	    fxmlLoader.setRoot(this);
@@ -73,6 +80,9 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 	    } catch (IOException e) {
 	        throw new RuntimeException(e);
 	    }
+	    
+	    if(animacionActivada) 
+	    	InizializarAnimacion();
 	}
 	
 	@Override
@@ -87,16 +97,27 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 		this.precio.setText(precio + "€ \n" + Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1, fecha2).size() + " noches");	
 		this.imagen.getEngine().loadContent("<html><body style=\"padding:0px; margin:0px;\"><img src=" + alojamiento.getImgurl() + " width=190px height=190px></img></body></html>");
 		JFXDepthManager.setDepth(imagen, 1);
-		
+
 		setDatos();
-		verServicios();
 		setMapa();
 		setIconoAloj();
 		setHabitaciones();
 		setEstancias();
+		//verServicios(this.alojamiento);
 	}
 	
-    @FXML
+    private void InizializarAnimacion() {
+    	
+    	TranslateTransition transicion = new TranslateTransition();
+    	transicion.setFromY(300);
+    	transicion.setToY(0);
+    	transicion.setDuration(Duration.seconds(tAnimacion));
+    	transicion.setNode(paneBase);
+    	transicion.play();
+		
+	}
+
+	@FXML
     void verAlojamiento(ActionEvent event) {
     	Principal.modelo.reserva.setAlojamiento(this.alojamiento);
 		Principal.aplicacion.CambiarScene("PaneInfo.fxml");
@@ -125,7 +146,8 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 	 * muestra los iconos de los servicios
 	 * @param alojamiento
 	 */
-	public void verServicios() {
+
+	/*public void verServicios(Alojamiento alojamiento) {
 		alojamiento.setServicios(Principal.modelo.gestorBBDD.obtenerServicios(alojamiento.getCodAlojamiento()));
 		ArrayList<Servicio> aux = alojamiento.getServicios();
 		
@@ -134,9 +156,8 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 			Label lblServicios = new Label("");
 			lblServicios.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.valueOf(auxS)));
 			servicios.getChildren().add(lblServicios);
-		}
-		
-	}
+		}		
+	}*/
 	
 	/**
 	 * 
