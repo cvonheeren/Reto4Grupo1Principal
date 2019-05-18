@@ -126,7 +126,10 @@ public class ControladorPasos implements Initializable {
      */
     public void btnSiguienteHabitaciones() {
     	if(comprobarHabitacionSeleccionada()) {
-			float precio = modelo().gestorDinero.calcularPrecioConDescuentos(modelo().reserva.getHabitacionesSeleccionadas());
+    		ArrayList<Habitacion> habitaciones = modelo().reserva.getHabitacionesSeleccionadas();
+    		LocalDate fecha1 = Principal.modelo.reserva.getFechaEntrada().toLocalDate();
+    		LocalDate fecha2 = Principal.modelo.reserva.getFechaSalida().toLocalDate();
+			float precio = modelo().gestorDinero.calcularPrecioConDescuentos(habitaciones, fecha1, fecha2);
 			modelo().gestorDinero.setPrecio(precio);
 			if(modelo().cliente != null) {
 				idTabPago.setDisable(false);

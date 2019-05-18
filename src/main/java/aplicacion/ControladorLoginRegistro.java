@@ -98,7 +98,8 @@ public class ControladorLoginRegistro implements Initializable {
 			String user = textFieldDNI.getText();
 			String pass = contrasena.getText();
 			if(Principal.modelo.gestorBBDD.comprobarCliente(user, pass)) {
-				Principal.modelo.cliente = new Cliente(user, pass);
+				int codCliente = Principal.modelo.gestorBBDD.obtenerCodCliente(user);
+				Principal.modelo.cliente = new Cliente(codCliente, user, pass);
 				Principal.aplicacion.CambiarScene(pantallaAnterior);
 				if (tabGuardada != -1) {
 					if (loginForced) {
@@ -117,7 +118,7 @@ public class ControladorLoginRegistro implements Initializable {
     	if (Principal.modelo.gestorValidaciones.validarDatosRegistro(this)) {
     		int codCliente = Principal.modelo.gestorBBDD.insertarCliente(textFieldUserName.getText(), textFieldDNIReg.getText(), contrasenaReg.getText(), textFieldNombreReg.getText(), textFieldApellidoReg.getText(), Date.valueOf(fechaNacReg.getValue()), textFieldMailReg.getText());
     		if (codCliente != -1) {
-    			Principal.modelo.cliente = new Cliente(textFieldUserName.getText(), contrasenaReg.getText());
+    			Principal.modelo.cliente = new Cliente(codCliente, textFieldUserName.getText(), contrasenaReg.getText());
     			Principal.aplicacion.CambiarScene(pantallaAnterior);
     			if (tabGuardada != -1) {
     				if (loginForced) {

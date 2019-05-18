@@ -25,13 +25,11 @@ public class Cliente {
 		this.fechaNac = fechaNac;
 		this.email = email;
 	}
-
-	private Modelo modelo() {return Principal.modelo;}
 	
-	public Cliente(String username, String contrasenia) {
+	public Cliente(Integer codCliente, String username, String contrasenia) {
 		this.username = username;
 		this.contrasenia = contrasenia;
-		this.codCliente = modelo().gestorBBDD.obtenerCodCliente(username);
+		this.codCliente = codCliente;
 	}
 	
 	public int getCodCliente() {

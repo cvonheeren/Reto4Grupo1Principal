@@ -34,26 +34,16 @@ public class Casa extends Alojamiento {
 		this.estancias = estancias;
 	}
 	
-	public int numBanios() {
-		int suma = 0;
-		for (Estancia e: this.estancias) {
-			if ( e.getNombre() == "BANIO") {
-				suma++;
-			}
-		}
-		return suma;
-	}
-	
 	public float calcularArea() {
 		float suma = 0;
 		if (this.estancias != null) {
 			for (Estancia e: this.estancias) {
-				suma += e.getTamano();
+				suma += e.getTamano() * e.getCantidad();
 			}
 		}
 		if (this.habitaciones != null) {
 			for (Habitacion h: this.habitaciones) {
-				suma += h.getTamano();
+				suma += h.getTamano() * h.getCantidad();
 			}
 		}
 		return suma;

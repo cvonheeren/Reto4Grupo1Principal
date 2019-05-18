@@ -101,8 +101,4 @@ public class Habitacion extends Estancia {
 		return num;
 	}
 	
-	public int getNumHuespedes() {
-		return this.ctaCamasSimples + this.ctaCamasMatrimonio * 2 + this.ctaCamasInfantil;
-	}
-	
 }

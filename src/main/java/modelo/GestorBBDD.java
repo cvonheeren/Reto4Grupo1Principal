@@ -66,7 +66,7 @@ public class GestorBBDD {
 	private ArrayList<Alojamiento> ObtenerListaAlojamientos(ResultSet result, int cantidad) {
 		int contador = 0;
 		try {
-			while (result.next() && contador<cantidad) {
+			while (result.next() && contador < cantidad) {
 				
 				int codAlojamiento = result.getInt("COD_ALOJAMIENTO");
 				String ubicacion = result.getString("UBICACIONES.NOMBRE");

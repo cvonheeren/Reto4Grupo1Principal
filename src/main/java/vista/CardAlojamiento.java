@@ -2,7 +2,7 @@ package vista;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -21,10 +21,8 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
-import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import modelo.Alojamiento;
 import modelo.Apartamento;
@@ -79,23 +77,19 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// carga el precio total de la estancia para la habitacion mas barata
-		float precio = Principal.modelo.gestorDinero.getPrecioTotalHabitacion(Principal.modelo.gestorDinero.getHabBarata(alojamiento.getHabitaciones()));
-		Date fecha1 = Principal.modelo.reserva.getFechaEntrada();
-		Date fecha2 = Principal.modelo.reserva.getFechaSalida();
+		LocalDate fecha1 = Principal.modelo.reserva.getFechaEntrada().toLocalDate();
+		LocalDate fecha2 = Principal.modelo.reserva.getFechaSalida().toLocalDate();
+		float precio = Principal.modelo.gestorDinero.getPrecioTotalHabitacion(Principal.modelo.gestorDinero.getHabBarata(alojamiento.getHabitaciones()), fecha1, fecha2);
+		
 		this.nombre.setText(this.alojamiento.getNombre());
-		WebEngine webEngine = imagen.getEngine();
-		webEngine.loadContent("<html><body style=\"padding:0px; margin:0px;\"><img src=" + alojamiento.getImgurl() + " width=190px height=190px></img></body></html>");
-		JFXDepthManager.setDepth(imagen, 1);
 		this.ubicacion.setText(this.alojamiento.getUbicacion());
 		this.descripcion.setText(this.alojamiento.getDescripcion());
-		this.precio.setText(precio + "€ \n" + Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1.toLocalDate(), fecha2.toLocalDate()).size() + " noches");
-		if (alojamiento instanceof Casa) {
-			this.tamano.setText(Float.toString(((Casa) alojamiento).calcularArea()) + " m²");
-		} else if(alojamiento instanceof Apartamento) {
-			this.tamano.setText(("Piso " + ((Apartamento) alojamiento).getPiso() ));
-		}
-		verServicios(this.alojamiento);
+		this.precio.setText(precio + "€ \n" + Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1, fecha2).size() + " noches");	
+		this.imagen.getEngine().loadContent("<html><body style=\"padding:0px; margin:0px;\"><img src=" + alojamiento.getImgurl() + " width=190px height=190px></img></body></html>");
+		JFXDepthManager.setDepth(imagen, 1);
+		
+		setDatos();
+		verServicios();
 		setMapa();
 		setIconoAloj();
 		setHabitaciones();
@@ -106,6 +100,14 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
     void verAlojamiento(ActionEvent event) {
     	Principal.modelo.reserva.setAlojamiento(this.alojamiento);
 		Principal.aplicacion.CambiarScene("PaneInfo.fxml");
+    }
+    
+    public void setDatos() {
+    	if (alojamiento instanceof Casa) {
+			this.tamano.setText(Float.toString(((Casa) alojamiento).calcularArea()) + " m²");
+		} else if(alojamiento instanceof Apartamento) {
+			this.tamano.setText(("Piso " + ((Apartamento) alojamiento).getPiso() ));
+		}
     }
 	
 	/*
@@ -123,7 +125,7 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 	 * muestra los iconos de los servicios
 	 * @param alojamiento
 	 */
-	public void verServicios(Alojamiento alojamiento) {
+	public void verServicios() {
 		alojamiento.setServicios(Principal.modelo.gestorBBDD.obtenerServicios(alojamiento.getCodAlojamiento()));
 		ArrayList<Servicio> aux = alojamiento.getServicios();
 		

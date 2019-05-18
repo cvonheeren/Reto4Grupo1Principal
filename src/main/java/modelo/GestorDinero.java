@@ -14,17 +14,22 @@ public class GestorDinero {
 	private float dineroIntroducido;
 	private ArrayList<Float> monedasIntroducidas;
 	private float dineroRestante;
-	private float descuento = 0;
+	private float descuento;
 	private float precio;
 	
 	public GestorDinero() {
 		this.dineroIntroducido = 0;
 		this.dineroRestante = 0;
+		this.descuento = 0;
 		this.monedasIntroducidas = new ArrayList<Float>();
 	}
 	
 	public float getPrecio() {
 		return precio;
+	}
+	
+	public void setPrecio(float precio) {
+		this.precio = precio;
 	}
 
 	public float getDescuento() {
@@ -37,10 +42,6 @@ public class GestorDinero {
 	
 	public float getPrecioConDescuento(){
 		return precio-descuento;
-	}
-
-	public void setPrecio(float precio) {
-		this.precio = precio;
 	}
 
 	public float getDineroIntroducido() {
@@ -104,14 +105,6 @@ public class GestorDinero {
 		return dineroIntroducido - precio;
 	}
 	
-	/**
-	 * Comprueba si falta dinero por introducir para realizar el pago
-	 * @return true en caso de que falte dinero por introducir, false en caso contrario
-	 */
-	public boolean comprobarFaltaDinero() {
-		return (dineroIntroducido < precio) ? true : false ;
-	}
-	
 	/**	
 	 * Metodo que se encarga de calcular el menor numero de monedas y billetes que se deben que dar de devolucion
 	 * @param sobra dinero sobrante tras realizar el pago
@@ -160,7 +153,7 @@ public class GestorDinero {
 	 * @param habReservadas
 	 * @return
 	 */
-	public float calcularPrecioConDescuentos(ArrayList<Habitacion> habReservadas) {
+	public float calcularPrecioConDescuentos(ArrayList<Habitacion> habReservadas, LocalDate fecha1, LocalDate fecha2) {
 		
 		float precioTotal = 0;
 		float tarifaDiaNormal = 0;
@@ -183,8 +176,6 @@ public class GestorDinero {
 		}
 		
 		// cogemos los dias del periodo para comprobar sus tarifas extras
-		LocalDate fecha1 = Principal.modelo.reserva.getFechaEntrada().toLocalDate();
-		LocalDate fecha2 = Principal.modelo.reserva.getFechaSalida().toLocalDate(); 
 	    ArrayList<LocalDate> lista = Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1, fecha2);
 	    
 	    for (int i = 0; i < lista.size(); i++) {
@@ -205,12 +196,10 @@ public class GestorDinero {
 	 * @param habReservadas
 	 * @return
 	 */
-	public float getPrecioTotalHabitacion(Habitacion habitacion) {
+	public float getPrecioTotalHabitacion(Habitacion habitacion, LocalDate fecha1, LocalDate fecha2) {
 		float precioTotal = 0;
 		
 		// cogemos los dias del periodo para comprobar sus tarifas extras
-		LocalDate fecha1 = Principal.modelo.reserva.getFechaEntrada().toLocalDate();
-		LocalDate fecha2 = Principal.modelo.reserva.getFechaSalida().toLocalDate(); 
 	    ArrayList<LocalDate> lista = Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1, fecha2);
 	    
 	    for (int i = 0; i < lista.size(); i++) {
@@ -247,7 +236,7 @@ public class GestorDinero {
      * @return
      */
 	public Habitacion getHabBarata(ArrayList<Habitacion> habitaciones){
-		float menor = 99999;
+		float menor = habitaciones.get(0).getTarifaNormal();
 		Habitacion habBarataHabitacion = null;
 		for(int i = 0; i < habitaciones.size(); i++) {
 			float tarifaActual = habitaciones.get(i).getTarifaNormal();

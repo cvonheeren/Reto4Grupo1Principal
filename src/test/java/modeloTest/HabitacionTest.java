@@ -9,6 +9,7 @@ import modelo.Habitacion;
 public class HabitacionTest {
 
 	Habitacion habitacion = new Habitacion(1, "", 2, 3, 1, 2, 3, 4f, 2f, 1f, "");
+	Habitacion habitacion2 = new Habitacion(1, 3);
 	
 	@Test
 	public void testConstructor() {
@@ -23,9 +24,8 @@ public class HabitacionTest {
 	
 	@Test
 	public void testConstructor2() {
-		assertEquals(1, habitacion.getCodEstancia());
-		assertEquals(3, habitacion.getCantidad());
-		
+		assertEquals(1, habitacion2.getCodEstancia());
+		assertEquals(3, habitacion2.getCantidad());
 	}
 
 	@Test
@@ -66,8 +66,15 @@ public class HabitacionTest {
 	
 	@Test
 	public void testdescri() {
-		habitacion.setDescripcion("");;
+		habitacion.setDescripcion("");
 		assertEquals("", habitacion.getDescripcion());
+	}
+	
+	@Test
+	public void testNumAdultos() {
+		habitacion.setCtaCamasSimples(2);
+		habitacion.setCtaCamasMatrimonio(2);
+		assertEquals(6, habitacion.getNumAdultos());
 	}
 	
 	
