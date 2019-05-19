@@ -2,8 +2,6 @@ package modelo;
 
 import java.sql.Date;
 
-import core.Principal;
-
 public class Cliente {
 	
 	private int codCliente;

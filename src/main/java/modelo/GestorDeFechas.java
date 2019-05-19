@@ -57,7 +57,7 @@ public class GestorDeFechas {
 		ArrayList<LocalDate> dias = new ArrayList<LocalDate>();
 		LocalDate fechaAux;
 		
-		for (int i = 1; i < (fecha2.getDayOfYear() - fecha1.getDayOfYear())+1; i++) {
+		for (int i = 0; i < (fecha2.getDayOfYear() - fecha1.getDayOfYear()); i++) {
 			fechaAux = fecha1.plusDays(i);
 			dias.add(fechaAux);
 		}

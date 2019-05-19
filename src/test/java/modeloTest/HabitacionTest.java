@@ -77,7 +77,32 @@ public class HabitacionTest {
 		assertEquals(6, habitacion.getNumAdultos());
 	}
 	
+	@Test
+	public void testEquals() {
+		Habitacion habitacion = new Habitacion(2, "HABITACION DOBLE MATRIMONIO", 30, 0, 1, 0, 10, 70, 95, 126, null);
+		Habitacion habitacion2 = new Habitacion(2, "HABITACION DOBLE MATRIMONIO", 30, 0, 1, 0, 10, 70, 95, 126, null);
+		assertEquals(habitacion, habitacion2);
+	}
 	
+	@Test
+	public void testEquals2() {
+		Habitacion habitacion = new Habitacion(2, "HABITACION DOBLE MATRIMONIO", 30, 0, 1, 0, 10, 70, 95, 126, "aaa");
+		Habitacion habitacion2 = new Habitacion(2, "HABITACION DOBLE MATRIMONIO", 30, 0, 1, 0, 10, 70, 95, 126, null);
+		assertNotEquals(habitacion, habitacion2);
+	}
 	
+	@Test
+	public void testEquals3() {
+		Habitacion habitacion = new Habitacion(2, "HABITACION DOBLE MATRIMONIO", 40, 0, 1, 0, 10, 70, 95, 126, null);
+		Habitacion habitacion2 = new Habitacion(2, "HABITACION DOBLE MATRIMONIO", 30, 0, 1, 0, 10, 70, 95, 126, null);
+		assertNotEquals(habitacion, habitacion2);
+	}
+	
+	@Test
+	public void testEquals4() {
+		Habitacion habitacion = new Habitacion(2, "HABITACION DOBLE MATRIMONIO", 30, 0, 1, 0, 10, 80, 95, 126, null);
+		Habitacion habitacion2 = new Habitacion(2, "HABITACION DOBLE MATRIMONIO", 30, 0, 1, 0, 10, 70, 95, 126, null);
+		assertNotEquals(habitacion, habitacion2);
+	}
 	
 }

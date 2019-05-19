@@ -235,12 +235,22 @@ public class GestorDinero {
      * @param habitaciones
      * @return
      */
-	public Habitacion getHabBarata(ArrayList<Habitacion> habitaciones){
+	public Habitacion getHabBarata(ArrayList<Habitacion> habitaciones, LocalDate fecha){
 		int pos = 0;
 		for(int i = 0; i < habitaciones.size(); i++) {
-			if(habitaciones.get(i).getTarifaNormal() < habitaciones.get(pos).getTarifaNormal()) {
-				pos = i;
-			}
+			if(Principal.modelo.gestorFechas.comprobarFestivo(fecha)) {
+				if(habitaciones.get(i).getTarifaFestivo() < habitaciones.get(pos).getTarifaFestivo()) {
+					pos = i;
+				}
+	    	} else if (Principal.modelo.gestorFechas.comprobarSiEsVerano(fecha)){
+	    		if(habitaciones.get(i).getTarifaVerano() < habitaciones.get(pos).getTarifaVerano()) {
+					pos = i;
+				}
+	    	} else {
+	    		if(habitaciones.get(i).getTarifaNormal() < habitaciones.get(pos).getTarifaNormal()) {
+					pos = i;
+				}
+	    	}
 		}
 		return habitaciones.get(pos);
 	}

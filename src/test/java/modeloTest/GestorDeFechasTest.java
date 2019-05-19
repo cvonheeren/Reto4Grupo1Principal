@@ -44,7 +44,6 @@ public class GestorDeFechasTest {
         
 		dias.add(fecha1);
         dias.add(fecha2);
-        dias.add(fecha3);
        
         assertEquals(dias, gestor.setDiasSeleccionados(fecha1, fecha3));
     }

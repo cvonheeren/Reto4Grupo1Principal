@@ -2,10 +2,10 @@ package modelo;
 
 public class Servicio {
 
-	protected int codServicio;
-	protected String nombre;
-	protected float precio;
-	protected String iconString;
+	private int codServicio;
+	private String nombre;
+	private float precio;
+	private String iconString;
 	
 	public Servicio(int codServicio, String nombre, float precio, String icon) {
 		this.codServicio = codServicio;

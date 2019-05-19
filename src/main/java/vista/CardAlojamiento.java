@@ -89,7 +89,7 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		LocalDate fecha1 = Principal.modelo.reserva.getFechaEntrada().toLocalDate();
 		LocalDate fecha2 = Principal.modelo.reserva.getFechaSalida().toLocalDate();
-		Habitacion habitacion = Principal.modelo.gestorDinero.getHabBarata(alojamiento.getHabitaciones());
+		Habitacion habitacion = Principal.modelo.gestorDinero.getHabBarata(alojamiento.getHabitaciones(), fecha1);
 		float precio = Principal.modelo.gestorDinero.getPrecioTotalHabitacion(habitacion, fecha1, fecha2);
 		
 		this.nombre.setText(this.alojamiento.getNombre());
