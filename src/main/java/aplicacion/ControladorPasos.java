@@ -2,6 +2,9 @@ package aplicacion;
 
 import java.net.URL;
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -153,7 +156,8 @@ public class ControladorPasos implements Initializable {
     	if (modelo().gestorDinero.calcularDineroRestante() == 0) {
 			
 			// guarda la fecha de la compra
-			Date fechaCompra = Date.valueOf(LocalDate.now());
+    		
+			Timestamp fechaCompra = new Timestamp(System.currentTimeMillis());
 			modelo().reserva.setFechaCompra(fechaCompra);
 			
 			// inserta la reserva en la base de datos
