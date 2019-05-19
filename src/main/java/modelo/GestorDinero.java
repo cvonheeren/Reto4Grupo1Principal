@@ -180,9 +180,9 @@ public class GestorDinero {
 	    
 	    for (int i = 0; i < lista.size(); i++) {
 			if(Principal.modelo.gestorFechas.comprobarFestivo(lista.get(i))) {
-				precioTotal += tarifaDiaVerano;
-			} else if(Principal.modelo.gestorFechas.comprobarSiEsVerano(lista.get(i))) {
 				precioTotal += tarifaDiaFestivo;
+			} else if(Principal.modelo.gestorFechas.comprobarSiEsVerano(lista.get(i))) {
+				precioTotal += tarifaDiaVerano;
 			} else {
 				precioTotal += tarifaDiaNormal;
 			}

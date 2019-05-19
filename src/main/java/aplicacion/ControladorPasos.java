@@ -1,10 +1,7 @@
 package aplicacion;
 
 import java.net.URL;
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -42,7 +39,7 @@ public class ControladorPasos implements Initializable {
 	public Hyperlink lblSesion;
 	
 	@FXML
-	public Label lblSaludo;
+	public Label lblSaludo, carrito;
 	
     @FXML
     private FontAwesomeIconView iconInfo;
@@ -63,6 +60,15 @@ public class ControladorPasos implements Initializable {
 		idTabPago.setDisable(true);
 		idTabFin.setDisable(true);
 		aplicacion().controladorPasos = this;
+	}
+	
+	public void actualizarCarrito() {
+		ArrayList<Habitacion> habitaciones = modelo().reserva.getHabitacionesSeleccionadas();
+		int numHab = 0;
+		for (int i = 0; i < habitaciones.size(); i++) {
+			numHab += habitaciones.get(i).getCantidad();
+		}
+		this.carrito.setText(String.valueOf(numHab));
 	}
 	
 	@FXML
