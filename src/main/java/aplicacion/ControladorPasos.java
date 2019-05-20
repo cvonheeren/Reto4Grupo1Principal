@@ -11,9 +11,13 @@ import javax.swing.JOptionPane;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
+import com.sun.prism.paint.Color;
 
 import core.Principal;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import javafx.animation.ParallelTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,6 +26,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
+import javafx.util.Duration;
 import modelo.GestorDinero;
 import modelo.Habitacion;
 import modelo.Modelo;
@@ -53,12 +59,15 @@ public class ControladorPasos implements Initializable {
 	@FXML
     private JFXButton btnLogin, btnSiguiente, btnAtras, btnCancelar;
 	
+	private FontAwesomeIconView iconoCama;
+	
 	private Modelo modelo() {return Principal.modelo;}
 	private Aplicacion aplicacion() {return Principal.aplicacion;}
 	
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		iconoCama = new FontAwesomeIconView(FontAwesomeIcon.BED);
 		comprobarSesionIniciada();
 		idTabPago.setDisable(true);
 		idTabFin.setDisable(true);
@@ -238,6 +247,34 @@ public class ControladorPasos implements Initializable {
 			lblSaludo.setText("Hola, Anonimo");
 			lblSesion.setText("Identifiquese");
 		}
+	}
+	public void AnimacionCama() {
+		try{anchorPaneBase.getChildren().remove(iconoCama);} catch (Exception e) {}
+		iconoCama.setSize("100");
+		iconoCama.setLayoutX(300);
+		iconoCama.setLayoutY(500);
+		iconoCama.setFill(Paint.valueOf("#777777"));
+		anchorPaneBase.getChildren().add(iconoCama);
+		
+		
+		TranslateTransition animacionCama = new TranslateTransition();
+		animacionCama.setFromX(0);
+		animacionCama.setFromY(0);
+		animacionCama.setToX(700);
+		animacionCama.setToY(-400);
+		animacionCama.setDuration(Duration.seconds(0.3F));
+		animacionCama.setNode(iconoCama);
+		
+		TranslateTransition animacionCama2 = new TranslateTransition();
+		animacionCama2.setToX(1000);
+		animacionCama2.setDelay(Duration.seconds(0.3F));
+		animacionCama2.setDuration(Duration.seconds(0.01F));
+		animacionCama2.setNode(iconoCama);
+		
+		ParallelTransition transiciones = new ParallelTransition(animacionCama, animacionCama2);
+		transiciones.play();
+		
+		
 	}
 
 }

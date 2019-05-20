@@ -12,6 +12,8 @@ import com.jfoenix.effects.JFXDepthManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import core.Principal;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import modelo.Alojamiento;
 import modelo.Habitacion;
 import vista.CardHabitacion;
@@ -26,7 +28,7 @@ public class ControladorSelHabitacion implements Initializable {
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		cargarHabitaciones(Principal.modelo.reserva.getAlojamiento());
+    	cargarHabitaciones(Principal.modelo.reserva.getAlojamiento());
 	}
     
     public void cargarHabitaciones(Alojamiento alojamiento) {
@@ -68,5 +70,9 @@ public class ControladorSelHabitacion implements Initializable {
     	paneHabitacion.getChildren().setAll(grid);
     	return grid;
     }
+
+
+
+    
 
 }
