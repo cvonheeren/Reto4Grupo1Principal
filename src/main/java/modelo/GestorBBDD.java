@@ -45,7 +45,7 @@ public class GestorBBDD {
 	 * @param ordenAscendente
 	 * @return
 	 */
-	private ResultSet ObtenerResultSetAlojamientos(String ciudad, int estrellasMin, int estrellasMax, String[] tipoAlojSel, char tipoOrden, boolean ordenAscendente, String[] servSeleccionados) {	
+	private ResultSet ObtenerResultSetAlojamientos(String ciudad, int estrellasMin, int estrellasMax, String[] tipoAlojSel, char tipoOrden, boolean ordenAscendente, int[] servSeleccionados) {	
 		return modificarBBDD.cargarAlojamientos(ciudad, estrellasMin, estrellasMax, tipoAlojSel, tipoOrden, ordenAscendente, servSeleccionados);
 	}
 	
@@ -60,7 +60,7 @@ public class GestorBBDD {
 	 * @param cantidad
 	 * @return
 	 */
-	public ArrayList<Alojamiento> RealizarBusquedaAlojamientos(String ciudad, int estrellasMin, int estrellasMax, String[] tipoAlojSel, char tipoOrden, boolean ordenAscendente, int cantidad, String[] servSeleccionados) {
+	public ArrayList<Alojamiento> RealizarBusquedaAlojamientos(String ciudad, int estrellasMin, int estrellasMax, String[] tipoAlojSel, char tipoOrden, boolean ordenAscendente, int cantidad, int[] servSeleccionados) {
 		ultimaBusqueda = ObtenerResultSetAlojamientos(ciudad, estrellasMin, estrellasMax, tipoAlojSel, tipoOrden, ordenAscendente, servSeleccionados);
 		return ObtenerListaAlojamientos(ultimaBusqueda, cantidad);
 	}

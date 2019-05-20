@@ -406,11 +406,11 @@ public class ControladorSelAlojamiento implements Initializable {
 		return tiposAloj;
 	}
 	
-	private String[] ServiciosSeleccionados() {
-		String[] servSeleccionadosString = new String[serviciosSeleccionados.size()];
+	private int[] ServiciosSeleccionados() {
+		int[] servSeleccionadosString = new int[serviciosSeleccionados.size()];
 		for(int i=0;i<serviciosSeleccionados.size();i++)
 		{
-			servSeleccionadosString[i]=Integer.toString(serviciosSeleccionados.get(i).getCodServicio());
+			servSeleccionadosString[i]=serviciosSeleccionados.get(i).getCodServicio();
 		}
 		
 		return servSeleccionadosString;
