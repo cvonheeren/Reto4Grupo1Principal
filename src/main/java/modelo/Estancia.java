@@ -8,12 +8,11 @@ public class Estancia {
 	protected int cantidad;
 	
 	/**
-	 * Habitaciones de los hoteles
-	 * @param codHabitacion Codigo unico para cada habitacion de todos los hoteles
-	 * @param numeroHabitacion el numero de la habitacion en ese hotel
-	 * @param tamano Los metros cuadrados de la habitacion
-	 * @param numeroCamas Numero de camas
-	 * @param tipoCama Tipo de cama
+	 * Crea un objeto estancia con todos los datos de una estancia
+	 * @param codEstancia Codigo unico para cada estancia de un alojamiento
+	 * @param nombre Nombre del tipo de habitacion
+	 * @param tamano Metros cuadrados de la habitacion
+	 * @param cantidad Numero de estancias de este tipo que hay en un alojamiento
 	 */
 	public Estancia(int codEstancia, String nombre, float tamano, int cantidad) {
 		this.codEstancia = codEstancia;

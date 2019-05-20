@@ -19,8 +19,6 @@ DROP TABLE IF EXISTS ALOJAMIENTOS;
 DROP TABLE IF EXISTS UBICACIONES;
 
 
-
-
 /**************************************************************************
 * CREA LAS TABLAS
 ***************************************************************************/
@@ -44,9 +42,6 @@ CREATE TABLE ALOJAMIENTOS
   TIPO CHAR NOT NULL CHECK (TIPO IN('H', 'C', 'A')),
   ESTRELLAS INT(1) CHECK (ESTRELLAS BETWEEN 1 AND 5),
   ALTURA INT(2),
-  DESAYUNO FLOAT(6) DEFAULT 0,
-  MEDIA_PENSION FLOAT(6) DEFAULT 0,
-  PENSION_COMPLETA FLOAT(6) DEFAULT 0,
   IMGURL VARCHAR(100) DEFAULT 'https://stampedtribe.com/wp-content/uploads/2018/03/hotel-icon-10.png',
   FOREIGN KEY (COD_UBICACION) REFERENCES UBICACIONES (COD_UBICACION) ON DELETE CASCADE
 );

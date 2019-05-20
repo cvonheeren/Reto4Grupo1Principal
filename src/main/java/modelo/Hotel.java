@@ -4,9 +4,8 @@ public class Hotel extends Alojamiento {
 
 	private int estrellas;
 	
-	
 	/**
-	 * 
+	 * Objeto que guarda los datos especificos de los hoteles
 	 * @param codAlojamiento
 	 * @param ubicacion
 	 * @param nombre

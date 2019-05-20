@@ -1,11 +1,10 @@
 package modeloTest;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
+
 
 import org.junit.Test;
 
-import modelo.Cliente;
 import modelo.GestorArchivos;
 import modelo.GestorBBDD;
 import modelo.GestorDeFechas;
@@ -17,19 +16,26 @@ import modelo.Reserva;
 
 public class ModeloTest {
 
-	private Modelo modelo = new Modelo();
+	Modelo modelo = new Modelo();
 	GestorDinero gestorDinero = new GestorDinero();
-	GestorArchivos gestorArchivosMock = mock(GestorArchivos.class);
-	GestorBBDD gestorBBDDMock = mock(GestorBBDD.class);
-	Reserva reservaMock = mock(Reserva.class);
-	Cliente clienteMock = mock(Cliente.class);
+	GestorBBDD gestorBBDD = new GestorBBDD();
+	GestorArchivos gestorArchivos = new GestorArchivos();
+	Reserva reserva = new Reserva();
+	GestorValidaciones gestorV = new GestorValidaciones();
+	GestorDeFechas gestorF = new GestorDeFechas();
 
 	@Test
 	public void testConstructor() {
-		assertEquals(gestorDinero, modelo.gestorDinero);
-		assertEquals(clienteMock, modelo.cliente);
-		assertEquals(reservaMock, modelo.reserva);
-		assertEquals(gestorBBDDMock, modelo.gestorBBDD);
+		assertEquals(gestorDinero.getClass(), modelo.gestorDinero.getClass());
+		assertEquals(gestorBBDD.getClass(), modelo.gestorBBDD.getClass());
+		assertEquals(gestorArchivos.getClass(), modelo.gestorArchivos.getClass());
+		assertEquals(reserva.getClass(), modelo.reserva.getClass());
+		assertEquals(gestorV.getClass(), modelo.gestorValidaciones.getClass());
+		assertEquals(gestorF.getClass(), modelo.gestorFechas.getClass());
 	}
 	
+	@Test
+	public void testCliente() {
+		assertEquals(null, modelo.cliente);
+	}
 }

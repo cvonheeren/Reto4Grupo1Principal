@@ -36,10 +36,7 @@ import modelo.Servicio;
 public class CardAlojamiento extends AnchorPane implements Initializable {
 	
 	@FXML
-    private AnchorPane card;
-	
-	@FXML
-    private AnchorPane paneBase;
+    private AnchorPane card, paneBase;
 	
 	@FXML
     private FlowPane servicios;
@@ -54,13 +51,10 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
     private Hyperlink mapa;
 
     @FXML
-    private Label descripcion, lblHabitaciones, lblEstancias;
+    private Label descripcion, lblHabitaciones, lblEstancias, tamano;
     
     @FXML
     private JFXButton btnVer;
-    
-    @FXML
-    private Label tamano;
     
     private Alojamiento alojamiento;
     
@@ -69,7 +63,6 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 	public CardAlojamiento(Alojamiento alojamiento, float tAnimacion, boolean animacionActivada) {
 		
 		this.alojamiento = alojamiento;
-		
 		this.tAnimacion = tAnimacion;
 		
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vista/Alojamiento.fxml"));
@@ -83,7 +76,7 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 	    }
 	    
 	    if(animacionActivada) 
-	    	InizializarAnimacion();
+	    	inizializarAnimacion();
 	}
 	
 	@Override
@@ -105,7 +98,7 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 		setIconoAloj();
 		setHabitaciones();
 		setEstancias();
-		verServicios(this.alojamiento);
+		verServicios();
 	}
 	
 	@FXML
@@ -115,20 +108,19 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
     }
 	
 	/**
-	 * 
+	 * Inicializa la animacion de carga de los paneles de los alojamientos
 	 */
-    private void InizializarAnimacion() {
+    private void inizializarAnimacion() {
     	TranslateTransition transicion = new TranslateTransition();
     	transicion.setFromY(300);
     	transicion.setToY(0);
     	transicion.setDuration(Duration.seconds(tAnimacion));
     	transicion.setNode(paneBase);
-    	transicion.play();
-		
+    	transicion.play();	
 	}
     
 	/**
-	 * 
+	 * Carga los datos especificos de las casa y los apartamentos
 	 */
     public void setDatos() {
     	if (alojamiento instanceof Casa) {
@@ -138,9 +130,9 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 		}
     }
 	
-	/*
-	 * 
-	 */
+    /**
+     * Coloca el enlace del mapa en la posicion correcta y le añade un listener para abrirlo al pulsar
+     */
 	public void setMapa() {
 		mapa.setLayoutX((int) ubicacion.getBoundsInLocal().getMaxX() + ubicacion.getLayoutX() + 5);
 		mapa.setOnAction((e) -> {
@@ -150,13 +142,11 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 	}
 	
 	/**
-	 * muestra los iconos de los servicios
-	 * @param alojamiento
+	 * Muestra los iconos de los servicios
 	 */
-	public void verServicios(Alojamiento alojamiento) {
+	public void verServicios() {
 		alojamiento.setServicios(Principal.modelo.gestorBBDD.obtenerServicios(alojamiento.getCodAlojamiento()));
 		ArrayList<Servicio> aux = alojamiento.getServicios();
-		
 		for (Servicio unservicio : aux) {
 			String auxS = unservicio.getIcon();
 			Label lblServicios = new Label("");
@@ -166,8 +156,7 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 	}
 	
 	/**
-	 * 
-	 * @param alojamiento
+	 * Muestra un icono segun el tipo de alojamiento
 	 */
 	public void setIconoAloj() {
 		int coordX = (int) ((int) nombre.getBoundsInLocal().getMaxX()+nombre.getLayoutX()+10);
@@ -187,9 +176,9 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 	}
 	
 	/**
-	 * 
+	 * Mostrar icono estrella
 	 * @param coordX
-	 * @return
+	 * @return icono estrella
 	 */
 	public FontAwesomeIconView crearIconoEstrella(int coordX) {
 		FontAwesomeIconView iconoEstrella = new FontAwesomeIconView(FontAwesomeIcon.STAR);
@@ -201,9 +190,9 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 	}
 	
 	/**
-	 * 
+	 * Crear icono llave
 	 * @param coordX
-	 * @return
+	 * @return icono llave
 	 */
 	public FontAwesomeIconView crearIconoLlave(int coordX) {
 		FontAwesomeIconView iconoLlave = new FontAwesomeIconView(FontAwesomeIcon.KEY);
@@ -215,9 +204,9 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 	}
 	
 	/**
-	 * 
+	 * Crea un icono casa
 	 * @param coordX
-	 * @return
+	 * @return icono casa
 	 */
 	public FontAwesomeIconView crearIconoCasa(int coordX) {
 		FontAwesomeIconView iconoLlave = new FontAwesomeIconView(FontAwesomeIcon.HOME);
@@ -229,13 +218,11 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 	}
 	
 	/**
-	 * 
-	 * @param alojamiento
-	 * @param habitaciones
+	 * Añade la informacion de las habitaciones
 	 */
 	public void setHabitaciones() {
 		if(alojamiento instanceof Hotel) {
-			String str = mostrarHabitaciones(alojamiento.getHabitaciones());
+			String str = formatInfoHabitaciones(alojamiento.getHabitaciones());
 			this.habitaciones.setText(str);
 		} else if(alojamiento instanceof Apartamento) {
 			this.card.getChildren().remove(this.lblHabitaciones);
@@ -247,28 +234,27 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 	}
 	
 	/**
-	 * 
-	 * @param alojamiento
+	 * Añade la informacion de las estancias
 	 */
 	public void setEstancias() {
 		if(alojamiento instanceof Hotel) {
 			this.card.getChildren().remove(this.lblEstancias);
 			this.card.getChildren().remove(this.estancias);
 		} else if(alojamiento instanceof Apartamento) {
-			String str = mostrarEstancias(((Apartamento)alojamiento).getEstancias(), alojamiento.getHabitaciones());
+			String str = formatInfoEstancias(((Apartamento)alojamiento).getEstancias(), alojamiento.getHabitaciones());
 			this.estancias.setText(str);
 		} else if(alojamiento instanceof Casa) {	
-			String str = mostrarEstancias(((Casa)alojamiento).getEstancias(), alojamiento.getHabitaciones());
+			String str = formatInfoEstancias(((Casa)alojamiento).getEstancias(), alojamiento.getHabitaciones());
 			this.estancias.setText(str);
 		}
 	}
 	
     /**
-     * 
+     * Crea un string con los datos de las habitaciones del alojamiento
      * @param habitaciones
-     * @return
+     * @return String formateado
      */
-    public String mostrarHabitaciones(ArrayList<Habitacion> habitaciones) {
+    public String formatInfoHabitaciones(ArrayList<Habitacion> habitaciones) {
     	String str = "";
 		for (Habitacion h : habitaciones) {
 			str += h.getCantidad() + " ";
@@ -283,11 +269,12 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
     }
     
     /**
-     * 
+     * Crea un string con los datos de las estancias del alojamiento
      * @param estancias
-     * @return
+     * @param habitaciones
+     * @return String formateado
      */
-    public String mostrarEstancias(ArrayList<Estancia> estancias, ArrayList<Habitacion> habitaciones) {
+    public String formatInfoEstancias(ArrayList<Estancia> estancias, ArrayList<Habitacion> habitaciones) {
     	String str = numHabitaciones(habitaciones) + " x Dormitorios, ";
     	int cont = 1;
 		for (Estancia e : estancias) {
@@ -303,7 +290,7 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
     /**
      * Calcula el numero de habitaciones dormitorio de un alojamiento
      * @param habitaciones
-     * @return
+     * @return int cantidad de habitaciones
      */
     public int numHabitaciones(ArrayList<Habitacion> habitaciones) {
     	int suma = 0;
