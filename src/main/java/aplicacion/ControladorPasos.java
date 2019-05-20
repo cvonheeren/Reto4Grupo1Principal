@@ -46,6 +46,9 @@ public class ControladorPasos implements Initializable {
     
     @FXML
     public AnchorPane anchorPaneBase, botones;
+    
+    @FXML
+    public Label lblCantidadCarrito;
 	
 	@FXML
     private JFXButton btnLogin, btnSiguiente, btnAtras, btnCancelar;

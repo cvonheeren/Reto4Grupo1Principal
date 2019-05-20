@@ -146,6 +146,7 @@ public class ControladorSelAlojamiento implements Initializable {
     	
     	
 	}
+    
 
 	@FXML
     void filtrarME(MouseEvent event) {
