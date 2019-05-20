@@ -35,24 +35,61 @@ public class GestorBBDD {
 		return destinos;
 	}
 	
+	/**
+	 * 
+	 * @param ciudad
+	 * @param estrellasMin
+	 * @param estrellasMax
+	 * @param tipoAlojSel
+	 * @param tipoOrden
+	 * @param ordenAscendente
+	 * @return
+	 */
 	private ResultSet ObtenerResultSetAlojamientos(String ciudad, int estrellasMin, int estrellasMax, String[] tipoAlojSel, char tipoOrden, boolean ordenAscendente) {	
 		return modificarBBDD.cargarAlojamientos(ciudad, estrellasMin, estrellasMax, tipoAlojSel, tipoOrden, ordenAscendente);
 	}
 	
+	/**
+	 * 
+	 * @param ciudad
+	 * @param estrellasMin
+	 * @param estrellasMax
+	 * @param tipoAlojSel
+	 * @param tipoOrden
+	 * @param ordenAscendente
+	 * @param cantidad
+	 * @return
+	 */
 	public ArrayList<Alojamiento> RealizarBusquedaAlojamientos(String ciudad, int estrellasMin, int estrellasMax, String[] tipoAlojSel, char tipoOrden, boolean ordenAscendente, int cantidad) {
 		ultimaBusqueda = ObtenerResultSetAlojamientos(ciudad, estrellasMin, estrellasMax, tipoAlojSel, tipoOrden, ordenAscendente);
 		return ObtenerListaAlojamientos(ultimaBusqueda, cantidad);
 	}
 	
+	/*
+	 * 
+	 * 
+	 */
 	public void BorrarUltimaBusqueda() {
 		ultimaBusqueda = null;
 		listaAlojamientos = new ArrayList<Alojamiento>();
 	}
 	
+	/**
+	 * 
+	 * @param cantidad
+	 * @return
+	 */
 	public ArrayList<Alojamiento> MostrarMasAlojamientos(int cantidad) {
 		return ObtenerListaAlojamientos(ultimaBusqueda, cantidad);
 	}
 	
+	/**
+	 * 
+	 * @param codPromo
+	 * @param user
+	 * @param codAlojamiento
+	 * @return
+	 */
 	public float validarCodPromo(String codPromo, String user, int codAlojamiento) {
 		ResultSet result = modificarBBDD.validarCodPromo(codPromo, user, codAlojamiento);
 		float descuento = 0;
@@ -347,6 +384,24 @@ public class GestorBBDD {
 			e.printStackTrace();
 		}
 		return servicios;
+	}
+	
+	/**
+	 * Obtiene una lista de todos los codsAloj de los Alojamientos que tienen un servicio
+	 * @param codServicio
+	 * @return
+	 */
+	public ArrayList<Integer> obteneralojPorServv(int codServicio) {
+		ArrayList<Integer> codsAloj = new ArrayList<Integer>();
+		ResultSet result = modificarBBDD.obtenerAlojporServicio(codServicio);
+
+		try {
+			result.next();
+			codsAloj.add(result.getInt(1));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return codsAloj;
 	}
 	
 }
