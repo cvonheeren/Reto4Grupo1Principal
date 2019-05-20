@@ -112,7 +112,7 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 	 */
     private void inizializarAnimacion() {
     	TranslateTransition transicion = new TranslateTransition();
-    	transicion.setFromY(300);
+    	transicion.setFromY(800);
     	transicion.setToY(0);
     	transicion.setDuration(Duration.seconds(tAnimacion));
     	transicion.setNode(paneBase);

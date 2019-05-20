@@ -354,7 +354,7 @@ public class ControladorSelAlojamiento implements Initializable {
         		alojamiento.setHabitaciones(buscarHabDisponibles(alojamiento));
         		
         		// crea la tarjeta con la informacion del alojamiento
-        		CardAlojamiento card = new CardAlojamiento(alojamiento, i/5 + 0.5F, activarAnimacionCards);
+        		CardAlojamiento card = new CardAlojamiento(alojamiento, (float)(i)/16 + 1F, activarAnimacionCards);
         		
         		// añade listener a la tarjeta
         		card.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>(){
