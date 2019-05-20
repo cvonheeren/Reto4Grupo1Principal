@@ -121,9 +121,8 @@ public class GestorArchivos {
 				resultado=resultado+linea +"\n";					
 			}
 		} catch (Exception e) {
-			//Implementar logger?
 			System.out.println(e.getMessage());
-			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Error en la base de datos",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(new JFrame(), e.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
 			System.exit(0);
 		}
 		
