@@ -56,6 +56,10 @@ public class CardHabitacion extends AnchorPane implements Initializable {
 	    }
 	}
 	
+	public void actualizarCantidad(int cantidad) {
+		this.cantidad.setValue(cantidad);
+	}
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		LocalDate fecha1 = Principal.modelo.reserva.getFechaEntrada().toLocalDate();
