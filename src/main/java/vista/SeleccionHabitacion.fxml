@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -8,7 +9,7 @@
 
 <AnchorPane fx:id="main" prefHeight="767.0" prefWidth="1150.0" style="-fx-background-color: #1976d2;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorSelHabitacion">
    <children>
-      <Pane prefHeight="767.0" prefWidth="1150.0" style="-fx-background-color: #fff;">
+      <Pane fx:id="panePrincipal" prefHeight="767.0" prefWidth="1150.0" style="-fx-background-color: #fff;">
          <children>
             <Label fx:id="titulo" layoutX="75.0" layoutY="50.0" text="ELIGA LAS HABITACIONES QUE QUIERE RESERVAR:">
                <font>
@@ -20,6 +21,11 @@
                   <AnchorPane fx:id="paneHabitacion" prefHeight="485.0" prefWidth="600.0" />
                </content>
             </ScrollPane>
+            <JFXCheckBox fx:id="reservarTodo" layoutX="750.0" layoutY="100.0" mnemonicParsing="false" onAction="#reservarTodo" text="Reservar todo">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXCheckBox>
          </children>
       </Pane>
    </children>
