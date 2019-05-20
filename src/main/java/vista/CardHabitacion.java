@@ -25,16 +25,10 @@ public class CardHabitacion extends AnchorPane implements Initializable {
     private AnchorPane card;
 
 	@FXML
-	private Text tipo;
+	private Text tipo, precio, camas;
 
     @FXML
     private Label descripcion;
-
-    @FXML
-    private Text precio;
-
-    @FXML
-    private Text camas;
     
     @FXML
     private ChoiceBox<Integer> cantidad;
@@ -56,10 +50,6 @@ public class CardHabitacion extends AnchorPane implements Initializable {
 	    }
 	}
 	
-	public void actualizarCantidad(int cantidad) {
-		this.cantidad.setValue(cantidad);
-	}
-	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		LocalDate fecha1 = Principal.modelo.reserva.getFechaEntrada().toLocalDate();
@@ -71,7 +61,6 @@ public class CardHabitacion extends AnchorPane implements Initializable {
 		this.precio.setText(precio + "€ \n" + Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1, fecha2).size() + " noches");
 		this.camas.setText(textoCamas());
 		
-		// ChoiceBox - Cantidad de habitaciones
 		ArrayList<Integer> numHab = new ArrayList<Integer>();
 		for (int j = 0; j <= habitacion.getCantidad(); j++) {
 			numHab.add(j);
@@ -110,6 +99,14 @@ public class CardHabitacion extends AnchorPane implements Initializable {
 		});
 	}
 	
+	/**
+	 * Actualiza el selector de habitacion
+	 * @param cantidad
+	 */
+	public void actualizarCantidad(int cantidad) {
+		this.cantidad.setValue(cantidad);
+	}
+	
 	public String textoCamas() {
 		String str = "";
 		if (habitacion.getCtaCamasSimples() > 0 ) {
@@ -125,15 +122,17 @@ public class CardHabitacion extends AnchorPane implements Initializable {
 	}
 	
 	/**
-     * 
+     * Guarda el tipo de habitacion seleccionada y su cantidad en el objeto reserva
      * @param habitacion
      * @param cantidad
      */
     public void guardarHabitacion(Habitacion habitacion, int cantidad) {
-		ArrayList<Habitacion> habitacionesReservadas = Principal.modelo.reserva.getHabitacionesSeleccionadas();
+    	Principal.aplicacion.controladorPasos.AnimacionCama();
+    	ArrayList<Habitacion> habitacionesReservadas = Principal.modelo.reserva.getHabitacionesSeleccionadas();
 		if (habitacionesReservadas.size() == 0) {
 			Principal.modelo.reserva.addHabitacion(habitacion);
 			Principal.modelo.reserva.getHabitacionesSeleccionadas().get(habitacionesReservadas.size()-1).setCantidad(cantidad);
+			
 			return;
 		}
 		for (int i = 0;i < habitacionesReservadas.size(); i++) {

@@ -13,17 +13,12 @@ public class Cliente {
 	private Date fechaNac;
 	private String email;
 	
-	public Cliente(int codCliente, String username, String dni, String contrasenia, String nombre, String apellidos, Date fechaNac, String email) {
-		this.codCliente = codCliente;
-		this.username = username;
-		this.dni = dni;
-		this.contrasenia = contrasenia;
-		this.nombre = nombre;
-		this.apellidos = apellidos;
-		this.fechaNac = fechaNac;
-		this.email = email;
-	}
-	
+	/**
+	 * Crea un objeto Cliente con el codigo de cliente, el username y la contraseña de un usuario.
+	 * @param codCliente
+	 * @param username
+	 * @param contrasenia
+	 */
 	public Cliente(Integer codCliente, String username, String contrasenia) {
 		this.username = username;
 		this.contrasenia = contrasenia;

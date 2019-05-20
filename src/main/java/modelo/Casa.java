@@ -7,7 +7,7 @@ public class Casa extends Alojamiento {
 	private ArrayList<Estancia> estancias = new ArrayList<Estancia>();
 	
 	/**
-	 * Objeto hijo de Alojamiento del tipo Casa
+	 * Crea un objeto Casa que guarda los datos especificos de las casas
 	 * @param codAlojamiento
 	 * @param ubicacion
 	 * @param nombre
@@ -16,9 +16,9 @@ public class Casa extends Alojamiento {
 	 * @param latitud
 	 * @param tarifaNormal
 	 * @param tarifaVerano
-	 * @param recargo
 	 * @param desayuno
 	 * @param imgurl
+	 * @param estancias
 	 */
 	public Casa(int codAlojamiento, String ubicacion, String nombre, String descripcion, float longitud, float latitud,
 			float tarifaNormal, float tarifaVerano, float desayuno, String imgurl, ArrayList<Estancia> estancias) {
@@ -34,6 +34,10 @@ public class Casa extends Alojamiento {
 		this.estancias = estancias;
 	}
 	
+	/**
+	 * Calcula el tamaño total de una casa en metros cuadrados
+	 * @return metros cuadrados totales
+	 */
 	public float calcularArea() {
 		float suma = 0;
 		if (this.estancias != null) {
