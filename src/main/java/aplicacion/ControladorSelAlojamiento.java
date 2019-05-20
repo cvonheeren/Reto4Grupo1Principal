@@ -251,7 +251,16 @@ public class ControladorSelAlojamiento implements Initializable {
     		serv.setOnAction(new EventHandler<ActionEvent>(){
                  @Override
                  public void handle(ActionEvent event) {
-                     System.out.println("Button clicked");
+                     if(serv.isSelected())
+                     {
+                    	 serviciosSeleccionados.add(servicio);
+                    	 System.out.println("Seleccionado: " + servicio.getNombre());
+                     }
+                     else
+                     {
+                    	 serviciosSeleccionados.remove(servicio);
+                    	 System.out.println("Deleccionado: " + servicio.getNombre());
+                     }
                  }
             });
     		gridServicios.addRow(i, serv);
@@ -329,7 +338,7 @@ public class ControladorSelAlojamiento implements Initializable {
 		
 		if(alojamientos.isEmpty())
 		{
-			alojamientos = Principal.modelo.gestorBBDD.RealizarBusquedaAlojamientos(textCiudad.getText(), (int) filtroEstrellas.getLowValue(), (int) filtroEstrellas.getHighValue(), TiposAlojamientoSeleccionados(), tipoOrden, ordenAscendente, (int) sliderCantidad.getValue());
+			alojamientos = Principal.modelo.gestorBBDD.RealizarBusquedaAlojamientos(textCiudad.getText(), (int) filtroEstrellas.getLowValue(), (int) filtroEstrellas.getHighValue(), TiposAlojamientoSeleccionados(), tipoOrden, ordenAscendente, (int) sliderCantidad.getValue(), ServiciosSeleccionados());
 		}
 		Principal.aplicacion.busquedaAlojamientos = alojamientos;
 		Principal.aplicacion.textoBusqueda = textCiudad.getText().concat("");
@@ -395,6 +404,16 @@ public class ControladorSelAlojamiento implements Initializable {
 		if(chkBoxCasa.isSelected())
 			tiposAloj[2]="C";
 		return tiposAloj;
+	}
+	
+	private String[] ServiciosSeleccionados() {
+		String[] servSeleccionadosString = new String[serviciosSeleccionados.size()];
+		for(int i=0;i<serviciosSeleccionados.size();i++)
+		{
+			servSeleccionadosString[i]=Integer.toString(serviciosSeleccionados.get(i).getCodServicio());
+		}
+		
+		return servSeleccionadosString;
 	}
 	
 	/**
