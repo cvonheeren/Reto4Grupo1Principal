@@ -2,8 +2,6 @@ package modelo;
 
 public class Modelo {
 
-	
-//	public Habitacion habitacion = null;
 	public Cliente cliente = null;
 	public Reserva reserva = null;
 	public GestorDinero gestorDinero = null;

@@ -32,19 +32,21 @@ public class Aplicacion {
 
 	public Stage stage;
 	public Stage stageLogin;
-	private JFXSnackbar snackbar;
-	public ControladorPasos controladorPasos;
 	public Stage stagePopupInfo;
+	public Stage stageDialogo;
+	public Stage stageCargando;
+	
+	public ControladorPasos controladorPasos;
 	public ControladorSelAlojamiento controladorSelAlojamiento;
 	public ControladorPago controladorPago;
 	public ControladorInformacionAloj controladorInformacionAloj;
 	public ControladorFactura controladorFactura;
 	public ControladorLoginRegistro controladorLoginRegistro;
-	public Stage stageDialogo;
+	
+	private JFXSnackbar snackbar;
 	public ArrayList<Alojamiento> busquedaAlojamientos;
 	public String textoBusqueda = "";
 	public String textoTemporal;
-	public Stage stageCargando;
 	
 	@FXML
     private Pane anchorPaneBase;

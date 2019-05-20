@@ -8,12 +8,14 @@ import org.junit.Test;
 
 import modelo.Alojamiento;
 import modelo.Habitacion;
+import modelo.Servicio;
 
 public class AlojamientotTest {
 	
 	private Alojamiento alojamiento = new Alojamiento(1, "Bilbao", "Hotel Bilbao", "cremas", 20, 20, 3, 4, 5, "www.kakota");
 	private Alojamiento alojamiento2 = new Alojamiento();
-	protected ArrayList<Habitacion> habitaciones = new ArrayList<Habitacion>();
+	private ArrayList<Habitacion> habitaciones = new ArrayList<Habitacion>();
+	private ArrayList<Servicio> servicios = new ArrayList<Servicio>();
 	
 	@Test
 	public void testConstructor() {
@@ -32,68 +34,76 @@ public class AlojamientotTest {
 
 	@Test
 	public void testCodAlojamiento() {
-		alojamiento.setCodAlojamiento(1);
-		assertEquals(1, alojamiento.getCodAlojamiento());
+		alojamiento.setCodAlojamiento(2);
+		assertEquals(2, alojamiento.getCodAlojamiento());
 	}
 	
 	@Test
 	public void testNombre() {
-		alojamiento.setNombre("Hotel Bilbao");
-		assertEquals("Hotel Bilbao", alojamiento.getNombre());
+		alojamiento.setNombre("Hotel Bilbao2");
+		assertEquals("Hotel Bilbao2", alojamiento.getNombre());
 	}
 	
 	@Test
 	public void testUbicacion() {
-		alojamiento.setUbicacion("Bilbao");
-		assertEquals("Bilbao", alojamiento.getUbicacion());
+		alojamiento.setUbicacion("Bilbao2");
+		assertEquals("Bilbao2", alojamiento.getUbicacion());
 	}
 	
 	@Test
 	public void testDescripcion() {
-		alojamiento.setDescripcion("Bilbao");
-		assertEquals("Bilbao", alojamiento.getDescripcion());
+		alojamiento.setDescripcion("Bilbao2");
+		assertEquals("Bilbao2", alojamiento.getDescripcion());
 	}
 	
 	@Test
 	public void testLongitud() {
-		alojamiento.setLongitud(20);
-		assertEquals(20, alojamiento.getLongitud(), 0.00001);
+		alojamiento.setLongitud(21);
+		assertEquals(21, alojamiento.getLongitud(), 0.00001);
 	}
 	
 	@Test
 	public void testLatitud() {
-		alojamiento.setLatitud(20);
-		assertEquals(20, alojamiento.getLatitud(), 0.00001);
+		alojamiento.setLatitud(21);
+		assertEquals(21, alojamiento.getLatitud(), 0.00001);
 	}
 	
 	@Test
 	public void testDesayuno() {
-		alojamiento.setDesayuno(20);
-		assertEquals(20, alojamiento.getDesayuno(), 0.00001);
+		alojamiento.setDesayuno(21);
+		assertEquals(21, alojamiento.getDesayuno(), 0.00001);
 	}
 	
 	@Test
 	public void testMediaPension() {
-		alojamiento.setMediaPension(20);
-		assertEquals(20, alojamiento.getMediaPension(), 0.00001);
+		alojamiento.setMediaPension(21);
+		assertEquals(21, alojamiento.getMediaPension(), 0.00001);
 	}
 	
 	@Test
 	public void testPensionCompleta() {
-		alojamiento.setPensionCompleta(20);
-		assertEquals(20, alojamiento.getPensionCompleta(), 0.00001);
+		alojamiento.setPensionCompleta(21);
+		assertEquals(21, alojamiento.getPensionCompleta(), 0.00001);
 	}
 	
 	@Test
 	public void testImgurl() {
-		alojamiento.setImgurl("Bilbao");
-		assertEquals("Bilbao", alojamiento.getImgurl());
+		alojamiento.setImgurl("Bilbao2");
+		assertEquals("Bilbao2", alojamiento.getImgurl());
 	}
 	
 	@Test
 	public void testHabitaciones() {
+		habitaciones.add(new Habitacion(1, "hola", 2, 1, 1, 1, 1, 2f, 3f, 4f, ""));
 		alojamiento.setHabitaciones(habitaciones);
 		assertEquals(habitaciones, alojamiento.getHabitaciones());
+	}
+	
+	@Test
+	public void testServicios() {
+		servicios.add(new Servicio(1, "wifi", 5f, ""));
+		alojamiento.setServicios(servicios);
+		assertEquals(servicios, alojamiento.getServicios());
 	}
 	
 	@Test

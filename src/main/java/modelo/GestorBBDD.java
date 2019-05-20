@@ -35,27 +35,38 @@ public class GestorBBDD {
 		return destinos;
 	}
 	
-	private ResultSet ObtenerResultSetAlojamientos(String ciudad, int estrellasMin, int estrellasMax, String[] tipoAlojSel, char tipoOrden, boolean ordenAscendente)
-	{
-		
+	private ResultSet ObtenerResultSetAlojamientos(String ciudad, int estrellasMin, int estrellasMax, String[] tipoAlojSel, char tipoOrden, boolean ordenAscendente) {	
 		return modificarBBDD.cargarAlojamientos(ciudad, estrellasMin, estrellasMax, tipoAlojSel, tipoOrden, ordenAscendente);
 	}
 	
-	public ArrayList<Alojamiento> RealizarBusquedaAlojamientos(String ciudad, int estrellasMin, int estrellasMax, String[] tipoAlojSel, char tipoOrden, boolean ordenAscendente, int cantidad)
-	{
+	public ArrayList<Alojamiento> RealizarBusquedaAlojamientos(String ciudad, int estrellasMin, int estrellasMax, String[] tipoAlojSel, char tipoOrden, boolean ordenAscendente, int cantidad) {
 		ultimaBusqueda = ObtenerResultSetAlojamientos(ciudad, estrellasMin, estrellasMax, tipoAlojSel, tipoOrden, ordenAscendente);
 		return ObtenerListaAlojamientos(ultimaBusqueda, cantidad);
 	}
 	
-	public void BorrarUltimaBusqueda()
-	{
+	public void BorrarUltimaBusqueda() {
 		ultimaBusqueda = null;
 		listaAlojamientos = new ArrayList<Alojamiento>();
 	}
 	
-	public ArrayList<Alojamiento> MostrarMasAlojamientos(int cantidad)
-	{
+	public ArrayList<Alojamiento> MostrarMasAlojamientos(int cantidad) {
 		return ObtenerListaAlojamientos(ultimaBusqueda, cantidad);
+	}
+	
+	public float validarCodPromo(String codPromo, String user, int codAlojamiento) {
+		ResultSet result = modificarBBDD.validarCodPromo(codPromo, user, codAlojamiento);
+		float descuento = 0;
+		try {
+			while (result.next()) {
+				if(result.getString("CODPROMO").equals(codPromo)) {
+					descuento = result.getFloat("DESCUENTO");
+					modificarBBDD.BorrarPromocion(codPromo);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return descuento;
 	}
 	
 	/**
@@ -66,7 +77,7 @@ public class GestorBBDD {
 	private ArrayList<Alojamiento> ObtenerListaAlojamientos(ResultSet result, int cantidad) {
 		int contador = 0;
 		try {
-			while (result.next() && contador<cantidad) {
+			while (result.next() && contador < cantidad) {
 				
 				int codAlojamiento = result.getInt("COD_ALOJAMIENTO");
 				String ubicacion = result.getString("UBICACIONES.NOMBRE");
@@ -297,6 +308,11 @@ public class GestorBBDD {
 		return codReserva;
 	}
 
+	/**
+	 * Obtiene el codigo del cliente segun su nombre de usuario
+	 * @param username
+	 * @return
+	 */
 	public int obtenerCodCliente(String username) {
 		int codCliente = -1;
 		ResultSet result = modificarBBDD.obtenerCodCliente(username);
@@ -309,5 +325,28 @@ public class GestorBBDD {
 		}
 		return codCliente;
 	}
+	
+	/**
+	 * Devuelve la lista de los servicios de un alojamiento por su codigo
+	 * @param codAlojamiento
+	 * @return
+	 */
+	/*public ArrayList<Servicio> obtenerServicios(int codAlojamiento) {
+		ArrayList<Servicio> servicios = new ArrayList<Servicio>();
+		ResultSet result = modificarBBDD.obtenerServicios(codAlojamiento);
+		
+		try {
+			while (result.next()) {
+				int codServicio = result.getInt("COD_SERVICIO");
+				String nombre = result.getString("NOMBRE");
+				float precio = result.getFloat("PRECIO");
+				String icon = result.getString("FONTAWESOMEICON");
+				servicios.add(new Servicio(codServicio, nombre, precio, icon));
+	        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return servicios;
+	}*/
 	
 }

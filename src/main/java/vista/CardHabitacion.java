@@ -2,7 +2,7 @@ package vista;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -58,13 +58,13 @@ public class CardHabitacion extends AnchorPane implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		float precio = Principal.modelo.gestorDinero.getPrecioTotalHabitacion(habitacion);
-		Date fecha1 = Principal.modelo.reserva.getFechaEntrada();
-		Date fecha2 = Principal.modelo.reserva.getFechaSalida();
+		LocalDate fecha1 = Principal.modelo.reserva.getFechaEntrada().toLocalDate();
+		LocalDate fecha2 = Principal.modelo.reserva.getFechaSalida().toLocalDate();
+		float precio = Principal.modelo.gestorDinero.getPrecioTotalHabitacion(habitacion, fecha1, fecha2);
 		
 		this.tipo.setText(this.habitacion.getNombre());
 		this.descripcion.setText(this.habitacion.getDescripcion());
-		this.precio.setText(precio + "€ \n" + Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1.toLocalDate(), fecha2.toLocalDate()).size() + " noches");
+		this.precio.setText(precio + "€ \n" + Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1, fecha2).size() + " noches");
 		this.camas.setText(textoCamas());
 		
 		// ChoiceBox - Cantidad de habitaciones
@@ -84,7 +84,8 @@ public class CardHabitacion extends AnchorPane implements Initializable {
 		cantidad.setOnAction((e) -> {
 			if(cantidad.getValue()>0) {
 				guardarHabitacion(habitacion, cantidad.getValue());
-				float precioTotal = Principal.modelo.gestorDinero.calcularPrecioConDescuentos(Principal.modelo.reserva.getHabitacionesSeleccionadas());
+				Principal.aplicacion.controladorPasos.actualizarCarrito();
+				float precioTotal = Principal.modelo.gestorDinero.calcularPrecioConDescuentos(Principal.modelo.reserva.getHabitacionesSeleccionadas(), fecha1, fecha2);
 				Principal.modelo.gestorDinero.setPrecio(precioTotal);
 			} else {
 				Principal.modelo.reserva.removeHabitacion(habitacion);
@@ -97,6 +98,7 @@ public class CardHabitacion extends AnchorPane implements Initializable {
 //				if(cb.getValue() < habitacion.getCantidad()) {
 				cantidad.getSelectionModel().selectNext();
 				guardarHabitacion(habitacion, cantidad.getValue());
+				Principal.aplicacion.controladorPasos.actualizarCarrito();
 //				} else {
 //					Principal.aplicacion.mostrarMensaje(main, "No quedan más habitaciones");
 //				}

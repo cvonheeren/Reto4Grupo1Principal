@@ -10,10 +10,13 @@ import modelo.*;
 
 public class GestorDineroTest {
 	
-	float dinero = 20;
-	float precio = 200;
-
-	GestorDinero gestorDinero = new GestorDinero();
+	private float dinero = 20;
+	private float precio = 200;
+	GestorDinero gestorDinero = null;
+	
+	public GestorDineroTest() {
+		gestorDinero = new GestorDinero();
+	}
 	
 	@Test
 	public void testConstructor() {
@@ -25,6 +28,31 @@ public class GestorDineroTest {
 	public void testPrecio() {
 		gestorDinero.setPrecio(precio);
 		assertEquals(precio, gestorDinero.getPrecio(), 0);
+	}
+	
+	@Test
+	public void testDescuento() {
+		gestorDinero.setDescuento(10);
+		assertEquals(10, gestorDinero.getDescuento(), 0);
+	}
+	
+	@Test
+	public void testPrecioConDescuento() {
+		gestorDinero.setPrecio(precio);
+		gestorDinero.setDescuento(10);
+		assertEquals(190, gestorDinero.getPrecioConDescuento(), 0);
+	}
+	
+	@Test
+	public void testDineroIntroducido() {
+		gestorDinero.setDineroIntroducido(precio);
+		assertEquals(precio, gestorDinero.getDineroIntroducido(), 0);
+	}
+	
+	@Test
+	public void testDineroRestante() {
+		gestorDinero.setDineroRestante(precio);
+		assertEquals(precio, gestorDinero.getDineroRestante(), 0);
 	}
 	
 	@Test
@@ -44,8 +72,14 @@ public class GestorDineroTest {
 	public void testCalcularDineroRestante() {
 		gestorDinero.setPrecio(precio);
 		gestorDinero.sumarDinero(dinero);
-		float falta = 180;
-		assertEquals(falta, gestorDinero.calcularDineroRestante(), 0);	
+		assertEquals(180, gestorDinero.calcularDineroRestante(), 0);	
+	}
+	
+	@Test
+	public void testCalcularDineroRestante2() {
+		gestorDinero.setPrecio(precio);
+		gestorDinero.sumarDinero(300);
+		assertEquals(0, gestorDinero.calcularDineroRestante(), 0);	
 	}
 	
 	@Test
@@ -73,27 +107,26 @@ public class GestorDineroTest {
 	@Test
     public void testCalcularPrecioConDescuentos() {
         
-//        LocalDate fecha11 = LocalDate.of(2019, 8, 15);
-//        Date fecha1 = java.sql.Date.valueOf(fecha11);
-//        LocalDate fecha22 = LocalDate.of(2019, 8, 18);
-//        Date fecha2 = java.sql.Date.valueOf(fecha22);
+        LocalDate fecha1 = LocalDate.of(2019, 8, 15);
+        LocalDate fecha2 = LocalDate.of(2019, 8, 18);
         ArrayList<Habitacion> habReservadas = new ArrayList<Habitacion>();
-        Habitacion habitacion = new Habitacion(0, null, 0, 0, 0, 0, 0, 1, 1.2f, 1.2f, null);
-        habReservadas.add(0, habitacion);
+        Habitacion habitacion = new Habitacion(0, null, 0, 0, 0, 0, 1, 1, 1.2f, 1.2f, null);
+        habReservadas.add(habitacion);
       
-        assertEquals(1.2f+1.2f+1.2f, gestorDinero.calcularPrecioConDescuentos(habReservadas), 0.00001);   
+        assertEquals(1.2*2, gestorDinero.calcularPrecioConDescuentos(habReservadas, fecha1, fecha2), 0.001);   
     }
 
 	@Test
 	public void testgetprecioTotalhabitacion() {
-		Habitacion habitacion = new Habitacion(0, null, 0, 0, 0, 0, 0, 1, 1.2f, 1.2f, null);
-		
-		assertEquals(1, gestorDinero.getPrecioTotalHabitacion(habitacion), 0.000001);	
+		Habitacion habitacion = new Habitacion(0, null, 0, 0, 0, 0, 1, 1, 1.2f, 1.2f, null);
+		LocalDate fecha1 = LocalDate.of(2019, 8, 15);
+        LocalDate fecha2 = LocalDate.of(2019, 8, 18);
+		assertEquals(1.2f, gestorDinero.getPrecioTotalHabitacion(habitacion, fecha1, fecha2), 0.000001);	
 	}
 	
 	@Test
 	public void testgetprecioDiahabitacion() {
-		Habitacion habitacion = new Habitacion(0, null, 0, 0, 0, 0, 0, 1, 1.2f, 1.2f, null);
+		Habitacion habitacion = new Habitacion(0, null, 0, 0, 0, 0, 1, 1, 1.2f, 1.2f, null);
 		LocalDate fecha = LocalDate.of(2019, 8, 15);
 		
 		assertEquals(1.2f, gestorDinero.getPrecioDiaHabitacion(habitacion, fecha), 0.000001);	
@@ -101,13 +134,14 @@ public class GestorDineroTest {
 	
 	@Test
 	public void testgetHabBarata() {
+		LocalDate fecha = LocalDate.of(2019, 8, 15);
 		ArrayList<Habitacion> habReservadas = new ArrayList<Habitacion>();
 		Habitacion habitacion = new Habitacion(0, null, 0, 0, 0, 0, 0, 1, 1.2f, 1.2f, null);
 		Habitacion habitacion2 = new Habitacion(0, null, 0, 0, 0, 0, 0, 0.9f, 1.1f, 1.1f, null);
-		habReservadas.add(0, habitacion);
-		habReservadas.add(1, habitacion2);
+		habReservadas.add(habitacion);
+		habReservadas.add(habitacion2);
 		
-		assertEquals(habitacion2, gestorDinero.getHabBarata(habReservadas));	
+		assertEquals(habitacion2, gestorDinero.getHabBarata(habReservadas, fecha));	
 	}
 	
 	

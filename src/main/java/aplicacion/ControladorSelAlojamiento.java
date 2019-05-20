@@ -25,6 +25,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import de.jensd.fx.glyphs.materialicons.MaterialIcon;
 import de.jensd.fx.glyphs.materialicons.MaterialIconView;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -34,6 +35,7 @@ import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -45,6 +47,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
+import javafx.util.Duration;
 import modelo.Alojamiento;
 import modelo.Habitacion;
 import vista.CardAlojamiento;
@@ -77,6 +80,9 @@ public class ControladorSelAlojamiento implements Initializable {
     
     @FXML
     private Label lblSaludo;
+    
+    @FXML
+    private ScrollPane scrolpane;
 
     @FXML
     private Hyperlink lblSesion;
@@ -92,6 +98,26 @@ public class ControladorSelAlojamiento implements Initializable {
    
     @FXML
     private JFXSlider sliderCantidad;
+    
+    private boolean activarAnimacionCards = true;
+    
+    @FXML
+    void mostrarPaneOpciones(MouseEvent event) {
+    	TranslateTransition transicion = new TranslateTransition();
+		transicion.setDuration(Duration.millis(200));
+		transicion.setToY(0);
+		transicion.setNode(paneOpciones);
+		transicion.play();
+    }
+
+    @FXML
+    void ocultarPaneOpciones(MouseEvent event) {
+		TranslateTransition transicion = new TranslateTransition();
+		transicion.setDuration(Duration.millis(200));
+		transicion.setToY(-55);
+		transicion.setNode(paneOpciones);
+		transicion.play();
+    }
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -109,6 +135,7 @@ public class ControladorSelAlojamiento implements Initializable {
 		fechaSalida = deshabilitarFechas(fechaSalida, LocalDate.now().plusDays(1));
 		
 		RellenarFiltros();
+		InizializarAnimaciones();
 		
     	comprobarSesionIniciada();
 		cargarAutocompletar();
@@ -125,7 +152,14 @@ public class ControladorSelAlojamiento implements Initializable {
 		}
 	}
     
-    private ArrayList<Alojamiento> alojamientos = new ArrayList<Alojamiento>();
+    private void InizializarAnimaciones() {
+		TranslateTransition transicion = new TranslateTransition();
+		transicion.setToY(-55);
+		transicion.setNode(paneOpciones);
+		transicion.play();
+	}
+
+	private ArrayList<Alojamiento> alojamientos = new ArrayList<Alojamiento>();
    
     private void RellenarFiltros() {
     	filtroEstrellas.setLowValue(1f);
@@ -151,6 +185,7 @@ public class ControladorSelAlojamiento implements Initializable {
 	@FXML
     void filtrarME(MouseEvent event) {
 		Principal.modelo.gestorBBDD.BorrarUltimaBusqueda();
+		activarAnimacionCards = true;
 		ejecutarBusqueda();
     }
 	
@@ -162,6 +197,7 @@ public class ControladorSelAlojamiento implements Initializable {
 	@FXML
     void filtrarAE(ActionEvent event) {
 		Principal.modelo.gestorBBDD.BorrarUltimaBusqueda();
+		activarAnimacionCards = true;
 		ejecutarBusqueda();
     }
     
@@ -176,6 +212,7 @@ public class ControladorSelAlojamiento implements Initializable {
     void AutoBuscar(KeyEvent event) {
     	if(event.getCode() == KeyCode.ENTER) {
     		Principal.modelo.gestorBBDD.BorrarUltimaBusqueda();
+    		activarAnimacionCards = true;
     		ejecutarBusqueda();
     	}
     }
@@ -183,6 +220,7 @@ public class ControladorSelAlojamiento implements Initializable {
     @FXML
     void BtnBuscarPulsado(MouseEvent event) {
     	Principal.modelo.gestorBBDD.BorrarUltimaBusqueda();
+    	activarAnimacionCards = true;
     	ejecutarBusqueda();
     }
     
@@ -239,6 +277,10 @@ public class ControladorSelAlojamiento implements Initializable {
 			Principal.aplicacion.mostrarMensaje(paneBase, "Debe introducir algun valor en el campo de busqueda");
 			return;
 		}
+    	if(activarAnimacionCards)
+    	{
+    		scrolpane.setVvalue(0);
+    	}
     	alojamientos = new ArrayList<Alojamiento>();
     	contenedor.getChildren().remove(busqueda);
 		Date fechaEntradaDate = Date.valueOf(this.fechaEntrada.getValue());
@@ -282,7 +324,7 @@ public class ControladorSelAlojamiento implements Initializable {
         		alojamiento.setHabitaciones(buscarHabDisponibles(alojamiento));
         		
         		// crea la tarjeta con la informacion del alojamiento
-        		CardAlojamiento card = new CardAlojamiento(alojamiento);
+        		CardAlojamiento card = new CardAlojamiento(alojamiento, i/5 + 0.5F, activarAnimacionCards);
         		
         		// añade listener a la tarjeta
         		card.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>(){
@@ -308,6 +350,7 @@ public class ControladorSelAlojamiento implements Initializable {
 			@Override
 			public void handle(Event event) {
 				Principal.modelo.gestorBBDD.MostrarMasAlojamientos((int) sliderCantidad.getValue());
+				activarAnimacionCards = false;
 				cargarAlojamientos();
 			}
 		});

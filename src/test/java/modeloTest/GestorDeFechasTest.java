@@ -42,8 +42,8 @@ public class GestorDeFechasTest {
         
 		ArrayList<LocalDate> dias = new ArrayList<LocalDate>();
         
-        dias.add(0, fecha2);
-        dias.add(1, fecha3);
+		dias.add(fecha1);
+        dias.add(fecha2);
        
         assertEquals(dias, gestor.setDiasSeleccionados(fecha1, fecha3));
     }

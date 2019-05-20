@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.Objects;
+
 public class Habitacion extends Estancia {
 
 	private int ctaCamasSimples;
@@ -100,9 +102,36 @@ public class Habitacion extends Estancia {
 		int num = this.ctaCamasSimples*1 + this.ctaCamasMatrimonio*2;
 		return num;
 	}
-	
-	public int getNumHuespedes() {
-		return this.ctaCamasSimples + this.ctaCamasMatrimonio * 2 + this.ctaCamasInfantil;
+
+	@Override
+	public String toString() {
+		return "Habitacion [ctaCamasSimples=" + ctaCamasSimples + ", ctaCamasMatrimonio=" + ctaCamasMatrimonio
+				+ ", ctaCamasInfantil=" + ctaCamasInfantil + ", tarifaNormal=" + tarifaNormal + ", tarifaVerano="
+				+ tarifaVerano + ", tarifaFestivo=" + tarifaFestivo + ", descripcion=" + descripcion + ", codEstancia="
+				+ codEstancia + ", nombre=" + nombre + ", tamano=" + tamano + ", cantidad=" + cantidad + "]";
 	}
+
+	 @Override
+     public boolean equals(Object o) {
+         if (this == o) {
+             return true;
+         }
+         if (o == null || getClass() != o.getClass()) {
+             return false;
+         }
+         Habitacion habitacion = (Habitacion) o;
+         return ctaCamasSimples == habitacion.ctaCamasSimples &&
+        		 ctaCamasMatrimonio == habitacion.ctaCamasMatrimonio &&
+        		 ctaCamasInfantil == habitacion.ctaCamasInfantil &&
+        		 tarifaNormal == habitacion.tarifaNormal &&
+        		 tarifaVerano == habitacion.tarifaVerano &&
+        		 tarifaFestivo == habitacion.tarifaFestivo &&
+        		 ctaCamasInfantil == habitacion.ctaCamasInfantil &&
+        		 codEstancia == habitacion.codEstancia &&
+        		 tamano == habitacion.tamano &&
+        		 cantidad == habitacion.cantidad &&
+        		 Objects.equals(descripcion, habitacion.descripcion) &&
+        		 Objects.equals(nombre, habitacion.nombre);
+     }
 	
 }

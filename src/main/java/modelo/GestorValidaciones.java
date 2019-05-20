@@ -16,12 +16,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
 public class GestorValidaciones {
-
-	
-	public GestorValidaciones()
-	{
-		
-	}
 	
 	/**
 	 * 

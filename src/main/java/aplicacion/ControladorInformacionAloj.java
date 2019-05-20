@@ -127,9 +127,10 @@ public class ControladorInformacionAloj implements Initializable {
     public String mostrarHabitaciones(ArrayList<Habitacion> habitaciones) {
     	String str = "";
 		LocalDate fecha1 = Principal.modelo.reserva.getFechaEntrada().toLocalDate();
+		LocalDate fecha2 = Principal.modelo.reserva.getFechaSalida().toLocalDate(); 
 		for (Habitacion s : habitaciones) {
 			// carga el precio total de la estancia para la habitacion
-			float precio = Principal.modelo.gestorDinero.getPrecioTotalHabitacion(s);
+			float precio = Principal.modelo.gestorDinero.getPrecioTotalHabitacion(s, fecha1, fecha2);
 			// muestra el precio de la habitacion por noche y por estancia
 			str += s.getNombre() + "\t\t" + precio + "€/Estancia (" + Principal.modelo.gestorDinero.getPrecioDiaHabitacion(s, fecha1) + "€/noche)\n";
 		    if (s.getCtaCamasSimples() > 0 ) {

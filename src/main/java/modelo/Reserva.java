@@ -1,12 +1,13 @@
 package modelo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class Reserva {
 
 	private int codReserva;
-	private Date fechaCompra;
+	private Timestamp fechaCompra;
 	private Date fechaEntrada;
 	private Date fechaSalida;
 	private Alojamiento alojamiento = null;
@@ -19,11 +20,11 @@ public class Reserva {
 	 * @param fecha Fecha en la cual se realiza
 	 * @param precio Precio
 	 */
-	public Reserva(int codReserva, Date fechaCompra, Date fechaEntrada, Date fechaSalida) {
+	public Reserva(int codReserva, Timestamp fechaCompra, Date fechaEntrada, Date fechaSalida) {
 		this.codReserva = codReserva;
-		this.fechaCompra = fechaEntrada;
+		this.fechaCompra = fechaCompra;
 		this.fechaEntrada = fechaEntrada;
-		this.fechaSalida = fechaEntrada;
+		this.fechaSalida = fechaSalida;
 		this.habitacionesSeleccionadas = new ArrayList<Habitacion>();
 		this.ctdHabitaciones = 0;
 	}
@@ -41,11 +42,11 @@ public class Reserva {
 		this.codReserva = codReserva;
 	}
 
-	public Date getFechaCompra() {
+	public Timestamp getFechaCompra() {
 		return fechaCompra;
 	}
 
-	public void setFechaCompra(Date fechaCompra) {
+	public void setFechaCompra(Timestamp fechaCompra) {
 		this.fechaCompra = fechaCompra;
 	}
 

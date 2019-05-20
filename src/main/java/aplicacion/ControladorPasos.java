@@ -1,7 +1,7 @@
 package aplicacion;
 
 import java.net.URL;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -39,7 +39,7 @@ public class ControladorPasos implements Initializable {
 	public Hyperlink lblSesion;
 	
 	@FXML
-	public Label lblSaludo;
+	public Label lblSaludo, carrito;
 	
     @FXML
     private FontAwesomeIconView iconInfo;
@@ -63,6 +63,15 @@ public class ControladorPasos implements Initializable {
 		idTabPago.setDisable(true);
 		idTabFin.setDisable(true);
 		aplicacion().controladorPasos = this;
+	}
+	
+	public void actualizarCarrito() {
+		ArrayList<Habitacion> habitaciones = modelo().reserva.getHabitacionesSeleccionadas();
+		int numHab = 0;
+		for (int i = 0; i < habitaciones.size(); i++) {
+			numHab += habitaciones.get(i).getCantidad();
+		}
+		this.carrito.setText(String.valueOf(numHab));
 	}
 	
 	@FXML
@@ -129,7 +138,10 @@ public class ControladorPasos implements Initializable {
      */
     public void btnSiguienteHabitaciones() {
     	if(comprobarHabitacionSeleccionada()) {
-			float precio = modelo().gestorDinero.calcularPrecioConDescuentos(modelo().reserva.getHabitacionesSeleccionadas());
+    		ArrayList<Habitacion> habitaciones = modelo().reserva.getHabitacionesSeleccionadas();
+    		LocalDate fecha1 = Principal.modelo.reserva.getFechaEntrada().toLocalDate();
+    		LocalDate fecha2 = Principal.modelo.reserva.getFechaSalida().toLocalDate();
+			float precio = modelo().gestorDinero.calcularPrecioConDescuentos(habitaciones, fecha1, fecha2);
 			modelo().gestorDinero.setPrecio(precio);
 			if(modelo().cliente != null) {
 				idTabPago.setDisable(false);
@@ -153,7 +165,8 @@ public class ControladorPasos implements Initializable {
     	if (modelo().gestorDinero.calcularDineroRestante() == 0) {
 			
 			// guarda la fecha de la compra
-			Date fechaCompra = Date.valueOf(LocalDate.now());
+    		
+			Timestamp fechaCompra = new Timestamp(System.currentTimeMillis());
 			modelo().reserva.setFechaCompra(fechaCompra);
 			
 			// inserta la reserva en la base de datos

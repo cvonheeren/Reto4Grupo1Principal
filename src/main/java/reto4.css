@@ -63,8 +63,3 @@
 	-fx-border-radius: 1;
 	-fx-background-radius: 5;
 }
-
-#filtroBusquedas:hover
-{
-	-fx-translate-y: 55px;
-}

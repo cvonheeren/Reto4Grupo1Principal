@@ -15,6 +15,7 @@ public class Alojamiento {
 	protected float pensionCompleta;
 	protected String imgurl;
 	protected ArrayList<Habitacion> habitaciones = null;
+	protected ArrayList<Servicio> servicios = null;
 	
 	/**
 	 * Objeto padre Alojamiento
@@ -138,6 +139,14 @@ public class Alojamiento {
 		this.habitaciones = habitaciones;
 	}
 
+	public ArrayList<Servicio> getServicios() {
+		return servicios;
+	}
+
+	public void setServicios(ArrayList<Servicio> servicios) {
+		this.servicios = servicios;
+	}
+	
 	@Override
 	public String toString() {
 		return nombre + " (" + ubicacion + ")";
