@@ -386,4 +386,39 @@ public class GestorBBDD {
 		return servicios;
 	}
 	
+	public ArrayList<Servicio> obtenerTodosServicios() {
+		ArrayList<Servicio> servicios = new ArrayList<Servicio>();
+		ResultSet result = modificarBBDD.obtenerTodosServicios();
+		
+		try {
+			while (result.next()) {
+				int codServicio = result.getInt("COD_SERVICIO");
+				String nombre = result.getString("NOMBRE");
+				String icon = result.getString("FONTAWESOMEICON");
+				servicios.add(new Servicio(codServicio, nombre, -1, icon));
+	        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return servicios;
+	}
+	
+	/**
+	 * Obtiene una lista de todos los codsAloj de los Alojamientos que tienen un servicio
+	 * @param codServicio
+	 * @return
+	 */
+	public ArrayList<Integer> obteneralojPorServv(int codServicio) {
+		ArrayList<Integer> codsAloj = new ArrayList<Integer>();
+		ResultSet result = modificarBBDD.obtenerAlojporServicio(codServicio);
+
+		try {
+			result.next();
+			codsAloj.add(result.getInt(1));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return codsAloj;
+	}
+	
 }

@@ -49,6 +49,7 @@ import javafx.util.Callback;
 import javafx.util.Duration;
 import modelo.Alojamiento;
 import modelo.Habitacion;
+import modelo.Servicio;
 import vista.CardAlojamiento;
 
 public class ControladorSelAlojamiento implements Initializable {
@@ -88,6 +89,9 @@ public class ControladorSelAlojamiento implements Initializable {
     
     @FXML
     private Text busqueda;
+   
+    @FXML
+    private GridPane gridServicios;
     
     @FXML
     private JFXComboBox<Label> comboBoxOrdenBusqueda;
@@ -101,6 +105,8 @@ public class ControladorSelAlojamiento implements Initializable {
     private boolean activarAnimacionCards = true;
     
     private ArrayList<Alojamiento> alojamientos = new ArrayList<Alojamiento>();
+    
+    private ArrayList<Servicio> serviciosSeleccionados = new ArrayList<Servicio>();
     
     @FXML
     void mostrarPaneOpciones(MouseEvent event) {
@@ -233,6 +239,24 @@ public class ControladorSelAlojamiento implements Initializable {
     	comboBoxOrdenBusqueda.getItems().add(lblPrecioBajo);
     	comboBoxOrdenBusqueda.getItems().add(lblPrecioAlto);
     	comboBoxOrdenBusqueda.getSelectionModel().select(0);
+    	
+    	ArrayList<Servicio> servicios = Principal.modelo.gestorBBDD.obtenerTodosServicios();
+    	
+    	for(int i=0;i<servicios.size();i++)
+    	{
+    		Servicio servicio = servicios.get(i);
+    		JFXCheckBox serv = new JFXCheckBox(servicio.getNombre());
+    		serv.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.valueOf(servicio.getIcon())));
+    		serv.setPrefHeight(30);
+    		serv.setOnAction(new EventHandler<ActionEvent>(){
+                 @Override
+                 public void handle(ActionEvent event) {
+                     System.out.println("Button clicked");
+                 }
+            });
+    		gridServicios.addRow(i, serv);
+    	}
+
 	} 
     
     /**
