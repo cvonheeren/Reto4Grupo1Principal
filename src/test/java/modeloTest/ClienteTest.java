@@ -12,8 +12,7 @@ public class ClienteTest {
 	
 	Date fecha = new Date(0);
 	Date hoy = new Date(1);
-	Cliente cliente = new Cliente(2, "user45", "424234", "njdsvdjv", "nombre", "inventado", fecha, "aaa@gmail.com");
-	Cliente cliente2 = new Cliente(2, "user45", "njdsvdjv");
+	Cliente cliente = new Cliente(2, "user45", "njdsvdjv");
 	
 	@Test
 	public void testConstructor() {

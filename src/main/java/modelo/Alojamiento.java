@@ -18,18 +18,17 @@ public class Alojamiento {
 	protected ArrayList<Servicio> servicios = null;
 	
 	/**
-	 * Objeto padre Alojamiento
-	 * @param codAlojamiento Codigo principal del alojamiento
-	 * @param ubicacion Ubicacion
-	 * @param nombre Nombre
-	 * @param descripcion
-	 * @param longitud
-	 * @param latitud
-	 * @param tarifaNormal
-	 * @param tarifaVerano
-	 * @param desayuno
-	 * @param mediaPension
-	 * @param pensionCompleta
+	 * Crea un objeto Alojamiento que guarda los datos no especificos de los alojamientos
+	 * @param codAlojamiento Codigo unico para cada alojamiento
+	 * @param ubicacion Nombre de la ciudad donde se encuentra el alojamiento
+	 * @param nombre Nombre del alojamiento
+	 * @param descripcion Informacion del alojamiento
+	 * @param longitud Coordenadas longitud
+	 * @param latitud Coordanadas latitud
+	 * @param desayuno Precio del desayuno
+	 * @param mediaPension Precio de la media pension
+	 * @param pensionCompleta Precio de la pension completa
+	 * @param imgurl url de la imagen del alojamiento
 	 */
 	public Alojamiento(int codAlojamiento, String ubicacion, String nombre, String descripcion, float longitud,
 			float latitud, float desayuno, float mediaPension,
