@@ -31,6 +31,7 @@ import modelo.Casa;
 import modelo.Estancia;
 import modelo.Habitacion;
 import modelo.Hotel;
+import modelo.Servicio;
 
 public class CardAlojamiento extends AnchorPane implements Initializable {
 	
@@ -104,11 +105,19 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 		setIconoAloj();
 		setHabitaciones();
 		setEstancias();
-		//verServicios(this.alojamiento);
+		verServicios(this.alojamiento);
 	}
 	
+	@FXML
+    void verAlojamiento(ActionEvent event) {
+    	Principal.modelo.reserva.setAlojamiento(this.alojamiento);
+		Principal.aplicacion.CambiarScene("PaneInfo.fxml");
+    }
+	
+	/**
+	 * 
+	 */
     private void InizializarAnimacion() {
-    	
     	TranslateTransition transicion = new TranslateTransition();
     	transicion.setFromY(300);
     	transicion.setToY(0);
@@ -117,13 +126,10 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
     	transicion.play();
 		
 	}
-
-	@FXML
-    void verAlojamiento(ActionEvent event) {
-    	Principal.modelo.reserva.setAlojamiento(this.alojamiento);
-		Principal.aplicacion.CambiarScene("PaneInfo.fxml");
-    }
     
+	/**
+	 * 
+	 */
     public void setDatos() {
     	if (alojamiento instanceof Casa) {
 			this.tamano.setText(Float.toString(((Casa) alojamiento).calcularArea()) + " m²");
@@ -147,8 +153,7 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 	 * muestra los iconos de los servicios
 	 * @param alojamiento
 	 */
-
-	/*public void verServicios(Alojamiento alojamiento) {
+	public void verServicios(Alojamiento alojamiento) {
 		alojamiento.setServicios(Principal.modelo.gestorBBDD.obtenerServicios(alojamiento.getCodAlojamiento()));
 		ArrayList<Servicio> aux = alojamiento.getServicios();
 		
@@ -158,7 +163,7 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 			lblServicios.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.valueOf(auxS)));
 			servicios.getChildren().add(lblServicios);
 		}		
-	}*/
+	}
 	
 	/**
 	 * 

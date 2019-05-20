@@ -331,7 +331,7 @@ public class GestorBBDD {
 	 * @param codAlojamiento
 	 * @return
 	 */
-	/*public ArrayList<Servicio> obtenerServicios(int codAlojamiento) {
+	public ArrayList<Servicio> obtenerServicios(int codAlojamiento) {
 		ArrayList<Servicio> servicios = new ArrayList<Servicio>();
 		ResultSet result = modificarBBDD.obtenerServicios(codAlojamiento);
 		
@@ -347,6 +347,6 @@ public class GestorBBDD {
 			e.printStackTrace();
 		}
 		return servicios;
-	}*/
+	}
 	
 }
