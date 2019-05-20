@@ -55,16 +55,13 @@ import vista.CardAlojamiento;
 public class ControladorSelAlojamiento implements Initializable {
 	
     @FXML
-    private AnchorPane paneBase;
+    private AnchorPane paneBase, contenedor;
     
     @FXML
     private RangeSlider filtroEstrellas;
-	
-	@FXML
-    private AnchorPane contenedor;
 
     @FXML
-    private Pane paneBusqueda, paneFiltros;
+    private Pane paneBusqueda, paneFiltros, paneOpciones;
 
     @FXML
     private JFXTextField textCiudad;
@@ -74,9 +71,6 @@ public class ControladorSelAlojamiento implements Initializable {
 
     @FXML
     private JFXButton btnBuscar;
-    
-    @FXML
-    private Pane paneOpciones;
     
     @FXML
     private Label lblSaludo;
@@ -103,35 +97,14 @@ public class ControladorSelAlojamiento implements Initializable {
     private JFXSlider sliderCantidad;
     
     private boolean activarAnimacionCards = true;
-    
     private ArrayList<Alojamiento> alojamientos = new ArrayList<Alojamiento>();
-    
     private ArrayList<Servicio> serviciosSeleccionados = new ArrayList<Servicio>();
-    
-    @FXML
-    void mostrarPaneOpciones(MouseEvent event) {
-    	TranslateTransition transicion = new TranslateTransition();
-		transicion.setDuration(Duration.millis(200));
-		transicion.setToY(0);
-		transicion.setNode(paneOpciones);
-		transicion.play();
-    }
-
-    @FXML
-    void ocultarPaneOpciones(MouseEvent event) {
-		TranslateTransition transicion = new TranslateTransition();
-		transicion.setDuration(Duration.millis(200));
-		transicion.setToY(-55);
-		transicion.setNode(paneOpciones);
-		transicion.play();
-    }
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	JFXDepthManager.setDepth(paneFiltros, 2);
     	JFXDepthManager.setDepth(paneBusqueda, 1);
     	JFXDepthManager.setDepth(paneOpciones, 2);
- 
 
 		fechaEntrada.setValue(LocalDate.now());
 		fechaSalida.setValue(LocalDate.now().plusDays(1));
@@ -155,23 +128,36 @@ public class ControladorSelAlojamiento implements Initializable {
 		} catch(Exception e) {
 			
 		}
-	}   
+	} 
+    
+    @FXML
+    void mostrarPaneOpciones(MouseEvent event) {
+    	TranslateTransition transicion = new TranslateTransition();
+		transicion.setDuration(Duration.millis(200));
+		transicion.setToY(0);
+		transicion.setNode(paneOpciones);
+		transicion.play();
+    }
+
+    @FXML
+    void ocultarPaneOpciones(MouseEvent event) {
+		TranslateTransition transicion = new TranslateTransition();
+		transicion.setDuration(Duration.millis(200));
+		transicion.setToY(-55);
+		transicion.setNode(paneOpciones);
+		transicion.play();
+    }  
 
 	@FXML
     void filtrarME(MouseEvent event) {
-		Principal.modelo.gestorBBDD.BorrarUltimaBusqueda();
+		Principal.modelo.gestorBBDD.borrarUltimaBusqueda();
 		activarAnimacionCards = true;
 		ejecutarBusqueda();
     }
 	
 	@FXML
-	void OrdenarBusqueda(ActionEvent event) {
-		
-	}
-	
-	@FXML
     void filtrarAE(ActionEvent event) {
-		Principal.modelo.gestorBBDD.BorrarUltimaBusqueda();
+		Principal.modelo.gestorBBDD.borrarUltimaBusqueda();
 		activarAnimacionCards = true;
 		ejecutarBusqueda();
     }
@@ -186,7 +172,7 @@ public class ControladorSelAlojamiento implements Initializable {
     @FXML
     void AutoBuscar(KeyEvent event) {
     	if(event.getCode() == KeyCode.ENTER) {
-    		Principal.modelo.gestorBBDD.BorrarUltimaBusqueda();
+    		Principal.modelo.gestorBBDD.borrarUltimaBusqueda();
     		activarAnimacionCards = true;
     		ejecutarBusqueda();
     	}
@@ -194,7 +180,7 @@ public class ControladorSelAlojamiento implements Initializable {
 
     @FXML
     void BtnBuscarPulsado(MouseEvent event) {
-    	Principal.modelo.gestorBBDD.BorrarUltimaBusqueda();
+    	Principal.modelo.gestorBBDD.borrarUltimaBusqueda();
     	activarAnimacionCards = true;
     	ejecutarBusqueda();
     }
@@ -326,23 +312,26 @@ public class ControladorSelAlojamiento implements Initializable {
 	public void cargarAlojamientos() {
 		char tipoOrden = 0;
 		boolean ordenAscendente = false;
-		switch(comboBoxOrdenBusqueda.getSelectionModel().getSelectedIndex())
-		{
-		case 0: tipoOrden='P'; ordenAscendente=false;
-		break;
-		case 1: tipoOrden='D'; ordenAscendente=true;
-		break;
-		case 2: tipoOrden='D'; ordenAscendente=false;
-		break;
+		switch(comboBoxOrdenBusqueda.getSelectionModel().getSelectedIndex()) {
+			case 0:
+				tipoOrden='P'; ordenAscendente=false;
+				break;
+			case 1:
+				tipoOrden='D'; ordenAscendente=true;
+				break;
+			case 2:
+				tipoOrden='D'; ordenAscendente=false;
+				break;
 		}
 		
-		if(alojamientos.isEmpty())
-		{
-			alojamientos = Principal.modelo.gestorBBDD.RealizarBusquedaAlojamientos(textCiudad.getText(), (int) filtroEstrellas.getLowValue(), (int) filtroEstrellas.getHighValue(), TiposAlojamientoSeleccionados(), tipoOrden, ordenAscendente, (int) sliderCantidad.getValue(), ServiciosSeleccionados());
+		if(alojamientos.isEmpty()) {
+			alojamientos = Principal.modelo.gestorBBDD.realizarBusquedaAlojamientos(textCiudad.getText(), (int) filtroEstrellas.getLowValue(), (int) filtroEstrellas.getHighValue(), TiposAlojamientoSeleccionados(), tipoOrden, ordenAscendente, (int) sliderCantidad.getValue(), ServiciosSeleccionados());
 		}
+		
 		Principal.aplicacion.busquedaAlojamientos = alojamientos;
 		Principal.aplicacion.textoBusqueda = textCiudad.getText().concat("");
     	GridPane grid = crearGrid();
+    	
         int i = 0;
     	for(i = 0; i<alojamientos.size(); i++) {
     		
@@ -379,7 +368,7 @@ public class ControladorSelAlojamiento implements Initializable {
     	btnMostrarMas.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>(){
 			@Override
 			public void handle(Event event) {
-				Principal.modelo.gestorBBDD.MostrarMasAlojamientos((int) sliderCantidad.getValue());
+				Principal.modelo.gestorBBDD.mostrarMasAlojamientos((int) sliderCantidad.getValue());
 				activarAnimacionCards = false;
 				cargarAlojamientos();
 			}
@@ -406,13 +395,15 @@ public class ControladorSelAlojamiento implements Initializable {
 		return tiposAloj;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	private int[] ServiciosSeleccionados() {
 		int[] servSeleccionadosString = new int[serviciosSeleccionados.size()];
-		for(int i=0;i<serviciosSeleccionados.size();i++)
-		{
+		for(int i=0;i<serviciosSeleccionados.size();i++) {
 			servSeleccionadosString[i]=serviciosSeleccionados.get(i).getCodServicio();
 		}
-		
 		return servSeleccionadosString;
 	}
 	

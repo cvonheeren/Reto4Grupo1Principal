@@ -89,7 +89,7 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 		this.nombre.setText(this.alojamiento.getNombre());
 		this.ubicacion.setText(this.alojamiento.getUbicacion());
 		this.descripcion.setText(this.alojamiento.getDescripcion());
-		this.precio.setText(precio + "€\n" + Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1, fecha2).size() + " noches");	
+		this.precio.setText(precio + "â‚¬\n" + Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1, fecha2).size() + " noches");	
 		this.imagen.getEngine().loadContent("<html><body style=\"padding:0px; margin:0px;\"><img src=" + alojamiento.getImgurl() + " width=190px height=190px></img></body></html>");
 		JFXDepthManager.setDepth(imagen, 1);
 
@@ -124,14 +124,14 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 	 */
     public void setDatos() {
     	if (alojamiento instanceof Casa) {
-			this.tamano.setText(Float.toString(((Casa) alojamiento).calcularArea()) + " m²");
+			this.tamano.setText(Float.toString(((Casa) alojamiento).calcularArea()) + "mÂ²");
 		} else if(alojamiento instanceof Apartamento) {
 			this.tamano.setText(("Piso " + ((Apartamento) alojamiento).getPiso() ));
 		}
     }
 	
     /**
-     * Coloca el enlace del mapa en la posicion correcta y le añade un listener para abrirlo al pulsar
+     * Coloca el enlace del mapa en la posicion correcta y le aï¿½ade un listener para abrirlo al pulsar
      */
 	public void setMapa() {
 		mapa.setLayoutX((int) ubicacion.getBoundsInLocal().getMaxX() + ubicacion.getLayoutX() + 5);
@@ -218,7 +218,7 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 	}
 	
 	/**
-	 * Añade la informacion de las habitaciones
+	 * Aï¿½ade la informacion de las habitaciones
 	 */
 	public void setHabitaciones() {
 		if(alojamiento instanceof Hotel) {
@@ -234,7 +234,7 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 	}
 	
 	/**
-	 * Añade la informacion de las estancias
+	 * Aï¿½ade la informacion de las estancias
 	 */
 	public void setEstancias() {
 		if(alojamiento instanceof Hotel) {
@@ -261,7 +261,7 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 			str += h.getNombre().toLowerCase() + " - ";
 			str += h.getNumAdultos() + " Adultos";
 			if (h.getCtaCamasInfantil() > 0) {
-				str += ", " + h.getCtaCamasInfantil() + " Niños";
+				str += ", " + h.getCtaCamasInfantil() + " Niï¿½os";
 			}
 			str += "\n";
 		}

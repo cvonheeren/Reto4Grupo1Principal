@@ -157,7 +157,7 @@ CREATE VIEW VISTAPRECIOHAB AS
 	SELECT habitaciones.COD_HABITACION, alojamiento_habitacion.COD_ALOJAMIENTO, habitaciones.TARIFA_NORMAL, habitaciones.TARIFA_VERANO, habitaciones.TARIFA_FESTIVO  FROM habitaciones, alojamiento_habitacion WHERE habitaciones.COD_HABITACION=alojamiento_habitacion.COD_HABITACION GROUP BY alojamiento_habitacion.COD_ALOJAMIENTO;
 
 /**************************************************************************
-* INSERTA LOS DATOS
+* INSERCION LOS DATOS
 ***************************************************************************/
 
 -- DECLARACION DE VARIABLES --
