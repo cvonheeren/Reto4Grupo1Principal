@@ -386,22 +386,4 @@ public class GestorBBDD {
 		return servicios;
 	}
 	
-	/**
-	 * Obtiene una lista de todos los codsAloj de los Alojamientos que tienen un servicio
-	 * @param codServicio
-	 * @return
-	 */
-	public ArrayList<Integer> obteneralojPorServv(int codServicio) {
-		ArrayList<Integer> codsAloj = new ArrayList<Integer>();
-		ResultSet result = modificarBBDD.obtenerAlojporServicio(codServicio);
-
-		try {
-			result.next();
-			codsAloj.add(result.getInt(1));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return codsAloj;
-	}
-	
 }
