@@ -42,7 +42,6 @@ public class ControladorSelHabitacion implements Initializable {
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-    	cargarHabitaciones(Principal.modelo.reserva.getAlojamiento());
     	cardHabitaciones = new ArrayList<CardHabitacion>();
     	this.alojamiento = Principal.modelo.reserva.getAlojamiento();
 		cargarHabitaciones(alojamiento);
