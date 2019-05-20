@@ -18,7 +18,7 @@ import javafx.util.Callback;
 public class GestorValidaciones {
 	
 	/**
-	 * 
+	 * Limita el DatePicker para que no se pueda seleccionar una edad de menor de 18
 	 */
 	public void limitarFechaMenorEdad(JFXDatePicker fechaNacReg) {
 		final Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
@@ -37,7 +37,7 @@ public class GestorValidaciones {
 	}
 	
 	/**
-	 * 
+	 * Valida los datos del login esten vacios
 	 * @return
 	 */
 	public boolean validarDatosLogin(JFXTextField textFieldDNI, AnchorPane paneLogin, JFXPasswordField contrasena) {
@@ -53,7 +53,7 @@ public class GestorValidaciones {
 	 }
     
 	/**
-	 * 
+	 * Valida que los datos del resgistro sean correctos
 	 * @return
 	 */
     public boolean validarDatosRegistro(ControladorLoginRegistro gestor) {

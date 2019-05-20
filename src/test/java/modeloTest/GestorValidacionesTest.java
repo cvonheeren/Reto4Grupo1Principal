@@ -15,10 +15,6 @@ public class GestorValidacionesTest {
 
 	GestorValidaciones gestor = new GestorValidaciones();
 	
-//	JFXTextField textFieldDNI = mock(JFXTextField.class);
-//	AnchorPane paneLogin = mock(AnchorPane.class);
-//	JFXPasswordField contrasena = mock(JFXPasswordField.class);
-	
 	@Test
 	public void testValidarNif() {
 		String dni1 = "48359605N";
@@ -39,6 +35,10 @@ public class GestorValidacionesTest {
 		assertFalse(gestor.validarPass(pass2));
 	}
 	
+//	JFXTextField textFieldDNI = mock(JFXTextField.class);
+//	AnchorPane paneLogin = mock(AnchorPane.class);
+//	JFXPasswordField contrasena = mock(JFXPasswordField.class);
+//	
 //	@Test
 //	public void testDatosLogin() {
 //		when(textFieldDNI.getText()).thenReturn("48359605N");

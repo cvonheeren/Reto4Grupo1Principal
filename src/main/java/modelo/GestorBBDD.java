@@ -200,7 +200,7 @@ public class GestorBBDD {
 	}
 	
 	/**
-	 * 
+	 * Obtiene las habitaciones reservadas del alojamiento indicado?
 	 * @param codAlojamiento
 	 * @param fechaEntrada
 	 * @param fechaSalida
@@ -222,7 +222,7 @@ public class GestorBBDD {
 	}
 	
 	/**
-	 * 
+	 * Carga las habitaciones disponibles de un alojamiento en las fechas seleccionadas
 	 * @param codAlojamiento
 	 * @param fechaEntrada
 	 * @param fechaSalida
@@ -246,7 +246,7 @@ public class GestorBBDD {
 	}
 	
 	/**
-	 * 
+	 * Carga las estancias de un alojamiento?
 	 * @param codAlojamiento
 	 * @return
 	 */
@@ -383,6 +383,10 @@ public class GestorBBDD {
 		return servicios;
 	}
 	
+	/**
+	 * Obtiene una lista de todos los servicios disponibles
+	 * @return
+	 */
 	public ArrayList<Servicio> obtenerTodosServicios() {
 		ArrayList<Servicio> servicios = new ArrayList<Servicio>();
 		ResultSet result = modificarBBDD.obtenerTodosServicios();
@@ -399,23 +403,4 @@ public class GestorBBDD {
 		}
 		return servicios;
 	}
-	
-	/**
-	 * Obtiene una lista de todos los codsAloj de los Alojamientos que tienen un servicio
-	 * @param codServicio
-	 * @return
-	 */
-	public ArrayList<Integer> obteneralojPorServv(int codServicio) {
-		ArrayList<Integer> codsAloj = new ArrayList<Integer>();
-		ResultSet result = modificarBBDD.obtenerAlojporServicio(codServicio);
-
-		try {
-			result.next();
-			codsAloj.add(result.getInt(1));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return codsAloj;
-	}
-	
 }
