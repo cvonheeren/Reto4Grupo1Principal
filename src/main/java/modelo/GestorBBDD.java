@@ -122,30 +122,27 @@ public class GestorBBDD {
 				String desc = result.getString("DESCRIPCION");
 				float longitud = result.getFloat("LONGITUD");
 				float latitud = result.getFloat("LATITUD");
-				float desayuno = result.getFloat("DESAYUNO");
-				float mediaPension = result.getFloat("MEDIA_PENSION");
-				float pensionCompleta = result.getFloat("PENSION_COMPLETA");
 				String tipoAloj = result.getString("TIPO");
 				String imgurl = result.getString("IMGURL");
 				if(tipoAloj.equals("H"))
 				{
 					int estrellas = result.getInt("ESTRELLAS");
-					listaAlojamientos.add(new Hotel(codAlojamiento, ubicacion, nombre, desc, longitud, latitud, desayuno, mediaPension, pensionCompleta, imgurl, estrellas));
+					listaAlojamientos.add(new Hotel(codAlojamiento, ubicacion, nombre, desc, longitud, latitud, imgurl, estrellas));
 				}
 				else if(tipoAloj.equals("A"))
 				{
 					int piso = result.getInt("ALTURA");
 					ArrayList<Estancia> estancias = cargarEstancias(codAlojamiento);
-					listaAlojamientos.add(new Apartamento(codAlojamiento, ubicacion, nombre, desc, longitud, latitud, desayuno, mediaPension, pensionCompleta, imgurl, piso, estancias));
+					listaAlojamientos.add(new Apartamento(codAlojamiento, ubicacion, nombre, desc, longitud, latitud, imgurl, piso, estancias));
 				}
 				else if(tipoAloj.equals("C"))
 				{
 					ArrayList<Estancia> estancias = cargarEstancias(codAlojamiento);
-					listaAlojamientos.add(new Casa(codAlojamiento, ubicacion, nombre, desc, longitud, latitud, desayuno, mediaPension, pensionCompleta, imgurl, estancias));
+					listaAlojamientos.add(new Casa(codAlojamiento, ubicacion, nombre, desc, longitud, latitud, imgurl, estancias));
 				}
 				else
 				{
-					listaAlojamientos.add(new Alojamiento(codAlojamiento, ubicacion, nombre, desc, longitud, latitud, desayuno, mediaPension, pensionCompleta, imgurl));
+					listaAlojamientos.add(new Alojamiento(codAlojamiento, ubicacion, nombre, desc, longitud, latitud,  imgurl));
 				}
 				contador++;
 	        }

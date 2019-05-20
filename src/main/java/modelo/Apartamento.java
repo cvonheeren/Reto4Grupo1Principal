@@ -15,17 +15,13 @@ public class Apartamento extends Alojamiento {
 	 * @param descripcion
 	 * @param longitud
 	 * @param latitud
-	 * @param tarifaNormal
-	 * @param tarifaVerano
-	 * @param desayuno
 	 * @param imgurl
 	 * @param piso
 	 * @param estancias
 	 */
 	public Apartamento(int codAlojamiento, String ubicacion, String nombre, String descripcion, float longitud, float latitud,
-			float tarifaNormal, float tarifaVerano, float desayuno, String imgurl, int piso, ArrayList<Estancia> estancias) {
-		super(codAlojamiento, ubicacion, nombre, descripcion, longitud, latitud, tarifaNormal, tarifaVerano,
-				desayuno, imgurl);
+			String imgurl, int piso, ArrayList<Estancia> estancias) {
+		super(codAlojamiento, ubicacion, nombre, descripcion, longitud, latitud, imgurl);
 		this.piso = piso;
 		this.estancias = estancias;
 	}

@@ -12,15 +12,11 @@ public class Hotel extends Alojamiento {
 	 * @param descripcion
 	 * @param longitud
 	 * @param latitud
-	 * @param desayuno
-	 * @param mediaPension
-	 * @param pensionCompleta
 	 * @param imgurl
 	 * @param estrellas
 	 */
-	public Hotel(int codAlojamiento, String ubicacion, String nombre, String descripcion, float longitud, float latitud, float desayuno, float mediaPension, float pensionCompleta, String imgurl, int estrellas) {
-		super(codAlojamiento, ubicacion, nombre, descripcion, longitud, latitud, desayuno, mediaPension,
-				pensionCompleta, imgurl);
+	public Hotel(int codAlojamiento, String ubicacion, String nombre, String descripcion, float longitud, float latitud, String imgurl, int estrellas) {
+		super(codAlojamiento, ubicacion, nombre, descripcion, longitud, latitud, imgurl);
 		this.estrellas = estrellas;
 	}
 

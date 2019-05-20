@@ -10,9 +10,6 @@ public class Alojamiento {
 	protected String descripcion;
 	protected float longitud;
 	protected float latitud;
-	protected float desayuno;
-	protected float mediaPension;
-	protected float pensionCompleta;
 	protected String imgurl;
 	protected ArrayList<Habitacion> habitaciones = null;
 	protected ArrayList<Servicio> servicios = null;
@@ -25,23 +22,16 @@ public class Alojamiento {
 	 * @param descripcion Informacion del alojamiento
 	 * @param longitud Coordenadas longitud
 	 * @param latitud Coordanadas latitud
-	 * @param desayuno Precio del desayuno
-	 * @param mediaPension Precio de la media pension
-	 * @param pensionCompleta Precio de la pension completa
 	 * @param imgurl url de la imagen del alojamiento
 	 */
 	public Alojamiento(int codAlojamiento, String ubicacion, String nombre, String descripcion, float longitud,
-			float latitud, float desayuno, float mediaPension,
-			float pensionCompleta, String imgurl) {
+			float latitud, String imgurl) {
 		this.codAlojamiento = codAlojamiento;
 		this.ubicacion = ubicacion;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.longitud = longitud;
 		this.latitud = latitud;
-		this.desayuno = desayuno;
-		this.mediaPension = mediaPension;
-		this.pensionCompleta = pensionCompleta;
 		this.imgurl = imgurl;
 	}
 
@@ -95,31 +85,6 @@ public class Alojamiento {
 
 	public void setLatitud(float latitud) {
 		this.latitud = latitud;
-	}
-
-
-	public float getDesayuno() {
-		return desayuno;
-	}
-
-	public void setDesayuno(float desayuno) {
-		this.desayuno = desayuno;
-	}
-
-	public float getMediaPension() {
-		return mediaPension;
-	}
-
-	public void setMediaPension(float mediaPension) {
-		this.mediaPension = mediaPension;
-	}
-
-	public float getPensionCompleta() {
-		return pensionCompleta;
-	}
-
-	public void setPensionCompleta(float pensionCompleta) {
-		this.pensionCompleta = pensionCompleta;
 	}
 	
 	public String getImgurl() {

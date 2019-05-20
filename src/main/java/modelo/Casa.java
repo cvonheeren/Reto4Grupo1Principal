@@ -14,15 +14,12 @@ public class Casa extends Alojamiento {
 	 * @param descripcion
 	 * @param longitud
 	 * @param latitud
-	 * @param tarifaNormal
-	 * @param tarifaVerano
-	 * @param desayuno
 	 * @param imgurl
 	 * @param estancias
 	 */
 	public Casa(int codAlojamiento, String ubicacion, String nombre, String descripcion, float longitud, float latitud,
-			float tarifaNormal, float tarifaVerano, float desayuno, String imgurl, ArrayList<Estancia> estancias) {
-		super(codAlojamiento, ubicacion, nombre, descripcion, longitud, latitud, tarifaNormal, tarifaVerano, desayuno, imgurl);
+			String imgurl, ArrayList<Estancia> estancias) {
+		super(codAlojamiento, ubicacion, nombre, descripcion, longitud, latitud, imgurl);
 		this.estancias = estancias;
 	}
 
