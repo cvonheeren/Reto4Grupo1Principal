@@ -1,6 +1,7 @@
 package aplicacion;
 
 import java.net.URL;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -9,6 +10,8 @@ import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.scene.paint.Paint;
 import com.jfoenix.effects.JFXDepthManager;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import core.Principal;
@@ -16,6 +19,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import modelo.Alojamiento;
 import modelo.Habitacion;
+import modelo.Hotel;
 import vista.CardHabitacion;
 
 public class ControladorSelHabitacion implements Initializable {
@@ -24,17 +28,53 @@ public class ControladorSelHabitacion implements Initializable {
 	private AnchorPane paneHabitacion, main;
 	
 	@FXML
+	private Pane panePrincipal;
+	
+	@FXML
 	private Label titulo;
+	
+	@FXML
+	private JFXCheckBox reservarTodo;
+	
+	private Alojamiento alojamiento;
+	
+	ArrayList<CardHabitacion> cardHabitaciones;
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	cargarHabitaciones(Principal.modelo.reserva.getAlojamiento());
+    	cardHabitaciones = new ArrayList<CardHabitacion>();
+    	this.alojamiento = Principal.modelo.reserva.getAlojamiento();
+		cargarHabitaciones(alojamiento);
+		if (alojamiento instanceof Hotel) {
+			panePrincipal.getChildren().remove(reservarTodo);
+		}
 	}
+    
+    @FXML
+    void reservarTodo(ActionEvent event) {
+    	Date fechaEntrada = Principal.modelo.reserva.getFechaEntrada();
+    	Date fechaSalida = Principal.modelo.reserva.getFechaSalida();
+    	if(reservarTodo.isSelected()) {
+    		ArrayList<Habitacion> habitaciones = Principal.modelo.gestorBBDD.habitacionesDisponibles(alojamiento.getCodAlojamiento(), fechaEntrada, fechaSalida);
+        	Principal.modelo.reserva.setHabitacionesSeleccionadas(habitaciones);
+        	paneHabitacion.setDisable(true);
+        	for(int i=0; i<cardHabitaciones.size(); i++) {
+        		cardHabitaciones.get(0).actualizarCantidad(0);
+        	}
+    	} else {
+    		Principal.modelo.reserva.setHabitacionesSeleccionadas(null);
+        	paneHabitacion.setDisable(false);
+    	}
+	
+    }
     
     public void cargarHabitaciones(Alojamiento alojamiento) {
     	
     	GridPane grid = crearGrid();
-		ArrayList<Habitacion> habitaciones = Principal.modelo.gestorBBDD.habitacionesDisponibles(alojamiento.getCodAlojamiento(), Principal.modelo.reserva.getFechaEntrada(), Principal.modelo.reserva.getFechaSalida());
+    	Date fechaEntrada = Principal.modelo.reserva.getFechaEntrada();
+    	Date fechaSalida = Principal.modelo.reserva.getFechaSalida();
+		ArrayList<Habitacion> habitaciones = Principal.modelo.gestorBBDD.habitacionesDisponibles(alojamiento.getCodAlojamiento(), fechaEntrada, fechaSalida);
         
     	for(int i=0; i<habitaciones.size(); i++) {
     		
@@ -42,7 +82,7 @@ public class ControladorSelHabitacion implements Initializable {
 
     		// crea la tarjeta con la informacion del alojamiento
     		CardHabitacion card = new CardHabitacion(habitacion);
-        	
+    		cardHabitaciones.add(card);
         	AnchorPane paneSuperior = new AnchorPane();
         	JFXRippler rippler = new JFXRippler(card);
     		JFXDepthManager.setDepth(card, 1);
