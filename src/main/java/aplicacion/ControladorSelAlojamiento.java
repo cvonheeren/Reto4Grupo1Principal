@@ -1,12 +1,10 @@
 package aplicacion;
 
-
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 
 
 import org.controlsfx.control.RangeSlider;
