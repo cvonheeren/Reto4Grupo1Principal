@@ -9,6 +9,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -45,7 +46,33 @@
             <Font size="16.0" />
          </font>
       </Hyperlink>
-      <AnchorPane prefHeight="190.0" prefWidth="1150.0" style="-fx-background-color: #1976d2;" />
+      <AnchorPane prefHeight="190.0" prefWidth="1150.0" style="-fx-background-color: #1976d2;">
+         <children>
+            <Pane prefHeight="37.0" prefWidth="1150.0" style="-fx-background-color: #666666;">
+               <children>
+                  <Label fx:id="lblSaludo" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="828.0" layoutY="4.0" prefHeight="17.0" prefWidth="151.0" text="Hola, Anonimo" textAlignment="RIGHT" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Hyperlink fx:id="lblSesion" layoutX="979.0" onAction="#iniciarCerrar" prefHeight="37.0" prefWidth="151.0" text="Identifiquese" textFill="#f57c00">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Hyperlink>
+                  <Label layoutX="14.0" layoutY="4.0" prefHeight="27.0" prefWidth="88.0" text="BiDai-On:" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="102.0" layoutY="5.0" prefHeight="27.0" prefWidth="237.0" text="Pre-Release 1" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children></AnchorPane>
       <Label fx:id="tituloHab" layoutX="65.0" layoutY="520.0" text="Habitaciones disponibles:">
          <font>
             <Font name="System Bold" size="16.0" />
@@ -57,16 +84,6 @@
             <Font size="14.0" />
          </font>
       </Text>
-      <Label fx:id="lblSaludo" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="801.0" layoutY="49.0" prefHeight="17.0" prefWidth="151.0" text="Hola, Anonimo" textAlignment="RIGHT" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Hyperlink fx:id="lblSesion" layoutX="952.0" layoutY="44.0" onAction="#iniciarCerrar" prefHeight="37.0" prefWidth="151.0" text="Identifiquese" textFill="#f57c00">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Hyperlink>
       <ScrollPane layoutX="65.0" layoutY="560.0" prefHeight="200.0" prefWidth="450.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="430.0">

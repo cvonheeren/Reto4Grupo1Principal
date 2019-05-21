@@ -83,7 +83,7 @@ public class ControladorPasos implements Initializable {
 	}
 	
 	@FXML
-    void IniciarCerrar(ActionEvent event) {
+    void iniciarCerrar(ActionEvent event) {
 		if(modelo().cliente == null) {
 			aplicacion().CambiarScene("LoginRegistro.fxml");
 			aplicacion().controladorLoginRegistro.setPantallaAnterior("Pasos.fxml");
