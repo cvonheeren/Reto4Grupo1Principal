@@ -11,7 +11,6 @@ import javax.swing.JOptionPane;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
-import com.sun.prism.paint.Color;
 
 import core.Principal;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
@@ -52,9 +51,6 @@ public class ControladorPasos implements Initializable {
     
     @FXML
     public AnchorPane anchorPaneBase, botones;
-    
-    @FXML
-    public Label lblCantidadCarrito;
 	
 	@FXML
     private JFXButton btnLogin, btnSiguiente, btnAtras, btnCancelar;
@@ -244,10 +240,14 @@ public class ControladorPasos implements Initializable {
 			lblSaludo.setText("Hola, " + modelo().cliente.getUser());
 			lblSesion.setText("Cerrar Sesion");
 		} else {
-			lblSaludo.setText("Hola, Anonimo");
-			lblSesion.setText("Identifiquese");
+			lblSaludo.setText("Hola, Anónimo");
+			lblSesion.setText("Identifíquese");
 		}
 	}
+    
+    /**
+     * 
+     */
 	public void AnimacionCama() {
 		try{anchorPaneBase.getChildren().remove(iconoCama);} catch (Exception e) {}
 		iconoCama.setSize("100");

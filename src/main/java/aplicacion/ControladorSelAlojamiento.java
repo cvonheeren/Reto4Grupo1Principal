@@ -1,13 +1,10 @@
 package aplicacion;
 
-
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-import javax.swing.JScrollPane;
 
 import org.controlsfx.control.RangeSlider;
 
@@ -444,8 +441,8 @@ public class ControladorSelAlojamiento implements Initializable {
 			lblSaludo.setText("Hola, " + Principal.modelo.cliente.getUser());
 			lblSesion.setText("Cerrar Sesion");
 		} else {
-			lblSaludo.setText("Hola, Anonimo");
-			lblSesion.setText("Identifiquese");
+			lblSaludo.setText("Hola, Anónimo");
+			lblSesion.setText("Identifíquese");
 		}
 	}
 

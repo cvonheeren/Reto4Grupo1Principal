@@ -16,7 +16,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 import modelo.Habitacion;
 
 public class CardHabitacion extends AnchorPane implements Initializable {
@@ -140,7 +139,7 @@ public class CardHabitacion extends AnchorPane implements Initializable {
 		}
 		Principal.modelo.reserva.addHabitacion(habitacion);
 		Principal.modelo.reserva.getHabitacionesSeleccionadas().get(Principal.modelo.reserva.getHabitacionesSeleccionadas().size()-1).setCantidad(cantidad);
-		Principal.aplicacion.controladorPasos.lblCantidadCarrito.setText(Integer.toString(cantidad));
+		Principal.aplicacion.controladorPasos.carrito.setText(Integer.toString(cantidad));
 	}
 	
 }
