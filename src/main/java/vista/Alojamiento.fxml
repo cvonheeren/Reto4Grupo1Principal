@@ -49,7 +49,13 @@
          <FlowPane fx:id="servicios" layoutX="230.0" layoutY="110.0" prefHeight="20.0" prefWidth="390.0" />
          <JFXButton layoutX="5.0" layoutY="5.0" onAction="#verAlojamiento" prefHeight="210.0" prefWidth="740.0" ripplerFill="#bbbbbb" style="-fx-background-color: transparent;" text=" " />
          <Hyperlink fx:id="mapa" layoutY="54.0" text="Ver Mapa" underline="true" />
-         <JFXButton fx:id="btnVer" layoutX="650.0" layoutY="165.0" onAction="#verAlojamiento" prefHeight="40.0" prefWidth="80.0" style="-fx-background-color: #f57c00;" text="Ver Más" textFill="WHITE" />
+         <JFXButton fx:id="btnVer" layoutX="571.0" layoutY="166.0" onAction="#verAlojamiento" prefHeight="40.0" prefWidth="159.0" style="-fx-background-color: transparent;" styleClass="botonInverso" stylesheets="@../reto4.css" text="Mas información" textFill="WHITE">
+            <font>
+               <Font name="System Bold" size="14.0" />
+            </font>
+            <graphic>
+               <FontAwesomeIconView fill="#f57c00" glyphName="LINK" size="20" />
+            </graphic></JFXButton>
 	   </children>
 	   <cursor>
 	      <Cursor fx:constant="HAND" />
