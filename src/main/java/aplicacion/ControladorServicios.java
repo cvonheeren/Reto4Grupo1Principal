@@ -51,9 +51,16 @@ public class ControladorServicios implements Initializable {
     
     public void cargarServicios(Alojamiento alojamiento) {
     	ArrayList<Servicio> servicios = Principal.modelo.gestorBBDD.obtenerServicios(alojamiento.getCodAlojamiento());
+    	for(int i=0;i<servicios.size();i++)
+    	{
+    		Servicio servicio = servicios.get(i);
+    		if(servicio.getPrecio()>0.0F)
+    			servicios.remove(i);
+    	}
+    	
     	for(int i=0;i<servicios.size();i++) {
     		Servicio servicio = servicios.get(i);
-    		JFXCheckBox serv = new JFXCheckBox(servicio.getNombre());
+    		JFXCheckBox serv = new JFXCheckBox(servicio.getNombre() + " " + servicio.getPrecio() + "€");
     		serv.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.valueOf(servicio.getIcon())));
     		serv.setPrefHeight(30);
     		serv.setOnAction(new EventHandler<ActionEvent>(){
