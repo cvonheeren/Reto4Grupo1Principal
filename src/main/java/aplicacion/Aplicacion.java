@@ -84,8 +84,8 @@ public class Aplicacion {
 	 * @param bounds
 	 */
 	public void centrarPopup(Bounds bounds) {
-		stagePopupInfo.setX(stage.getX()+700);
-		stagePopupInfo.setY(stage.getY()+170);
+		stagePopupInfo.setX(stage.getX()+720);
+		stagePopupInfo.setY(stage.getY()+110);
 	}
 	
 	/**
