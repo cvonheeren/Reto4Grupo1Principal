@@ -22,7 +22,7 @@
                   	<fx:include fx:id="SeleccionHabitacion" source="SeleccionHabitacion.fxml" />
                   </Tab>
                   <Tab fx:id="idTabServ" closable="false" text="Seleccione Servicios">
-<!--                   	<fx:include fx:id="Servicios" source="Servicios.fxml" /> -->
+                  	<fx:include fx:id="Servicios" source="Servicios.fxml" />
                   </Tab>
                   <Tab fx:id="idTabPago" closable="false" text="Pago">
 					<fx:include fx:id="Pago" source="Pago.fxml" />
