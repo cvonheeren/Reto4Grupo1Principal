@@ -9,7 +9,6 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="anchorPaneBase" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1150.0" styleClass="fondo" stylesheets="@../reto4.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorPasos">
@@ -22,7 +21,7 @@
                   	<fx:include fx:id="SeleccionHabitacion" source="SeleccionHabitacion.fxml" />
                   </Tab>
                   <Tab fx:id="idTabServ" closable="false" text="Seleccione Servicios">
-<!--                   	<fx:include fx:id="Servicios" source="Servicios.fxml" /> -->
+                  	<fx:include fx:id="Servicios" source="Servicios.fxml" />
                   </Tab>
                   <Tab fx:id="idTabPago" closable="false" text="Pago">
 					<fx:include fx:id="Pago" source="Pago.fxml" />
@@ -62,16 +61,6 @@
             </JFXButton>
          </children>
       </AnchorPane>
-      <Label fx:id="lblSaludo" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="790.0" layoutY="61.0" prefHeight="17.0" prefWidth="151.0" text="Hola, Anonimo" textAlignment="RIGHT" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Hyperlink fx:id="lblSesion" layoutX="940.0" layoutY="56.0" onAction="#IniciarCerrar" prefHeight="37.0" prefWidth="151.0" text="Identifiquese" textFill="#f57c00">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Hyperlink>
       <FontAwesomeIconView fx:id="iconInfo" fill="WHITE" glyphName="SHOPPING_CART" layoutX="1060.0" layoutY="85.0" onMouseClicked="#mostrarInfo" size="35">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -82,5 +71,29 @@
              <Font name="System Bold" size="12.0" />
           </font>
        </Label>
+      <Pane prefHeight="37.0" prefWidth="1150.0" style="-fx-background-color: #666666;">
+         <children>
+            <Label fx:id="lblSaludo" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="828.0" layoutY="4.0" prefHeight="17.0" prefWidth="151.0" text="Hola, Anonimo" textAlignment="RIGHT" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Hyperlink fx:id="lblSesion" layoutX="979.0" onAction="#iniciarCerrar" prefHeight="37.0" prefWidth="151.0" text="Identifiquese" textFill="#f57c00">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Hyperlink>
+            <Label layoutX="14.0" layoutY="4.0" prefHeight="27.0" prefWidth="88.0" text="BiDai-On:" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="102.0" layoutY="5.0" prefHeight="27.0" prefWidth="237.0" text="Pre-Release 1" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

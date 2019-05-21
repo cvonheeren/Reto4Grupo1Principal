@@ -129,7 +129,6 @@ public class CardHabitacion extends AnchorPane implements Initializable {
 		if (habitacionesReservadas.size() == 0) {
 			Principal.modelo.reserva.addHabitacion(habitacion);
 			Principal.modelo.reserva.getHabitacionesSeleccionadas().get(habitacionesReservadas.size()-1).setCantidad(cantidad);
-			
 			return;
 		}
 		for (int i = 0;i < habitacionesReservadas.size(); i++) {

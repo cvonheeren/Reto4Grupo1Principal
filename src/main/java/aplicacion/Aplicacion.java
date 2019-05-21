@@ -18,7 +18,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -85,8 +84,8 @@ public class Aplicacion {
 	 * @param bounds
 	 */
 	public void centrarPopup(Bounds bounds) {
-		stagePopupInfo.setX(stage.getX()+700);
-		stagePopupInfo.setY(stage.getY()+170);
+		stagePopupInfo.setX(stage.getX()+720);
+		stagePopupInfo.setY(stage.getY()+110);
 	}
 	
 	/**
@@ -101,6 +100,7 @@ public class Aplicacion {
 			JFXDecorator decorator = new JFXDecorator(stage, FXML, false, false, true);
 			decorator.getStylesheets().add("reto4.css");
 			Scene scene = new Scene(decorator);
+			Button prueba = new Button("aaaa");
 			scene.getStylesheets().add("reto4.css");
 			stage.setTitle("BiDaiOn ALPHA");
 			stage.setScene(scene);

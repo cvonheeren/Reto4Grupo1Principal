@@ -57,7 +57,7 @@
          <content>
             <AnchorPane fx:id="contenedor" prefHeight="656.0" prefWidth="770.0" style="-fx-background-color: #eeeeee;">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="37.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" rotate="83.7">
+                  <ImageView fx:id="flecha" fitHeight="150.0" fitWidth="200.0" layoutX="37.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" rotate="83.7">
                      <image>
                         <Image url="@arrow.png" />
                      </image>

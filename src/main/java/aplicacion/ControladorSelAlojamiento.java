@@ -23,7 +23,7 @@ import com.jfoenix.effects.JFXDepthManager;
 import core.Principal;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-
+import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -36,6 +36,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -95,6 +96,9 @@ public class ControladorSelAlojamiento implements Initializable {
    
     @FXML
     private JFXSlider sliderCantidad;
+    
+    @FXML
+    private ImageView flecha;
     
     private boolean activarAnimacionCards = true;
     private ArrayList<Alojamiento> alojamientos = new ArrayList<Alojamiento>();
@@ -205,6 +209,7 @@ public class ControladorSelAlojamiento implements Initializable {
 		transicion.setToY(-55);
 		transicion.setNode(paneOpciones);
 		transicion.play();
+		
 	}
    
 	/**

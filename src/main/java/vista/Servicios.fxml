@@ -4,10 +4,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="main" prefHeight="767.0" prefWidth="1150.0" style="-fx-background-color: #1976d2;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorSelHabitacion">
+<AnchorPane fx:id="main" prefHeight="767.0" prefWidth="1150.0" style="-fx-background-color: #1976d2;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplicacion.ControladorServicios">
    <children>
       <Pane fx:id="panePrincipal" prefHeight="767.0" prefWidth="1150.0" style="-fx-background-color: #fff;">
          <children>
@@ -18,7 +21,20 @@
             </Label>
             <ScrollPane layoutX="75.0" layoutY="100.0" prefHeight="490.0" prefWidth="615.0">
                <content>
-                  <AnchorPane fx:id="paneServicios" prefHeight="485.0" prefWidth="600.0" />
+                  <AnchorPane fx:id="paneServicios" prefHeight="485.0" prefWidth="600.0">
+                     <children>
+                        <GridPane fx:id="gridServicios" layoutX="5.0" layoutY="5.0" prefHeight="460.0" prefWidth="505.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                        </GridPane>
+                     </children></AnchorPane>
                </content>
             </ScrollPane>
             <JFXCheckBox fx:id="reservarTodo" layoutX="750.0" layoutY="100.0" mnemonicParsing="false" onAction="#reservarTodo" text="Reservar todo">

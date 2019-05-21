@@ -121,7 +121,7 @@ public class Reserva {
 		this.ctdServicios++;
 	}
 	
-	public void removeServicios(Servicio servicio) {
+	public void removeServicio(Servicio servicio) {
 		this.serviciosSeleccionados.remove(servicio);
 		this.ctdServicios--;
 	}
