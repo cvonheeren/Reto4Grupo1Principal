@@ -8,6 +8,8 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXButton;
 
 import core.Principal;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,6 +18,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import modelo.Alojamiento;
 import modelo.Apartamento;
@@ -23,6 +27,7 @@ import modelo.Casa;
 import modelo.Estancia;
 import modelo.Habitacion;
 import modelo.Hotel;
+import modelo.Servicio;
 
 public class ControladorInformacionAloj implements Initializable {
 	
@@ -44,6 +49,9 @@ public class ControladorInformacionAloj implements Initializable {
     @FXML
     private JFXButton atras, reservar;
     
+    @FXML
+    private VBox servicios;
+    
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
@@ -59,6 +67,8 @@ public class ControladorInformacionAloj implements Initializable {
 		
 		comprobarSesionIniciada();
 		setHabitaciones(alojamiento);
+		verServicios(alojamiento);
+		
 	}
     
     @FXML
@@ -88,6 +98,17 @@ public class ControladorInformacionAloj implements Initializable {
 		new ControladorPasos();
 		Principal.aplicacion.CambiarScene("Pasos.fxml");
 	}	
+	
+	public void verServicios(Alojamiento alojamiento) {
+		alojamiento.setServicios(Principal.modelo.gestorBBDD.obtenerServicios(alojamiento.getCodAlojamiento()));
+		ArrayList<Servicio> aux = alojamiento.getServicios();
+		for (Servicio unservicio : aux) {
+			String auxS = unservicio.getIcon();
+			Label lblServicios = new Label("- " + unservicio.getNombre() + "\n");
+			lblServicios.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.valueOf(auxS)));
+			servicios.getChildren().add(lblServicios);
+		}		
+	}
 	
 	/**
 	 * Carga las habitaciones del alojamiento seleccionado y otra info del alojamiento

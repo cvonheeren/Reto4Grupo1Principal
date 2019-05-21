@@ -21,7 +21,7 @@
 	      </Text>
 	      <Text fx:id="ubicacion" layoutX="255.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UBICACION" />
 	      <FontAwesomeIconView fill="#555555" glyphName="MAP_MARKER" layoutX="235.0" layoutY="70.0" size="20" />
-         <Label fx:id="descripcion" layoutX="235.0" layoutY="75.0" prefHeight="50.0" prefWidth="390.0" text="Descripcion" wrapText="true" />
+         <Label fx:id="descripcion" layoutX="235.0" layoutY="75.0" prefHeight="40.0" prefWidth="390.0" text="Descripcion" wrapText="true" />
          <Text fx:id="precio" fill="#0ab21b" layoutX="630.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Precio">
             <font>
                <Font name="Arial" size="26.0" />
@@ -49,7 +49,7 @@
             </font>
          </Label>
          <Label fx:id="tamano" layoutX="402.0" layoutY="57.0" />
-         <FlowPane fx:id="servicios" layoutX="510.0" layoutY="119.0" prefHeight="40.0" prefWidth="200.0" />
+         <FlowPane fx:id="servicios" layoutX="230.0" layoutY="110.0" prefHeight="20.0" prefWidth="390.0" />
 	   </children>
 	   <cursor>
 	      <Cursor fx:constant="HAND" />
