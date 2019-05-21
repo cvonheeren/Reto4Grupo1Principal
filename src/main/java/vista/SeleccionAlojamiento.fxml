@@ -67,7 +67,7 @@
                         <Font name="Arial" size="24.0" />
                      </font>
                   </Text>
-                  <Label alignment="TOP_LEFT" layoutX="249.0" layoutY="170.0" prefHeight="77.0" prefWidth="444.0" text="Para comenzar busca un destino en la barra superior de busqueda" wrapText="true">
+                  <Label alignment="TOP_LEFT" layoutX="249.0" layoutY="170.0" prefHeight="77.0" prefWidth="444.0" text="Para comenzar busca un destino en la barra superior de búsqueda" wrapText="true">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -195,7 +195,7 @@
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                   </GridPane>
-                  <Label layoutX="35.0" layoutY="14.0" text="Filtros de busqueda:">
+                  <Label layoutX="35.0" layoutY="14.0" text="Filtros de búsqueda:">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>

@@ -86,7 +86,7 @@ public class GestorValidaciones {
     		return false;
     	}
     	if (gestor.contrasenaRepReg.getText().isEmpty()) {
-    		Principal.aplicacion.mostrarMensaje(gestor.paneLogin, "Campo 'Contraseña1' vacio.");
+    		Principal.aplicacion.mostrarMensaje(gestor.paneLogin, "Campo 'Repita contraseña' vacio.");
     		return false;
     	}
     	if (gestor.textFieldMailReg.getText().isEmpty()) {
@@ -101,6 +101,10 @@ public class GestorValidaciones {
     		Principal.aplicacion.mostrarMensaje(gestor.paneLogin, "No puedes registrarte siendo menor de edad.");
     		return false;
     	}
+    	if (!gestor.chkboxBases.isSelected()) {
+    		Principal.aplicacion.mostrarMensaje(gestor.paneLogin, "Para continuar debe aceptar las bases legales.");
+    		return false;
+    	}
     	if (Principal.modelo.gestorBBDD.comprobarDni(gestor.textFieldDNIReg.getText())) {
     		Principal.aplicacion.mostrarMensaje(gestor.paneLogin, "El DNI introducido ya existe.");
     		return false;
@@ -110,11 +114,7 @@ public class GestorValidaciones {
     		return false;
     	}
     	if (!gestor.contrasenaReg.getText().equals(gestor.contrasenaRepReg.getText())) {
-    		Principal.aplicacion.mostrarMensaje(gestor.paneLogin, "Las contraseñas introducidas no son correctas.");
-    		return false;
-    	}
-    	if (!gestor.chkboxBases.isSelected()) {
-    		Principal.aplicacion.mostrarMensaje(gestor.paneLogin, "Para continuar debe aceptar las bases legales.");
+    		Principal.aplicacion.mostrarMensaje(gestor.paneLogin, "Las contraseñas introducidas no coinciden.");
     		return false;
     	}
     	return true;

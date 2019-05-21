@@ -291,7 +291,7 @@ public class ControladorSelAlojamiento implements Initializable {
      */
     public void ejecutarBusqueda() {
     	if (textCiudad.getText().equals("")) {
-			Principal.aplicacion.mostrarMensaje(paneBase, "Debe introducir algun valor en el campo de busqueda");
+			Principal.aplicacion.mostrarMensaje(paneBase, "Debe introducir algún valor en el campo de búsqueda");
 			return;
 		}
     	if(activarAnimacionCards)
