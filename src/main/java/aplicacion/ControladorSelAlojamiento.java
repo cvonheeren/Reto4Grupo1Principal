@@ -237,15 +237,16 @@ public class ControladorSelAlojamiento implements Initializable {
     		serv.setOnAction(new EventHandler<ActionEvent>(){
                  @Override
                  public void handle(ActionEvent event) {
-                     if(serv.isSelected())
-                     {
+                     if(serv.isSelected()) {
                     	 serviciosSeleccionados.add(servicio);
-                    	 System.out.println("Seleccionado: " + servicio.getNombre());
-                     }
-                     else
-                     {
+                    	 Principal.modelo.gestorBBDD.borrarUltimaBusqueda();
+                    	 activarAnimacionCards = true;
+                    	 ejecutarBusqueda();
+                     } else {
                     	 serviciosSeleccionados.remove(servicio);
-                    	 System.out.println("Deleccionado: " + servicio.getNombre());
+                    	 Principal.modelo.gestorBBDD.borrarUltimaBusqueda();
+                    	 activarAnimacionCards = true;
+                    	 ejecutarBusqueda();
                      }
                  }
             });
