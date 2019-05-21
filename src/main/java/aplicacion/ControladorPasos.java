@@ -240,10 +240,14 @@ public class ControladorPasos implements Initializable {
 			lblSaludo.setText("Hola, " + modelo().cliente.getUser());
 			lblSesion.setText("Cerrar Sesion");
 		} else {
-			lblSaludo.setText("Hola, Anonimo");
-			lblSesion.setText("Identifiquese");
+			lblSaludo.setText("Hola, Anónimo");
+			lblSesion.setText("Identifíquese");
 		}
 	}
+    
+    /**
+     * 
+     */
 	public void AnimacionCama() {
 		try{anchorPaneBase.getChildren().remove(iconoCama);} catch (Exception e) {}
 		iconoCama.setSize("100");
