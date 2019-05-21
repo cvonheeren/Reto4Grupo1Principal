@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import com.jfoenix.controls.JFXDecorator;
 import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXSnackbar.SnackbarEvent;
 
@@ -17,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -47,6 +49,7 @@ public class Aplicacion {
 	public ArrayList<Alojamiento> busquedaAlojamientos;
 	public String textoBusqueda = "";
 	public String textoTemporal;
+	
 	
 	@FXML
     private Pane anchorPaneBase;
@@ -93,11 +96,19 @@ public class Aplicacion {
 	public void CambiarScene(String FXMLLink) {
 		Parent FXML = loadFXML(FXMLLink);
 		if (FXML != null) {
-			Scene scene = new Scene(FXML);
+			Stage stageAntiguo = stage;
+			stage = new Stage();
+			JFXDecorator decorator = new JFXDecorator(stage, FXML, false, false, true);
+			decorator.getStylesheets().add("reto4.css");
+			Scene scene = new Scene(decorator);
 			scene.getStylesheets().add("reto4.css");
 			stage.setTitle("BiDaiOn ALPHA");
 			stage.setScene(scene);
+			stage.setResizable(false);
 			stage.show();
+			// evento de cierre de la app
+			stage.setOnCloseRequest(confirmCloseEventHandler);
+			stageAntiguo.close();
 		}
 	}
 	
