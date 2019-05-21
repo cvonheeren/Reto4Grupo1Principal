@@ -42,7 +42,7 @@ public class GestorValidaciones {
 	 */
 	public boolean validarDatosLogin(JFXTextField textFieldDNI, AnchorPane paneLogin, JFXPasswordField contrasena) {
     	if (textFieldDNI.getText().isEmpty()) {
-    		Principal.aplicacion.mostrarMensaje(paneLogin, "Campo 'DNI' vacio.");
+    		Principal.aplicacion.mostrarMensaje(paneLogin, "Campo 'Nombre de usuario' vacio.");
     		return false;
     	}
     	if (contrasena.getText().isEmpty()) {
