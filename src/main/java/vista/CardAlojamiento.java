@@ -124,7 +124,7 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 	 */
     public void setDatos() {
     	if (alojamiento instanceof Casa) {
-			this.tamano.setText(Float.toString(((Casa) alojamiento).calcularArea()) + "mÂ²");
+			this.tamano.setText(Float.toString(((Casa) alojamiento).calcularArea()) + "m²");
 		} else if(alojamiento instanceof Apartamento) {
 			this.tamano.setText(("Piso " + ((Apartamento) alojamiento).getPiso() ));
 		}
@@ -261,7 +261,7 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 			str += h.getNombre().toLowerCase() + " - ";
 			str += h.getNumAdultos() + " Adultos";
 			if (h.getCtaCamasInfantil() > 0) {
-				str += ", " + h.getCtaCamasInfantil() + " Niï¿½os";
+				str += ", " + h.getCtaCamasInfantil() + " Niños";
 			}
 			str += "\n";
 		}

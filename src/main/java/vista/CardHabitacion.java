@@ -24,11 +24,8 @@ public class CardHabitacion extends AnchorPane implements Initializable {
 	@FXML
     private AnchorPane card;
 
-	@FXML
-	private Text tipo, precio, camas;
-
     @FXML
-    private Label descripcion;
+    private Label descripcion, tipo, precio, camas;
     
     @FXML
     private ChoiceBox<Integer> cantidad;
