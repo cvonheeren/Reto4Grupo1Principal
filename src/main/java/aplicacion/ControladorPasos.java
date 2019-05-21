@@ -67,6 +67,7 @@ public class ControladorPasos implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		iconoCama = new FontAwesomeIconView(FontAwesomeIcon.BED);
 		comprobarSesionIniciada();
+		idTabServ.setDisable(true);
 		idTabPago.setDisable(true);
 		idTabFin.setDisable(true);
 		aplicacion().controladorPasos = this;
@@ -150,17 +151,8 @@ public class ControladorPasos implements Initializable {
     		LocalDate fecha2 = Principal.modelo.reserva.getFechaSalida().toLocalDate();
 			float precio = modelo().gestorDinero.calcularPrecioConDescuentos(habitaciones, fecha1, fecha2);
 			modelo().gestorDinero.setPrecio(precio);
-//			if(modelo().cliente != null) {
-//				idTabPago.setDisable(false);
-//				tabPane.getSelectionModel().select(idTabPago);
-//				Principal.aplicacion.controladorPago.initialize(null, null);
-//				Principal.aplicacion.controladorFactura.initialize(null, null);
-//			} else {
-//				aplicacion().CambiarScene("LoginRegistro.fxml");
-//				aplicacion().controladorLoginRegistro.setPantallaAnterior("Pasos.fxml");
-//				aplicacion().controladorLoginRegistro.setTabActiva(tabPane.getSelectionModel().getSelectedIndex());
-//				aplicacion().controladorLoginRegistro.setLoginForced(true);
-//			}
+			idTabServ.setDisable(false);
+			tabPane.getSelectionModel().select(idTabServ);
 		}
     }
     
@@ -169,24 +161,24 @@ public class ControladorPasos implements Initializable {
      * si has iniciado sesión o no lo has hecho
      */
     public void btnSiguienteServicios() {
-    	if(comprobarHabitacionSeleccionada()) {
+    	if(comprobarServiciosSeleccionados()) {
     		ArrayList<Habitacion> habitaciones = modelo().reserva.getHabitacionesSeleccionadas();
     		ArrayList<Servicio> servicios = modelo().reserva.getServiciosSeleccionados();
     		LocalDate fecha1 = Principal.modelo.reserva.getFechaEntrada().toLocalDate();
     		LocalDate fecha2 = Principal.modelo.reserva.getFechaSalida().toLocalDate();
 			float precio = modelo().gestorDinero.calcularPrecioConDescuentos2(habitaciones, servicios, fecha1, fecha2);
 			modelo().gestorDinero.setPrecio(precio);
-			if(modelo().cliente != null) {
-				idTabPago.setDisable(false);
-				tabPane.getSelectionModel().select(idTabPago);
-				Principal.aplicacion.controladorPago.initialize(null, null);
-				Principal.aplicacion.controladorFactura.initialize(null, null);
-			} else {
-				aplicacion().CambiarScene("LoginRegistro.fxml");
-				aplicacion().controladorLoginRegistro.setPantallaAnterior("Pasos.fxml");
-				aplicacion().controladorLoginRegistro.setTabActiva(tabPane.getSelectionModel().getSelectedIndex());
-				aplicacion().controladorLoginRegistro.setLoginForced(true);
-			}
+		}
+    	if(modelo().cliente != null) {
+			idTabPago.setDisable(false);
+			tabPane.getSelectionModel().select(idTabPago);
+			Principal.aplicacion.controladorPago.initialize(null, null);
+			Principal.aplicacion.controladorFactura.initialize(null, null);
+		} else {
+			aplicacion().CambiarScene("LoginRegistro.fxml");
+			aplicacion().controladorLoginRegistro.setPantallaAnterior("Pasos.fxml");
+			aplicacion().controladorLoginRegistro.setTabActiva(tabPane.getSelectionModel().getSelectedIndex());
+			aplicacion().controladorLoginRegistro.setLoginForced(true);
 		}
     }
     
@@ -248,6 +240,14 @@ public class ControladorPasos implements Initializable {
 		}
 		return sigTab;
 	}
+    
+    /**
+     * 
+     * @return
+     */
+    public boolean comprobarServiciosSeleccionados() {
+    	return true;
+    }
     
     /**
      * 
