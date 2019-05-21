@@ -146,11 +146,14 @@ public class ControladorPasos implements Initializable {
      */
     public void btnSiguienteHabitaciones() {
     	if(comprobarHabitacionSeleccionada()) {
+    		
     		ArrayList<Habitacion> habitaciones = modelo().reserva.getHabitacionesSeleccionadas();
     		LocalDate fecha1 = Principal.modelo.reserva.getFechaEntrada().toLocalDate();
     		LocalDate fecha2 = Principal.modelo.reserva.getFechaSalida().toLocalDate();
+    		
 			float precio = modelo().gestorDinero.calcularPrecioConDescuentos(habitaciones, null, fecha1, fecha2);
 			modelo().gestorDinero.setPrecio(precio);
+			
 			idTabServ.setDisable(false);
 			tabPane.getSelectionModel().select(idTabServ);
 		}
@@ -162,14 +165,17 @@ public class ControladorPasos implements Initializable {
      */
     public void btnSiguienteServicios() {
     	if(comprobarServiciosSeleccionados()) {
+    		
     		ArrayList<Habitacion> habitaciones = modelo().reserva.getHabitacionesSeleccionadas();
     		ArrayList<Servicio> servicios = modelo().reserva.getServiciosSeleccionados();
     		LocalDate fecha1 = Principal.modelo.reserva.getFechaEntrada().toLocalDate();
     		LocalDate fecha2 = Principal.modelo.reserva.getFechaSalida().toLocalDate();
+    		
 			float precio = modelo().gestorDinero.calcularPrecioConDescuentos(habitaciones, servicios, fecha1, fecha2);
 			modelo().gestorDinero.setPrecio(precio);
 		}
     	if(modelo().cliente != null) {
+    		idTabServ.setDisable(false);
 			idTabPago.setDisable(false);
 			tabPane.getSelectionModel().select(idTabPago);
 			Principal.aplicacion.controladorPago.initialize(null, null);
@@ -246,7 +252,11 @@ public class ControladorPasos implements Initializable {
      * @return
      */
     public boolean comprobarServiciosSeleccionados() {
-    	return true;
+    	if (Principal.modelo.reserva.getServiciosSeleccionados().size() > 0) {
+    		return true;
+    	} else {
+    		return false;
+    	}
     }
     
     /**

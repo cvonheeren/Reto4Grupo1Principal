@@ -60,10 +60,7 @@ public class ControladorServicios implements Initializable {
                  @Override
                  public void handle(ActionEvent event) {
                 	 if(serv.isSelected()) {
-						ArrayList<Servicio> serviciosSeleccionados = Principal.modelo.reserva.getServiciosSeleccionados();
-						if (serviciosSeleccionados.size() == 0) {
-							Principal.modelo.reserva.addServicio(servicio);
-						}
+						Principal.modelo.reserva.addServicio(servicio);
                      } else {
                     	 Principal.modelo.reserva.removeServicio(servicio);
                      }

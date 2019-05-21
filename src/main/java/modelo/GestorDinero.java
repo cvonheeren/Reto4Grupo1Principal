@@ -159,6 +159,7 @@ public class GestorDinero {
 		float tarifaDiaNormal = 0;
 		float tarifaDiaVerano = 0;
 		float tarifaDiaFestivo = 0;
+		float precioServicios = 0;
 		
 		// calcular tarifa por dia normal
 		for(int i=0;i<habReservadas.size();i++) {
@@ -187,8 +188,14 @@ public class GestorDinero {
 				precioTotal += tarifaDiaNormal;
 			}
 		}
+	    
+	    if (servicios != null) {
+	    	for (int i = 0; i < servicios.size(); i++) {
+	    		precioServicios += servicios.get(i).getPrecio();
+	    	}
+	    }
 
-	    return precioTotal - descuento;
+	    return precioTotal + precioServicios - descuento;
 	}
 	
 	/**

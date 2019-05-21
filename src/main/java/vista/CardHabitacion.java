@@ -75,7 +75,7 @@ public class CardHabitacion extends AnchorPane implements Initializable {
 			if(cantidad.getValue()>0) {
 				guardarHabitacion(habitacion, cantidad.getValue());
 				Principal.aplicacion.controladorPasos.actualizarCarrito();
-				float precioTotal = Principal.modelo.gestorDinero.calcularPrecioConDescuentos(Principal.modelo.reserva.getHabitacionesSeleccionadas(), fecha1, fecha2);
+				float precioTotal = Principal.modelo.gestorDinero.calcularPrecioConDescuentos(Principal.modelo.reserva.getHabitacionesSeleccionadas(), null, fecha1, fecha2);
 				Principal.modelo.gestorDinero.setPrecio(precioTotal);
 			} else {
 				Principal.modelo.reserva.removeHabitacion(habitacion);
