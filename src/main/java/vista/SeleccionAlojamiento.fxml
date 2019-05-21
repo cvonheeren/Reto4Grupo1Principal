@@ -12,6 +12,8 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -55,11 +57,26 @@
          <content>
             <AnchorPane fx:id="contenedor" prefHeight="656.0" prefWidth="770.0" style="-fx-background-color: #eeeeee;">
                <children>
-                  <Text fx:id="busqueda" layoutX="256.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No ha realizado ninguna busqueda aun.">
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="37.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" rotate="83.7">
+                     <image>
+                        <Image url="@arrow.png" />
+                     </image>
+                  </ImageView>
+                  <Text fx:id="busqueda1" layoutX="249.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="¡Bienvenido a BiDai-On!">
                      <font>
-                        <Font size="16.0" />
+                        <Font name="Arial" size="24.0" />
                      </font>
                   </Text>
+                  <Label alignment="TOP_LEFT" layoutX="249.0" layoutY="170.0" prefHeight="77.0" prefWidth="444.0" text="Para comenzar busca un destino en la barra superior de busqueda" wrapText="true">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="150.0" fitWidth="183.0" layoutX="588.0" layoutY="473.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@BiDaiOn.png" />
+                     </image>
+                  </ImageView>
                </children></AnchorPane>
          </content>
       </ScrollPane>
@@ -119,31 +136,45 @@
                </padding>
             </JFXTextField>
             <FontAwesomeIconView fill="#f57c00" glyphName="SEARCH" layoutX="583.0" layoutY="155.0" onMouseClicked="#BtnBuscarPulsado" size="30" />
-            <Label fx:id="lblSaludo" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="801.0" layoutY="49.0" prefHeight="17.0" prefWidth="151.0" text="Hola, Anonimo" textAlignment="RIGHT" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Hyperlink fx:id="lblSesion" layoutX="952.0" layoutY="44.0" onAction="#IniciarCerrar" prefHeight="37.0" prefWidth="151.0" text="Identifiquese" textFill="#f57c00">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Hyperlink>
             <Label layoutX="645.0" layoutY="205.0" text="Opciones de busqueda" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
+            <Pane prefHeight="37.0" prefWidth="1150.0" style="-fx-background-color: #666666;">
+               <children>
+                  <Label fx:id="lblSaludo" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="828.0" layoutY="4.0" prefHeight="17.0" prefWidth="151.0" text="Hola, Anonimo" textAlignment="RIGHT" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Hyperlink fx:id="lblSesion" layoutX="979.0" onAction="#IniciarCerrar" prefHeight="37.0" prefWidth="151.0" text="Identifiquese" textFill="#f57c00">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Hyperlink>
+                  <Label layoutX="14.0" layoutY="4.0" prefHeight="27.0" prefWidth="88.0" text="BiDai-On:" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="102.0" layoutY="5.0" prefHeight="27.0" prefWidth="237.0" text="Pre-Release 1" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
          </children>
       </Pane>
       <ScrollPane fitToWidth="true" layoutY="240.0" prefHeight="660.0" prefWidth="339.0">
          <content>
             <Pane fx:id="paneFiltros" minHeight="658.0" prefWidth="337.0" styleClass="fondoBlanco" stylesheets="@../reto4.css">
                <children>
-                  <Label layoutX="28.0" layoutY="34.0" prefHeight="28.0" prefWidth="133.0" text="Estrellas" />
-                  <RangeSlider fx:id="filtroEstrellas" blockIncrement="0.0" highValue="5.0" layoutX="50.0" layoutY="72.0" lowValue="1.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" onMouseReleased="#filtrarME" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
-                  <Label layoutX="28.0" layoutY="121.0" prefHeight="28.0" prefWidth="133.0" text="Tipo" />
-                  <GridPane layoutX="50.0" layoutY="167.0">
+                  <Label layoutX="28.0" layoutY="58.0" prefHeight="28.0" prefWidth="133.0" text="Estrellas" />
+                  <RangeSlider fx:id="filtroEstrellas" blockIncrement="0.0" highValue="5.0" layoutX="50.0" layoutY="96.0" lowValue="1.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" onMouseReleased="#filtrarME" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+                  <Label layoutX="28.0" layoutY="145.0" prefHeight="28.0" prefWidth="133.0" text="Tipo" />
+                  <GridPane layoutX="50.0" layoutY="191.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
@@ -158,12 +189,17 @@
                         <JFXCheckBox fx:id="chkBoxCasa" onAction="#filtrarAE" selected="true" text="Casa" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
-                  <Label layoutX="28.0" layoutY="263.0" prefHeight="28.0" prefWidth="133.0" text="Servicios" />
-                  <GridPane fx:id="gridServicios" layoutX="50.0" layoutY="315.0">
+                  <Label layoutX="28.0" layoutY="301.0" prefHeight="28.0" prefWidth="133.0" text="Servicios" />
+                  <GridPane fx:id="gridServicios" layoutX="50.0" layoutY="339.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                   </GridPane>
+                  <Label layoutX="35.0" layoutY="14.0" text="Filtros de busqueda:">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
          </content>
