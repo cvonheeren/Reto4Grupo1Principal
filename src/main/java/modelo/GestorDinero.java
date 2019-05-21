@@ -192,6 +192,49 @@ public class GestorDinero {
 	}
 	
 	/**
+	 * 
+	 * @param habReservadas
+	 * @return
+	 */
+	public float calcularPrecioConDescuentos2(ArrayList<Habitacion> habReservadas, ArrayList<Servicio> servicios, LocalDate fecha1, LocalDate fecha2) {
+		
+		float precioTotal = 0;
+		float tarifaDiaNormal = 0;
+		float tarifaDiaVerano = 0;
+		float tarifaDiaFestivo = 0;
+		
+		// calcular tarifa por dia normal
+		for(int i=0;i<habReservadas.size();i++) {
+			tarifaDiaNormal += habReservadas.get(i).getTarifaNormal() * habReservadas.get(i).getCantidad();
+		}
+		
+		// calcular tarifa por dia verano
+		for(int i=0;i<habReservadas.size();i++) {
+			tarifaDiaVerano += habReservadas.get(i).getTarifaVerano() * habReservadas.get(i).getCantidad();
+		}
+		
+		// calcular tarifa por dia festivo
+		for(int i=0;i<habReservadas.size();i++) {
+			tarifaDiaFestivo += habReservadas.get(i).getTarifaFestivo() * habReservadas.get(i).getCantidad();
+		}
+		
+		// cogemos los dias del periodo para comprobar sus tarifas extras
+	    ArrayList<LocalDate> lista = Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1, fecha2);
+	    
+	    for (int i = 0; i < lista.size(); i++) {
+			if(Principal.modelo.gestorFechas.comprobarFestivo(lista.get(i))) {
+				precioTotal += tarifaDiaFestivo;
+			} else if(Principal.modelo.gestorFechas.comprobarSiEsVerano(lista.get(i))) {
+				precioTotal += tarifaDiaVerano;
+			} else {
+				precioTotal += tarifaDiaNormal;
+			}
+		}
+
+	    return precioTotal - descuento;
+	}
+	
+	/**
 	 * calcula el precio total de la estancia para una habitacion
 	 * @param habReservadas
 	 * @return

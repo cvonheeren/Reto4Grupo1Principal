@@ -13,6 +13,8 @@ public class Reserva {
 	private Alojamiento alojamiento = null;
 	private ArrayList<Habitacion> habitacionesSeleccionadas = null;
 	private int ctdHabitaciones;
+	private ArrayList<Servicio> serviciosSeleccionados = null;
+	private int ctdServicios;
 	
 	/**
 	 * Objeto para guardar la reserva que se está gestionando
@@ -27,11 +29,15 @@ public class Reserva {
 		this.fechaSalida = fechaSalida;
 		this.habitacionesSeleccionadas = new ArrayList<Habitacion>();
 		this.ctdHabitaciones = 0;
+		this.serviciosSeleccionados = new ArrayList<Servicio>();
+		this.ctdServicios = 0;
 	}
 	
 	public Reserva() {
 		this.habitacionesSeleccionadas = new ArrayList<Habitacion>();
 		this.ctdHabitaciones = 0;
+		this.serviciosSeleccionados = new ArrayList<Servicio>();
+		this.ctdServicios = 0;
 	}
 
 	public int getCodReserva() {
@@ -73,7 +79,8 @@ public class Reserva {
 	public void setAlojamiento(Alojamiento alojamiento) {
 		this.alojamiento = alojamiento;
 	}
-
+	
+	// habitaciones 
 	public ArrayList<Habitacion> getHabitacionesSeleccionadas() {
 		return habitacionesSeleccionadas;
 	}
@@ -98,6 +105,33 @@ public class Reserva {
 
 	public void setCtdHabitaciones(int ctdHabitaciones) {
 		this.ctdHabitaciones = ctdHabitaciones;
+	}
+	
+	// servicios 
+	public ArrayList<Servicio> getServiciosSeleccionados() {
+		return serviciosSeleccionados;
+	}
+
+	public void setServiciosSeleccionados(ArrayList<Servicio> serviciosSeleccionados) {
+		this.serviciosSeleccionados = serviciosSeleccionados;
+	}
+	
+	public void addServicio(Servicio servicio) {
+		this.serviciosSeleccionados.add(servicio);
+		this.ctdServicios++;
+	}
+	
+	public void removeServicios(Servicio servicio) {
+		this.serviciosSeleccionados.remove(servicio);
+		this.ctdServicios--;
+	}
+
+	public int getCtdServicios() {
+		return ctdServicios;
+	}
+
+	public void setCtdServicios(int ctdServicios) {
+		this.ctdServicios = ctdServicios;
 	}
 	
 }

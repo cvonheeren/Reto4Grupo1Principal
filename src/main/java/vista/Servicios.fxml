@@ -18,7 +18,7 @@
             </Label>
             <ScrollPane layoutX="75.0" layoutY="100.0" prefHeight="490.0" prefWidth="615.0">
                <content>
-                  <AnchorPane fx:id="paneHabitacion" prefHeight="485.0" prefWidth="600.0" />
+                  <AnchorPane fx:id="paneServicios" prefHeight="485.0" prefWidth="600.0" />
                </content>
             </ScrollPane>
             <JFXCheckBox fx:id="reservarTodo" layoutX="750.0" layoutY="100.0" mnemonicParsing="false" onAction="#reservarTodo" text="Reservar todo">

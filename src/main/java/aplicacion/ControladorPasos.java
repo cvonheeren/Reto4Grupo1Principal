@@ -31,6 +31,7 @@ import modelo.GestorDinero;
 import modelo.Habitacion;
 import modelo.Modelo;
 import modelo.Reserva;
+import modelo.Servicio;
 
 public class ControladorPasos implements Initializable {
 	
@@ -116,8 +117,8 @@ public class ControladorPasos implements Initializable {
 				btnSiguienteHabitaciones();
 				break;
 				
-//			case "idTabServ":
-//				btnSiguienteServicios();
+			case "idTabServ":
+				btnSiguienteServicios();
 				
 			case "idTabPago":
 				btnSiguientePago();
@@ -147,6 +148,32 @@ public class ControladorPasos implements Initializable {
     		LocalDate fecha1 = Principal.modelo.reserva.getFechaEntrada().toLocalDate();
     		LocalDate fecha2 = Principal.modelo.reserva.getFechaSalida().toLocalDate();
 			float precio = modelo().gestorDinero.calcularPrecioConDescuentos(habitaciones, fecha1, fecha2);
+			modelo().gestorDinero.setPrecio(precio);
+//			if(modelo().cliente != null) {
+//				idTabPago.setDisable(false);
+//				tabPane.getSelectionModel().select(idTabPago);
+//				Principal.aplicacion.controladorPago.initialize(null, null);
+//				Principal.aplicacion.controladorFactura.initialize(null, null);
+//			} else {
+//				aplicacion().CambiarScene("LoginRegistro.fxml");
+//				aplicacion().controladorLoginRegistro.setPantallaAnterior("Pasos.fxml");
+//				aplicacion().controladorLoginRegistro.setTabActiva(tabPane.getSelectionModel().getSelectedIndex());
+//				aplicacion().controladorLoginRegistro.setLoginForced(true);
+//			}
+		}
+    }
+    
+    /**
+     * Controla los eventos que se dan al darle al botón de siguiente
+     * si has iniciado sesión o no lo has hecho
+     */
+    public void btnSiguienteServicios() {
+    	if(comprobarHabitacionSeleccionada()) {
+    		ArrayList<Habitacion> habitaciones = modelo().reserva.getHabitacionesSeleccionadas();
+    		ArrayList<Servicio> servicios = modelo().reserva.getServiciosSeleccionados();
+    		LocalDate fecha1 = Principal.modelo.reserva.getFechaEntrada().toLocalDate();
+    		LocalDate fecha2 = Principal.modelo.reserva.getFechaSalida().toLocalDate();
+			float precio = modelo().gestorDinero.calcularPrecioConDescuentos2(habitaciones, servicios, fecha1, fecha2);
 			modelo().gestorDinero.setPrecio(precio);
 			if(modelo().cliente != null) {
 				idTabPago.setDisable(false);
