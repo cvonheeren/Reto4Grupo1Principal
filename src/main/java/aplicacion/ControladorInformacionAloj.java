@@ -99,6 +99,10 @@ public class ControladorInformacionAloj implements Initializable {
 		Principal.aplicacion.CambiarScene("Pasos.fxml");
 	}	
 	
+	/**
+	 * 
+	 * @param alojamiento
+	 */
 	public void verServicios(Alojamiento alojamiento) {
 		alojamiento.setServicios(Principal.modelo.gestorBBDD.obtenerServicios(alojamiento.getCodAlojamiento()));
 		ArrayList<Servicio> aux = alojamiento.getServicios();
@@ -169,8 +173,9 @@ public class ControladorInformacionAloj implements Initializable {
     }
     
     /**
-     * Muestra las estancias reservadas en un string
+     * 
      * @param estancias
+     * @param habitaciones
      * @return
      */
     public String mostrarEstancias(ArrayList<Estancia> estancias, ArrayList<Habitacion> habitaciones) {
@@ -207,8 +212,8 @@ public class ControladorInformacionAloj implements Initializable {
 			lblSaludo.setText("Hola, " + Principal.modelo.cliente.getUser());
 			lblSesion.setText("Cerrar Sesion");
 		} else {
-			lblSaludo.setText("Hola, Anonimo");
-			lblSesion.setText("Identifiquese");
+			lblSaludo.setText("Hola, Anónimo");
+			lblSesion.setText("Identifíquese");
 		}
 	}
 	
