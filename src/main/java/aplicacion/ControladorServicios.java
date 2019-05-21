@@ -54,7 +54,7 @@ public class ControladorServicios implements Initializable {
     	for(int i=0;i<servicios.size();i++)
     	{
     		Servicio servicio = servicios.get(i);
-    		if(servicio.getPrecio()>0.0F)
+    		if(!(servicio.getPrecio()>0.0F))
     			servicios.remove(i);
     	}
     	
