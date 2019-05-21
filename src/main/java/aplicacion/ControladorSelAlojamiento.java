@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import javax.swing.JScrollPane;
+
 
 import org.controlsfx.control.RangeSlider;
 
