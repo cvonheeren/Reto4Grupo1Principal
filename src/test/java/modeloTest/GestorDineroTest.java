@@ -91,20 +91,6 @@ public class GestorDineroTest {
 	}
 	
 	@Test
-	public void testCalcularMonedasBilletes() {
-		float sobra = 3.5f;
-		String devuelve = "1 monedas de 2€ \n" + "1 monedas de 1€ \n" +  "1 monedas de 0.5€ \n";
-		assertEquals(devuelve, gestorDinero.calcularMonedasBilletes(sobra));	
-	}
-	
-	@Test
-	public void testCalcularMonedasBilletes2() {
-		float sobra = 13.5f;
-		String devuelve = "1 billetes de 10€ \n" + "1 monedas de 2€ \n" + "1 monedas de 1€ \n" +  "1 monedas de 0.5€ \n";
-		assertEquals(devuelve, gestorDinero.calcularMonedasBilletes(sobra));	
-	}
-	
-	@Test
     public void testCalcularPrecioConDescuentos() {
         LocalDate fecha1 = LocalDate.of(2019, 8, 15);
         LocalDate fecha2 = LocalDate.of(2019, 8, 18);

@@ -13,7 +13,6 @@ import modelo.Servicio;
 public class AlojamientotTest {
 	
 	private Alojamiento alojamiento = new Alojamiento(1, "Bilbao", "Hotel Bilbao", "cremas", 20, 20, "www.kakota");
-	private Alojamiento alojamiento2 = new Alojamiento();
 	private ArrayList<Habitacion> habitaciones = new ArrayList<Habitacion>();
 	private ArrayList<Servicio> servicios = new ArrayList<Servicio>();
 	
@@ -26,7 +25,6 @@ public class AlojamientotTest {
 		assertEquals(20, alojamiento.getLongitud(), 0.0001);
 		assertEquals(20, alojamiento.getLatitud(), 0.0001);
 		assertEquals("www.kakota", alojamiento.getImgurl());
-		assertEquals(null, alojamiento2.getImgurl());
 	}
 
 	@Test

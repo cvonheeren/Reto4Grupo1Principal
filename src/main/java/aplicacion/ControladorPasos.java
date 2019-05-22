@@ -201,7 +201,6 @@ public class ControladorPasos implements Initializable {
     	if (modelo().gestorDinero.calcularDineroRestante() == 0) {
 			
 			// guarda la fecha de la compra
-    		
 			Timestamp fechaCompra = new Timestamp(System.currentTimeMillis());
 			modelo().reserva.setFechaCompra(fechaCompra);
 			
@@ -228,8 +227,8 @@ public class ControladorPasos implements Initializable {
     }
     
     /**
-     * Controla que se ha seleccionado al menos una habitación
-     * @return
+     * Compruba si se ha seleccionado al menos una habitación
+     * @return true si se ha seleccionado al menos una habitación, false en caso contrario
      */
     public boolean comprobarHabitacionSeleccionada() {
 		boolean sigTab = true;
@@ -253,8 +252,8 @@ public class ControladorPasos implements Initializable {
 	}
     
     /**
-     * 
-     * @return
+     * Comprueba si se han seleccionado servicios
+     * @return true si se han seleccionado servicios, false en caso contrario
      */
     public boolean comprobarServiciosSeleccionados() {
     	if (Principal.modelo.reserva.getServiciosSeleccionados().size() > 0) {
@@ -265,7 +264,7 @@ public class ControladorPasos implements Initializable {
     }
     
     /**
-     * 
+     * Hace visible la pestaña (tab) cuyo id se pasa por parametro
      * @param index
      */
     public void selecionarTab(int index) {
@@ -289,16 +288,19 @@ public class ControladorPasos implements Initializable {
 	}
     
     /**
-     * 
+     * Genera una animacion de un icono moviendose desde el punto clickado hasta el carrito
      */
 	public void AnimacionCama() {
-		try{anchorPaneBase.getChildren().remove(iconoCama);} catch (Exception e) {}
+		try {
+			anchorPaneBase.getChildren().remove(iconoCama);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		iconoCama.setSize("100");
 		iconoCama.setLayoutX(300);
 		iconoCama.setLayoutY(500);
 		iconoCama.setFill(Paint.valueOf("#777777"));
 		anchorPaneBase.getChildren().add(iconoCama);
-		
 		
 		TranslateTransition animacionCama = new TranslateTransition();
 		animacionCama.setFromX(0);
@@ -316,8 +318,6 @@ public class ControladorPasos implements Initializable {
 		
 		ParallelTransition transiciones = new ParallelTransition(animacionCama, animacionCama2);
 		transiciones.play();
-		
-		
 	}
 
 }

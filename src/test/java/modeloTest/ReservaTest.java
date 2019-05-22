@@ -1,14 +1,8 @@
 package modeloTest;
 
 import static org.junit.Assert.*;
-
-
 import java.util.ArrayList;
-
-
 import org.junit.Test;
-
-import modelo.Alojamiento;
 import modelo.Habitacion;
 import modelo.Reserva;
 
@@ -17,7 +11,6 @@ public class ReservaTest {
 	Reserva reserva = new Reserva(1, null, null, null);
 	Reserva reserva2 = new Reserva();
 	ArrayList<Habitacion> habitacionesReservadas = new ArrayList<Habitacion>();
-	Alojamiento alojTest = new Alojamiento();
 	
 	@Test
 	public void testConstructor1() {
@@ -63,12 +56,6 @@ public class ReservaTest {
 	public void testAlojLista() {
 		reserva.setHabitacionesSeleccionadas(habitacionesReservadas);
 		assertEquals(habitacionesReservadas, reserva.getHabitacionesSeleccionadas());
-	}
-	
-	@Test
-	public void testAloj() {
-		reserva.setAlojamiento(alojTest);
-		assertEquals(alojTest, reserva.getAlojamiento());
 	}
 	
 	@Test

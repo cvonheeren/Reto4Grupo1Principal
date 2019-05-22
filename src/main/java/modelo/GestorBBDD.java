@@ -37,7 +37,7 @@ public class GestorBBDD {
 	}
 	
 	/**
-	 * Obttiene el nombre los alojamientos
+	 * Obtiene el nombre los alojamientos
 	 * @return
 	 */
 	public ArrayList<String> cargarNombresAlojamientos() {
@@ -392,16 +392,8 @@ public class GestorBBDD {
 	 * @return Devuelve el codigo de la reserva que se genera en sql
 	 */
 	public int insertarReserva(Cliente cliente, Reserva reserva, GestorDinero gestorDinero) {
-		int codReserva = -1;
-		ResultSet result = modificarBBDD.insertarReserva(reserva.getAlojamiento().getCodAlojamiento(), gestorDinero.getPrecio(), reserva.getFechaCompra(), reserva.getFechaEntrada(), reserva.getFechaSalida(), cliente.getCodCliente());
-
-		try {
-			result.next();
-			codReserva = result.getInt(1);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return codReserva;
+		int result = modificarBBDD.insertarReserva(reserva.getAlojamiento().getCodAlojamiento(), gestorDinero.getPrecio(), reserva.getFechaCompra(), reserva.getFechaEntrada(), reserva.getFechaSalida(), cliente.getCodCliente());
+		return result;
 	}
 	
 	/**

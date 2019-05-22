@@ -111,8 +111,8 @@ public class Habitacion extends Estancia {
 				+ codEstancia + ", nombre=" + nombre + ", tamano=" + tamano + ", cantidad=" + cantidad + "]";
 	}
 
-	 @Override
-     public boolean equals(Object o) {
+	@Override
+    public boolean equals(Object o) {
          if (this == o) {
              return true;
          }

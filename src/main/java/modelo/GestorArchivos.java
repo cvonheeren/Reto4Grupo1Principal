@@ -95,7 +95,7 @@ public class GestorArchivos {
 	}
 	
 	/**
-	 * Genera una ventana de dialogo que premite elegir donde guardar el archivo
+	 * Genera una ventana de dialogo que permite elegir donde guardar el archivo
 	 * @return ruta que el usuario a elegido
 	 */
 	public String preguntarGuadar() {
@@ -115,6 +115,11 @@ public class GestorArchivos {
 		return pathReserva;
 	}
 	
+	/**
+	 * Devuelve el contenido del archivo cuya ruta se le pasa por parametro
+	 * @param ruta
+	 * @return el contenido del archivo en forma de string
+	 */
 	public String leerBases(String ruta) {
 		FileReader fileReader = null;
 		BufferedReader buffer = null;

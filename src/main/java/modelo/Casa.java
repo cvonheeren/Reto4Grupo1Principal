@@ -24,7 +24,7 @@ public class Casa extends Alojamiento {
 	}
 
 	/**
-	 * Devuelve el arraylist de estanicas
+	 * Devuelve el arraylist de estancias
 	 * @return
 	 */
 	public ArrayList<Estancia> getEstancias() {
@@ -32,7 +32,7 @@ public class Casa extends Alojamiento {
 	}
 
 	/**
-	 * Establece las estancais
+	 * Establece las estancias
 	 * @param estancias
 	 */
 	public void setEstancias(ArrayList<Estancia> estancias) {
@@ -40,7 +40,7 @@ public class Casa extends Alojamiento {
 	}
 	
 	/**
-	 * Calcula el tamaño total de una casa en metros cuadrados
+	 * Calcula el tamaño total de la casa en metros cuadrados
 	 * @return metros cuadrados totales
 	 */
 	public float calcularArea() {

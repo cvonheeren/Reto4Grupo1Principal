@@ -2,10 +2,9 @@ package modelo;
 
 import java.util.ArrayList;
 
-public class Apartamento extends Alojamiento {
+public class Apartamento extends Casa {
 
 	private int piso;
-	private ArrayList<Estancia> estancias = null;
 
 	/**
 	 * Crea un objeto Apartamento que guarda los datos especificos de los apartamentos
@@ -21,9 +20,8 @@ public class Apartamento extends Alojamiento {
 	 */
 	public Apartamento(int codAlojamiento, String ubicacion, String nombre, String descripcion, float longitud, float latitud,
 			String imgurl, int piso, ArrayList<Estancia> estancias) {
-		super(codAlojamiento, ubicacion, nombre, descripcion, longitud, latitud, imgurl);
+		super(codAlojamiento, ubicacion, nombre, descripcion, longitud, latitud, imgurl, estancias);
 		this.piso = piso;
-		this.estancias = estancias;
 	}
 
 	/**
@@ -42,19 +40,4 @@ public class Apartamento extends Alojamiento {
 		this.piso = piso;
 	}
 	
-	/**
-	 * Obtiene las estancias
-	 * @return
-	 */
-	public ArrayList<Estancia> getEstancias() {
-		return estancias;
-	}
-
-	/**
-	 * Establece las estancias
-	 * @param estancias
-	 */
-	public void setEstancias(ArrayList<Estancia> estancias) {
-		this.estancias = estancias;
-	}
 }

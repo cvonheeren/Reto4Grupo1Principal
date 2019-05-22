@@ -69,7 +69,7 @@ public class ControladorFactura implements Initializable {
 		Principal.modelo.reserva = new Reserva();
 		Principal.modelo.gestorDinero = new GestorDinero();
 		Principal.aplicacion.CambiarScene("SeleccionAlojamiento.fxml");
-		Principal.modelo.gestorBBDD.borrarReservas();
+//		Principal.modelo.gestorBBDD.borrarReservas();
     }
 	
     /**
