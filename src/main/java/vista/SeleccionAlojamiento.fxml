@@ -173,7 +173,7 @@
                <children>
                   <Label layoutX="28.0" layoutY="58.0" prefHeight="28.0" prefWidth="133.0" text="Estrellas" />
                   <RangeSlider fx:id="filtroEstrellas" blockIncrement="0.0" highValue="5.0" layoutX="50.0" layoutY="96.0" lowValue="1.0" majorTickUnit="1.0" max="5.0" min="1.0" minorTickCount="0" onMouseReleased="#filtrarME" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
-                  <Label layoutX="28.0" layoutY="145.0" prefHeight="28.0" prefWidth="133.0" text="Tipo" />
+                  <Label layoutX="28.0" layoutY="154.0" prefHeight="28.0" prefWidth="133.0" text="Tipo" />
                   <GridPane layoutX="50.0" layoutY="191.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -189,13 +189,13 @@
                         <JFXCheckBox fx:id="chkBoxCasa" onAction="#filtrarAE" selected="true" text="Casa" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
-                  <Label layoutX="28.0" layoutY="301.0" prefHeight="28.0" prefWidth="133.0" text="Servicios" />
+                  <Label layoutX="28.0" layoutY="304.0" prefHeight="28.0" prefWidth="133.0" text="Servicios" />
                   <GridPane fx:id="gridServicios" layoutX="50.0" layoutY="339.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                   </GridPane>
-                  <Label layoutX="35.0" layoutY="14.0" text="Filtros de búsqueda:">
+                  <Label layoutX="28.0" layoutY="20.0" text="Filtros de búsqueda:">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>

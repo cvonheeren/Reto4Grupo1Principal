@@ -51,7 +51,7 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
     private Hyperlink mapa;
 
     @FXML
-    private Label descripcion, lblHabitaciones, lblEstancias, tamano;
+    private Label descripcion, lblHabitaciones, lblEstancias, tamano, numNoches;
     
     @FXML
     private JFXButton btnVer;
@@ -89,7 +89,8 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 		this.nombre.setText(this.alojamiento.getNombre());
 		this.ubicacion.setText(this.alojamiento.getUbicacion());
 		this.descripcion.setText(this.alojamiento.getDescripcion());
-		this.precio.setText(precio + "€ \n" + Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1, fecha2).size() + " noches");	
+		this.precio.setText(precio + "€");	
+		this.numNoches.setText(String.valueOf(Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1, fecha2).size()));	
 		this.imagen.getEngine().loadContent("<html><body style=\"padding:0px; margin:0px;\"><img src=" + alojamiento.getImgurl() + " width=190px height=190px></img></body></html>");
 		JFXDepthManager.setDepth(imagen, 1);
 

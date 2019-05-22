@@ -37,16 +37,31 @@ public class ControladorServicios implements Initializable {
     private GridPane gridServicios;
 	
 	private Alojamiento alojamiento;
+	private ArrayList<JFXCheckBox> checkServicios;
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+    	checkServicios = new ArrayList<JFXCheckBox>();
     	this.alojamiento = Principal.modelo.reserva.getAlojamiento();
     	cargarServicios(alojamiento);
 	}
     
     @FXML
     void reservarTodo(ActionEvent event) {
-    		
+    	if(reservarTodo.isSelected()) {
+    		ArrayList<Servicio> servicios = Principal.modelo.gestorBBDD.obtenerServicios(alojamiento.getCodAlojamiento());
+        	Principal.modelo.reserva.setServiciosSeleccionados(servicios);
+        	paneServicios.setDisable(true);
+        	for(int i=0; i<checkServicios.size(); i++) {
+        		checkServicios.get(i).setSelected(true);;
+        	}
+    	} else {
+    		Principal.modelo.reserva.setHabitacionesSeleccionadas(null);
+    		paneServicios.setDisable(false);
+    		for(int i=0; i<checkServicios.size(); i++) {
+        		checkServicios.get(i).setSelected(false);;
+        	}
+    	}
     }
     
     public void cargarServicios(Alojamiento alojamiento) {
@@ -61,6 +76,7 @@ public class ControladorServicios implements Initializable {
     	for(int i=0;i<servicios.size();i++) {
     		Servicio servicio = servicios.get(i);
     		JFXCheckBox serv = new JFXCheckBox(servicio.getNombre() + " " + servicio.getPrecio() + "€");
+    		checkServicios.add(serv);
     		serv.setGraphic(new FontAwesomeIconView(FontAwesomeIcon.valueOf(servicio.getIcon())));
     		serv.setPrefHeight(30);
     		serv.setOnAction(new EventHandler<ActionEvent>(){

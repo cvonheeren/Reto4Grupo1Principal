@@ -57,13 +57,12 @@ public class ControladorSelHabitacion implements Initializable {
         	Principal.modelo.reserva.setHabitacionesSeleccionadas(habitaciones);
         	paneHabitacion.setDisable(true);
         	for(int i=0; i<cardHabitaciones.size(); i++) {
-        		cardHabitaciones.get(0).actualizarCantidad(0);
+        		cardHabitaciones.get(i).actualizarCantidad(habitaciones.get(i).getCantidad());
         	}
     	} else {
     		Principal.modelo.reserva.setHabitacionesSeleccionadas(null);
         	paneHabitacion.setDisable(false);
-    	}
-	
+    	}	
     }
     
     public void cargarHabitaciones(Alojamiento alojamiento) {
