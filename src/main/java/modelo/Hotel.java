@@ -20,10 +20,6 @@ public class Hotel extends Alojamiento {
 		this.estrellas = estrellas;
 	}
 
-	public Hotel() {
-		
-	}
-
 	public int getEstrellas() {
 		return estrellas;
 	}

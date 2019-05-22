@@ -43,10 +43,26 @@ public class ControladorPago implements Initializable {
     @FXML
     private AnchorPane contenedor;
     
+    /**
+     * Es un metodo que devuelve el modelo
+     * @return
+     */
 	private Modelo modelo() {return Principal.modelo;}
+	
+	/**
+	 * Es un metodo que devuelve la aplicacion
+	 * @return
+	 */
 	private Aplicacion aplicacion() {return Principal.aplicacion;}
     
+	/**
+	 * Guarda un array de monedas y billetes
+	 */
     private float[] monedasBilletes = { 500, 200, 100, 50, 20, 10, 5, 2, 1, 0.50f, 0.20f, 0.10f, 0.05f, 0.02f, 0.01f };
+    
+    /**
+     * Crea array billetes
+     */
     public JFXButton[] botonesMonedasBilletes = new JFXButton[15];	
     
     @Override

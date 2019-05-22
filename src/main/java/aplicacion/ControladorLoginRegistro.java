@@ -137,14 +137,26 @@ public class ControladorLoginRegistro implements Initializable {
     	Principal.aplicacion.verBases();
     }
     
+    /**
+     * Establece la variable de la pantalla anterior
+     * @param nombrePantalla
+     */
     public void setPantallaAnterior(String nombrePantalla) {
     	this.pantallaAnterior = nombrePantalla;
     }
     
+    /**
+     * Establece la pestaña activa
+     * @param nombreTab
+     */
 	public void setTabActiva(int nombreTab) {
 		this.tabGuardada = nombreTab;
 	}
 	
+	/**
+	 * Establece si es forzado el login
+	 * @param forced
+	 */
 	public void setLoginForced(boolean forced) {
 		this.loginForced = forced;
 	}

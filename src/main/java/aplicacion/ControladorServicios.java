@@ -65,6 +65,11 @@ public class ControladorServicios implements Initializable {
     	}
     }
     
+    
+    /**
+     * Carga los servicios y los muestra
+     * @param alojamiento
+     */
     public void cargarServicios(Alojamiento alojamiento) {
     	ArrayList<Servicio> servicios = Principal.modelo.gestorBBDD.obtenerServiciosPago(alojamiento.getCodAlojamiento());  	
     	for(int i=0;i<servicios.size();i++) {

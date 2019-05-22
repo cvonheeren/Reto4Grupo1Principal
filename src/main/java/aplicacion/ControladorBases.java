@@ -13,6 +13,7 @@ public class ControladorBases implements Initializable {
     @FXML
     private Label texto;
 
+   
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		texto.setText(Principal.modelo.gestorArchivos.leerBases(System.getProperty("user.dir") + "\\BasesLegales.txt"));

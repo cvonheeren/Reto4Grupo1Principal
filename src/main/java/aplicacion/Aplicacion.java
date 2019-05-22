@@ -128,7 +128,7 @@ public class Aplicacion {
 	}
 	
 	/**
-	 * 
+	 * Abre la ventana de las bases legales
 	 */
     public void verBases() {
 		Parent FXML = loadFXML("Bases.fxml");

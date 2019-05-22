@@ -74,6 +74,10 @@ public class ControladorPasos implements Initializable {
 		actualizarCarrito();
 	}
 	
+	
+	/**
+	 * Actualiza la informacion del carrito
+	 */
 	public void actualizarCarrito() {
 		ArrayList<Habitacion> habitaciones = modelo().reserva.getHabitacionesSeleccionadas();
 		int numHab = 0;

@@ -65,6 +65,11 @@ public class ControladorSelHabitacion implements Initializable {
     	}	
     }
     
+    
+    /**
+     * Carga las habitaciones y las muestra
+     * @param alojamiento
+     */
     public void cargarHabitaciones(Alojamiento alojamiento) {
     	
     	GridPane grid = crearGrid();

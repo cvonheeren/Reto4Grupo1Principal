@@ -26,18 +26,34 @@ public class Apartamento extends Alojamiento {
 		this.estancias = estancias;
 	}
 
+	/**
+	 * Obtiene el piso
+	 * @return
+	 */
 	public int getPiso() {
 		return piso;
 	}
 
+	/**
+	 * Establece el piso
+	 * @param piso
+	 */
 	public void setPiso(int piso) {
 		this.piso = piso;
 	}
 	
+	/**
+	 * Obtiene las estancias
+	 * @return
+	 */
 	public ArrayList<Estancia> getEstancias() {
 		return estancias;
 	}
 
+	/**
+	 * Establece las estancias
+	 * @param estancias
+	 */
 	public void setEstancias(ArrayList<Estancia> estancias) {
 		this.estancias = estancias;
 	}

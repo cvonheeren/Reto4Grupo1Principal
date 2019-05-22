@@ -23,10 +23,18 @@ public class Casa extends Alojamiento {
 		this.estancias = estancias;
 	}
 
+	/**
+	 * Devuelve el arraylist de estanicas
+	 * @return
+	 */
 	public ArrayList<Estancia> getEstancias() {
 		return estancias;
 	}
 
+	/**
+	 * Establece las estancais
+	 * @param estancias
+	 */
 	public void setEstancias(ArrayList<Estancia> estancias) {
 		this.estancias = estancias;
 	}
