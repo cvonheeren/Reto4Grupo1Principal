@@ -48,7 +48,6 @@ public class ControladorFactura implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Principal.aplicacion.controladorFactura = this;
-		//actualizarDatos();
 	}
     
 	@FXML
@@ -70,6 +69,7 @@ public class ControladorFactura implements Initializable {
 		Principal.modelo.reserva = new Reserva();
 		Principal.modelo.gestorDinero = new GestorDinero();
 		Principal.aplicacion.CambiarScene("SeleccionAlojamiento.fxml");
+		Principal.modelo.gestorBBDD.borrarReservas();
     }
 	
     /**

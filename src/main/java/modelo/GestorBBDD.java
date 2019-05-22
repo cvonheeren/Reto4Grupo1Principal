@@ -3,6 +3,7 @@ package modelo;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import Reto4Grupo1BBDD.ModificarBBDD;
@@ -425,6 +426,12 @@ public class GestorBBDD {
 			e.printStackTrace();
 		}
 		return codReserva;
+	}
+	
+	public void borrarReservas() {
+		LocalDate fecha1 = LocalDate.now();
+		Date date = Date.valueOf(fecha1);
+		modificarBBDD.borrarReservas(date);
 	}
 	
 }
