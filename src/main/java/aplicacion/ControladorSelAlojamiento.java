@@ -201,7 +201,7 @@ public class ControladorSelAlojamiento implements Initializable {
     }
     
     /**
-     * 
+     * Establece las animaciones iniciales
      */
     private void InizializarAnimaciones() {
 		TranslateTransition transicion = new TranslateTransition();
@@ -212,7 +212,7 @@ public class ControladorSelAlojamiento implements Initializable {
 	}
    
 	/**
-	 * 
+	 * Rellena los filtros
 	 */
     private void RellenarFiltros() {
     	filtroEstrellas.setLowValue(1f);

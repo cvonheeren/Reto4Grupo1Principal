@@ -37,7 +37,7 @@ public class GestorBBDD {
 	}
 	
 	/**
-	 * 
+	 * Obttiene el nombre los alojamientos
 	 * @return
 	 */
 	public ArrayList<String> cargarNombresAlojamientos() {
@@ -70,9 +70,8 @@ public class GestorBBDD {
 		return obtenerListaAlojamientos(ultimaBusqueda, cantidad);
 	}
 	
-	/*
-	 * 
-	 * 
+	/**
+	 * Borra la ultima busqueda
 	 */
 	public void borrarUltimaBusqueda() {
 		ultimaBusqueda = null;
@@ -80,7 +79,7 @@ public class GestorBBDD {
 	}
 	
 	/**
-	 * 
+	 * Obtiene el resulset de alojanietos de la BBDD
 	 * @param ciudad
 	 * @param estrellasMin
 	 * @param estrellasMax
@@ -94,7 +93,7 @@ public class GestorBBDD {
 	}
 	
 	/**
-	 * 
+	 * Muestra mas alojamientos
 	 * @param cantidad
 	 * @return
 	 */
@@ -149,7 +148,7 @@ public class GestorBBDD {
 	}
 	
 	/**
-	 * 
+	 * Carga habitaciones
 	 * @param codAlojamiento
 	 * @return
 	 */
@@ -364,7 +363,7 @@ public class GestorBBDD {
 	}
 	
 	/**
-	 * 
+	 * Valida del codigo promocional
 	 * @param codPromo
 	 * @param user
 	 * @param codAlojamiento

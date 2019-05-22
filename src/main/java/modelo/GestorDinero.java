@@ -149,7 +149,7 @@ public class GestorDinero {
 	
 	
 	/**
-	 * 
+	 * Calcula el precio final con descuentos
 	 * @param habReservadas
 	 * @return
 	 */
