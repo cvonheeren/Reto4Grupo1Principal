@@ -2,13 +2,7 @@ package modeloTest;
 
 import static org.junit.Assert.*;
 
-import static org.mockito.Mockito.*;
 import org.junit.Test;
-
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextField;
-
-import javafx.scene.layout.AnchorPane;
 import modelo.GestorValidaciones;
 
 public class GestorValidacionesTest {

@@ -106,14 +106,15 @@ public class GestorDineroTest {
 	
 	@Test
     public void testCalcularPrecioConDescuentos() {
-        
         LocalDate fecha1 = LocalDate.of(2019, 8, 15);
         LocalDate fecha2 = LocalDate.of(2019, 8, 18);
         ArrayList<Habitacion> habReservadas = new ArrayList<Habitacion>();
         Habitacion habitacion = new Habitacion(0, null, 0, 0, 0, 0, 1, 1, 1.2f, 1.2f, null);
         habReservadas.add(habitacion);
-      
-        assertEquals(1.2*2, gestorDinero.calcularPrecioConDescuentos(habReservadas, fecha1, fecha2), 0.001);   
+        ArrayList<Servicio> servicios = new ArrayList<Servicio>();
+        Servicio servicio = new Servicio(0, "WIFI", 1.2f, "");
+        servicios.add(servicio);
+        assertEquals(1.2*2, gestorDinero.calcularPrecioConDescuentos(habReservadas, servicios, fecha1, fecha2), 0.001);
     }
 
 	@Test
@@ -128,7 +129,6 @@ public class GestorDineroTest {
 	public void testgetprecioDiahabitacion() {
 		Habitacion habitacion = new Habitacion(0, null, 0, 0, 0, 0, 1, 1, 1.2f, 1.2f, null);
 		LocalDate fecha = LocalDate.of(2019, 8, 15);
-		
 		assertEquals(1.2f, gestorDinero.getPrecioDiaHabitacion(habitacion, fecha), 0.000001);	
 	}
 	
@@ -140,7 +140,6 @@ public class GestorDineroTest {
 		Habitacion habitacion2 = new Habitacion(0, null, 0, 0, 0, 0, 0, 0.9f, 1.1f, 1.1f, null);
 		habReservadas.add(habitacion);
 		habReservadas.add(habitacion2);
-		
 		assertEquals(habitacion2, gestorDinero.getHabBarata(habReservadas, fecha));	
 	}
 	

@@ -245,13 +245,36 @@ public class GestorBBDD {
 	}
 	
 	/**
-	 * Devuelve la lista de los servicios de un alojamiento por su codigo
+	 * Devuelve la lista de todos los servicios de un alojamiento por su codigo
 	 * @param codAlojamiento
 	 * @return
 	 */
 	public ArrayList<Servicio> obtenerServicios(int codAlojamiento) {
 		ArrayList<Servicio> servicios = new ArrayList<Servicio>();
 		ResultSet result = modificarBBDD.obtenerServicios(codAlojamiento);
+		
+		try {
+			while (result.next()) {
+				int codServicio = result.getInt("COD_SERVICIO");
+				String nombre = result.getString("NOMBRE");
+				float precio = result.getFloat("PRECIO");
+				String icon = result.getString("FONTAWESOMEICON");
+				servicios.add(new Servicio(codServicio, nombre, precio, icon));
+	        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return servicios;
+	}
+	
+	/**
+	 * Devuelve la lista de los servicios de pago de un alojamiento por su codigo
+	 * @param codAlojamiento
+	 * @return
+	 */
+	public ArrayList<Servicio> obtenerServiciosPago(int codAlojamiento) {
+		ArrayList<Servicio> servicios = new ArrayList<Servicio>();
+		ResultSet result = modificarBBDD.obtenerServiciosPago(codAlojamiento);
 		
 		try {
 			while (result.next()) {

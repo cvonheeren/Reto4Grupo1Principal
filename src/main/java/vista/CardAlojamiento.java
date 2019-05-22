@@ -89,7 +89,7 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 		this.nombre.setText(this.alojamiento.getNombre());
 		this.ubicacion.setText(this.alojamiento.getUbicacion());
 		this.descripcion.setText(this.alojamiento.getDescripcion());
-		this.precio.setText(precio + "â‚¬");	
+		this.precio.setText(precio + "€");
 		this.numNoches.setText(String.valueOf(Principal.modelo.gestorFechas.setDiasSeleccionados(fecha1, fecha2).size()));	
 		this.imagen.getEngine().loadContent("<html><body style=\"padding:0px; margin:0px;\"><img src=" + alojamiento.getImgurl() + " width=190px height=190px></img></body></html>");
 		JFXDepthManager.setDepth(imagen, 1);
@@ -125,7 +125,7 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 	 */
     public void setDatos() {
     	if (alojamiento instanceof Casa) {
-			this.tamano.setText(Float.toString(((Casa) alojamiento).calcularArea()) + "mÂ²");
+			this.tamano.setText(Float.toString(((Casa) alojamiento).calcularArea()) + "m²");
 		} else if(alojamiento instanceof Apartamento) {
 			this.tamano.setText(("Piso " + ((Apartamento) alojamiento).getPiso() ));
 		}
@@ -262,7 +262,7 @@ public class CardAlojamiento extends AnchorPane implements Initializable {
 			str += h.getNombre().toLowerCase() + " - ";
 			str += h.getNumAdultos() + " Adultos";
 			if (h.getCtaCamasInfantil() > 0) {
-				str += ", " + h.getCtaCamasInfantil() + " Niï¿½os";
+				str += ", " + h.getCtaCamasInfantil() + " Niños";
 			}
 			str += "\n";
 		}

@@ -28,7 +28,7 @@ public class CasaTest {
 		habitacion = new Habitacion(1, "hola", 2, 1, 1, 1, 1, 2f, 3f, 4f, "");
 		estancias.add(estancia);
 		
-		casa = new Casa(1, "Bilbao", "Hotel Bilbao", "cremas", 20, 20, 3, 4, 5, "www.kakota", estancias);
+		casa = new Casa(1, "Bilbao", "Hotel Bilbao", "cremas", 20, 20, "www.kakota", estancias);
 	}
 	
 	@Test

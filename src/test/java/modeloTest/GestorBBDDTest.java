@@ -9,7 +9,6 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import modelo.Alojamiento;
 import modelo.GestorBBDD;
 import modelo.Habitacion;
 
@@ -23,11 +22,6 @@ public class GestorBBDDTest {
 		ArrayList<String> aloj = new ArrayList<String>(Arrays.asList("BARCELONA", "BILBAO", "MADRID", "MALAGA"));
 		ArrayList<String> test = gestorTest.cargarNombresDestinos();
 		assertEquals(aloj, test);
-	}
-
-	@Test
-	public void testObtenerListaAlojamientos() {
-//		ArrayList<Alojamiento> alojamientos = gestorTest.ObtenerListaAlojamientos( , 5);
 	}
 	
 	@Test
@@ -67,7 +61,6 @@ public class GestorBBDDTest {
 	public void testCargarHabitacionesDisponibles() {
 		Date fecha1 = Date.valueOf(LocalDate.of(2019, 4, 16));
 		Date fecha2 = Date.valueOf(LocalDate.of(2019, 4, 19));
-		String descripcion = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris purus nulla, consectetur id elit id, suscipit dictum mauris. Cras est magna, hendrerit eu fringilla ut, feugiat sed lorem. Sed sit amet placerat sapien, at sodales ligula. Proin semper nisl in nibh molestie mattis at at augue. Aenean ac facilisis ante. Fusce in elementum dolor. Aenean luctus blandit mi, et rutrum tortor placerat vel. Praesent dictum aliquam lectus, in viverra risus. Cras vehicula turpis eu metus faucibus, in mattis ";
 		Habitacion habitacion = new Habitacion(2, null, 0, 0, 0, 0, 0, 0, 0, 0, null);
 		ArrayList<Habitacion> test = new ArrayList<Habitacion>();
 		test.add(habitacion);

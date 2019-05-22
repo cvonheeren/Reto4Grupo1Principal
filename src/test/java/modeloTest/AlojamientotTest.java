@@ -12,7 +12,7 @@ import modelo.Servicio;
 
 public class AlojamientotTest {
 	
-	private Alojamiento alojamiento = new Alojamiento(1, "Bilbao", "Hotel Bilbao", "cremas", 20, 20, 3, 4, 5, "www.kakota");
+	private Alojamiento alojamiento = new Alojamiento(1, "Bilbao", "Hotel Bilbao", "cremas", 20, 20, "www.kakota");
 	private Alojamiento alojamiento2 = new Alojamiento();
 	private ArrayList<Habitacion> habitaciones = new ArrayList<Habitacion>();
 	private ArrayList<Servicio> servicios = new ArrayList<Servicio>();
@@ -25,9 +25,6 @@ public class AlojamientotTest {
 		assertEquals("cremas", alojamiento.getDescripcion());
 		assertEquals(20, alojamiento.getLongitud(), 0.0001);
 		assertEquals(20, alojamiento.getLatitud(), 0.0001);
-		assertEquals(3, alojamiento.getDesayuno(), 0.0001);
-		assertEquals(4, alojamiento.getMediaPension(), 0.0001);
-		assertEquals(5, alojamiento.getPensionCompleta(), 0.0001);
 		assertEquals("www.kakota", alojamiento.getImgurl());
 		assertEquals(null, alojamiento2.getImgurl());
 	}
@@ -66,24 +63,6 @@ public class AlojamientotTest {
 	public void testLatitud() {
 		alojamiento.setLatitud(21);
 		assertEquals(21, alojamiento.getLatitud(), 0.00001);
-	}
-	
-	@Test
-	public void testDesayuno() {
-		alojamiento.setDesayuno(21);
-		assertEquals(21, alojamiento.getDesayuno(), 0.00001);
-	}
-	
-	@Test
-	public void testMediaPension() {
-		alojamiento.setMediaPension(21);
-		assertEquals(21, alojamiento.getMediaPension(), 0.00001);
-	}
-	
-	@Test
-	public void testPensionCompleta() {
-		alojamiento.setPensionCompleta(21);
-		assertEquals(21, alojamiento.getPensionCompleta(), 0.00001);
 	}
 	
 	@Test

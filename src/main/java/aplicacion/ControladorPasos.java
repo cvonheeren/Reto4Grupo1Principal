@@ -71,6 +71,7 @@ public class ControladorPasos implements Initializable {
 		idTabPago.setDisable(true);
 		idTabFin.setDisable(true);
 		aplicacion().controladorPasos = this;
+		actualizarCarrito();
 	}
 	
 	public void actualizarCarrito() {

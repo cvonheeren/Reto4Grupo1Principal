@@ -56,7 +56,8 @@ public class ControladorServicios implements Initializable {
         		checkServicios.get(i).setSelected(true);;
         	}
     	} else {
-    		Principal.modelo.reserva.setHabitacionesSeleccionadas(null);
+    		ArrayList<Servicio> serviciosNuevo = new ArrayList<Servicio>();
+    		Principal.modelo.reserva.setServiciosSeleccionados(serviciosNuevo);
     		paneServicios.setDisable(false);
     		for(int i=0; i<checkServicios.size(); i++) {
         		checkServicios.get(i).setSelected(false);;
@@ -65,14 +66,7 @@ public class ControladorServicios implements Initializable {
     }
     
     public void cargarServicios(Alojamiento alojamiento) {
-    	ArrayList<Servicio> servicios = Principal.modelo.gestorBBDD.obtenerServicios(alojamiento.getCodAlojamiento());
-    	for(int i=0;i<servicios.size();i++)
-    	{
-    		Servicio servicio = servicios.get(i);
-    		if(!(servicio.getPrecio()>0.0F))
-    			servicios.remove(i);
-    	}
-    	
+    	ArrayList<Servicio> servicios = Principal.modelo.gestorBBDD.obtenerServiciosPago(alojamiento.getCodAlojamiento());  	
     	for(int i=0;i<servicios.size();i++) {
     		Servicio servicio = servicios.get(i);
     		JFXCheckBox serv = new JFXCheckBox(servicio.getNombre() + " " + servicio.getPrecio() + "€");

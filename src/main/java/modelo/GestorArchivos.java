@@ -28,6 +28,11 @@ public class GestorArchivos {
 			habitaciones += "	- " + h.getNombre() + " x " + h.getCantidad() + "\n";
 		}
 		
+		String servicios = "";
+		for (Servicio h: reserva.getServiciosSeleccionados()) {
+			servicios += "	- " + h.getNombre() + " x " + h.getPrecio() + "\n";
+		}
+		
 		try {
 			
 			fichero = new FileWriter(path);
@@ -58,6 +63,8 @@ public class GestorArchivos {
 			writer.println("Ubicacion: " + reserva.getAlojamiento().getUbicacion());
 			writer.println("Habitaciones reservadas: ");
 			writer.println(habitaciones);
+			writer.println("Servicios contratados: ");
+			writer.println(servicios);
 			writer.println();
 			writer.println();
 			writer.println("=== DATOS DEL CLIENTE ===");

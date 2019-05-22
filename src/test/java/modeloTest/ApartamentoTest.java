@@ -14,7 +14,7 @@ import modelo.Estancia;
 public class ApartamentoTest {
 
 	ArrayList<Estancia> estancias = new ArrayList<Estancia>();
-	Apartamento apartamento = new Apartamento(1, "Bilbao", "Hotel Bilbao", "cremas", 20, 20, 3, 4, 5, "www.kakota", 1, estancias);
+	Apartamento apartamento = new Apartamento(1, "Bilbao", "Hotel Bilbao", "cremas", 20, 20, "www.kakota", 1, estancias);
 	
 	@Test
 	public void testConstructor() {
